@@ -1,0 +1,2150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/28/%E4%B8%BA%E5%95%A5%E6%95%B0%E7%BB%84%E8%B6%8A%E7%95%8C%E6%8A%9B%E5%BC%82%E5%B8%B8%E8%80%8C%E5%AD%97%E5%85%B8%E7%A1%AE%E4%B8%8D%E4%BC%9A%EF%BC%9F/</loc>
+    <lastmod>2018-05-29T01:53:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>为啥数组越界抛异常而字典确不会？</title>
+        <pubTime>2018-05-28T06:15:49.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/28/%E7%AA%A5%E6%8E%A2Swift%E4%B9%8B%E6%95%B0%E7%BB%84%E5%AE%89%E5%85%A8%E7%B4%A2%E5%BC%95%E4%B8%8E%E6%95%B0%E7%BB%84%E5%88%87%E7%89%87/</loc>
+    <lastmod>2018-05-29T01:53:15.000Z</lastmod>
+    <data>
+        <display>
+        <title>窥探Swift之数组安全索引与数组切片</title>
+        <pubTime>2018-05-28T06:19:46.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/17/Xcode%E9%85%8D%E7%BD%AE%E5%B8%B8%E7%94%A8%E5%8F%98%E9%87%8F/</loc>
+    <lastmod>2018-05-29T01:51:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>配置Xcode常用变量</title>
+        <pubTime>2018-05-17T10:34:25.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/16/%5BSwift%5D%E4%B8%BAExtension%E6%B7%BB%E5%8A%A0%E5%AD%98%E5%82%A8%E5%B1%9E%E6%80%A7/</loc>
+    <lastmod>2018-05-29T01:49:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>为Extension添加存储属性</title>
+        <pubTime>2018-05-16T02:39:50.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/16/WKWebView%E7%9A%84%E4%BD%BF%E7%94%A8--API%E7%AF%87/</loc>
+    <lastmod>2018-05-29T01:48:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>WKWebView的使用API篇</title>
+        <pubTime>2018-05-16T02:37:34.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>WKWebView</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/23/NSString%20%E8%A2%AB%E5%BF%BD%E8%A7%86%E7%9A%84%E6%96%B9%E6%B3%95%20stringByTrimmingCharactersInSet/</loc>
+    <lastmod>2018-05-29T01:43:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>NSString 被忽视的方法 stringByTrimmingCharactersInSet</title>
+        <pubTime>2018-05-23T01:32:31.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+        <tag>NSString</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/24/swift%20%E7%AE%80%E5%8D%95%E7%9A%84Time%E5%8D%95%E4%BE%8B%EF%BC%8C%E5%BB%B6%E8%BF%9F%EF%BC%8C%E5%BE%AA%E7%8E%AF%EF%BC%8C%E4%BB%BB%E4%BD%A0%E9%80%89/</loc>
+    <lastmod>2018-05-29T01:43:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>swift 简单的Time单例，延迟，循环，任你选</title>
+        <pubTime>2018-05-24T10:04:22.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/24/Swift-predecessor(),%20successor(),%20advancedBy()/</loc>
+    <lastmod>2018-05-29T01:43:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift-predecessor(), successor(), advancedBy()</title>
+        <pubTime>2018-05-24T10:21:36.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/25/swift-Tips/</loc>
+    <lastmod>2018-05-29T01:42:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>where Self</title>
+        <pubTime>2018-05-25T02:56:10.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/25/Swift3%20GCD/</loc>
+    <lastmod>2018-05-29T01:39:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift3 GCD</title>
+        <pubTime>2018-05-25T03:36:12.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift3</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/23/Swift3.0%20%E6%8C%87%E9%92%88/</loc>
+    <lastmod>2018-05-29T01:39:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift3.0 指针</title>
+        <pubTime>2018-05-23T11:40:16.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/23/swift%E7%AE%80%E5%8D%95%E7%B2%97%E6%9A%B4%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E4%BB%BB%E6%84%8F%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2/</loc>
+    <lastmod>2018-05-29T01:39:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>swift简单粗暴方式实现任意模式切换</title>
+        <pubTime>2018-05-23T02:06:13.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/17/%E5%A6%82%E4%BD%95%E4%BB%8E%20GitHub%20%E4%B8%8A%E4%B8%8B%E8%BD%BD%E5%8D%95%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9/</loc>
+    <lastmod>2018-05-29T01:38:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>如何从 GitHub 上下载单个文件夹？</title>
+        <pubTime>2018-05-17T08:42:29.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/17/%E5%AD%97%E5%85%B8%E7%9A%84%E4%BB%8B%E7%BB%8D/</loc>
+    <lastmod>2018-05-29T01:38:43.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS字典的介绍</title>
+        <pubTime>2018-05-17T03:39:30.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/17/Swift%20fallthrough%E8%AF%AD%E5%8F%A5/</loc>
+    <lastmod>2018-05-29T01:38:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift fallthrough语句</title>
+        <pubTime>2018-05-17T07:05:20.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>fallthrough</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/18/Swift4.0%20%20%20string:::%20%E5%9C%A8%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C%E4%BD%8D%E7%BD%AE%E5%89%8D:%E5%90%8E%E6%8F%92%E5%85%A5%E5%AD%97%E7%AC%A6%E4%B8%B2/</loc>
+    <lastmod>2018-05-29T01:38:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>string/// 在指定字符串第一次搜索结果位置前/后插入字符串</title>
+        <pubTime>2018-05-18T10:21:22.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>string</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/16/Swift%E9%AB%98%E6%89%8B%E8%BF%9B%E9%98%B6%E4%B9%8B%E6%B3%9B%E5%9E%8B/</loc>
+    <lastmod>2018-05-29T01:37:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS高手进阶之</title>
+        <pubTime>2018-05-16T09:14:00.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>泛型</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/17/Swift%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%89%8B%E5%8A%A8%E6%B7%BB%E5%8A%A0%E6%A1%A5%E6%8E%A5%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2018-05-29T01:36:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift项目中手动添加桥接文件</title>
+        <pubTime>2018-05-17T10:32:08.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/16/Swift%E9%AB%98%E6%89%8B%E8%BF%9B%E9%98%B6%E4%B9%8B%E5%8D%8F%E8%AE%AE/</loc>
+    <lastmod>2018-05-29T01:36:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift高手进阶之协议</title>
+        <pubTime>2018-05-16T09:10:39.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>协议</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/16/WKWebView%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2018-05-29T01:36:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>WKWebView学习笔记</title>
+        <pubTime>2018-05-16T05:43:38.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>WKWebView</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/swift%20enum%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/</loc>
+    <lastmod>2018-05-15T05:56:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>swift enum高级用法</title>
+        <pubTime>2018-05-11T09:00:30.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%20%E7%BC%96%E7%A8%8B%E4%B8%AD%E7%9A%84%E5%B0%BE%E9%80%92%E5%BD%92%E5%92%8C%E8%B9%A6%E5%BA%8A/</loc>
+    <lastmod>2018-05-15T05:56:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift 编程中的尾递归和蹦床</title>
+        <pubTime>2018-05-11T08:42:26.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/%E5%88%97%E4%B8%BE%20ENUM%20%E7%B1%BB%E5%9E%8B/</loc>
+    <lastmod>2018-05-15T05:55:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>列举 ENUM 类型</title>
+        <pubTime>2018-05-11T09:23:15.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/14/Swift%20App%E7%8A%B6%E6%80%81%E6%81%A2%E5%A4%8D%EF%BC%8DState%20Restoration/</loc>
+    <lastmod>2018-05-15T05:55:03.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift App状态恢复－State Restoration</title>
+        <pubTime>2018-05-14T10:16:39.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/14/%E5%85%81%E8%AE%B8%E7%94%A8%E6%88%B7%E5%88%A0%E9%99%A4%E4%B8%93%E8%BE%91%E4%BB%A5%E5%8F%8A%E6%92%A4%E9%94%80%E4%B8%8A%E6%AC%A1%E7%9A%84%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C/</loc>
+    <lastmod>2018-05-15T05:54:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS允许用户删除专辑，以及撤销上次的删除操作</title>
+        <pubTime>2018-05-14T04:02:22.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>other</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/14/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-15T05:53:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS备忘录模式 - Memento</title>
+        <pubTime>2018-05-14T03:48:20.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/15/UIApplication/</loc>
+    <lastmod>2018-05-15T05:52:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS UIApplication.h</title>
+        <pubTime>2018-05-15T05:48:14.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Apple</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/15/iOS10%E4%B9%8B%E5%89%8D%E4%B9%8B%E5%90%8E%E7%B3%BB%E7%BB%9F%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E8%B7%B3%E8%BD%AC%E5%88%B0%E7%B3%BB%E7%BB%9F%E7%95%8C%E9%9D%A2/</loc>
+    <lastmod>2018-05-15T05:51:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS10之前/之后系统访问权限以及跳转到系统界面</title>
+        <pubTime>2018-05-15T03:59:36.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/08/Swift%204%20%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%20DNS/</loc>
+    <lastmod>2018-05-11T06:35:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift 4 域名解析 DNS</title>
+        <pubTime>2018-05-08T09:25:13.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E4%B8%AD%E8%87%AA%E5%AE%9A%E4%B9%89Log/</loc>
+    <lastmod>2018-05-11T06:33:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift中自定义Log</title>
+        <pubTime>2018-05-11T03:02:14.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>tips</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:30:03.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之装饰模式</title>
+        <pubTime>2018-05-11T04:18:12.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:29:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之工厂方法模式</title>
+        <pubTime>2018-05-11T06:08:06.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:29:11.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之中介者模式</title>
+        <pubTime>2018-05-11T06:11:48.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:28:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之命令模式</title>
+        <pubTime>2018-05-11T06:12:53.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:27:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之原型模式</title>
+        <pubTime>2018-05-11T06:07:44.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:26:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之解释器模式</title>
+        <pubTime>2018-05-11T06:12:31.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:25:02.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之状态模式</title>
+        <pubTime>2018-05-11T06:10:14.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:24:45.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之组合模式</title>
+        <pubTime>2018-05-11T04:18:42.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:24:26.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之责任链模式</title>
+        <pubTime>2018-05-11T06:13:18.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:24:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之外观模式</title>
+        <pubTime>2018-05-11T04:17:43.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:23:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之适配器模式</title>
+        <pubTime>2018-05-11T04:19:28.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%A1%A5%E6%A2%81%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:22:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之桥梁模式</title>
+        <pubTime>2018-05-11T04:19:07.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:21:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之访问者模式</title>
+        <pubTime>2018-05-11T06:09:25.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:21:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之迭代器模式</title>
+        <pubTime>2018-05-11T06:12:09.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:21:11.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之单例模式</title>
+        <pubTime>2018-05-11T06:07:10.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:20:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之创建者模式</title>
+        <pubTime>2018-05-11T06:08:39.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:20:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之抽象工厂模式</title>
+        <pubTime>2018-05-11T06:09:05.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:20:15.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之备忘录模式</title>
+        <pubTime>2018-05-11T06:11:22.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:19:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之策略模式</title>
+        <pubTime>2018-05-11T06:09:48.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/11/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BF%9D%E6%8A%A4%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:19:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之保护代理模式</title>
+        <pubTime>2018-05-11T04:17:12.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/10/Swift%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-05-11T06:19:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift设计模式之观察者模式</title>
+        <pubTime>2018-05-10T08:03:21.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Swift设计模式</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/07/%E6%9E%9A%E4%B8%BEenum/</loc>
+    <lastmod>2018-05-08T02:01:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>枚举enum</title>
+        <pubTime>2018-05-07T06:33:02.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>apple</tag>
+         
+        <tag>enum</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/07/%E6%B3%9B%E5%9E%8BT/</loc>
+    <lastmod>2018-05-08T01:55:26.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS泛型</title>
+        <pubTime>2018-05-07T06:24:31.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>apple</tag>
+         
+        <tag>泛型</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/07/%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B/</loc>
+    <lastmod>2018-05-08T01:54:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>集合类型</title>
+        <pubTime>2018-05-07T06:29:21.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>apple</tag>
+         
+        <tag>集合</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/07/%E7%B1%BB%E5%92%8C%E7%BB%93%E6%9E%84/</loc>
+    <lastmod>2018-05-08T01:53:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>类和结构struct</title>
+        <pubTime>2018-05-07T06:33:45.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>apple</tag>
+         
+        <tag>struct</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/07/%E5%8D%8F%E8%AE%AE/</loc>
+    <lastmod>2018-05-08T01:52:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>协议protocol</title>
+        <pubTime>2018-05-07T06:26:56.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>apple</tag>
+         
+        <tag>protocol</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/07/%E5%B5%8C%E5%A5%97%E7%B1%BB%E5%9E%8B/</loc>
+    <lastmod>2018-05-08T01:52:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS嵌套类型</title>
+        <pubTime>2018-05-07T06:27:47.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>嵌套</tag>
+         
+        <tag>apple</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/07/%E8%87%AA%E5%AE%9A%E4%B9%89UIAlertController/</loc>
+    <lastmod>2018-05-08T01:50:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>UIAlertController</title>
+        <pubTime>2018-05-07T10:58:52.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>UIAlertController</tag>
+         
+        <tag>UI</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/07/Closures%E9%97%AD%E5%8C%85/</loc>
+    <lastmod>2018-05-08T01:49:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>Closures闭包</title>
+        <pubTime>2018-05-07T06:31:53.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Closures</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/04/%E8%8E%B7%E5%8F%96%E6%89%8B%E6%9C%BASSID%E5%92%8CBSSID%E4%BB%A5%E5%8F%8AIP%E5%9C%B0%E5%9D%80/</loc>
+    <lastmod>2018-05-08T01:47:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>获取手机SSID和BSSID以及IP地址</title>
+        <pubTime>2018-05-04T08:40:15.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>SSID</tag>
+         
+        <tag>IP</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/04/struct%20ifaddrs%20/</loc>
+    <lastmod>2018-05-08T01:46:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS struct ifaddrs</title>
+        <pubTime>2018-05-04T09:14:03.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>ifaddrs</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/02/UICollectionViewLayout%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2018-05-08T01:44:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>UICollectionViewLayout布局详解</title>
+        <pubTime>2018-05-02T09:26:04.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>UICollectionViewLayout</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/05/02/What's%20New%20in%20iOS%2011.0/</loc>
+    <lastmod>2018-05-08T01:43:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS 11.0 news</title>
+        <pubTime>2018-05-02T06:48:11.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>apple</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/28/%E5%85%B3%E4%BA%8EIOS%E4%B8%AD%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%89%BE%E4%B8%8D%E5%88%B0%E5%BC%80%E5%8F%91%E8%80%85%E9%80%89%E9%A1%B9%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</loc>
+    <lastmod>2018-05-08T01:42:01.000Z</lastmod>
+    <data>
+        <display>
+        <title>IOS中设置中找不到开发者选项的解决办法</title>
+        <pubTime>2018-04-28T08:58:04.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>other</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/28/%E5%AD%90%E7%B1%BB%E5%8C%96Provider%EF%BC%8Csession%E7%9A%84%E8%87%AA%E5%8A%A8%E5%88%B7%E6%96%B0%EF%BC%89--Moya%E6%96%87%E6%A1%A3/</loc>
+    <lastmod>2018-05-08T01:40:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>Subclassing Provider and refreshing session automatically（子类化Provider，session的自动刷新）--Moya文档</title>
+        <pubTime>2018-04-28T06:20:56.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Network</tag>
+         
+        <tag>Moya</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/28/iOS%20%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2018-05-08T01:39:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS判断当前网络状态的三种方法</title>
+        <pubTime>2018-04-28T07:49:16.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Network</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/16/%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2018-04-27T11:03:11.000Z</lastmod>
+    <data>
+        <display>
+        <title>下载功能测试</title>
+        <pubTime>2018-04-16T01:58:12.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/26/init(coder%20aDecoder:%20NSCoder)/</loc>
+    <lastmod>2018-04-27T10:54:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>‘‘required’ initializer ‘init(coder:)’ must be provided by subclass of’</title>
+        <pubTime>2018-04-26T04:01:06.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>error</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/27/URLSessionConfiguration/</loc>
+    <lastmod>2018-04-27T10:38:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>URLSessionConfiguration</title>
+        <pubTime>2018-04-27T07:37:25.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Network</tag>
+         
+        <tag>URLSession</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/26/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Moya%E8%AE%BE%E8%AE%A1/</loc>
+    <lastmod>2018-04-27T10:38:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>深入理解Moya设计</title>
+        <pubTime>2018-04-26T09:45:09.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Network</tag>
+         
+        <tag>Moya</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/26/%E4%BD%BF%E7%94%A8%20Swift%20Mirror%20%E5%BF%AB%E9%80%9F%E5%B0%86%E7%B1%BB%E8%BD%AC%E6%8D%A2%E4%B8%BA%20Json/</loc>
+    <lastmod>2018-04-27T10:37:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用 Swift Mirror 快速将类转换为 Json 的方法。</title>
+        <pubTime>2018-04-26T03:44:07.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Data</tag>
+         
+        <tag>Mirror</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/26/iOS%20%E4%BD%BF%E7%94%A8Moya%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/</loc>
+    <lastmod>2018-04-27T10:36:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS 使用Moya网络请求</title>
+        <pubTime>2018-04-26T09:52:34.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Moya</tag>
+         
+        <tag>NetWork</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/26/iOS%20Monkey%20%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88/</loc>
+    <lastmod>2018-04-27T10:36:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>smart_monkey移动性能测试</title>
+        <pubTime>2018-04-26T04:00:58.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>smart_monkey</tag>
+         
+        <tag>测试</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/26/swift-Runtime/</loc>
+    <lastmod>2018-04-27T10:35:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>Runtime</title>
+        <pubTime>2018-04-26T03:44:24.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Runtime</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/26/Swift%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%EF%BC%88Moya%E7%AF%87%EF%BC%89/</loc>
+    <lastmod>2018-04-27T10:35:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift网络请求（Moya篇）</title>
+        <pubTime>2018-04-26T09:43:02.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Moya</tag>
+         
+        <tag>NetWork</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/26/Swift%E4%B9%8B%E6%B2%99%E7%9B%92%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/</loc>
+    <lastmod>2018-04-27T10:34:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift之沙盒与数据存储</title>
+        <pubTime>2018-04-26T07:45:03.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>数据存储</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/24/Core%20Data%20-swift%20-%20ios8/</loc>
+    <lastmod>2018-04-27T10:34:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS Swift教程 Core Data （三）Core Data栈 下</title>
+        <pubTime>2018-04-24T08:24:39.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Core Data</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/27/Multipath%20TCP/</loc>
+    <lastmod>2018-04-27T10:33:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用 Multipath TCP 为 iOS 创建备份连接</title>
+        <pubTime>2018-04-27T07:27:22.000Z</pubTime>
+        
+        <tag>Multipath</tag>
+         
+        <tag>swift</tag>
+         
+        <tag>Network</tag>
+         
+        <tag>TCP</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/27/Moya%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</loc>
+    <lastmod>2018-04-27T10:33:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Moya源码解析</title>
+        <pubTime>2018-04-27T04:34:30.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Network</tag>
+         
+        <tag>Moya</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/27/%E8%8B%B9%E6%9E%9C%E4%BC%81%E4%B8%9A%E8%B4%A6%E5%8F%B7%E5%8F%91%E5%B8%83APP%E8%AF%A6%E8%A7%A3%E2%80%94%E2%80%94%E9%80%9A%E8%BF%87%E8%87%AA%E5%B7%B1%E7%BD%91%E7%AB%99%E5%88%86%E5%8F%91%E5%BA%94%E7%94%A8/</loc>
+    <lastmod>2018-04-27T10:32:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>苹果企业账号发布APP详解——通过自己网站分发应用</title>
+        <pubTime>2018-04-27T10:16:10.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/27/Moya%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B9%8B%E9%81%93/</loc>
+    <lastmod>2018-04-27T09:18:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>Moya的设计之道</title>
+        <pubTime>2018-04-27T06:11:59.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Network</tag>
+         
+        <tag>Moya</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/13/CoreServicesLayer/</loc>
+    <lastmod>2018-04-24T08:58:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>CoreServicesLayer</title>
+        <pubTime>2018-04-13T08:20:58.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/19/Swift%E4%B8%AD@IBDesignable:@IBInspectable%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2018-04-24T08:57:14.000Z</lastmod>
+    <data>
+        <display>
+        <title>IB可视化属性调节视图-@IBDesignable/@IBInspectable的使用</title>
+        <pubTime>2018-04-19T03:32:42.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/24/%E9%9B%86%E5%90%88%EF%BC%88Set%EF%BC%89%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2018-04-24T04:05:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift - 集合（Set）使用详解（附样例）</title>
+        <pubTime>2018-04-24T03:44:37.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Set</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/23/Swift%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%E7%B1%BB%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+    <lastmod>2018-04-24T02:21:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift中的集合类数据结构</title>
+        <pubTime>2018-04-23T10:09:25.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>Cocoa</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/23/Swift%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E4%B8%B2%E8%A1%8C/</loc>
+    <lastmod>2018-04-24T02:20:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift实现异步操作串行</title>
+        <pubTime>2018-04-23T06:54:46.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>GCD</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/24/%E8%87%AA%E5%AE%9A%E4%B9%89CoreData%20Stack/</loc>
+    <lastmod>2018-04-24T02:19:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift实践：使用CoreData完成上班签到小工具</title>
+        <pubTime>2018-04-24T02:18:49.000Z</pubTime>
+        
+        <tag>swift</tag>
+         
+        <tag>CoreData</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/23/%E9%98%9F%E5%88%97%E9%A1%BA%E5%BA%8F%E6%89%A7%E8%A1%8CDispatchGroup/</loc>
+    <lastmod>2018-04-23T06:30:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>队列顺序执行DispatchGroup</title>
+        <pubTime>2018-04-23T06:29:48.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/23/Swift%20%E7%9A%84%20flatMap%20%E5%92%8C%20zip%20%E5%87%BD%E6%95%B0/</loc>
+    <lastmod>2018-04-23T06:30:43.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift 的 flatMap 和 zip 函数</title>
+        <pubTime>2018-04-23T03:06:55.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/23/swift%E4%B8%ADmap%E5%92%8CflatMap%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2018-04-23T02:33:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>swift中map和flatMap的使用</title>
+        <pubTime>2018-04-23T02:32:09.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/19/MarqueeLabel/</loc>
+    <lastmod>2018-04-19T08:36:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>MarqueeLabel.swift</title>
+        <pubTime>2018-04-19T06:44:05.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/19/%E5%AF%B9%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E6%97%B6%E6%89%80%E6%9C%89%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8%E9%A1%BA%E5%BA%8F%E5%88%86%E6%9E%90/</loc>
+    <lastmod>2018-04-19T08:35:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>应用程序启动时所有方法的调用顺序分析</title>
+        <pubTime>2018-04-19T04:14:53.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/18/%E5%88%A9%E7%94%A8sort%E6%96%B9%E6%B3%95%E5%AF%B9%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84%E6%8C%89%E7%85%A7%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F/</loc>
+    <lastmod>2018-04-18T09:35:39.000Z</lastmod>
+    <data>
+        <display>
+        <title>利用sort方法对对象数组按照对象属性进行排序**</title>
+        <pubTime>2018-04-18T08:52:41.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/13/IJKPlayer%E8%8E%B7%E5%8F%96%E5%AE%9E%E6%97%B6%E6%95%B0%E6%8D%AE%EF%BC%88%E4%B8%8A%EF%BC%89-%20%E6%B7%BB%E5%8A%A0%E5%A4%96%E9%83%A8%E6%8E%A5%E5%8F%A3/</loc>
+    <lastmod>2018-04-13T10:36:02.000Z</lastmod>
+    <data>
+        <display>
+        <title>IJKPlayer获取实时数据（上）- 添加外部接口</title>
+        <pubTime>2018-04-13T05:41:02.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/13/iOS%E8%A2%AB%E9%81%97%E5%BF%98%E7%9A%84%E8%BF%91%E8%B7%9D%E7%A6%BB%E9%80%9A%E8%AE%AF%E5%88%A9%E5%99%A8-MultipeerConnectivity/</loc>
+    <lastmod>2018-04-13T10:35:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS被遗忘的近距离通讯利器-MultipeerConnectivity</title>
+        <pubTime>2018-04-13T08:24:46.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/13/NEHotspotConfigurationManager/</loc>
+    <lastmod>2018-04-13T10:35:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>NEHotspotConfigurationManager</title>
+        <pubTime>2018-04-13T07:29:37.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/13/NEHotspotConfigurationManager%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2018-04-13T10:34:45.000Z</lastmod>
+    <data>
+        <display>
+        <title>NEHotspotConfigurationManager使用</title>
+        <pubTime>2018-04-13T07:24:23.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/12/GPUImage%E8%AF%A6%E7%BB%86%E8%A7%A3%E6%9E%90/</loc>
+    <lastmod>2018-04-13T10:30:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>GPUImage详细解析</title>
+        <pubTime>2018-04-12T02:05:29.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/03/08/NSAttributedStringKey/</loc>
+    <lastmod>2018-04-13T10:25:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>NSAttributedStringKey</title>
+        <pubTime>2018-03-08T08:53:11.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/03/29/navigationBar%20%20%20%E8%BF%94%E5%9B%9E%20%E3%80%81title%20%E4%B8%8D%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2018-04-13T10:25:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>navigationBar   返回 、title。不显示问题</title>
+        <pubTime>2018-03-29T10:05:38.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/02/02/iOS%20Swift%20Crash%E7%9A%84%E6%8D%95%E8%8E%B7/</loc>
+    <lastmod>2018-04-13T10:25:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS Swift Crash的捕获</title>
+        <pubTime>2018-02-02T03:54:36.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/11/Swift%20-%20%E4%BD%BF%E7%94%A8ijkplayer%E6%A1%86%E6%9E%B6%E6%92%AD%E6%94%BE%E7%9B%B4%E6%92%AD%E8%A7%86%E9%A2%911%E2%80%94%E2%80%94RTMP:HTTP%E8%A7%86%E9%A2%91%E6%B5%81%E6%92%AD%E6%94%BE/</loc>
+    <lastmod>2018-04-13T10:24:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift - 使用ijkplayer框架播放直播视频1——（RTMP/HTTP视频流播放）</title>
+        <pubTime>2018-04-11T02:30:59.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/03/30/runtime/</loc>
+    <lastmod>2018-04-13T10:24:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>runtime</title>
+        <pubTime>2018-03-30T05:46:19.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/12/NSURLSession%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%92%8C%E6%96%AD%E7%82%B9%E7%BB%A7%E4%BC%A0%E4%BB%A5%E5%8F%8A%E5%90%8E%E5%8F%B0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD/</loc>
+    <lastmod>2018-04-13T10:24:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>NSURLSession的下载和断点继传以及后台下载功能</title>
+        <pubTime>2018-04-12T06:14:51.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/12/NSURLSession%20/</loc>
+    <lastmod>2018-04-13T10:24:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>NSURLSession</title>
+        <pubTime>2018-04-12T06:20:16.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/10/iPhone%E9%80%9A%E8%BF%87usb%E4%B8%8Ewindows%E5%AE%9E%E7%8E%B0%E9%80%9A%E4%BF%A1/</loc>
+    <lastmod>2018-04-13T10:24:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>iPhone通过usb与windows实现通信</title>
+        <pubTime>2018-04-10T02:15:25.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/12/iOS%20%E5%9B%BE%E7%89%87%E5%8E%BB%E9%99%A4%E7%89%B9%E5%83%8F%E7%B4%A0%E8%89%B2/</loc>
+    <lastmod>2018-04-13T10:24:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS 图片去除特像素色</title>
+        <pubTime>2018-04-12T06:33:53.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/09/GPUImage%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E6%A1%86%E6%9E%B6%5D/</loc>
+    <lastmod>2018-04-13T10:23:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS：GPUImage强大的图像处理框架</title>
+        <pubTime>2018-04-09T03:13:46.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/04/10/AppIcon%E5%92%8CLaunchImage%E5%B0%BA%E5%AF%B8/</loc>
+    <lastmod>2018-04-13T10:23:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>AppIcon和LaunchImage尺寸</title>
+        <pubTime>2018-04-10T08:06:28.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/03/19/50%E6%AF%AB%E7%A7%92%E8%A7%A6%E5%8F%91%E4%B8%80%E6%AC%A1%E7%9A%84%E6%96%B9%E6%B3%95%E3%80%82%E5%BD%93%E6%88%91%E5%8F%91%E5%AE%8C1024%E6%95%B0%E6%8D%AE%E5%B0%B1%E8%B7%B3%E5%87%BAtimer%20/</loc>
+    <lastmod>2018-04-13T10:20:39.000Z</lastmod>
+    <data>
+        <display>
+        <title>ble多字节传送</title>
+        <pubTime>2018-03-19T03:44:19.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/03/16/%E5%85%B3%E4%BA%8EDictionary%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BCKey%E5%AD%97%E6%AF%8D%E5%8D%87%E9%99%8D%E5%BA%8F%E6%8E%92%E5%88%97%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2018-04-13T10:20:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>关于Dictionary根据键值Key字母升降序排列的解决方法</title>
+        <pubTime>2018-03-16T08:16:15.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/03/09/%E4%BD%BF%E7%94%A8UISearchController%E8%B7%B3%E8%BD%AC%E6%96%B0%E6%8E%A7%E5%88%B6%E5%99%A8%E6%97%B6%E6%90%9C%E7%B4%A2%E6%A1%86%E4%BE%9D%E7%84%B6%E5%87%BA%E7%8E%B0/</loc>
+    <lastmod>2018-04-13T10:20:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用UISearchController跳转新控制器时搜索框依然出现</title>
+        <pubTime>2018-03-09T08:54:49.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/03/23/%E9%9A%8F%E6%9C%BA%E5%9B%BE%E7%89%87%E8%8E%B7%E5%8F%96/</loc>
+    <lastmod>2018-04-13T10:20:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>随机图片获取</title>
+        <pubTime>2018-03-23T02:33:12.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/03/19/ijkplayer%E8%AE%BE%E7%BD%AErtmp%E7%A7%92%E5%BC%80/</loc>
+    <lastmod>2018-04-13T10:20:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>ijkplayer设置rtmp秒开</title>
+        <pubTime>2018-03-19T04:06:10.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/03/21/Swift%E5%BC%80%E5%8F%91%E4%B9%8B%20----%20Swift4.0%20GCD%E5%AE%9E%E7%8E%B0%E8%AE%A1%E6%97%B6%E5%99%A8/</loc>
+    <lastmod>2018-04-13T10:19:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift开发之 ---- Swift4.0 GCD实现计时器</title>
+        <pubTime>2018-03-21T07:00:31.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/02/02/AvoidCrash%20-%20oc-no-crash%20%E7%A6%8F%E9%9F%B3/</loc>
+    <lastmod>2018-04-13T10:19:12.000Z</lastmod>
+    <data>
+        <display>
+        <title>AvoidCrash - oc-no-crash 福音</title>
+        <pubTime>2018-02-02T09:38:53.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/02/02/swift4.0%20%E9%80%82%E9%85%8D/</loc>
+    <lastmod>2018-04-13T10:16:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>swift4.0 适配</title>
+        <pubTime>2018-02-02T03:54:36.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/02/02/hello-world/</loc>
+    <lastmod>2018-03-07T02:46:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>Alamofire serversTool</title>
+        <pubTime>2018-02-02T03:54:36.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+</urlset>
