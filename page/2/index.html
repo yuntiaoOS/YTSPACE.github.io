@@ -153,14 +153,14 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-swift 简单的Time单例，延迟，循环，任你选" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-iOS12 Siri Shortcuts初探" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/24/swift 简单的Time单例，延迟，循环，任你选/">swift 简单的Time单例，延迟，循环，任你选</a>
+      <a class="article-title" href="/2018/06/20/iOS12 Siri Shortcuts初探/">iOS12 Siri Shortcuts初探</a>
     </h1>
   
 
@@ -169,8 +169,8 @@
         	
 	
         
-        <a href="/2018/05/24/swift 简单的Time单例，延迟，循环，任你选/" class="archive-article-date">
-  	<time datetime="2018-05-24T10:04:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-24</time>
+        <a href="/2018/06/20/iOS12 Siri Shortcuts初探/" class="archive-article-date">
+  	<time datetime="2018-06-20T05:50:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-20</time>
 </a>
         
       </header>
@@ -182,15 +182,14 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>swift 简单的Time单例，延迟，循环，任你选</p>
-<p>import Foundation</p>
-<p>typealias ZZWTimeBlock = () -&gt; Void</p>
-<p>class ZZWTimeManager: NSObject{</p>
-<p>​    static let sharedInstance = ZZWTimeManager()</p>
-<p>​    var cycyleTimer : Timer?</p>
-<p>​
+        <p>## </p>
+<p>来源：<a href="https://www.jianshu.com/p/19b248333b18" target="_blank" rel="noopener">he15hiss</a></p>
+<p><strong>简述</strong></p>
+<p>开发者期待的2018 WWDC如期开始，然而今年并没有什么特别大的功能亮点，主要是进行一些bug修复和性能提升，而少之又少的功能里面最让我期待的还是Shortcuts,粗略的了解了下功能就是可以通过自定义一个短语，能过Siri来唤起特定的功能，可以在应用中添加“添加到Siri”按钮，点击后会把这个动作列到 My Shortcuts列表里面，还会有一个Shortcuts应用，用这个应用可以把一连串动作连接起来执行，也就是workflow的效果；这也是之前苹果收购workflow的原因。</p>
+<p>大概了解了它的功能，下面就带大家看看如何开发一个这样的功能</p>
+<p><strong>创建事件</strong><br>
         
-          <a class="article-more-a" href="/2018/05/24/swift 简单的Time单例，延迟，循环，任你选/#more">more >></a>
+          <a class="article-more-a" href="/2018/06/20/iOS12 Siri Shortcuts初探/#more">more >></a>
         
       
 
@@ -208,7 +207,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Siri</a>
         		</li>
       		
 		</ul>
@@ -218,7 +217,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/24/swift 简单的Time单例，延迟，循环，任你选/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/06/20/iOS12 Siri Shortcuts初探/">展开全文 >></a>
         </p>
       
 
@@ -248,14 +247,14 @@
 
 
   
-    <article id="post-Swift3.0 指针" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-iOS逆向-ipa包重签名及非越狱手机安装多个微信" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/23/Swift3.0 指针/">Swift3.0 指针</a>
+      <a class="article-title" href="/2018/06/20/iOS逆向-ipa包重签名及非越狱手机安装多个微信/">iOS逆向-ipa包重签名及非越狱手机安装多个微信</a>
     </h1>
   
 
@@ -264,8 +263,291 @@
         	
 	
         
-        <a href="/2018/05/23/Swift3.0 指针/" class="archive-article-date">
-  	<time datetime="2018-05-23T11:40:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-23</time>
+        <a href="/2018/06/20/iOS逆向-ipa包重签名及非越狱手机安装多个微信/" class="archive-article-date">
+  	<time datetime="2018-06-20T05:49:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-20</time>
+</a>
+        
+      </header>
+    
+
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>## </p>
+<p>来源：<a href="https://www.jianshu.com/p/25e1f44c90f7" target="_blank" rel="noopener">czj_warrior</a></p>
+<blockquote>
+<p>前一段时间学了点儿逆向相关的一些东西，但是都是基于越狱手机上的操作，给视频类应用去广告之类的。随着苹果生态圈的逐渐完善、及苹果对自身系统的保护越来越严格，导致现在的iPhone手机并不像以前那样存在大量的越狱用户。</p>
+</blockquote>
+<p>前段时间我自己申请了个微信小号，申请小号的目的就是原来微信号好友中乱七八糟的人实在太多，感觉自己的朋友圈都是一些无关紧要的垃圾信息，曾经关闭了一段时间的朋友圈，但是最近遇到了好多技术上很强的同行，还想了解大佬们的动态。于是我就想着申请了个小号，但是麻烦来了，iPhone手机并不像安卓手机那样存在着微信多开之类的应用，将自己手机越狱吧成本太高，于是就想着通过技术手段安装多个微信，下面步入正题：</p>
+<p><strong>为什么要重签名</strong><br>
+        
+          <a class="article-more-a" href="/2018/06/20/iOS逆向-ipa包重签名及非越狱手机安装多个微信/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">iOS逆向</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/20/iOS逆向-ipa包重签名及非越狱手机安装多个微信/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Mac下利用Hexo+GitHub轻松搭建自己的博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/13/Mac下利用Hexo+GitHub轻松搭建自己的博客/">Mac下利用Hexo+GitHub轻松搭建自己的博客</a>
+    </h1>
+  
+
+
+        <!-- 显示阅读和评论数 -->
+        	
+	
+        
+        <a href="/2018/06/13/Mac下利用Hexo+GitHub轻松搭建自己的博客/" class="archive-article-date">
+  	<time datetime="2018-06-13T11:30:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-13</time>
+</a>
+        
+      </header>
+    
+
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p># </p>
+<p>2016年10月23日 15:03:21</p>
+<p>阅读数：3620</p>
+<p>今年4月份就在mac下利用hexo搭建了一个博客，因换了一台电脑，项目丢失，需重新安装。</p>
+<p>整理一下安装流程：</p>
+<p>1.hexo是基于nodejs的，需安装nodejs，安装nodejs最好选择homebrew</p>
+<p>2.首先查看电脑是否安装ruby，因为homebrew安装依赖ruby</p>
+<p>3.安装顺序：homebrew—-&gt;nodejs—-&gt;hexo</p>
+<hr>
+        
+          <a class="article-more-a" href="/2018/06/13/Mac下利用Hexo+GitHub轻松搭建自己的博客/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hexo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/13/Mac下利用Hexo+GitHub轻松搭建自己的博客/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-IBDesignable和IBInspectable（xcode的所见即所得）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/13/IBDesignable和IBInspectable（xcode的所见即所得）/">IBDesignable和IBInspectable（xcode的所见即所得）</a>
+    </h1>
+  
+
+
+        <!-- 显示阅读和评论数 -->
+        	
+	
+        
+        <a href="/2018/06/13/IBDesignable和IBInspectable（xcode的所见即所得）/" class="archive-article-date">
+  	<time datetime="2018-06-13T09:26:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-13</time>
+</a>
+        
+      </header>
+    
+
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p># </p>
+<p>转<a href="https://www.jianshu.com/u/9f2fa4dcf955" target="_blank" rel="noopener">Better_奔</a></p>
+<h2 id="IBDesignable的基本使用"><a href="#IBDesignable的基本使用" class="headerlink" title="IBDesignable的基本使用"></a>IBDesignable的基本使用</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p><code>IBDesignable</code>主要用于<code>xcode</code>版本的所见即所得（实时渲染），在<code>storyBoard</code>，<code>xib</code>或者代码中设置View的属性，<code>storyBoard</code>，<code>xib</code>能实时的渲染。<br>
+        
+          <a class="article-more-a" href="/2018/06/13/IBDesignable和IBInspectable（xcode的所见即所得）/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">IBDesignable</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/13/IBDesignable和IBInspectable（xcode的所见即所得）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-iOS改变UIImageView的image时添加渐变" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/07/iOS改变UIImageView的image时添加渐变/">iOS改变UIImageView的image时添加渐变</a>
+    </h1>
+  
+
+
+        <!-- 显示阅读和评论数 -->
+        	
+	
+        
+        <a href="/2018/06/07/iOS改变UIImageView的image时添加渐变/" class="archive-article-date">
+  	<time datetime="2018-06-07T11:05:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-07</time>
 </a>
         
       </header>
@@ -278,103 +560,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>#</p>
-<p>最近试着用Swift基于AudioQueue写一个音乐播放器，但是AudioQueue的API都是C函数，避免不了操作指针。经常卡在指针上，于是决定先静下心来学习一下Swift中的指针。baidu了很多，但是没有系统讲解Swift指针的文章，一边学一边记录，写下这些作为积累。这次学习分为四个部分:<code>UnsafePointer</code>, <code>UnsafeMutablePointer</code>, <code>UnsafeRawPointer</code>, <code>UnsafeMutableRawPointer</code>。有不对的地方欢迎指出！<br>在Swift中，指针由结构体 <code>struct UnsafePointer&lt;Pointee&gt;</code> 或 <code>struct UnsafeMutablePointer&lt;Pointee&gt;</code> 表示，但是不能通过”&amp;”获取一个<code>UnsafePointer</code> 或 <code>UnsafeMutablePointer</code>的实例，只能作为<code>inout</code>参数使用。<code>UnsafePointer</code>相对于<code>UnsafeMutablePointer</code>，其所指向的地址的值是不可变的</p>
-<h2 id="一、UnsafeMutablePointer"><a href="#一、UnsafeMutablePointer" class="headerlink" title="一、UnsafeMutablePointer"></a>一、UnsafeMutablePointer</h2><p>被<code>UnsafeMutablePointe</code>引用的内存有三种状态：<br>\1. Not Allocated<br>\2. Allocated but not initialized<br>\3. Allocated and initialized<br>只有在状态3时，可以安全的使用<code>pointee</code>属性来<code>set</code>和<code>get</code>。<br>
+<hr>
+<p>当改变UIImageView的image属性时，UI会立刻从一张图片切换到另一张图片，显得十分生硬，本文记录如何为改变UIImageView的image属性时加入淡入淡出的效果。</p>
+<p>现在有四张UIImage，初始化后将其存入数组中:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>.imgs = @[[<span class="type">UIImage</span> imageNamed:@<span class="string">"bg01"</span>],</span><br><span class="line">              [<span class="type">UIImage</span> imageNamed:@<span class="string">"bg02"</span>],</span><br><span class="line">              [<span class="type">UIImage</span> imageNamed:@<span class="string">"bg03"</span>],</span><br><span class="line">              [<span class="type">UIImage</span> imageNamed:@<span class="string">"bg04"</span>]];</span><br><span class="line"><span class="keyword">self</span>.imageView.image = <span class="keyword">self</span>.imgs[<span class="number">0</span>];<span class="number">12345</span></span><br></pre></td></tr></table></figure>
+<p>有一按钮，其事件如下:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="type">IBAction</span>)switchImg:(id)sender &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2018/05/23/Swift3.0 指针/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/23/Swift3.0 指针/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-swift简单粗暴方式实现任意模式切换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/23/swift简单粗暴方式实现任意模式切换/">swift简单粗暴方式实现任意模式切换</a>
-    </h1>
-  
-
-
-        <!-- 显示阅读和评论数 -->
-        	
-	
-        
-        <a href="/2018/05/23/swift简单粗暴方式实现任意模式切换/" class="archive-article-date">
-  	<time datetime="2018-05-23T02:06:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-23</time>
-</a>
-        
-      </header>
-    
-
-    <!-- 目录内容 -->
-
-<!-- 目录内容结束 -->
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#</p>
-<p>本来想写个UIApearance的教程改应用模式切换的，结果搞出来一个非常赞的方法来实现任意模式的切换。</p>
-<p>不了解UIApearance的可以点<a href="https://link.jianshu.com/?t=http://www.cocoachina.com/ios/20150723/12671.html" target="_blank" rel="noopener">这里</a>看看了解下。</p>
-<h4 id="说下思路："><a href="#说下思路：" class="headerlink" title="说下思路："></a>说下思路：</h4><p>本来我是想通过extension和子类化，自定义UIApearance可以调用的方法来实现模式的切换，具体方式就不写了，说真的，有点麻烦，也不容易封装，本来是想推荐给大家在找不到合适的方式而且不想使用通知的时候尝试下，后来突然想到如果我直接用block把对象本身传回来，不是可以任意修改样式了吗，然后就有了这个。</p>
-<h4 id="期间做了许多尝试："><a href="#期间做了许多尝试：" class="headerlink" title="期间做了许多尝试："></a>期间做了许多尝试：</h4>
-        
-          <a class="article-more-a" href="/2018/05/23/swift简单粗暴方式实现任意模式切换/#more">more >></a>
+          <a class="article-more-a" href="/2018/06/07/iOS改变UIImageView的image时添加渐变/#more">more >></a>
         
       
 
@@ -392,7 +585,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">UIImageView</a>
         		</li>
       		
 		</ul>
@@ -402,202 +595,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/23/swift简单粗暴方式实现任意模式切换/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-NSString 被忽视的方法 stringByTrimmingCharactersInSet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/23/NSString 被忽视的方法 stringByTrimmingCharactersInSet/">NSString 被忽视的方法 stringByTrimmingCharactersInSet</a>
-    </h1>
-  
-
-
-        <!-- 显示阅读和评论数 -->
-        	
-	
-        
-        <a href="/2018/05/23/NSString 被忽视的方法 stringByTrimmingCharactersInSet/" class="archive-article-date">
-  	<time datetime="2018-05-23T01:32:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-23</time>
-</a>
-        
-      </header>
-    
-
-    <!-- 目录内容 -->
-
-<!-- 目录内容结束 -->
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#</p>
-<p>2016.09.06 13:29* 字数 195 阅读 3207评论 2喜欢 13赞赏 1</p>
-<p>在app中，处理用户的输入是很头疼的，NSString自带了这个方法，可以去除用户输入的前后空格（注意只是前后哦）或是里面的特殊符号。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSString *str = @&quot;  我是一个程序猿   &quot;;</span><br><span class="line">NSString *newStr = [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];</span><br><span class="line">NSLog(@&quot;处理之前|%@|, 处理之后|%@|&quot;, str, newStr);</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2018/05/23/NSString 被忽视的方法 stringByTrimmingCharactersInSet/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NSString</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/23/NSString 被忽视的方法 stringByTrimmingCharactersInSet/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Swift4.0   string::: 在指定字符串第一次搜索结果位置前:后插入字符串" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/18/Swift4.0   string::: 在指定字符串第一次搜索结果位置前:后插入字符串/">string/// 在指定字符串第一次搜索结果位置前/后插入字符串</a>
-    </h1>
-  
-
-
-        <!-- 显示阅读和评论数 -->
-        	
-	
-        
-        <a href="/2018/05/18/Swift4.0   string::: 在指定字符串第一次搜索结果位置前:后插入字符串/" class="archive-article-date">
-  	<time datetime="2018-05-18T10:21:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-18</time>
-</a>
-        
-      </header>
-    
-
-    <!-- 目录内容 -->
-
-<!-- 目录内容结束 -->
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Swift4.0   string/// 在指定字符串第一次搜索结果位置前/后插入字符串</p>
-<p>extension String {</p>
-<p>​    func positionOf(sub:String, backwards:Bool)-&gt;Int {</p>
-<p>​        var pos = -1</p>
-<p>​        </p>
-<p>​        guard let inde  = self.range(of: sub)?.upperBound else {</p>
-<p>​           </p>
-<p>​            return pos</p>
-<p>​            </p>
-<p>​        }</p>
-<p>​<br>
-        
-          <a class="article-more-a" href="/2018/05/18/Swift4.0   string::: 在指定字符串第一次搜索结果位置前:后插入字符串/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">string</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/18/Swift4.0   string::: 在指定字符串第一次搜索结果位置前:后插入字符串/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/06/07/iOS改变UIImageView的image时添加渐变/">展开全文 >></a>
         </p>
       
 
@@ -629,7 +627,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -741,11 +739,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
+                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">swift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UIButton</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IJKMediaFramework.framework</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -754,6 +764,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -769,6 +787,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Swift3</a>
               </li>
              
@@ -781,15 +803,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Moya</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">NetWork</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -809,15 +831,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">UIImageView</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">iOS逆向</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">error</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ifaddrs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -865,10 +891,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCD</a>
               </li>
              
@@ -877,7 +899,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">响应链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -890,10 +920,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">struct</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -914,6 +940,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">protocol</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
             
             <div class="clearfix"></div>
@@ -1150,6 +1184,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           
             <li class="search-li">
               <a href="http://fengjian0106.github.io/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>FengJian&#39;s Blog</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://limboy.me/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>limboy</a>
             </li>
           
         </ul>

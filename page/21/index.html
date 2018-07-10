@@ -153,14 +153,14 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-GPUImage详细解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-swift中map和flatMap的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/12/GPUImage详细解析/">GPUImage详细解析</a>
+      <a class="article-title" href="/2018/04/23/swift中map和flatMap的使用/">swift中map和flatMap的使用</a>
     </h1>
   
 
@@ -169,8 +169,8 @@
         	
 	
         
-        <a href="/2018/04/12/GPUImage详细解析/" class="archive-article-date">
-  	<time datetime="2018-04-12T02:05:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-12</time>
+        <a href="/2018/04/23/swift中map和flatMap的使用/" class="archive-article-date">
+  	<time datetime="2018-04-23T02:32:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-23</time>
 </a>
         
       </header>
@@ -182,16 +182,25 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>假设我们自定义一个OpenGL ES程序来处理图片，那么会有以下几个步骤：</p>
-<p>1、初始化OpenGL ES环境，编译、链接顶点着色器和片元着色器；</p>
-<p>2、缓存顶点、纹理坐标数据，传送图像数据到GPU；</p>
-<p>3、绘制图元到特定的帧缓存；</p>
-<p>4、在帧缓存取出绘制的图像。</p>
-<p><code>GPUImageFilter</code>负责的是第一、二、三步。</p>
-<p><code>GPUImageFramebuffer</code>负责是第四步。<br>
-        
-          <a class="article-more-a" href="/2018/04/12/GPUImage详细解析/#more">more >></a>
-        
+        <h1 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h1><blockquote>
+<p>map和flatMap是swift中两个常用的函数，它们提现了swift中很多特性。</p>
+</blockquote>
+<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><p>1、map的使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let numbers = [1,2,3,4]</span><br><span class="line">let result = numbers.map &#123; $0 + 2 &#125;</span><br><span class="line">print(result)    //输出：3，4，5，6</span><br></pre></td></tr></table></figure>
+<p>大家可以看一下，map方法接受的是一个闭包参数，然后它会遍历整个numbers数组，并对数组中每一个元素执行闭包中定义的操作。相当于对数组中的所有元素做了一个映射。<br>这个例子就是对numbers数组的所有元素进行了加2。</p>
+<p>再看一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let array1 = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span><br><span class="line">let array2 = array1.map &#123; &quot;NO.\($0)&quot; &#125;</span><br><span class="line">print(array2)    //输出：NO.a，NO.b，NO.c，NO.d</span><br></pre></td></tr></table></figure>
+<p>2、flatMap的使用<br><code>map</code> 可以理解为对一个集合类型的所有元素做了一个映射操作，那么<code>flatMap</code>呢？</p>
+<p>让我们来看一下下面的一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = numbers.flatMap&#123; $0 + 2 &#125;      //输出：3,4,5,6</span><br></pre></td></tr></table></figure>
+<p>我们对同样的数组使用了<code>flatMap</code>进行处理，得到了相同的结果。那么这两个到底有什么区别呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let array1 = [[1,2,3],[4,5,6]]</span><br><span class="line">var arr = array1.map&#123; $0.map&#123; $0 + 1 &#125; &#125;</span><br><span class="line">//输出：[[2,3,4],[5,6,7]]</span><br><span class="line"></span><br><span class="line">var arr2 = array1.flatMap&#123; $0.map&#123; $0 + 1 &#125; &#125;</span><br><span class="line">//输出：[2,3,4,5,6,7]</span><br></pre></td></tr></table></figure>
+<p>看到这两个数组的输出就看出差别来了，对于二维数组，<code>map</code>和<code>flatMap</code>的结果就不同了。</p>
+<p><code>flatMap</code> 会遍历数组的元素，并对这些元素执行闭包中定义的操作。 但唯一和<code>map</code>不同的是，它对最终的结果进行了所谓的 “降维” 操作。 本来原始数组是一个二维的， 但经过 <code>flatMap</code> 之后，它变成一维的了。</p>
+<p>大家再来看看flatMap的第二个作用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let optionalArray: [String?] = [&quot;AA&quot;,&quot;BB&quot;,nil,&quot;CC&quot;]</span><br><span class="line">print(optionalArray)   </span><br><span class="line">//输出：[Optional(&quot;AA&quot;), Optional(&quot;BB&quot;), nil, Optional(&quot;CC&quot;)]</span><br><span class="line"></span><br><span class="line">var flatMapArray = optionalArray.flatMap&#123; $0 &#125;</span><br><span class="line">print(flatMapArray)</span><br><span class="line">//输出：[&quot;AA&quot;, &quot;BB&quot;, &quot;CC&quot;]</span><br></pre></td></tr></table></figure>
+<p>大家可以看到，在<code>flatMap</code> 的返回结果中， 成功的将原数组中的 nil 值过滤掉了。 再仔细观察，你会发现更多。 使用 flatMap 调用之后， 数组中的所有元素都被解包了。也就是说原始数组的类型是 <code>[String?]</code>, 而 <code>flatMap</code> 调用后变成了 <code>[String]</code>。 这也是<code>flatMap</code> 和 <code>map</code> 的一个重大区别。</p>
+
       
 
       
@@ -203,7 +212,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/12/GPUImage详细解析/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/23/swift中map和flatMap的使用/">展开全文 >></a>
         </p>
       
 
@@ -233,14 +242,14 @@
 
 
   
-    <article id="post-Swift - 使用ijkplayer框架播放直播视频1——RTMP:HTTP视频流播放" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-MarqueeLabel" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/11/Swift - 使用ijkplayer框架播放直播视频1——RTMP:HTTP视频流播放/">Swift - 使用ijkplayer框架播放直播视频1——（RTMP/HTTP视频流播放）</a>
+      <a class="article-title" href="/2018/04/19/MarqueeLabel/">MarqueeLabel.swift</a>
     </h1>
   
 
@@ -249,8 +258,8 @@
         	
 	
         
-        <a href="/2018/04/11/Swift - 使用ijkplayer框架播放直播视频1——RTMP:HTTP视频流播放/" class="archive-article-date">
-  	<time datetime="2018-04-11T02:30:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
+        <a href="/2018/04/19/MarqueeLabel/" class="archive-article-date">
+  	<time datetime="2018-04-19T06:44:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-19</time>
 </a>
         
       </header>
@@ -262,22 +271,17 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>转载 2017年03月10日 11:53:03</p>
-<ul>
-<li>**868</li>
-</ul>
-<p>最近在研究IOS下播放RTSP RTMP等视频流，目前已测试成功。</p>
-<p>转载地址：<a href="http://www.hangge.com/blog/cache/detail_1326.html" target="_blank" rel="noopener">http://www.hangge.com/blog/cache/detail_1326.html</a></p>
-<p><strong>BiliBili</strong>（简称B站），想必大家都不陌生。<strong>Ijkplayer </strong>框架是B站提供了一个开源的流媒体解决方案，集成了 <strong>ffmpeg</strong>，还支持硬解码(需 <strong>iOS8 </strong>以上版本)。使用 <strong>Ijkplayer </strong>框架我们可以很方便地实现视频直播功能（<strong>Http</strong>/<strong>RTMP</strong>/<strong>RTSP </strong>这几种直播源都支持）。</p>
-<p>本文主要介绍如何使用 <strong>Ijkplayer </strong>框架播放在线直播视频（当然其本地播放能力也很强大）。对于几种直播流不太清楚地，可以参考我前面写的这篇文章：<a href="http://www.hangge.com/blog/cache/detail_1325.html" target="_blank" rel="noopener">RTMP、RTSP、HTTP视频协议详解（附：直播流地址、播放软件）</a></p>
-<p>一，环境部署</p>
-<p>在使用 <strong>Ijkplayer </strong>前，我们需要先搭建运行环境。</p>
-<p>1，在“终端”中运行如下命令，安装homebrew, git, yasm等环境。</p>
-<p><strong>2，将Ijkplayer项目下载到本地</strong></p>
-<p><strong>GitHub</strong></p>
-<p>地址：<br>
+        <p>//</p>
+<p>//  Created by Charles Powell on 8/6/14.</p>
+<p>//  Copyright (c) 2015 Charles Powell. All rights reserved.</p>
+<p>//</p>
+<p>import UIKit</p>
+<p>import QuartzCore</p>
+<p>@IBDesignable</p>
+<p>open class MarqueeLabel: UILabel, CAAnimationDelegate {</p>
+<p>​<br>
         
-          <a class="article-more-a" href="/2018/04/11/Swift - 使用ijkplayer框架播放直播视频1——RTMP:HTTP视频流播放/#more">more >></a>
+          <a class="article-more-a" href="/2018/04/19/MarqueeLabel/#more">more >></a>
         
       
 
@@ -290,7 +294,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/11/Swift - 使用ijkplayer框架播放直播视频1——RTMP:HTTP视频流播放/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/19/MarqueeLabel/">展开全文 >></a>
         </p>
       
 
@@ -320,14 +324,14 @@
 
 
   
-    <article id="post-AppIcon和LaunchImage尺寸" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-对应用程序启动时所有方法的调用顺序分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/10/AppIcon和LaunchImage尺寸/">AppIcon和LaunchImage尺寸</a>
+      <a class="article-title" href="/2018/04/19/对应用程序启动时所有方法的调用顺序分析/">应用程序启动时所有方法的调用顺序分析</a>
     </h1>
   
 
@@ -336,8 +340,8 @@
         	
 	
         
-        <a href="/2018/04/10/AppIcon和LaunchImage尺寸/" class="archive-article-date">
-  	<time datetime="2018-04-10T08:06:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-10</time>
+        <a href="/2018/04/19/对应用程序启动时所有方法的调用顺序分析/" class="archive-article-date">
+  	<time datetime="2018-04-19T04:14:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-19</time>
 </a>
         
       </header>
@@ -349,30 +353,17 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1、AppIcon 尺寸</p>
-<p>iPhone Notification iOS 7-10 20pt                             2x( 40x40 )  3x( 60x60 )</p>
-<p>iPhone、Spotlight iOS 5,6 、Settings iOS 5-10  29pt   2x( 58x58 )  3x( 87x87 )</p>
-<p>iPhone Spotlight iOS 7-10 40pt                                 2x( 80x80 )   3x( 120x120 )</p>
-<p>iPhone APP iOS 7-10 60pt                                        2x( 120x120 )  3x( 180x180 )</p>
-<p>iPad Notifications 7-10 20pt                                      1x( 20x20 )  2x( 40x40 )</p>
-<p>iPad Settings 5-10 29pt                                            1x( 29x29 )  2x( 58x58 )</p>
-<p>iPad Spotlight iOS 7-10 40pt                                     1x( 40x40 )  2x( 80x80 )</p>
-<p>iPad App iOS 7-10 76pt                                            1x( 76x76 )  2x( 152x152 )</p>
-<p>iPad Pro App iOS 9-10 83.5                                      2x( 167x167 )</p>
-<p>2、LaunchImage尺寸</p>
-<p>iPhone X  1125 * 2436  必要</p>
-<p>iPhone Portrait  iOS 5,6        1x( 320x480 )  2x( 640x960 ) Retina4( 640x1136 )</p>
-<p>iPhone Portrait iOS 8,9         Retina HD 5.5( 1242x2208 )  Retina HD 4.7( 750x1334 )  必要</p>
-<p>iPhone Portrait iOS 7-9        2x( 640x960 )  Retina4( 640x1136 )  必要(没有的话 在5上边有问题)</p>
-<p>iPhone Landscape iOS 8,9    Retina HD 5.5( 2208x1242 )</p>
-<p>iPad Portrait iOS 5,6            1x( 768x1024 )  2x( 1536x2048 )</p>
-<p>iPad Portait iOS 7-9            1x( 768x1024 )  2x( 1536x2048 )</p>
-<p>iPad Landscape iOS 5,6       1x( 1024x768 )  2x( 2048x1536 )</p>
-<p>iPad Landscape 7-9            1x( 1024x768 )  2x( 2048x1536 )</p>
-<p>iPad Portrait Without Status Bar iOS 5,6           1x( 768x1004 )  2x( 1536x2008 )</p>
-<p>iPad Landscape Without Status Bar iOS 5,6      1x( 1024x748 )  2x( 2048x1496 )<br>
+        <h1 id="对应用程序启动时所有方法的调用顺序分析"><a href="#对应用程序启动时所有方法的调用顺序分析" class="headerlink" title="对应用程序启动时所有方法的调用顺序分析"></a><a href="http://www.cnblogs.com/dsxniubility/p/4322525.html" target="_blank" rel="noopener">对应用程序启动时所有方法的调用顺序分析</a></h1><p>一个应用程序的启动过程要包括代理的创建，控制器的加载和控制器view的加载，这其中有很多关于生命周期的方法，每个方法都是有先后顺序的，如果调用顺序拿不准，或者某段代码写的方法不恰当，就会遇到各种奇葩问题。本文不怕麻烦的在几乎所有启动时要调用的方法里都用了 <strong>FUNCTION</strong> 打印。结果还有有些地方出人意料的</p>
+<p>如果你不是在董铂然博客园看到本文，<a href="http://www.cnblogs.com/dsxniubility/p/4322525.html" target="_blank" rel="noopener">请点击查看原文</a></p>
+<h2 id="首先回顾一下应用程序的启动过程"><a href="#首先回顾一下应用程序的启动过程" class="headerlink" title="首先回顾一下应用程序的启动过程"></a>首先回顾一下应用程序的启动过程</h2><p>①.先加载Main函数</p>
+<p>②.在Main函数里的 UIApplicationMain方法中，创建Application对象 创建Application的Delegate对象</p>
+<p>③.创建主循环，代理对象开始监听事件</p>
+<p>④.启动完毕会调用 didFinishLaunching方法，并在这个方法中创建UIWindow</p>
+<p>⑤.设置UIWindow的根控制器是谁</p>
+<p>⑥.如果有storyboard，会根据info.plist中找到应用程序的入口storyboard并加载箭头所指的控制器</p>
+<p>⑦.显示窗口</p>
         
-          <a class="article-more-a" href="/2018/04/10/AppIcon和LaunchImage尺寸/#more">more >></a>
+          <a class="article-more-a" href="/2018/04/19/对应用程序启动时所有方法的调用顺序分析/#more">more >></a>
         
       
 
@@ -385,7 +376,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/10/AppIcon和LaunchImage尺寸/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/19/对应用程序启动时所有方法的调用顺序分析/">展开全文 >></a>
         </p>
       
 
@@ -415,14 +406,14 @@
 
 
   
-    <article id="post-iPhone通过usb与windows实现通信" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift中@IBDesignable:@IBInspectable的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/10/iPhone通过usb与windows实现通信/">iPhone通过usb与windows实现通信</a>
+      <a class="article-title" href="/2018/04/19/Swift中@IBDesignable:@IBInspectable的使用/">IB可视化属性调节视图-@IBDesignable/@IBInspectable的使用</a>
     </h1>
   
 
@@ -431,8 +422,8 @@
         	
 	
         
-        <a href="/2018/04/10/iPhone通过usb与windows实现通信/" class="archive-article-date">
-  	<time datetime="2018-04-10T02:15:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-10</time>
+        <a href="/2018/04/19/Swift中@IBDesignable:@IBInspectable的使用/" class="archive-article-date">
+  	<time datetime="2018-04-19T03:32:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-19</time>
 </a>
         
       </header>
@@ -444,13 +435,14 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>之前没怎么接触过这方面知识，最近有个需求需要实现这方面功能。于是上网查找资料，写了个小程序，实现了iPhone端和windows端的互联通信，原理基本上是这样的：windows端运行一个叫做usbmuxd的多路复用守护进程，该进程的作用是建立本地端口和远程端口的转发，实现usb到tcp的转换服务。window端通过本地127.0.0.1:27015连接到usb，然后指定和iPhone进行通信的端口（例如2345）。同样，iPhone端也指定对应连接地址127.0.0.1:2345。根据相关usb协议，客户端将请求包发送到usbmuxd进程，通过usbmuxd转发到对方设备，实现tcp连接。实现过程如下：</p>
-<p><strong>1、安装服务</strong></p>
-<p>windows端首先要安装苹果公司提供的相关服务，才能实现通信功能。服务名称为：AppleApplicationSupport和AppleMobileDeviceSupport</p>
-<p><strong>2、协议内容</strong><br>
-        
-          <a class="article-more-a" href="/2018/04/10/iPhone通过usb与windows实现通信/#more">more >></a>
-        
+        <p>##IB可视化属性调节视图-@IBDesignable/@IBInspectable的使用**</p>
+<p>@IBDesignable //要使用这个才可以直接在在IB中设置属性 相当于OC中的IB_DESIGNABLE(宏)</p>
+<p>示例代码如下：</p>
+<blockquote>
+<p>class TXView: UIView {<br>@IBInspectable var cornerRadius:CGFloat = 0.0{     //前面的为属性名字 初始值<br>didSet{              //【需要学习:属性监控器willset监控属性改变值之前做点什么，didSet监控改变后做些什么，通常直接跟在属性后 详情学习：           学习参考：<a href="http://www.hangge.com/blog/cache/detail_519.html】" target="_blank" rel="noopener">http://www.hangge.com/blog/cache/detail_519.html】</a><br>layer.cornerRadius=cornerRadius //设置属性 【？？layar干嘛的】<br>layer.masksToBounds = true//允许剪切<br>}<br>}<br>//边框颜色<br>@IBInspectable var borderColor:UIColor=UIColor(){<br>didSet{<br>layer.borderColor = borderColor.CGColor<br>}<br>}<br>//设置边框宽度<br>@IBInspectable var borderWidth:CGFloat=0.0{<br>didSet{<br>layer.borderWidth = borderWidth<br>}<br>}</p>
+<p>\1. 怎样将矩形按钮控件变成圆型<br>\2. 将属性设置为为可视化改变，并且可以实时查看。<br>\3. willSet与didSet的作用。<br>\4. 提示：很多OC中的代码（如某些宏的定义）在swift中用@前缀使用</p>
+</blockquote>
+
       
 
       
@@ -462,7 +454,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/10/iPhone通过usb与windows实现通信/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/19/Swift中@IBDesignable:@IBInspectable的使用/">展开全文 >></a>
         </p>
       
 
@@ -492,14 +484,14 @@
 
 
   
-    <article id="post-GPUImage强大的图像处理框架]" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-利用sort方法对对象数组按照对象属性进行排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/09/GPUImage强大的图像处理框架]/">iOS：GPUImage强大的图像处理框架</a>
+      <a class="article-title" href="/2018/04/18/利用sort方法对对象数组按照对象属性进行排序/">利用sort方法对对象数组按照对象属性进行排序**</a>
     </h1>
   
 
@@ -508,8 +500,8 @@
         	
 	
         
-        <a href="/2018/04/09/GPUImage强大的图像处理框架]/" class="archive-article-date">
-  	<time datetime="2018-04-09T03:13:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-09</time>
+        <a href="/2018/04/18/利用sort方法对对象数组按照对象属性进行排序/" class="archive-article-date">
+  	<time datetime="2018-04-18T08:52:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-18</time>
 </a>
         
       </header>
@@ -521,14 +513,10 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>附一张GPUImage的结构图：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/2348494-7f030c0295b0fc7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p>GPUImage.png</p>
-<h5 id="GPUImage中的几个概念"><a href="#GPUImage中的几个概念" class="headerlink" title="GPUImage中的几个概念"></a>GPUImage中的几个概念</h5><p><code>output</code>为输出源<br><code>input</code>为输入源<br><code>filter</code>为滤镜</p>
-<h5 id="GPUImage的四大输入基础类"><a href="#GPUImage的四大输入基础类" class="headerlink" title="GPUImage的四大输入基础类"></a>GPUImage的四大输入基础类</h5><p><code>GPUImageVideoCamera</code> 摄像头-视频流<br><code>GPUImageStillCamera</code> 摄像头-照相<br><code>GPUImagePicture</code> 图片<br><code>GPUImageMovie</code> 视频<br>
-        
-          <a class="article-more-a" href="/2018/04/09/GPUImage强大的图像处理框架]/#more">more >></a>
-        
+        <p>var userList = <a href="">UserInfo</a><br>userList.append(UserInfo(name: “张三”, phone: “4234”))<br>userList.append(UserInfo(name: “李四”, phone: “1212”))<br>userList.append(UserInfo(name: “航歌”, phone: “3525”))</p>
+<p>let addressBkeys  = addressBookDict.sorted(by: { (t1, t2) -&gt; Bool in<br>return t1.0 &lt; t2.0 ? true:false<br>})</p>
+<p>t1.0 = userList.name<br>t1.1 = userList.phone</p>
+
       
 
       
@@ -540,7 +528,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/09/GPUImage强大的图像处理框架]/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/18/利用sort方法对对象数组按照对象属性进行排序/">展开全文 >></a>
         </p>
       
 
@@ -572,7 +560,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/20/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/22/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/20/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/22/">Next &raquo;</a>
     </nav>
   
 
@@ -684,11 +672,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
+                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">swift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UIButton</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IJKMediaFramework.framework</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -697,6 +697,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -712,6 +720,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Swift3</a>
               </li>
              
@@ -724,15 +736,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Moya</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">NetWork</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -752,15 +764,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">UIImageView</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">iOS逆向</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">error</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ifaddrs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -808,10 +824,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCD</a>
               </li>
              
@@ -820,7 +832,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">响应链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -833,10 +853,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">struct</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -857,6 +873,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">protocol</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
             
             <div class="clearfix"></div>
@@ -1093,6 +1117,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           
             <li class="search-li">
               <a href="http://fengjian0106.github.io/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>FengJian&#39;s Blog</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://limboy.me/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>limboy</a>
             </li>
           
         </ul>

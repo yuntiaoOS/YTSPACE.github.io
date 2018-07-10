@@ -153,14 +153,14 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-利用sort方法对对象数组按照对象属性进行排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-iOS Monkey 测试方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/18/利用sort方法对对象数组按照对象属性进行排序/">利用sort方法对对象数组按照对象属性进行排序**</a>
+      <a class="article-title" href="/2018/04/26/iOS Monkey 测试方案/">smart_monkey移动性能测试</a>
     </h1>
   
 
@@ -169,8 +169,8 @@
         	
 	
         
-        <a href="/2018/04/18/利用sort方法对对象数组按照对象属性进行排序/" class="archive-article-date">
-  	<time datetime="2018-04-18T08:52:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-18</time>
+        <a href="/2018/04/26/iOS Monkey 测试方案/" class="archive-article-date">
+  	<time datetime="2018-04-26T04:00:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-26</time>
 </a>
         
       </header>
@@ -182,9 +182,79 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>var userList = <a href="">UserInfo</a><br>userList.append(UserInfo(name: “张三”, phone: “4234”))<br>userList.append(UserInfo(name: “李四”, phone: “1212”))<br>userList.append(UserInfo(name: “航歌”, phone: “3525”))</p>
-<p>let addressBkeys  = addressBookDict.sorted(by: { (t1, t2) -&gt; Bool in<br>return t1.0 &lt; t2.0 ? true:false<br>})</p>
-<p>t1.0 = userList.name<br>t1.1 = userList.phone</p>
+        <h1 id="移动性能测试-iOS-Monkey-测试方案-大家可以通过-gem-install-smart-monkey-进行安装了"><a href="#移动性能测试-iOS-Monkey-测试方案-大家可以通过-gem-install-smart-monkey-进行安装了" class="headerlink" title="移动性能测试 iOS Monkey 测试方案 [大家可以通过 gem install smart_monkey 进行安装了]"></a><a href="https://testerhome.com/topics/node32" target="_blank" rel="noopener">移动性能测试</a> iOS Monkey 测试方案 [大家可以通过 gem install smart_monkey 进行安装了]</h1><p><a href="https://testerhome.com/vigossjjj" target="_blank" rel="noopener">vigossjjj</a> · 2015年05月10日 · 最后由 <a href="https://testerhome.com/Hapenl" target="_blank" rel="noopener">Hapenl</a> 回复于 2017年11月03日 · 2221 次阅读</p>
+<p>** 本帖已被设为精华帖！</p>
+<p>** 目录 </p>
+<h2 id="再次声明，如有任何问题，请先去github查阅，再在github提issue，这样也方便其他同学查阅。"><a href="#再次声明，如有任何问题，请先去github查阅，再在github提issue，这样也方便其他同学查阅。" class="headerlink" title="再次声明，如有任何问题，请先去github查阅，再在github提issue，这样也方便其他同学查阅。"></a>再次声明，如有任何问题，请先去github查阅，再在github提issue，这样也方便其他同学查阅。</h2><p><a href="https://github.com/vigossjjj/CrashMonkey4IOS/issues" target="_blank" rel="noopener">github issue 传送门</a></p>
+<h2 id="先为小白用户说明下安装："><a href="#先为小白用户说明下安装：" class="headerlink" title="先为小白用户说明下安装："></a>先为小白用户说明下安装：</h2><p>Step 1. <code>brew install libimobiledevice</code><br>Step 2. <code>brew install -HEAD ideviceinstaller</code><br>Step 3. <code>brew install imagemagick</code><br>Step 4. <code>gem install smart_monkey</code><br>上面这三部都执行成功就可以执行了，具体执行看说ReadMe <a href="https://github.com/vigossjjj/CrashMonkey4IOS" target="_blank" rel="noopener">https://github.com/vigossjjj/CrashMonkey4IOS</a> 或者直接 smart_monkey -h</p>
+<h2 id="CrashMonkey4IOS"><a href="#CrashMonkey4IOS" class="headerlink" title="CrashMonkey4IOS"></a>CrashMonkey4IOS</h2><p>iOS Monkey Test Tool.</p>
+<h3 id="简要说明"><a href="#简要说明" class="headerlink" title="简要说明:"></a>简要说明:</h3><ol>
+<li>支持<strong>真机测试、模拟器测试</strong></li>
+<li>支持收集<strong>系统日志(Systemlog)</strong>、<strong>崩溃日志(Crashlog)</strong>、<strong>instrument行为日志</strong></li>
+<li>支持测试报告截图，绘制行为轨迹</li>
+<li>支持测试设备信息收集</li>
+<li>使用最新版的<a href="https://github.com/jonathanpenn/ui-auto-monkey/blob/master/UIAutoMonkey.js" target="_blank" rel="noopener">UIAutoMonkey</a>，加入<code>UI Holes</code>与<code>Application Not Repsonding (&quot;ANR&quot;)</code>的处理，添加<a href="https://github.com/vigossjjj/CrashMonkey4IOS/blob/master/lib/ui-auto-monkey/custom.js" target="_blank" rel="noopener">custom.js</a>作为入口脚本.</li>
+<li>加入<a href="https://github.com/vigossjjj/CrashMonkey4IOS/tree/master/lib/ui-auto-monkey/tuneup" target="_blank" rel="noopener">tuneup</a>依赖</li>
+<li>修改<strong>UIAutoMonkey.js</strong>中截图策略，为每个Event Action进行截图</li>
+<li>支持测试执行过程中App进入后台，自动恢复(测试不会block)</li>
+</ol>
+<h3 id="系统及环境要求"><a href="#系统及环境要求" class="headerlink" title="系统及环境要求:"></a>系统及环境要求:</h3><ol>
+<li>安装Ruby运行环境，建议不要使用OS X自带版本，可自行使用RVM安装最新版的Ruby。建议使用淘宝镜像安装，速度比较快，<code>$ sed -i -e &#39;s/ftp\.ruby-lang\.org\/pub\/ruby/ruby\.taobao\.org\/mirrors\/ruby/g&#39; ~/.rvm/config/db</code></li>
+<li>确保gem可用，也建议使用淘宝镜像 <code>gem sources --remove https://rubygems.org/;gem sources -a http://ruby.taobao.org/;gem sources -l</code></li>
+<li>安装<strong>Homebrew</strong> <code>ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code></li>
+<li>建议Xcode 6.x +</li>
+</ol>
+<h3 id="必要依赖安装"><a href="#必要依赖安装" class="headerlink" title="必要依赖安装:"></a>必要依赖安装:</h3><ol>
+<li><code>brew install -HEAD ideviceinstaller</code></li>
+<li><code>brew install libimobiledevice</code></li>
+<li><code>brew install imagemagick</code></li>
+</ol>
+<h3 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明:"></a>使用说明:</h3><h6 id="安装Release版"><a href="#安装Release版" class="headerlink" title="安装Release版"></a>安装Release版</h6><p><code>gem install smart_monkey</code>, 执行入口: 终端下直接使用<code>smart_monkey</code></p>
+<h6 id="安装开发版"><a href="#安装开发版" class="headerlink" title="安装开发版"></a>安装开发版</h6><p>直接clone本项目, 执行入口: <code>/CrashMonkey4IOS/bin/smart_monkey</code></p>
+<h6 id="执行命令"><a href="#执行命令" class="headerlink" title="执行命令"></a>执行命令</h6><p><code>smart_monkey -a ${App_BunnelID}</code></p>
+<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明:"></a>参数说明:</h3><ul>
+<li><p><strong>-a</strong>: 指向被测程序的<strong>BundleID</strong>(不可缺省)。e.g.<code>-a com.mytest.app</code></p>
+</li>
+<li><p><strong>-w</strong>: 指向测试设备的<strong>UDID</strong>，可以通过<code>$instruments -s devices</code>进行设备id的查看，若缺省则默认指向第一台设备(模拟器或真机)。e.g.<code>-w 26701a3a5bc17038ca0465186407b912375b35a7</code></p>
+</li>
+<li><p><strong>-n</strong>: monkey测试的执行次数，默认为1次。e.g.<code>-n 3</code></p>
+</li>
+<li><p><strong>-d</strong>: 测试报告地址，默认为当前目录下的<strong>smart_monkey_result</strong>文件夹下。e.g.<code>-d ~/my-monkey-test-result</code></p>
+</li>
+<li><p><strong>-t</strong>: 执行时间，单位为秒。e.g.<code>-t 60</code></p>
+</li>
+<li><p><strong>-s</strong>: 指向被测app的<strong>.dSYM</strong>文件，若出现crash，解析crash为明文。e.g.<code>-s testapp.dSYM</code></p>
+</li>
+<li><p><strong>-c</strong>: 自定义的配置集路径，<strong>参数必须为目录</strong>，目录下必须包含<code>custom.js</code>，若使用handler，目录下需存在名为<strong>handler</strong>的文件夹，用于存放相关文件。e.g.<code>-c /my/path/custom_cfg</code></p>
+<p><strong>如果使用custom_cfg必须遵守如下目录结构</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">custom_cfg</span><br><span class="line">    ├── custom.js</span><br><span class="line">    └── handler</span><br><span class="line">        ├── buttonHandler.js</span><br><span class="line">        └── wbScrollViewButtonHandler.js</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>–event-number</strong>: 定义Monkey测试的总事件数，默认为50。e.g.<code>--event-number 100</code></p>
+</li>
+<li><p><strong>–compress-result</strong>: 对测试过程中截取的图片进行压缩，以节省空间开销。e.g.<code>--compress-result 50%</code></p>
+</li>
+<li><p><strong>–detail-count</strong>: 定义报告详情中记录的事件总数，默认为50，即在报告当中展示最近的50次随机事件，且进行操作示意绘制。e.g.<code>--detail-count 100</code></p>
+</li>
+<li><p><strong>–show-config</strong>: 打印当前的配置信息，即<strong>custom.js</strong>。e.g.<code>--show-config</code></p>
+</li>
+<li><p><strong>–drop-useless-img</strong>: 删除除展示在报告当中的其余截图，以节省空间开销，如，一轮Monkey测试共产出截图100张，参数<code>--detail-count</code>设置为20，那么使用<code>--drop-useless-img</code>会删除其余80张截图。e.g.<code>--drop-useless-img</code></p>
+</li>
+<li><p><strong>–list-app</strong>: 打印当前连接的真机及模拟器中所安装的app。e.g.<code>--list-app</code></p>
+</li>
+<li><p><strong>–list-devices</strong>: 打印当前所有可用设备。e.g.<code>--list-devices</code></p>
+</li>
+<li><p><strong>–reset-ios-sim</strong>: 重启模拟器。e.g.<code>--reset-ios-sim</code></p>
+</li>
+<li><p><strong>–version</strong>: 打印smart_monkey的版本号。e.g.<code>--version</code></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">⇒  CrashMonkey4IOS/bin/smart_monkey -h</span><br><span class="line">Usage: smart_monkey [options]</span><br><span class="line">    -a app_name                      Bundle ID of the desired target on device(Required)</span><br><span class="line">    -w device                        Target Device UDID(Required)</span><br><span class="line">    -n run_count                     How many times monkeys run(default: 1)</span><br><span class="line">    -d result_dir                    Where to output result(default: ./smart_monkey_result)</span><br><span class="line">    -t time_limit_sec                Time limit of running</span><br><span class="line">    -s dsym_file                     Use .dSYM file to symbolicating crash logs</span><br><span class="line">    -c custom_cfg_path               Indicate confige lib directory path, not a file path.</span><br><span class="line">        --event-number event_number  The monkey event number(default: 50)</span><br><span class="line">        --compress-result compress_rate</span><br><span class="line">                                     compress the screenshot images to save disk space!(example: 50%)</span><br><span class="line">        --detail-count detail_event_count</span><br><span class="line">                                     How many events to show in detail result page(default 50)</span><br><span class="line">        --show-config                Show Current Configuration custom.js</span><br><span class="line">        --drop-useless-img           Delete the un-displayed images of detial page.</span><br><span class="line">        --list-app                   Show List of Installed Apps in iPhone/iPhone Simulator</span><br><span class="line">        --list-devices               Show List of Devices</span><br><span class="line">        --reset-ios-sim              Reset iPhone Simulator</span><br><span class="line">        --version                    print smart monkey version</span><br></pre></td></tr></table></figure>
+<h2 id="报告"><a href="#报告" class="headerlink" title="报告"></a>报告</h2><p><a href="https://testerhome.com/photo/2015/c1ff4907cda8b0ae0c13dbffeadd3d87.jpg" target="_blank" rel="noopener"><img src="https://testerhome.com/photo/2015/c1ff4907cda8b0ae0c13dbffeadd3d87.jpg" alt="img"></a></p>
+<p><img src="https://testerhome.com/photo/2015/5bf3dea58b56d682b6e35f50f3ce3647.jpg" alt="img"></p>
+<p><img src="https://testerhome.com/photo/2015/6acec3f474abad05ed88a2620087ec19.jpg" alt="img"></p>
+<p><img src="https://testerhome.com/photo/2015/22c5837f81e8e7bebfe22cee1614159c.jpg" alt="img"></p>
+<p><a href="https://testerhome.com/topics/2523?page=2#" target="_blank" rel="noopener">** 48 个赞</a><a href="https://testerhome.com/topics/2523/show_wechat" target="_blank" rel="noopener">**</a></p>
+<p>转载文章时务必注明原作者及原始链接，并注明「发表于 TesterHome 」，并不得对作品进行修改。</p>
 
       
 
@@ -193,11 +263,30 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">smart_monkey</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/18/利用sort方法对对象数组按照对象属性进行排序/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/26/iOS Monkey 测试方案/">展开全文 >></a>
         </p>
       
 
@@ -227,14 +316,14 @@
 
 
   
-    <article id="post-下载功能测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-swift-Runtime" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/16/下载功能测试/">下载功能测试</a>
+      <a class="article-title" href="/2018/04/26/swift-Runtime/">Runtime</a>
     </h1>
   
 
@@ -243,8 +332,8 @@
         	
 	
         
-        <a href="/2018/04/16/下载功能测试/" class="archive-article-date">
-  	<time datetime="2018-04-16T01:58:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-16</time>
+        <a href="/2018/04/26/swift-Runtime/" class="archive-article-date">
+  	<time datetime="2018-04-26T03:44:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-26</time>
 </a>
         
       </header>
@@ -256,7 +345,18 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p> <a href="/download/xx.xls&quot;">点击下载</a></p>
+        <p>都说Runtime是Objective-C中的黑魔法，<a href="https://link.jianshu.com?t=http://www.cocoachina.com/ios/20141031/10105.html" target="_blank" rel="noopener">这里有关于OC Runtime的详细介绍</a>。而我们在用Swift的时候，很多时候也需要用到Runtime，它与在OC中的使用还是有一点点区别的。在解决UIButton重复点击问题时主要用到了Runtime中的关联对象(Associated Objects)和方法交叉(Method Swizzling)。</p>
+<p><strong>因为在Swift代码中已经没有了Objective-C的运行时消息机制, 在代码编译时即确定了其实际调用的方法. 所以纯粹的Swift类和对象没有办法使用runtime, 更不存在method swizzling. 那是不是在swift中就不能使用runtime了呢？答案肯定是可以的。要使用runtime，我们需要在想要使用runtime的方法或者属性前面加上**</strong>dynamic关键字。**</p>
+<h3 id="Associated-Objects"><a href="#Associated-Objects" class="headerlink" title="Associated Objects"></a>Associated Objects</h3><p>在解决UIButton重复点击问题时，首先我们需要两个变量，一个是点击的间隔时间，另一个是是否需要忽视点击事件的Bool值，那么我们就需要将这两个变量与UIButton关联起来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">extension UIButton &#123;</span><br><span class="line">    </span><br><span class="line">    private struct AssociatedKeys &#123;</span><br><span class="line">        static var clickDurationTime = &quot;my_clickDurationTime&quot;</span><br><span class="line">        static var isIgnoreEvent = &quot;my_isIgnoreEvent&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 点击间隔时间</span><br><span class="line">    var clickDurationTime : NSTimeInterval &#123;</span><br><span class="line">        set &#123;</span><br><span class="line">            objc_setAssociatedObject(self, &amp;AssociatedKeys.clickDurationTime, newValue as NSTimeInterval, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        get &#123;</span><br><span class="line">            </span><br><span class="line">            if let clickDurationTime = objc_getAssociatedObject(self, &amp;AssociatedKeys.clickDurationTime) as? NSTimeInterval &#123;</span><br><span class="line">                return clickDurationTime</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            return defaultDuration</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 是否忽视点击事件</span><br><span class="line">    var isIgnoreEvent : Bool &#123;</span><br><span class="line">        </span><br><span class="line">        set &#123;</span><br><span class="line">            objc_setAssociatedObject(self, &amp;AssociatedKeys.isIgnoreEvent, newValue as Bool, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        get &#123;</span><br><span class="line">            </span><br><span class="line">            if let isIgnoreEvent = objc_getAssociatedObject(self, &amp;AssociatedKeys.isIgnoreEvent) as? Bool &#123;</span><br><span class="line">                return isIgnoreEvent</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            return false</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Method-Swizzling"><a href="#Method-Swizzling" class="headerlink" title="Method Swizzling"></a>Method Swizzling</h3><p>接下来我们需要写一个用来替换UIButton点击事件的方法，在这个方法里来处理重复点击的问题。UIButton继承自UIControl，在传递点击事件是会触发这个方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public func sendAction(action: Selector, to target: AnyObject?, forEvent event: UIEvent?)</span><br></pre></td></tr></table></figure>
+<p>于是我们重写用来交叉的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// SwizzledMethod</span><br><span class="line">    func my_sendAction(action: Selector, to target: AnyObject?, forEvent event: UIEvent?) &#123;</span><br><span class="line">        </span><br><span class="line">        if self.isKindOfClass(UIButton) &#123;</span><br><span class="line">            </span><br><span class="line">            clickDurationTime = clickDurationTime == 0 ? defaultDuration : clickDurationTime</span><br><span class="line">            </span><br><span class="line">            if isIgnoreEvent &#123;</span><br><span class="line">                return</span><br><span class="line">            &#125; else if clickDurationTime &gt; 0 &#123;</span><br><span class="line">                isIgnoreEvent = true</span><br><span class="line">                // 在过了我们设置的duration之后，再将isIgnoreEvent置为false</span><br><span class="line">                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(clickDurationTime) * Int64(NSEC_PER_SEC)), dispatch_get_main_queue()) &#123;</span><br><span class="line">                    self.isIgnoreEvent = false</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                my_sendAction(action, to: target, forEvent: event)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            my_sendAction(action, to: target, forEvent: event)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>接下来，就是用我们自己重写的SwizzeldMethod来替换UIButton的OriginalMethod：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// swift现不支持重写+load方法</span><br><span class="line">    override public class func initialize() &#123;</span><br><span class="line">        struct Static &#123;</span><br><span class="line">            static var token: dispatch_once_t = 0</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if self !== UIButton.self &#123;</span><br><span class="line">            return</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        dispatch_once(&amp;Static.token) &#123;</span><br><span class="line">            </span><br><span class="line">            let originalSelector = #selector(UIButton.sendAction(_:to:forEvent:))</span><br><span class="line">            let swizzledSelector = #selector(UIButton.my_sendAction(_:to:forEvent:))</span><br><span class="line">            </span><br><span class="line">            let originalMethod = class_getInstanceMethod(self, originalSelector)</span><br><span class="line">            let swizzledMethod = class_getInstanceMethod(self, swizzledSelector)</span><br><span class="line">            </span><br><span class="line">            // 运行时为类添加我们自己写的my_sendAction(_:to:forEvent:)</span><br><span class="line">            let didAddMethod = class_addMethod(self, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))</span><br><span class="line">            </span><br><span class="line">            if didAddMethod &#123;</span><br><span class="line">                // 如果添加成功，则交换方法</span><br><span class="line">                class_replaceMethod(self, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod))</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 如果添加失败，则交换方法的具体实现</span><br><span class="line">                method_exchangeImplementations(originalMethod, swizzledMethod)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法，就是在运行时将UIButton的sendAction(<em>:to:forEvent:)替换为我们自己写的my_sendAction(</em>:to:forEvent:)。</p>
+<h3 id="load-vs-initialize"><a href="#load-vs-initialize" class="headerlink" title="load vs. initialize"></a>load vs. initialize</h3><p>在 Swift 中 load 类方法永远不会被 runtime 调用，因此在+load方法中实现交叉就变成了不可能的事。出于安全性和一致性的考虑，我们必须确保相关的方法交叉在一个 dispatch<em>once 中，这样也是很安全的。还有一种方法，<code>在 app delegate 中实现方法交叉，</code> 不像上面通过类扩展进行方法交叉，而是简单地在 app delegate 的 application(</em>:didFinishLaunchingWithOptions:) 方法调用时中执行相关代码也是可以的。基于对类的修改，这种方法应该就足够确保这些代码会被执行到。</p>
 
       
 
@@ -265,11 +365,26 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Runtime</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/16/下载功能测试/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/26/swift-Runtime/">展开全文 >></a>
         </p>
       
 
@@ -299,14 +414,14 @@
 
 
   
-    <article id="post-iOS被遗忘的近距离通讯利器-MultipeerConnectivity" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-使用 Swift Mirror 快速将类转换为 Json" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/13/iOS被遗忘的近距离通讯利器-MultipeerConnectivity/">iOS被遗忘的近距离通讯利器-MultipeerConnectivity</a>
+      <a class="article-title" href="/2018/04/26/使用 Swift Mirror 快速将类转换为 Json/">使用 Swift Mirror 快速将类转换为 Json 的方法。</a>
     </h1>
   
 
@@ -315,8 +430,8 @@
         	
 	
         
-        <a href="/2018/04/13/iOS被遗忘的近距离通讯利器-MultipeerConnectivity/" class="archive-article-date">
-  	<time datetime="2018-04-13T08:24:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-13</time>
+        <a href="/2018/04/26/使用 Swift Mirror 快速将类转换为 Json/" class="archive-article-date">
+  	<time datetime="2018-04-26T03:44:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-26</time>
 </a>
         
       </header>
@@ -328,31 +443,17 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p> 转<a href="https://www.jianshu.com/p/662dd49d82b6" target="_blank" rel="noopener">https://www.jianshu.com/p/662dd49d82b6</a></p>
-<p><a href="https://www.jianshu.com/u/57d9688d4e1f" target="_blank" rel="noopener">卖报的小画家Sure</a></p>
-<p><strong>Multipeer connectivity</strong>是一个使附近设备通过Wi-Fi网络、P2P Wi-Fi以及蓝牙个人局域网进行通信的框架。互相链接的节点可以安全地传递信息、流或是其他文件资源。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1767950-75b223abb22710e6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="img"></p>
-<p>图片发自简书App</p>
-<p>废话少说，我们来集成MultipeerConnectivity的功能。<br>首先引入系统框架</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;MultipeerConnectivity/MultipeerConnectivity.h&gt;</span><br></pre></td></tr></table></figure>
-<p>依次声明如下属性，这里都给予了详细的备注，就不赘述了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  表示为一个用户，亦可认为是当前设备</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic,strong)MCPeerID * peerID;</span><br><span class="line">/**</span><br><span class="line"> *  数据流，启用和管理Multipeer连接会话中的所有人之间的沟通。 通过Sesion，给别人发送数据。类似于Scoket</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic,strong)MCSession * session;</span><br><span class="line">/**</span><br><span class="line"> *  可以接收，并处理用户请求连接的响应。没有回调，会弹出默认的提示框，并处理连接。</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic,strong)MCAdvertiserAssistant * advertiser;</span><br><span class="line">/**</span><br><span class="line"> *  用于搜索附近的用户，并可以对搜索到的用户发出邀请加入某个会话中。</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic,strong)MCNearbyServiceBrowser * brower;</span><br><span class="line">/**</span><br><span class="line"> *  附近用户列表</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic,strong)MCBrowserViewController * browserViewController;</span><br><span class="line">/**</span><br><span class="line"> *  存储连接</span><br><span class="line"> */</span><br><span class="line">@property (nonatomic,strong)NSMutableArray * sessionArray;</span><br></pre></td></tr></table></figure>
-<p>接下来我们将当前设备初始化，并开启附近用户搜索等功能。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  连接设置</span><br><span class="line"> */</span><br><span class="line">- (void)createMC&#123;</span><br><span class="line">    //获取设备名称</span><br><span class="line">    NSString * name = [UIDevice currentDevice].name;</span><br><span class="line">    //用户</span><br><span class="line">    _peerID = [[MCPeerID alloc]initWithDisplayName:name];</span><br><span class="line">    //为用户建立连接</span><br><span class="line">    _session = [[MCSession alloc]initWithPeer:_peerID];</span><br><span class="line">    //设置代理</span><br><span class="line">    _session.delegate = self;</span><br><span class="line">    //设置广播服务(发送方)</span><br><span class="line">    _advertiser = [[MCAdvertiserAssistant alloc]initWithServiceType:@&quot;type&quot; discoveryInfo:nil session:_session];</span><br><span class="line">    //开始广播</span><br><span class="line">    [_advertiser start];</span><br><span class="line">    //设置发现服务(接收方)</span><br><span class="line">    _brower = [[MCNearbyServiceBrowser alloc]initWithPeer:_peerID serviceType:@&quot;type&quot;];</span><br><span class="line">    //设置代理</span><br><span class="line">    _brower.delegate = self;</span><br><span class="line">    [_brower startBrowsingForPeers];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里不要忘记添加其协议，如下<br><strong>MCSessionDelegate</strong>，<strong>MCBrowserViewControllerDelegate</strong>，<strong>MCNearbyServiceBrowserDelegate</strong>。<br>最后实现其对应的代理方法即可</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">#pragma MC相关代理方法</span><br><span class="line">/**</span><br><span class="line"> *  发现附近用户</span><br><span class="line"> *</span><br><span class="line"> *  @param browser 搜索附近用户</span><br><span class="line"> *  @param peerID  附近用户</span><br><span class="line"> *  @param info    详情</span><br><span class="line"> */</span><br><span class="line">- (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info&#123;</span><br><span class="line">    NSLog(@&quot;发现附近用户%@&quot;,peerID.displayName);</span><br><span class="line">    if (_browserViewController == nil) &#123;</span><br><span class="line">        _browserViewController = [[MCBrowserViewController alloc]initWithServiceType:@&quot;type&quot; session:_session];</span><br><span class="line">        _browserViewController.delegate = self;</span><br><span class="line">        /**</span><br><span class="line">         *  跳转发现界面</span><br><span class="line">         */</span><br><span class="line">        [self presentViewController:_browserViewController animated:YES completion:nil];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> *  附近某个用户消失了</span><br><span class="line"> *</span><br><span class="line"> *  @param browser 搜索附近用户</span><br><span class="line"> *  @param peerID  用户</span><br><span class="line"> */</span><br><span class="line">- (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID&#123;</span><br><span class="line">    NSLog(@&quot;附近用户%@离开了&quot;,peerID.displayName);</span><br><span class="line">&#125;</span><br><span class="line">#pragma mark BrowserViewController附近用户列表视图相关代理方法</span><br><span class="line">/**</span><br><span class="line"> *  选取相应用户</span><br><span class="line"> *</span><br><span class="line"> *  @param browserViewController 用户列表</span><br><span class="line"> */</span><br><span class="line">- (void)browserViewControllerDidFinish:(MCBrowserViewController *)browserViewController&#123;</span><br><span class="line">    [self dismissViewControllerAnimated:YES completion:nil];</span><br><span class="line">    _browserViewController = nil;</span><br><span class="line">    //关闭广播服务，停止其他人发现</span><br><span class="line">    [_advertiser stop];</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> *  用户列表关闭</span><br><span class="line"> *</span><br><span class="line"> *  @param browserViewController 用户列表</span><br><span class="line"> */</span><br><span class="line">- (void)browserViewControllerWasCancelled:(MCBrowserViewController *)browserViewController&#123;</span><br><span class="line">    [self dismissViewControllerAnimated:YES completion:nil];</span><br><span class="line">    _browserViewController = nil;</span><br><span class="line">    [_advertiser stop];</span><br><span class="line">&#125;</span><br><span class="line">#pragma mark MCSession代理方法</span><br><span class="line">/**</span><br><span class="line"> *  当检测到连接状态发生改变后进行存储</span><br><span class="line"> *</span><br><span class="line"> *  @param session MC流</span><br><span class="line"> *  @param peerID  用户</span><br><span class="line"> *  @param state   连接状态</span><br><span class="line"> */</span><br><span class="line">- (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state&#123;</span><br><span class="line">    //判断如果连接</span><br><span class="line">    if (state == MCSessionStateConnected) &#123;</span><br><span class="line">        //保存这个连接</span><br><span class="line">        if (![_sessionArray containsObject:session]) &#123;</span><br><span class="line">            //如果不存在 保存</span><br><span class="line">            [_sessionArray addObject:session];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> *  接收到消息</span><br><span class="line"> *</span><br><span class="line"> *  @param session MC流</span><br><span class="line"> *  @param data    传入的二进制数据</span><br><span class="line"> *  @param peerID  用户</span><br><span class="line"> */</span><br><span class="line">- (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID&#123;</span><br><span class="line">    NSString * message = [NSString stringWithFormat:@&quot;%@:%@&quot;,peerID.displayName,[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];</span><br><span class="line">    dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        [_dataArray addObject:message];</span><br><span class="line">        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:_dataArray.count - 1 inSection:0];</span><br><span class="line">        [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];</span><br><span class="line">        [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> *  接收数据流</span><br><span class="line"> *</span><br><span class="line"> *  @param session    MC流</span><br><span class="line"> *  @param stream     数据流</span><br><span class="line"> *  @param streamName 数据流名称（标示）</span><br><span class="line"> *  @param peerID     用户</span><br><span class="line"> */</span><br><span class="line">- (void)session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> *  开始接收资源</span><br><span class="line"> */</span><br><span class="line">- (void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> *  资源接收结束</span><br><span class="line"> */</span><br><span class="line">- (void)session:(MCSession *)session didFinishReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL withError:(NSError *)error&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>效果图如下</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1767950-3497cb396e1789ea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p>1_发现附近设备.png</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1767950-93c379c3562fc251.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p>2_连接设备成功.png</p>
-<p>选定后点击Done即可完成连接。<br>代理方法中具有监听附近设备，连接，接收流程等流程。<br>对于发送数据，可以简单搭建一个页面来进行。比如在textField点击Return时触发。对于发送的数据类型具有两种形式，对应的即为socket中的UDP与TCP。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)textFieldShouldReturn:(UITextField *)textField&#123;</span><br><span class="line">    if (textField.text.length &gt; 0) &#123;</span><br><span class="line">        /**</span><br><span class="line">         *  两种类型</span><br><span class="line">         MCSessionSendDataUnreliable 类似于UDP连接方式</span><br><span class="line">         MCSessionSendDataReliable 类似于TCP连接方式</span><br><span class="line">         */</span><br><span class="line">        [_session sendData:[textField.text dataUsingEncoding:NSUTF8StringEncoding] toPeers:_session.connectedPeers withMode:MCSessionSendDataUnreliable error:nil];</span><br><span class="line">        //UI操作</span><br><span class="line">        [_dataArray addObject:textField.text];</span><br><span class="line">        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:_dataArray.count - 1 inSection:0];</span><br><span class="line">        [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];</span><br><span class="line">        [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];</span><br><span class="line">    &#125;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>效果图</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1767950-c6326bdfb121378a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p>3_传输数据.jpeg</p>
-<p>这里测试的话可以使用两台设备，模拟器、真机均可。当其中一个设备检测到附近设备后会弹起附近设备列表，点击选取后即可进行通讯操作。用例里模拟的是发送字符串操作，也可以替换为文件，因为都传递的为二进制嘛。相信你会察觉到其飞一样的速度的，就写到这里。</p>
-<h6 id="demo下载链接"><a href="#demo下载链接" class="headerlink" title="demo下载链接"></a>demo下载链接</h6><p><a href="https://link.jianshu.com/?t=https://github.com/LSure/MultipeerConnectivityDemo" target="_blank" rel="noopener">iOS被遗忘的近距离通讯利器demo🔗</a></p>
+        <p><a href="https://link.jianshu.com?t=http://chris.eidhof.nl/post/swift-mirrors-and-json/" target="_blank" rel="noopener">Swift Mirrors and JSON</a><br>但是原文已经不适应 Swift 2.2 的版本了，我将修改过的代码贴在这里（还是不少要改的），并附上一些可能需要解释的部分的注释：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">//定义的示范用的结构体</span><br><span class="line">struct Person &#123;</span><br><span class="line">    var name: String = &quot;John&quot;</span><br><span class="line">    var age: Int = 50</span><br><span class="line">    var dutch: Bool = false</span><br><span class="line">    var address: Address? = Address(street: &quot;Market St.&quot;)</span><br><span class="line">    var Some: Int = 60</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Address &#123;</span><br><span class="line">    var street: String</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let john = Person()</span><br><span class="line"></span><br><span class="line">//可以转换为 Json 的协议</span><br><span class="line">protocol JSON &#123;</span><br><span class="line">    func toJSON() throws -&gt; AnyObject?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//没有实现 JSON 协议的错误类型</span><br><span class="line">enum CouldNotSerializeError &#123;</span><br><span class="line">    case NoImplementation(source: Any, type: Mirror)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">extension CouldNotSerializeError: ErrorType &#123; &#125;</span><br><span class="line"></span><br><span class="line">//使用 extension 对 JSON 添加方法的默认实现</span><br><span class="line">extension JSON &#123;</span><br><span class="line">    func toJSON() throws -&gt; AnyObject? &#123;</span><br><span class="line">        //创建 Mirror 类型</span><br><span class="line">        let mirror = Mirror(reflecting: self)</span><br><span class="line">        //Mirror 的 children 是一个 (label: String?, value: Any) 元组类型，表示该类的所有属性的名字和类型</span><br><span class="line">        if mirror.children.count &gt; 0  &#123;</span><br><span class="line">            var result: [String:AnyObject] = [:]</span><br><span class="line">            for case let (label?, value) in mirror.children &#123;</span><br><span class="line">                //如果这个类型没有实现 JSON 协议，则抛出错误</span><br><span class="line">                if let value = value as? JSON &#123;</span><br><span class="line">                    //递归调用</span><br><span class="line">                    result[label] = try value.toJSON()</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    throw CouldNotSerializeError.NoImplementation(source: self, type: Mirror(reflecting: value))</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return result</span><br><span class="line">        &#125;</span><br><span class="line">         //如果没有属性（一般类，String，Int 等），则直接返回</span><br><span class="line">        return self as? AnyObject</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//将一般类型都遵从 JSON 协议</span><br><span class="line">extension Person: JSON &#123; &#125;</span><br><span class="line">extension String: JSON &#123; &#125;</span><br><span class="line">extension Int: JSON &#123; &#125;</span><br><span class="line">extension Bool: JSON &#123; &#125;</span><br><span class="line">extension Address: JSON &#123; &#125;</span><br><span class="line"></span><br><span class="line">//Optionai 需要特别对待，原因是如果直接返回，则会是 .Some: [...] </span><br><span class="line">extension Optional: JSON &#123;</span><br><span class="line">    func toJSON() throws -&gt; AnyObject? &#123;</span><br><span class="line">        if let x = self &#123;</span><br><span class="line">            if let value = x as? JSON &#123;</span><br><span class="line">                return try value.toJSON()</span><br><span class="line">            &#125;</span><br><span class="line">            throw CouldNotSerializeError.NoImplementation(source: x, type: Mirror(reflecting: x))</span><br><span class="line">        &#125;</span><br><span class="line">        return nil</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">do &#123;</span><br><span class="line">    print(try john.toJSON())</span><br><span class="line">&#125; catch &#123;</span><br><span class="line">    print(error)</span><br><span class="line">&#125;</span><br><span class="line">//输出：Optional(&#123; Some = 60;  address =  &#123; street = &quot;Market St.&quot; ; &#125;; age = 50; dutch = 0; name = John; &#125;)</span><br></pre></td></tr></table></figure>
+<p>是不是非常方便？我自己想了一个更加方便的，只要一个方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">//泛型</span><br><span class="line">func mkJson&lt;T&gt;(a: T?) -&gt; AnyObject? &#123;</span><br><span class="line">    //如果为空，则不将该属性加入 Json</span><br><span class="line">    guard let a = a else &#123; return nil &#125;</span><br><span class="line">    let mirror = Mirror(reflecting: a)</span><br><span class="line">    let num = mirror.children.count</span><br><span class="line">    if num &gt; 0  &#123;</span><br><span class="line">        var result: [String:AnyObject] = [:]</span><br><span class="line">        for case let (label?, value) in mirror.children &#123;</span><br><span class="line">            //这里有点 Trick，如果是一个有值的 Optional（Some），则直接载入warp下的值。</span><br><span class="line">            //后一个条件是防止如果有类型是叫做 Some（一般不会有吧）的属性的情况，见注1</span><br><span class="line">            if label == &quot;Some&quot; &amp;&amp; mirror.children.count == 1 &#123;</span><br><span class="line">                return toJson(value)</span><br><span class="line">            &#125;</span><br><span class="line">            result[label] = toJson(value)</span><br><span class="line">        &#125;</span><br><span class="line">        return result</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return a as? AnyObject</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let json = mkJson(john)</span><br><span class="line">print(json)</span><br><span class="line">//得到的结果完全一样</span><br><span class="line">//注1：也就是说，如果你有一个类或者结构体，里面只有一个属性叫做 Some ，那么这个 Some 会被跳过直接读取里面的类型。当然，这种情况微乎其微。</span><br></pre></td></tr></table></figure>
+<p>唯一不太好的就是，使用 Mirror 有性能上的损失，我在Xcode上跑了一下测试，用的我自己的一个成员类<br>用时如下：<br>类创建：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">func testInit() &#123;</span><br><span class="line">    self.measureBlock&#123;</span><br><span class="line">        for _ in 1...2000 &#123;</span><br><span class="line">            let _ = User()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//0.400 (0.401) seconds</span><br></pre></td></tr></table></figure>
+<p>Mirror：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">func testMirror() &#123;</span><br><span class="line">    self.measureBlock &#123;</span><br><span class="line">        let user = User()</span><br><span class="line">        for _ in 1...2000 &#123;</span><br><span class="line">            mkJson(user)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//4.147 (4.147) seconds</span><br><span class="line">//我的天呐</span><br></pre></td></tr></table></figure>
+<p>if let 方式加入 dictionary：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">func testIfLet() &#123;</span><br><span class="line">    self.measureBlock &#123;</span><br><span class="line">        let user = User()</span><br><span class="line">        for _ in 1...2000 &#123;</span><br><span class="line">            let _ = user.parameters</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">extension User &#123;</span><br><span class="line"></span><br><span class="line">public var parameters: [String: AnyObject]  &#123;</span><br><span class="line">    var parms:[String : AnyObject] = [ : ]</span><br><span class="line">    if let email = email &#123;</span><br><span class="line">        parms[&quot;email&quot;] = email</span><br><span class="line">    &#125;</span><br><span class="line">    if let nickName = nickName &#123;</span><br><span class="line">        parms[&quot;nickName&quot;] = nickName</span><br><span class="line">    &#125;</span><br><span class="line">    if let phoneNumber = phoneNumber &#123;</span><br><span class="line">        parms[&quot;phoneNumber&quot;] = phoneNumber</span><br><span class="line">    &#125;</span><br><span class="line">    return parms</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//in 0.531 (0.532) seconds</span><br><span class="line">//嗯……</span><br></pre></td></tr></table></figure>
+<p>所以说，虽然方便，还是慎用吧。</p>
 
       
 
@@ -361,11 +462,30 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Data</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Mirror</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/13/iOS被遗忘的近距离通讯利器-MultipeerConnectivity/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/26/使用 Swift Mirror 快速将类转换为 Json/">展开全文 >></a>
         </p>
       
 
@@ -395,14 +515,14 @@
 
 
   
-    <article id="post-CoreServicesLayer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Core Data -swift - ios8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/13/CoreServicesLayer/">CoreServicesLayer</a>
+      <a class="article-title" href="/2018/04/24/Core Data -swift - ios8/">iOS Swift教程 Core Data （三）Core Data栈 下</a>
     </h1>
   
 
@@ -411,8 +531,8 @@
         	
 	
         
-        <a href="/2018/04/13/CoreServicesLayer/" class="archive-article-date">
-  	<time datetime="2018-04-13T08:20:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-13</time>
+        <a href="/2018/04/24/Core Data -swift - ios8/" class="archive-article-date">
+  	<time datetime="2018-04-24T08:24:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
 </a>
         
       </header>
@@ -424,170 +544,231 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p><code>Gain access to fundamental iOS services with the frameworks in the Core Services layer. With these services, access files, low-level data types, Bonjour services, network sockets, and more. Use the frameworks in this layer if those in the Cocoa Touch and Media layers aren&#39;t sufficient for your needs. When you use the technologies at the Core Services layer, you&#39;ll automatically take advantage of the Core OS layer without getting into its details.</code></p>
-<p>使用CoreServicesLayer下的frameworks可以帮你使用比较底层的基础iOS服务. 这些服务让你可以访问文件,低层次的数据类型,WTF? Bonjour services,网络接口等.并且能满足一些你所需要但CocoaTouchLayer和MediaLayer无法满足的需求.当你使用CoreServicesLayer中的技术时可以让你在不了解CoreOSLayer的情况下使用它们.<br>⚠️Bonjour services是什么鬼?</p>
-<hr>
-        
-          <a class="article-more-a" href="/2018/04/13/CoreServicesLayer/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/13/CoreServicesLayer/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-NEHotspotConfigurationManager" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/13/NEHotspotConfigurationManager/">NEHotspotConfigurationManager</a>
-    </h1>
-  
-
-
-        <!-- 显示阅读和评论数 -->
-        	
-	
-        
-        <a href="/2018/04/13/NEHotspotConfigurationManager/" class="archive-article-date">
-  	<time datetime="2018-04-13T07:29:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-13</time>
-</a>
-        
-      </header>
-    
-
-    <!-- 目录内容 -->
-
-<!-- 目录内容结束 -->
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>配置管理器，应用并删除Wi-Fi网络的热点配置。</p>
-<p>SDK</p>
+        <p>翻译 2014年12月31日 17:56:45</p>
 <ul>
-<li>iOS 11.0+</li>
+<li>标签：</li>
+<li><a href="http://so.csdn.net/so/search/s.do?q=ios&amp;t=blog" target="_blank" rel="noopener">ios</a> /</li>
+<li><a href="http://so.csdn.net/so/search/s.do?q=%E6%BA%90%E7%A0%81&amp;t=blog" target="_blank" rel="noopener">源码</a> /</li>
+<li><a href="http://so.csdn.net/so/search/s.do?q=CoreData&amp;t=blog" target="_blank" rel="noopener">CoreData</a> /</li>
+<li><a href="http://so.csdn.net/so/search/s.do?q=Swift&amp;t=blog" target="_blank" rel="noopener">Swift</a></li>
 </ul>
-<p>骨架</p>
 <ul>
-<li>网络扩展</li>
+<li>**2118</li>
 </ul>
-<p>在本页<a href="https://developer.apple.com/documentation/networkextension/nehotspotconfigurationmanager#overview" target="_blank" rel="noopener">概观</a><a href="https://developer.apple.com/documentation/networkextension/nehotspotconfigurationmanager#topics" target="_blank" rel="noopener">主题</a><a href="https://developer.apple.com/documentation/networkextension/nehotspotconfigurationmanager#relationships" target="_blank" rel="noopener">关系</a><a href="https://developer.apple.com/documentation/networkextension/nehotspotconfigurationmanager#see-also" target="_blank" rel="noopener">也可以看看</a></p>
-<h2 id="概观"><a href="#概观" class="headerlink" title="概观"></a>概观</h2><p>当您的应用使用Wi-Fi网络创建新的热点配置并将其应用于Wi-Fi网络或尝试更新先前配置的网络时，设备会提示用户进行审批。没有明确的用户同意，您的应用程序无法进行配置更改。<a href="https://developer.apple.com/documentation/networkextension/nehotspotconfiguration" target="_blank" rel="noopener"><code>NEHotspotConfiguration</code></a></p>
-<p>您的应用可以使用或删除已添加的配置，但不能使用其他应用或用户添加的配置。用户还可以使用设置&gt; Wi-Fi删除已配置的网络。<a href="https://developer.apple.com/documentation/networkextension/nehotspotconfigurationmanager/2866709-removeconfiguration" target="_blank" rel="noopener"><code>removeConfiguration(forHS20DomainName:)</code></a><a href="https://developer.apple.com/documentation/networkextension/nehotspotconfigurationmanager/2866727-removeconfiguration" target="_blank" rel="noopener"><code>removeConfiguration(forSSID:)</code></a></p>
-<p>当您的应用程序被卸载时，它所配置的所有网络的配置将被删除，包括它们的钥匙串条目。</p>
-<p>热点配置管理器错误列在中。<a href="https://developer.apple.com/documentation/networkextension/nehotspotconfigurationerror" target="_blank" rel="noopener"><code>NEHotspotConfigurationError</code></a></p>
-<p>重要要使用该类，您必须在Xcode中启用热点配置功能。请参阅<a href="http://help.apple.com/xcode/mac/current/#/dev88ff319e7" target="_blank" rel="noopener">向目标添加功能</a>。<code>NEHotspotConfigurationManager</code></p>
-<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><h3 id="应用配置"><a href="#应用配置" class="headerlink" title="应用配置"></a>应用配置</h3><p><code>func apply(NEHotspotConfiguration, completionHandler: ((Error?) -&gt; Void)? = nil)</code></p>
-<p>在提示用户许可后添加或更新Wi-Fi网络配置，然后在特定条件下尝试加入网络。</p>
-<h3 id="获取当前配置"><a href="#获取当前配置" class="headerlink" title="获取当前配置"></a>获取当前配置</h3><p><code>func getConfiguredSSIDs(completionHandler: ([String]) -&gt; Void)</code></p>
-<p>返回您的应用配置的Wi-Fi热点域的SSID或名称，并调用可选的完成处理程序。</p>
-<h3 id="删除域名配置"><a href="#删除域名配置" class="headerlink" title="删除域名配置"></a>删除域名配置</h3><p><code>func removeConfiguration(forHS20DomainName: String)</code></p>
-<p>删除由热点2.0域名标识的Wi-Fi热点配置，您的应用以前添加的配置。</p>
-<h3 id="删除SSID配置"><a href="#删除SSID配置" class="headerlink" title="删除SSID配置"></a>删除SSID配置</h3><p><code>func removeConfiguration(forSSID: String)</code></p>
-<p>移除您的应用以前添加的由SSID标识的Wi-Fi配置。</p>
-<h3 id="共享配置"><a href="#共享配置" class="headerlink" title="共享配置"></a>共享配置</h3><p><code>class var shared: NEHotspotConfigurationManager</code></p>
-<p>实例化为单例，因此可以共享。<a href="https://developer.apple.com/documentation/networkextension/nehotspotconfigurationmanager" target="_blank" rel="noopener"><code>NEHotspotConfigurationManager</code></a></p>
-<h2 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h2><h3 id="继承自"><a href="#继承自" class="headerlink" title="继承自"></a>继承自</h3><p><a href="https://developer.apple.com/documentation/objectivec/nsobject" target="_blank" rel="noopener"><code>NSObject</code></a></p>
-<h3 id="符合"><a href="#符合" class="headerlink" title="符合"></a>符合</h3><ul>
-<li><a href="https://developer.apple.com/documentation/swift/cvararg" target="_blank" rel="noopener"><code>CVarArg</code></a>， </li>
-<li><a href="https://developer.apple.com/documentation/swift/equatable" target="_blank" rel="noopener"><code>Equatable</code></a>， </li>
-<li><a href="https://developer.apple.com/documentation/swift/hashable" target="_blank" rel="noopener"><code>Hashable</code></a></li>
-</ul>
-<h2 id="也可以看看"><a href="#也可以看看" class="headerlink" title="也可以看看"></a>也可以看看</h2><h3 id="相关文档"><a href="#相关文档" class="headerlink" title="相关文档"></a>相关文档</h3><h2 id="class-NEHotspotConfiguration"><a href="#class-NEHotspotConfiguration" class="headerlink" title="class NEHotspotConfiguration"></a><code>class NEHotspotConfiguration</code></h2><p>Wi-Fi网络热点的配置设置。</p>
-<h2 id="概观-1"><a href="#概观-1" class="headerlink" title="概观"></a>概观</h2><p>本类包含连接到Wi-Fi网络所需的配置属性和证书。<code>NEHotspotConfiguration</code></p>
-<h2 id="主题-1"><a href="#主题-1" class="headerlink" title="主题"></a>主题</h2><h3 id="创建一个热点配置"><a href="#创建一个热点配置" class="headerlink" title="创建一个热点配置"></a>创建一个热点配置</h3><p>为开放式，WEP，WPA / WPA2个人，WPA / WPA企业和Hotspot 2.0 Wi-Fi网络创建新的热点配置。</p>
-<p><code>init(ssid: String)</code></p>
-<p>为一个开放的Wi-Fi网络创建一个由SSID标识的新热点配置。</p>
-<p><code>init(ssid: String, passphrase: String, isWEP: Bool)</code></p>
-<p>为受保护的WEP或WPA / WPA2个人Wi-Fi网络创建一个由SSID标识的新热点配置。</p>
-<p><code>init(ssid: String, eapSettings: NEHotspotEAPSettings)</code></p>
-<p>为具有EAP设置的WPA / WPA2企业Wi-Fi网络创建由SSID标识的新热点配置。</p>
-<p><code>init(hs20Settings: NEHotspotHS20Settings, eapSettings: NEHotspotEAPSettings)</code></p>
-<p>为具有HS 2.0和EAP设置的Hotspot 2.0 Wi-Fi网络创建一个由域名标识的新热点配置。</p>
-<h3 id="热点配置属性"><a href="#热点配置属性" class="headerlink" title="热点配置属性"></a>热点配置属性</h3><p><code>var ssid: String</code></p>
-<p>开放，WEP，WPA / WPA2个人或WPA / WPA2企业Wi-Fi网络的SSID。</p>
-<p><code>var lifeTimeInDays: NSNumber</code></p>
-<p>网络保留相关配置的天数。</p>
-<p><code>var joinOnce: Bool</code></p>
-<p>将配置的生命周期限制为创建它的应用的运行状态。</p>
-<h2 id="class-NEHotspotEAPSettings"><a href="#class-NEHotspotEAPSettings" class="headerlink" title="class NEHotspotEAPSettings"></a><code>class NEHotspotEAPSettings</code></h2><p>用于配置WPA和WPA2企业Wi-Fi网络的可扩展身份验证协议（EAP）设置。</p>
-<h3 id="配置EAP握手"><a href="#配置EAP握手" class="headerlink" title="配置EAP握手"></a>配置EAP握手</h3><p><code>var isTLSClientCertificateRequired: Bool</code></p>
-<p>一个布尔值，指示网络是否需要双因素身份验证或允许零因素身份验证。</p>
-<p><code>var trustedServerNames: [String]</code></p>
-<p>用于验证服务器证书的服务器证书公用名字符串数组。</p>
-<p><code>var supportedEAPTypes: [NSNumber]</code></p>
-<p>支持的EAP类型的数组。</p>
-<p><code>enum NEHotspotEAPSettings.EAPType</code></p>
-<p>可以在中指定的EAP类型。<a href="https://developer.apple.com/documentation/networkextension/nehotspoteapsettings/2866648-supportedeaptypes" target="_blank" rel="noopener"><code>supportedEAPTypes</code></a></p>
-<p><code>var username: String</code></p>
-<p>EAP认证的用户名字符串，编码为UTF-8。</p>
-<p><code>var password: String</code></p>
-<p>IEEE 802.1X身份验证凭证的密码组件。</p>
-<p><code>var preferredTLSVersion: NEHotspotEAPSettings.TLSVersion</code></p>
-<p>在TLS身份验证握手期间使用的传输层安全（TLS）版本。</p>
-<p><code>enum NEHotspotEAPSettings.TLSVersion</code></p>
-<p>EAPTLS版本标识符可以通过。<a href="https://developer.apple.com/documentation/networkextension/nehotspoteapsettings/2866697-preferredtlsversion" target="_blank" rel="noopener"><code>preferredTLSVersion</code></a></p>
-<p><code>var outerIdentity: String</code></p>
-<p>外部EAP认证期间在EAP-Identity / Response数据包中使用的身份字符串。</p>
-<p><code>var ttlsInnerAuthenticationType: NEHotspotEAPSettings.TTLSInnerAuthenticationType</code></p>
-<p>TTLS模块使用的内层认证协议。</p>
-<p><code>enum NEHotspotEAPSettings.TTLSInnerAuthenticationType</code></p>
-<p>TTLS内部认证类型可以通过。<a href="https://developer.apple.com/documentation/networkextension/nehotspoteapsettings.ttlsinnerauthenticationtype" target="_blank" rel="noopener"><code>NEHotspotEAPSettings.TTLSInnerAuthenticationType</code></a></p>
-<h3 id="设置验证值"><a href="#设置验证值" class="headerlink" title="设置验证值"></a>设置验证值</h3><p><code>func setIdentity(SecIdentity)</code></p>
-<p>设置EAP认证的客户端标识。</p>
-<p><code>func setTrustedServerCertificates([Any])</code></p>
-<p>为企业Wi-Fi或Hotspot 2.0网络设置可信的EAP服务器证书。</p>
-<h2 id="class-NEHotspotHS20Settings"><a href="#class-NEHotspotHS20Settings" class="headerlink" title="class NEHotspotHS20Settings"></a><code>class NEHotspotHS20Settings</code></h2><p>配置Hotspot 2.0 Wi-Fi网络的设置。</p>
-<p><code>init(domainName: String, roamingEnabled: Bool)</code></p>
-<p>创建传统Hotspot或HS 2.0 Wi-Fi网络的新热点配置。启用可选的漫游功能。</p>
-<h3 id="热点2-0属性"><a href="#热点2-0属性" class="headerlink" title="热点2.0属性"></a>热点2.0属性</h3><p><code>var domainName: String</code></p>
-<p>Hotspot 2.0 Wi-Fi网络的域名。</p>
-<p><code>var isRoamingEnabled: Bool</code></p>
-<p>一个布尔值，指示是否在Hotspot 2.0 Wi-Fi网络上启用漫游。</p>
-<p><code>var mccAndMNCs: [String]</code></p>
-<p>用于Wi-Fi热点2.0协商的一组移动国家代码（MCC）和移动网络代码（MNC）对。</p>
-<p><code>var naiRealmNames: [String]</code></p>
-<p>用于Wi-Fi热点2.0协商的一组网络访问标识符（NAI）领域名称字符串。</p>
-<p><code>var roamingConsortiumOIs: [String]</code></p>
-<p>用于Wi-Fi热点2.0协商的一组漫游联盟组织（RCO）标识符。</p>
+<p>接下来，我们创建自己的stack object。</p>
+<p>创建一个名为CoreDataStack的swift加入到工程中。</p>
+<p>转载请注明出处：<a href="http://blog.csdn.net/yamingwu/article/details/42297675" target="_blank" rel="noopener">http://blog.csdn.net/yamingwu/article/details/42297675</a></p>
+<p>源代码地址：<a href="https://github.com/dnawym/StudySwift/tree/master/CoreData/Dog%20Walk" target="_blank" rel="noopener">https://github.com/dnawym/StudySwift/tree/master/CoreData/Dog%20Walk</a></p>
+<p>定义成员变量：</p>
+<p><strong>[cpp]</strong> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">view plain</a> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">copy</a></p>
+<ol>
+<li>import CoreData  </li>
+<li></li>
+<li>class CoreDataStack {  </li>
+<li>​    let context: NSManagedObjectContext  </li>
+<li>​    let psc: NSPersistentStoreCoordinator  </li>
+<li>​    let model: NSManagedObjectModel  </li>
+<li>​    let store: NSPersistentStore?  </li>
+<li>}  </li>
+</ol>
+<p><strong>[cpp]</strong> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">view plain</a> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">copy</a></p>
+<ol>
+<li>func saveContext() {  </li>
+<li>​    var error: NSError? = nil  </li>
+<li>​    if context.hasChanges &amp;&amp; !context.save(&amp;error) {  </li>
+<li>​        println(“Could not save: (error), (error?.userInfo)”)s  </li>
+<li>​    }  </li>
+<li>}  </li>
+<li></li>
+<li>// 获取应用程序documents diretory的url  </li>
+<li>func applicationDocumentsDirectory() -&gt; NSURL {  </li>
+<li>​    let fileManager = NSFileManager.defaultManager()  </li>
+<li>​      </li>
+<li>​    let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask) as [NSURL]  </li>
+<li>​      </li>
+<li>​    return urls[0]  </li>
+<li>}  </li>
+</ol>
+<p><strong>[cpp]</strong> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">view plain</a> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">copy</a></p>
+<ol>
+<li>init() {  </li>
+<li>​    // 从硬盘加载managed object model，这里通过读取momd目录下的编译后的.xcdatamodeld文件实现  </li>
+<li>​    let bundle = NSBundle.mainBundle()  </li>
+<li>​    let modelURL = bundle.URLForResource(“Dog Walk”, withExtension: “momd”)  </li>
+<li>​    model = NSManagedObjectModel(contentsOfURL: modelURL!)!  </li>
+<li>​      </li>
+<li>​    // 一旦初始化了NSManagedObjectModel，下一步是创建PSC，PSC用于桥接model和PersistentStore  </li>
+<li>​    psc = NSPersistentStoreCoordinator(managedObjectModel: model)  </li>
+<li>​      </li>
+<li>​    // Context的初始化没有任何参数，我们将psc连接到context上  </li>
+<li>​    context = NSManagedObjectContext()  </li>
+<li>​    context.persistentStoreCoordinator = psc  </li>
+<li>​      </li>
+<li>​    // 我们不需要手工创建PS，PSC会帮我们创建它。我们只需要为PSC提供所需的PS类型，一些配置，存放路径即可  </li>
+<li>​    let documentsURL = applicationDocumentsDirectory()  </li>
+<li>​    let storeURL = documentsURL.URLByAppendingPathComponent(“Dog Walk”)  </li>
+<li>​      </li>
+<li>​    let options = [NSMigratePersistentStoresAutomaticallyOption: true]  </li>
+<li>​      </li>
+<li>​    var error: NSError? = nil  </li>
+<li>​    store = psc.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: options, error: &amp;error)  </li>
+<li>​      </li>
+<li>​    if store == nil {  </li>
+<li>​        println(“Error adding persistent store: (error)”)  </li>
+<li>​        abort()  </li>
+<li>​    }  </li>
+<li>}  </li>
+</ol>
+<p>修改AppDelegate文件，构造CoreData’Stack并传递给ViewController，同时添加2个函数在应用程序进入后台和即将结束时，保存数据到文件系统中</p>
+<p><strong>[cpp]</strong> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">view plain</a> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">copy</a></p>
+<ol>
+<li>import UIKit  </li>
+<li>import CoreData  </li>
+<li></li>
+<li>@UIApplicationMain  </li>
+<li>class AppDelegate: UIResponder, UIApplicationDelegate {  </li>
+<li>​                              </li>
+<li>​    var window: UIWindow?  </li>
+<li>​      </li>
+<li>​    lazy var coreDataStack = CoreDataStack()  </li>
+<li></li>
+<li>​    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -&gt; Bool {  </li>
+<li></li>
+<li>​        let navigationController = self.window!.rootViewController as UINavigationController  </li>
+<li>​        let viewController = navigationController.topViewController as ViewController  </li>
+<li>​          </li>
+<li>​        viewController.managedContext = coreDataStack.context  </li>
+<li>​          </li>
+<li>​        return true  </li>
+<li>​    }  </li>
+<li>​      </li>
+<li>​    func applicationDidEnterBackground(application: UIApplication) {  </li>
+<li>​        coreDataStack.saveContext()  </li>
+<li>​    }  </li>
+<li>​      </li>
+<li>​    func applicationWillTerminate(application: UIApplication) {  </li>
+<li>​        coreDataStack.saveContext()  </li>
+<li>​    }  </li>
+<li></li>
+<li>}  </li>
+</ol>
+<p><strong>[cpp]</strong> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">view plain</a> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">copy</a></p>
+<ol>
+<li>var managedContext: NSManagedObjectContext!  </li>
+</ol>
+<p>数据建模：</p>
+<p>创建名为Dog Walk的CoreData model文件，在其中添加2个entity</p>
+<p><img src="https://img-blog.csdn.net/20141231180923874?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFtaW5nd3U=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p><img src="https://img-blog.csdn.net/20141231181001689?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFtaW5nd3U=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>这里，回到Dog Entity界面，创建一个指向walk的relationship</p>
+<p><img src="https://img-blog.csdn.net/20141231181153609?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFtaW5nd3U=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>默认情况下，这种关系都是一对一的，这里需要修改为一对多，并且勾选Ordered，这样，数据自动按日期进行排序。</p>
+<p><img src="https://img-blog.csdn.net/20141231181416219?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFtaW5nd3U=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>接下来，选择walk entity，创建一个inverse relationship指回dog，这里不用修改成to many，因为一次walk只会关联到一条狗</p>
+<p><img src="https://img-blog.csdn.net/20141231181642843?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFtaW5nd3U=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>inverse的作用是让model知道如何找到反向路径。比如，对于一个walk记录，通过relationship可以找到对应的dog，通过inverse，model知道通过walks关系可以回到walk记录。通过选择右下角的按钮来切换视图模式到图像编辑模式。to-one是单箭头，to-many是双箭头。</p>
+<p><img src="https://img-blog.csdn.net/20141231184051914?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFtaW5nd3U=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>创建ManagedObjectModel的子类，选择Dog Walk model并选择Dog和Walk这两个entity，最后记得选择swift编程语言，这样会生成Dog.swift和Walk.swift<img src="https://img-blog.csdn.net/20141231184506023?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFtaW5nd3U=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>  然后，修改Dog和Walk数据模型的属性，将Dog改为Dog_Walk.Dog，将Walk改为Dog_Walk.Walk。这一步的目的是连接managed object子类的全名到data model中的entity。</p>
+<p><img src="https://img-blog.csdn.net/20141231204244640?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFtaW5nd3U=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>实现对数据的持久存储：</p>
+<p>前面我们已经完成了Core Data栈的创建，data model子类的创建，接下来我们修改ViewController来使用Core Data。</p>
+<p><strong>[cpp]</strong> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">view plain</a> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">copy</a></p>
+<ol>
+<li>var currentDog: Dog!  </li>
+</ol>
+<p><strong>[cpp]</strong> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">view plain</a> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">copy</a></p>
+<ol>
+<li>override func viewDidLoad() {  </li>
+<li>​    super.viewDidLoad()  </li>
+<li>​    tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: “Cell”)  </li>
+<li>​      </li>
+<li>​    let dogEntity = NSEntityDescription.entityForName(“Dog”, inManagedObjectContext: managedContext)  </li>
+<li>​      </li>
+<li>​    let dog = Dog(entity: dogEntity!, insertIntoManagedObjectContext: managedContext)  </li>
+<li>​      </li>
+<li>​    let dogName = “Fido”  </li>
+<li>​    let dogFetch = NSFetchRequest(entityName: “Dog”)  </li>
+<li>​    dogFetch.predicate = NSPredicate(format: “name == %@”, dogName)  </li>
+<li>​      </li>
+<li>​    var error: NSError? = nil  </li>
+<li>​    let result = managedContext.executeFetchRequest(dogFetch, error: &amp;error) as [Dog]?  </li>
+<li>​      </li>
+<li>​    if let dogs = result {  </li>
+<li>​        if dogs.count == 0 {  </li>
+<li>​            currentDog = Dog(entity: dogEntity!, insertIntoManagedObjectContext: managedContext)  </li>
+<li>​            currentDog.name = dogName  </li>
+<li>​              </li>
+<li>​            if !managedContext.save(&amp;error) {  </li>
+<li>​                println(“Could not save: (error)”)  </li>
+<li>​            }  </li>
+<li>​        } else {  </li>
+<li>​            currentDog = dogs[0]  </li>
+<li>​        }  </li>
+<li>​    } else {  </li>
+<li>​        println(“Could not fetch: (error)”)  </li>
+<li>​    }  </li>
+<li>}  </li>
+</ol>
+<p><strong>[cpp]</strong> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">view plain</a> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">copy</a></p>
+<ol>
+<li>@IBAction func add(sender: AnyObject) {  </li>
+<li>​      </li>
+<li>​    // 插入新的Walk entity到Core Data中  </li>
+<li>​    let walkEntity = NSEntityDescription.entityForName(“Walk”, inManagedObjectContext: managedContext)  </li>
+<li>​    let walk = Walk(entity: walkEntity!, insertIntoManagedObjectContext: managedContext)  </li>
+<li>​      </li>
+<li>​    walk.date = NSDate()  </li>
+<li>​      </li>
+<li>​    // 插入新的walk到dog的walks集合中  </li>
+<li>​    var walks = currentDog.walks.mutableCopy() as NSMutableOrderedSet  </li>
+<li>​    walks.addObject(walk)  </li>
+<li>​    currentDog.walks = walks.copy() as NSOrderedSet  </li>
+<li>​      </li>
+<li>​    // 保存managed object context  </li>
+<li>​    var error: NSError?  </li>
+<li>​    if !managedContext.save(&amp;error) {  </li>
+<li>​        println(“Could not save: (error)”)  </li>
+<li>​    }  </li>
+<li>​      </li>
+<li>​    tableView.reloadData()  </li>
+<li>}  </li>
+</ol>
+<p>从Core Data中删除数据：</p>
+<p>添加下述函数到ViewController：</p>
+<p><strong>[cpp]</strong> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">view plain</a> <a href="https://blog.csdn.net/yamingwu/article/details/42297675#" target="_blank" rel="noopener">copy</a></p>
+<ol>
+<li>func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -&gt; Bool {  </li>
+<li>​    return true  </li>
+<li>}  </li>
+<li></li>
+<li>func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {  </li>
+<li>​    if editingStyle == UITableViewCellEditingStyle.Delete {  </li>
+<li>​        // 获取要删除的walk对象  </li>
+<li>​        let walkToRemove = currentDog.walks[indexPath.row] as Walk  </li>
+<li>​          </li>
+<li>​        // 类似于添加walk到walks，现获取一个mutable拷贝，然后在拷贝中移除对应的walk，最后将拷贝赋值回dog  </li>
+<li>​        let walks = currentDog.walks.mutableCopy() as NSMutableOrderedSet  </li>
+<li>​        walks.removeObjectAtIndex(indexPath.row)  </li>
+<li>​        currentDog.walks = walks.copy() as NSOrderedSet  </li>
+<li>​          </li>
+<li>​        // 删除walk对象  </li>
+<li>​        managedContext.deleteObject(walkToRemove)  </li>
+<li>​          </li>
+<li>​        // 保存  </li>
+<li>​        var error: NSError?  </li>
+<li>​        if !managedContext.save(&amp;error) {  </li>
+<li>​            println(“Could not save: (error)”)  </li>
+<li>​        }  </li>
+<li>​          </li>
+<li>​        // 从table view中删除当前行  </li>
+<li>​        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)  </li>
+<li>​    }  </li>
+<li>}  </li>
+</ol>
+<p><img src="https://img-blog.csdn.net/20141231212643577?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFtaW5nd3U=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>至此，我们就完成了3个实例，遛狗程序。这一节中，我们学习了如何构建自己的Core Data栈，数据模型和managed object子类，以及如何建立实例之间的关系，如何操作关系以及如何从Core Data中删除数据。</p>
+<p>接下来，我们会更深入的学习fetch和其它更高级的iOS8 topics，这一节我们学习了基本的操作，但是还有更多需要学习的地方，are you ready？</p>
 
       
 
@@ -596,11 +777,177 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Core Data</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/13/NEHotspotConfigurationManager/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/24/Core Data -swift - ios8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-集合（Set）使用详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/24/集合（Set）使用详解/">Swift - 集合（Set）使用详解（附样例）</a>
+    </h1>
+  
+
+
+        <!-- 显示阅读和评论数 -->
+        	
+	
+        
+        <a href="/2018/04/24/集合（Set）使用详解/" class="archive-article-date">
+  	<time datetime="2018-04-24T03:44:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
+</a>
+        
+      </header>
+    
+
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、基本介绍"><a href="#一、基本介绍" class="headerlink" title="一、基本介绍"></a>一、基本介绍</h2><h3 id="1，集合的作用"><a href="#1，集合的作用" class="headerlink" title="1，集合的作用"></a>1，集合的作用</h3><ul>
+<li>集合（Set）是用来存储相同类型、没有确定顺序、且不重复的值。 </li>
+<li>也就是说当元素顺序不重要时，或者希望确保每个元素只出现一次时，可以使用集合而不是数组。</li>
+</ul>
+<h3 id="2，Array、Set、Dictionariy-三者的区别"><a href="#2，Array、Set、Dictionariy-三者的区别" class="headerlink" title="2，Array、Set、Dictionariy 三者的区别"></a>2，Array、Set、Dictionariy 三者的区别</h3><p>Swift 中这三种基本的集合类型都是用来存储集合数据的，它们间的区别如下：</p>
+<ul>
+<li>数组（Arrays）是有序数据的集。</li>
+<li>集合（Sets）是无序无重复数据的集。</li>
+<li>字典（Dictionaries）是无序的键值对的集。</li>
+</ul>
+<p><a href="http://www.hangge.com/blog/cache/detail_1840.html#" target="_blank" rel="noopener"><img src="http://www.hangge.com/blog_uploads/201710/2017103014294695786.png" alt="原文:Swift - 集合（Set）使用详解（附样例）"></a></p>
+<h2 id="二、创建集合"><a href="#二、创建集合" class="headerlink" title="二、创建集合"></a>二、创建集合</h2><h3 id="1，创建空集合"><a href="#1，创建空集合" class="headerlink" title="1，创建空集合"></a>1，创建空集合</h3><p>（1）Swift 中 Set 类型被写为 Set<element>，这里的 Element 表示 Set 中允许存储的类型。下面我们通过构造器语法创建一个特定类型的空集合：</element></p>
+<p>Set</p>
+<h3 id="2，创建带初始值的集合"><a href="#2，创建带初始值的集合" class="headerlink" title="2，创建带初始值的集合"></a>2，创建带初始值的集合</h3><p>（1）下面我们创建一个带有三个 String 类型的初始值的集合。</p>
+<p>Set </p>
+<h3 id="3，将数组转为集合"><a href="#3，将数组转为集合" class="headerlink" title="3，将数组转为集合"></a>3，将数组转为集合</h3><p><a href="http://www.hangge.com/blog/cache/detail_1840.html#" target="_blank" rel="noopener"><img src="http://www.hangge.com/blog_uploads/201710/201710301729496066.png" alt="原文:Swift - 集合（Set）使用详解（附样例）"></a></p>
+<h2 id="三、元素访问与操作"><a href="#三、元素访问与操作" class="headerlink" title="三、元素访问与操作"></a>三、元素访问与操作</h2><h3 id="1，获取元素个数：count"><a href="#1，获取元素个数：count" class="headerlink" title="1，获取元素个数：count"></a>1，获取元素个数：count</h3><p><a href="http://www.hangge.com/blog/cache/detail_1840.html#" target="_blank" rel="noopener"><img src="http://www.hangge.com/blog_uploads/201710/2017103015020156150.png" alt="原文:Swift - 集合（Set）使用详解（附样例）"></a></p>
+<h3 id="2，判断集合是否为空：isEmpty"><a href="#2，判断集合是否为空：isEmpty" class="headerlink" title="2，判断集合是否为空：isEmpty"></a>2，判断集合是否为空：isEmpty</h3><h3 id="3，添加一个新元素：insert"><a href="#3，添加一个新元素：insert" class="headerlink" title="3，添加一个新元素：insert()"></a>3，添加一个新元素：insert()</h3><h3 id="4，删除一个元素：remove"><a href="#4，删除一个元素：remove" class="headerlink" title="4，删除一个元素：remove()"></a>4，删除一个元素：remove()</h3><ul>
+<li>如果删除值是该 Set 的一个元素，则删除该元素并且返回被删除的元素值。</li>
+<li>如果该 Set 不包含该值，则返回 nil。</li>
+</ul>
+<h3 id="5，删除所有元素：removeAll"><a href="#5，删除所有元素：removeAll" class="headerlink" title="5，删除所有元素：removeAll()"></a>5，删除所有元素：removeAll()</h3><h3 id="6，判断集合中是否包含特定值：contains"><a href="#6，判断集合中是否包含特定值：contains" class="headerlink" title="6，判断集合中是否包含特定值：contains()"></a>6，判断集合中是否包含特定值：contains()</h3><h3 id="7，遍历集合元素"><a href="#7，遍历集合元素" class="headerlink" title="7，遍历集合元素"></a>7，遍历集合元素</h3><p>（1）可以使用 for in 循环遍历一个 Set 中的所有值。</p>
+<p>Set </p>
+<p>sorted() </p>
+<p>&lt;</p>
+<h2 id="四、集合的操作"><a href="#四、集合的操作" class="headerlink" title="四、集合的操作"></a>四、集合的操作</h2><h3 id="1，过滤集合元素"><a href="#1，过滤集合元素" class="headerlink" title="1，过滤集合元素"></a>1，过滤集合元素</h3><p>filter </p>
+<p>Set</p>
+<p><a href="http://www.hangge.com/blog/cache/detail_1840.html#" target="_blank" rel="noopener"><img src="http://www.hangge.com/blog_uploads/201710/2017103017191193819.png" alt="原文:Swift - 集合（Set）使用详解（附样例）"></a></p>
+<h3 id="2，两个集合的基本操作"><a href="#2，两个集合的基本操作" class="headerlink" title="2，两个集合的基本操作"></a>2，两个集合的基本操作</h3><p>（1）Set 提供了如下 4 个方法来实现通过现有的两个集合创建一个新的集合：</p>
+<ul>
+<li>intersection(_:)：根据两个集合中都包含的值创建的一个新的集合。</li>
+<li>symmetricDifference(_:)：根据在一个集合中但不在两个集合中的值创建一个新的集合。</li>
+<li>union(_:)：根据两个集合的值创建一个新的集合。</li>
+<li>subtracting(_:)：根据不在该集合中的值创建一个新的集合。</li>
+</ul>
+<p><a href="http://www.hangge.com/blog/cache/detail_1840.html#" target="_blank" rel="noopener"><img src="http://www.hangge.com/blog_uploads/201710/2017103016402315045.png" alt="原文:Swift - 集合（Set）使用详解（附样例）"></a></p>
+<p>（2）下面是一个简单的使用样例</p>
+<h3 id="3，判断两个集合之间的关系"><a href="#3，判断两个集合之间的关系" class="headerlink" title="3，判断两个集合之间的关系"></a>3，判断两个集合之间的关系</h3><p>（1）我们可以通过如下几种方法进行判断：</p>
+<ul>
+<li>==：判断两个集合是否包含全部相同的值。</li>
+<li>isSubset(of:)：判断一个集合中的值是否也被包含在另外一个集合中。</li>
+<li>isSuperset(of:)：判断一个集合中包含另一个集合中所有的值。</li>
+<li>isStrictSubset(of:)：判断一个集合是否是另外一个集合的子集合，并且两个集合并不相等。</li>
+<li>isStrictSuperset(of:)：判断一个集合是否是另外一个集合的父集合，并且两个集合并不相等。</li>
+<li>isDisjoint(with:)：判断两个集合是否不含有相同的值（是否没有交集）。</li>
+</ul>
+<p>（2）下面是一个简单的使用样例</p>
+<h2 id="五、集合类型的哈希值"><a href="#五、集合类型的哈希值" class="headerlink" title="五、集合类型的哈希值"></a>五、集合类型的哈希值</h2><h3 id="1，哈希值说明"><a href="#1，哈希值说明" class="headerlink" title="1，哈希值说明"></a>1，哈希值说明</h3><ul>
+<li>一个类型如果想要存储在集合中，那么该类型必须是可哈希化的。也就是说，该类型必须提供一个方法来计算它的哈希值。</li>
+<li>哈希值是 Int 类型，相等对象的哈希值必须相同。比如：a==b，那么必定有 a.hashValue == b.hashValue。</li>
+<li>Swift 的所有基本类型（如 String，Int，Double，Bool）默认都是可哈希化的，可以作为集合的值的类型或者字典的键的类型。没有关联值的枚举成员值默认也是可哈希化的。</li>
+</ul>
+<h3 id="2，自定义类型的哈希化"><a href="#2，自定义类型的哈希化" class="headerlink" title="2，自定义类型的哈希化"></a>2，自定义类型的哈希化</h3><p>（1）如果想要自定义的类型作为集合的值类型或者是字典的键类型，那么这个自定义类型必需符合 Swift 标准库中的 Hashable 协议。符合 Hashable 协议的类型需要提供一个类型为 Int 的可读属性 hashValue。</p>
+<p>（2）因为 Hashable 协议符合 Equatable 协议，所以遵循该协议的类型也必须提供一个”是否相等”运算符（==）的实现。这个 Equatable 协议要求任何符合 == 实现的实例间都是一种相等的关系。也就是说，对于 a、b、c 三个值来说，== 的实现必须满足下面三种情况：</p>
+<ul>
+<li>自反性：a == a</li>
+<li>对称性：a == b 意味着 b == a</li>
+<li>传递性：a == b &amp;&amp; b == c 意味着 a == c</li>
+</ul>
+<h3 id="3，样例代码"><a href="#3，样例代码" class="headerlink" title="3，样例代码"></a>3，样例代码</h3><p>（1）这里我们自定义一个结构体（User），用来做为 Set 里的值的类型。</p>
+<p><a href="http://www.hangge.com/blog/cache/detail_1840.html#" target="_blank" rel="noopener"><img src="http://www.hangge.com/blog_uploads/201710/2017103020071386106.png" alt="原文:Swift - 集合（Set）使用详解（附样例）"></a></p>
+<p>原文出自：</p>
+<p>www.hangge.com</p>
+<p>  转载请保留原文链接：</p>
+<p><a href="http://www.hangge.com/blog/cache/detail_1840.html" target="_blank" rel="noopener">http://www.hangge.com/blog/cache/detail_1840.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Set</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/24/集合（Set）使用详解/">展开全文 >></a>
         </p>
       
 
@@ -632,7 +979,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/18/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/20/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/18/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/20/">Next &raquo;</a>
     </nav>
   
 
@@ -744,11 +1091,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
+                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">swift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UIButton</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IJKMediaFramework.framework</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -757,6 +1116,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -772,6 +1139,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Swift3</a>
               </li>
              
@@ -784,15 +1155,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Moya</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">NetWork</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -812,15 +1183,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">UIImageView</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">iOS逆向</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">error</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ifaddrs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -868,10 +1243,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCD</a>
               </li>
              
@@ -880,7 +1251,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">响应链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -893,10 +1272,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">struct</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -917,6 +1292,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">protocol</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
             
             <div class="clearfix"></div>
@@ -1153,6 +1536,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           
             <li class="search-li">
               <a href="http://fengjian0106.github.io/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>FengJian&#39;s Blog</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://limboy.me/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>limboy</a>
             </li>
           
         </ul>

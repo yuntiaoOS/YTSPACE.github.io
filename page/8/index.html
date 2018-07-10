@@ -153,14 +153,14 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Swift设计模式之策略模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-iOS10之前之后系统访问权限以及跳转到系统界面" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/11/Swift设计模式之策略模式/">Swift设计模式之策略模式</a>
+      <a class="article-title" href="/2018/05/15/iOS10之前之后系统访问权限以及跳转到系统界面/">iOS10之前/之后系统访问权限以及跳转到系统界面</a>
     </h1>
   
 
@@ -169,8 +169,8 @@
         	
 	
         
-        <a href="/2018/05/11/Swift设计模式之策略模式/" class="archive-article-date">
-  	<time datetime="2018-05-11T06:09:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
+        <a href="/2018/05/15/iOS10之前之后系统访问权限以及跳转到系统界面/" class="archive-article-date">
+  	<time datetime="2018-05-15T03:59:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-15</time>
 </a>
         
       </header>
@@ -182,17 +182,13 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#</p>
-<p><strong>转自</strong></p>
-<ul>
-<li><a href="http://qefee.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">Swift设计模式</a></li>
-</ul>
-<p><strong>原文</strong></p>
-<ul>
-<li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">// 策略模式</span><br><span class="line">// 策略模式定义了一系列的算法，并将每一个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化</span><br><span class="line">// 设计模式分类：行为型模式</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  打印策略接口</span><br><span class="line"> */</span><br><span class="line">protocol PrintStrategy &#123;</span><br><span class="line">    func printString(string: String) -&gt; String</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 打印机类</span><br><span class="line">class Printer &#123;</span><br><span class="line">    </span><br><span class="line">    let strategy: PrintStrategy</span><br><span class="line">    </span><br><span class="line">    func printString(string: String) -&gt; String &#123;</span><br><span class="line">        return self.strategy.printString(string)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    init(strategy: PrintStrategy) &#123;</span><br><span class="line">        self.strategy = strategy</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 大写打印策略</span><br><span class="line">class UpperCaseStrategy : PrintStrategy &#123;</span><br><span class="line">    func printString(string:String) -&gt; String &#123;</span><br><span class="line">        return string.uppercaseString</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 小写打印策略</span><br><span class="line">class LowerCaseStrategy : PrintStrategy &#123;</span><br><span class="line">    func printString(string:String) -&gt; String &#123;</span><br><span class="line">        return string.lowercaseString</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var lower = Printer(strategy:LowerCaseStrategy())</span><br><span class="line">lower.printString(&quot;O tempora, o mores!&quot;)</span><br><span class="line"></span><br><span class="line">var upper = Printer(strategy:UpperCaseStrategy())</span><br><span class="line">upper.printString(&quot;O tempora, o mores!&quot;)</span><br></pre></td></tr></table></figure>
-
+        <p>iOS10以后字段有所改变</p>
+<p>iOS10后：”App-Prefs:root=INTERNET_TETHERING”</p>
+<p>iOS10前：”prefs:root=INTERNET_TETHERING”</p>
+<p>跳转到自已app设置里及权限设置 ：let settingUrl = NSURL(string:UIApplicationOpenSettingsURLString)!</p>
+        
+          <a class="article-more-a" href="/2018/05/15/iOS10之前之后系统访问权限以及跳转到系统界面/#more">more >></a>
+        
       
 
       
@@ -209,7 +205,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Swift设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
         		</li>
       		
 		</ul>
@@ -219,7 +215,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/11/Swift设计模式之策略模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/15/iOS10之前之后系统访问权限以及跳转到系统界面/">展开全文 >></a>
         </p>
       
 
@@ -249,14 +245,14 @@
 
 
   
-    <article id="post-Swift设计模式之访问者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift App状态恢复－State Restoration" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/11/Swift设计模式之访问者模式/">Swift设计模式之访问者模式</a>
+      <a class="article-title" href="/2018/05/14/Swift App状态恢复－State Restoration/">Swift App状态恢复－State Restoration</a>
     </h1>
   
 
@@ -265,8 +261,8 @@
         	
 	
         
-        <a href="/2018/05/11/Swift设计模式之访问者模式/" class="archive-article-date">
-  	<time datetime="2018-05-11T06:09:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
+        <a href="/2018/05/14/Swift App状态恢复－State Restoration/" class="archive-article-date">
+  	<time datetime="2018-05-14T10:16:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-14</time>
 </a>
         
       </header>
@@ -278,17 +274,11 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#</p>
-<p><strong>转自</strong></p>
-<ul>
-<li><a href="http://qefee.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">Swift设计模式</a></li>
-</ul>
-<p><strong>原文</strong></p>
-<ul>
-<li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">// 访问者模式</span><br><span class="line">// 百度百科：表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素类的前提下定义作用于这些元素的新操作</span><br><span class="line">// 设计模式分类：行为型模式</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  星球访问者接口</span><br><span class="line"> */</span><br><span class="line">protocol PlanetVisitor &#123;</span><br><span class="line">    func visit(planet: Earth)</span><br><span class="line">    func visit(planet: Mars)</span><br><span class="line">    func visit(planet: Venus)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  行星类</span><br><span class="line"> */</span><br><span class="line">protocol Planet &#123;</span><br><span class="line">    func accept(visitor: PlanetVisitor)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 地球</span><br><span class="line">class Earth: Planet &#123;</span><br><span class="line">    func accept(visitor: PlanetVisitor) &#123; visitor.visit(self) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 火星</span><br><span class="line">class Mars: Planet &#123;</span><br><span class="line">    func accept(visitor: PlanetVisitor) &#123; visitor.visit(self) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 金星</span><br><span class="line">class Venus: Planet &#123;</span><br><span class="line">    func accept(visitor: PlanetVisitor) &#123; visitor.visit(self) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 具体访问者类</span><br><span class="line">class NameVisitor: PlanetVisitor &#123;</span><br><span class="line">    var name = &quot;&quot;</span><br><span class="line">    </span><br><span class="line">    func visit(planet: Earth)  &#123; name = &quot;Earth&quot; &#125;</span><br><span class="line">    func visit(planet: Mars) &#123; name = &quot;Mars&quot; &#125;</span><br><span class="line">    func visit(planet: Venus)  &#123; name = &quot;Venus&quot; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let planets: [Planet] = [Earth(), Mars(), Venus()]</span><br><span class="line"></span><br><span class="line">let names = planets.map &#123; (planet: Planet) -&gt; String in</span><br><span class="line">    let visitor = NameVisitor()</span><br><span class="line">    planet.accept(visitor)</span><br><span class="line">    return visitor.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">print(names)</span><br></pre></td></tr></table></figure>
-
+        <h6 id="Swift-App状态恢复－State-Restoration"><a href="#Swift-App状态恢复－State-Restoration" class="headerlink" title="Swift App状态恢复－State Restoration"></a>Swift App状态恢复－State Restoration</h6><p>原创Blog，转载请注明出处<br><a href="https://blog.csdn.net/hello_hwc/article/details/blog.csdn.net/hello_hwc" target="_blank" rel="noopener">blog.csdn.net/hello_hwc</a></p>
+<hr>
+        
+          <a class="article-more-a" href="/2018/05/14/Swift App状态恢复－State Restoration/#more">more >></a>
+        
       
 
       
@@ -305,7 +295,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Swift设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
         		</li>
       		
 		</ul>
@@ -315,7 +305,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/11/Swift设计模式之访问者模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/14/Swift App状态恢复－State Restoration/">展开全文 >></a>
         </p>
       
 
@@ -345,14 +335,14 @@
 
 
   
-    <article id="post-Swift设计模式之抽象工厂模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-允许用户删除专辑以及撤销上次的删除操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/11/Swift设计模式之抽象工厂模式/">Swift设计模式之抽象工厂模式</a>
+      <a class="article-title" href="/2018/05/14/允许用户删除专辑以及撤销上次的删除操作/">iOS允许用户删除专辑，以及撤销上次的删除操作</a>
     </h1>
   
 
@@ -361,8 +351,8 @@
         	
 	
         
-        <a href="/2018/05/11/Swift设计模式之抽象工厂模式/" class="archive-article-date">
-  	<time datetime="2018-05-11T06:09:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
+        <a href="/2018/05/14/允许用户删除专辑以及撤销上次的删除操作/" class="archive-article-date">
+  	<time datetime="2018-05-14T04:02:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-14</time>
 </a>
         
       </header>
@@ -374,17 +364,13 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#</p>
-<p><strong>转自</strong></p>
-<ul>
-<li><a href="http://qefee.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">Swift设计模式</a></li>
-</ul>
-<p><strong>原文</strong></p>
-<ul>
-<li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">// 抽象工厂模式</span><br><span class="line">// 百度百科：为创建一组相关或相互依赖的对象提供一个接口，而且无需指定他们的具体类</span><br><span class="line">// 设计模式分类：创建型模式</span><br><span class="line"></span><br><span class="line">import Foundation</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  抽象工厂</span><br><span class="line"> */</span><br><span class="line">protocol Decimal &#123;</span><br><span class="line">    func stringValue() -&gt; String</span><br><span class="line">    // 工厂方法</span><br><span class="line">    static func make(string : String) -&gt; Decimal</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">typealias NumberFactory = (String) -&gt; Decimal</span><br><span class="line"></span><br><span class="line">// Number implementations with factory methods</span><br><span class="line">/**</span><br><span class="line"> *  具体工厂</span><br><span class="line"> */</span><br><span class="line">struct NextStepNumber : Decimal &#123;</span><br><span class="line">    private var nextStepNumber : NSNumber</span><br><span class="line">    </span><br><span class="line">    func stringValue() -&gt; String &#123; return nextStepNumber.stringValue &#125;</span><br><span class="line">    </span><br><span class="line">    // 工厂方法</span><br><span class="line">    static func make(string : String) -&gt; Decimal &#123;</span><br><span class="line">        return NextStepNumber(nextStepNumber:NSNumber(longLong:(string as NSString).longLongValue))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  具体工厂</span><br><span class="line"> */</span><br><span class="line">struct SwiftNumber : Decimal &#123;</span><br><span class="line">    private var swiftInt : Int</span><br><span class="line">    </span><br><span class="line">    func stringValue() -&gt; String &#123; return &quot;\(swiftInt)&quot; &#125;</span><br><span class="line">    </span><br><span class="line">    // 工厂方法</span><br><span class="line">    static func make(string : String) -&gt; Decimal &#123;</span><br><span class="line">        return SwiftNumber(swiftInt:(string as NSString).integerValue)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">enum NumberType &#123;</span><br><span class="line">    case NextStep, Swift</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">enum NumberHelper &#123;</span><br><span class="line">    static func factoryFor(type : NumberType) -&gt; NumberFactory &#123;</span><br><span class="line">        switch type &#123;</span><br><span class="line">        case .NextStep:</span><br><span class="line">            return NextStepNumber.make</span><br><span class="line">        case .Swift:</span><br><span class="line">            return SwiftNumber.make</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let factoryOne = NumberHelper.factoryFor(.NextStep)</span><br><span class="line">let numberOne = factoryOne(&quot;1&quot;)</span><br><span class="line">numberOne.stringValue()</span><br><span class="line"></span><br><span class="line">let factoryTwo = NumberHelper.factoryFor(.Swift)</span><br><span class="line">let numberTwo = factoryTwo(&quot;2&quot;)</span><br><span class="line">numberTwo.stringValue()</span><br></pre></td></tr></table></figure>
-
+        <h1 id="最后的润色"><a href="#最后的润色" class="headerlink" title="最后的润色"></a>最后的润色</h1><p>现在我们将添加最后一个功能：允许用户删除专辑，以及撤销上次的删除操作。</p>
+<p>在 <code>ViewController</code> 里添加如下属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 为了实现撤销功能，我们用数组作为一个栈来 push 和 pop 用户的操作</span><br><span class="line">var undoStack: [(Album, Int)] = []</span><br></pre></td></tr></table></figure>
+<p>然后在 <code>viewDidLoad</code> 的 <code>reloadScroller()</code> 后面添加如下代码：<br>
+        
+          <a class="article-more-a" href="/2018/05/14/允许用户删除专辑以及撤销上次的删除操作/#more">more >></a>
+        
       
 
       
@@ -401,7 +387,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Swift设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">other</a>
         		</li>
       		
 		</ul>
@@ -411,7 +397,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/11/Swift设计模式之抽象工厂模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/14/允许用户删除专辑以及撤销上次的删除操作/">展开全文 >></a>
         </p>
       
 
@@ -441,14 +427,14 @@
 
 
   
-    <article id="post-Swift设计模式之创建者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-备忘录模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/11/Swift设计模式之创建者模式/">Swift设计模式之创建者模式</a>
+      <a class="article-title" href="/2018/05/14/备忘录模式/">iOS备忘录模式 - Memento</a>
     </h1>
   
 
@@ -457,8 +443,8 @@
         	
 	
         
-        <a href="/2018/05/11/Swift设计模式之创建者模式/" class="archive-article-date">
-  	<time datetime="2018-05-11T06:08:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
+        <a href="/2018/05/14/备忘录模式/" class="archive-article-date">
+  	<time datetime="2018-05-14T03:48:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-14</time>
 </a>
         
       </header>
@@ -470,17 +456,11 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#</p>
-<p><strong>转自</strong></p>
-<ul>
-<li><a href="http://qefee.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">Swift设计模式</a></li>
-</ul>
-<p><strong>原文</strong></p>
-<ul>
-<li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">// 创建者模式</span><br><span class="line">// 百度百科：其核心思想是将一个“复杂对象的构建算法”与它的“部件及组装方式”分离，使得构件算法和组装方式可以独立应对变化；复用同样的构建算法可以创建不同的表示，不同的构建过程可以复用相同的部件组装方式</span><br><span class="line">// 设计模式分类：创建型模式</span><br><span class="line"></span><br><span class="line">/// 创建者</span><br><span class="line">class DeathStarBuilder &#123;</span><br><span class="line">    </span><br><span class="line">    var x: Double?</span><br><span class="line">    var y: Double?</span><br><span class="line">    var z: Double?</span><br><span class="line">    </span><br><span class="line">        /// 创建者闭包</span><br><span class="line">    typealias BuilderClosure = (DeathStarBuilder) -&gt; ()</span><br><span class="line">    </span><br><span class="line">    init(buildClosure: BuilderClosure) &#123;</span><br><span class="line">        buildClosure(self)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  创建对象</span><br><span class="line"> */</span><br><span class="line">struct DeathStar : CustomStringConvertible &#123;</span><br><span class="line">    </span><br><span class="line">    let x: Double</span><br><span class="line">    let y: Double</span><br><span class="line">    let z: Double</span><br><span class="line">    </span><br><span class="line">    init?(builder: DeathStarBuilder) &#123;</span><br><span class="line">        </span><br><span class="line">        if let x = builder.x, y = builder.y, z = builder.z &#123;</span><br><span class="line">            self.x = x</span><br><span class="line">            self.y = y</span><br><span class="line">            self.z = z</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return nil</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var description:String &#123;</span><br><span class="line">        return &quot;Death Star at (x:\(x) y:\(y) z:\(z))&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let empire = DeathStarBuilder &#123; builder in</span><br><span class="line">    builder.x = 0.1</span><br><span class="line">    builder.y = 0.2</span><br><span class="line">    builder.z = 0.3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let deathStar = DeathStar(builder:empire)</span><br></pre></td></tr></table></figure>
-
+        <p>备忘录模式捕捉并且具象化一个对象的内在状态。换句话说，它把你的对象存在了某个地方，然后在以后的某个时间再把它恢复出来，而不会打破它本身的封装性，私有数据依旧是私有数据。</p>
+<h3 id="如何使用备忘录模式"><a href="#如何使用备忘录模式" class="headerlink" title="如何使用备忘录模式"></a>如何使用备忘录模式</h3><p>在 <code>ViewController.swift</code> 里加上下面两个方法：<br>
+        
+          <a class="article-more-a" href="/2018/05/14/备忘录模式/#more">more >></a>
+        
       
 
       
@@ -497,7 +477,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Swift设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		
 		</ul>
@@ -507,7 +487,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/11/Swift设计模式之创建者模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/14/备忘录模式/">展开全文 >></a>
         </p>
       
 
@@ -537,14 +517,14 @@
 
 
   
-    <article id="post-Swift设计模式之工厂方法模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-列举 ENUM 类型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/11/Swift设计模式之工厂方法模式/">Swift设计模式之工厂方法模式</a>
+      <a class="article-title" href="/2018/05/11/列举 ENUM 类型/">列举 ENUM 类型</a>
     </h1>
   
 
@@ -553,8 +533,8 @@
         	
 	
         
-        <a href="/2018/05/11/Swift设计模式之工厂方法模式/" class="archive-article-date">
-  	<time datetime="2018-05-11T06:08:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
+        <a href="/2018/05/11/列举 ENUM 类型/" class="archive-article-date">
+  	<time datetime="2018-05-11T09:23:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
 </a>
         
       </header>
@@ -567,16 +547,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>#</p>
-<p><strong>转自</strong></p>
-<ul>
-<li><a href="http://qefee.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">Swift设计模式</a></li>
-</ul>
-<p><strong>原文</strong></p>
-<ul>
-<li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">// 工厂方法模式</span><br><span class="line">// 百度百科：是一种常用的对象创建型设计模式,此模式的核心精神是封装类中不变的部分，提取其中个性化善变的部分为独立类，通过依赖注入以达到解耦、复用和方便后期维护拓展的目的。它的核心结构有四个角色，分别是抽象工厂；具体工厂；抽象产品；具体产品</span><br><span class="line">// 设计模式分类：创建型模式</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  抽象产品（货币）</span><br><span class="line"> */</span><br><span class="line">protocol Currency &#123;</span><br><span class="line">    func symbol() -&gt; String</span><br><span class="line">    func code() -&gt; String</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 具体产品（欧元）</span><br><span class="line">class Euro : Currency &#123;</span><br><span class="line">    func symbol() -&gt; String &#123;</span><br><span class="line">        return &quot;€&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func code() -&gt; String &#123;</span><br><span class="line">        return &quot;EUR&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 具体产品（美元）</span><br><span class="line">class UnitedStatesDolar : Currency &#123;</span><br><span class="line">    func symbol() -&gt; String &#123;</span><br><span class="line">        return &quot;$&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func code() -&gt; String &#123;</span><br><span class="line">        return &quot;USD&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 国家</span><br><span class="line"> </span><br><span class="line"> - UnitedStates: 美国</span><br><span class="line"> - Spain:        西班牙</span><br><span class="line"> - UK:           英国</span><br><span class="line"> - Greece:       希腊</span><br><span class="line"> */</span><br><span class="line">enum Country &#123;</span><br><span class="line">    case UnitedStates, Spain, UK, Greece</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 具体工厂</span><br><span class="line"> */</span><br><span class="line">enum CurrencyFactory &#123;</span><br><span class="line">    static func currencyForCountry(country:Country) -&gt; Currency? &#123;</span><br><span class="line">        </span><br><span class="line">        switch country &#123;</span><br><span class="line">        case .Spain, .Greece :</span><br><span class="line">            return Euro()</span><br><span class="line">        case .UnitedStates :</span><br><span class="line">            return UnitedStatesDolar()</span><br><span class="line">        default:</span><br><span class="line">            return nil</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let noCurrencyCode = &quot;No Currency Code Available&quot;</span><br><span class="line"></span><br><span class="line">CurrencyFactory.currencyForCountry(.Greece)?.code() ?? noCurrencyCode</span><br><span class="line">CurrencyFactory.currencyForCountry(.Spain)?.code() ?? noCurrencyCode</span><br><span class="line">CurrencyFactory.currencyForCountry(.UnitedStates)?.code() ?? noCurrencyCode</span><br><span class="line">CurrencyFactory.currencyForCountry(.UK)?.code() ?? noCurrencyCode</span><br></pre></td></tr></table></figure>
-
+<p>由 <strong>王巍 (@ONEVCAT)</strong> 发布于 2016-04-13</p>
+<p><a href="http://swifter.tips/enum-enumerate/" target="_blank" rel="noopener">http://swifter.tips/enum-enumerate/</a></p>
+<p>设想我们有这样一个需求，通过对于一副扑克牌的花色和牌面大小的 <code>enum</code> 类型，凑出一套不含大小王的扑克牌的数组。<br>
+        
+          <a class="article-more-a" href="/2018/05/11/列举 ENUM 类型/#more">more >></a>
+        
       
 
       
@@ -593,7 +569,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Swift设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
         		</li>
       		
 		</ul>
@@ -603,7 +579,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/11/Swift设计模式之工厂方法模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/11/列举 ENUM 类型/">展开全文 >></a>
         </p>
       
 
@@ -635,7 +611,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
     </nav>
   
 
@@ -747,11 +723,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
+                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">swift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UIButton</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IJKMediaFramework.framework</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -760,6 +748,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -775,6 +771,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Swift3</a>
               </li>
              
@@ -787,15 +787,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Moya</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">NetWork</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -815,15 +815,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">UIImageView</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">iOS逆向</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">error</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ifaddrs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -871,10 +875,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCD</a>
               </li>
              
@@ -883,7 +883,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">响应链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -896,10 +904,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">struct</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -920,6 +924,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">protocol</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
             
             <div class="clearfix"></div>
@@ -1156,6 +1168,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           
             <li class="search-li">
               <a href="http://fengjian0106.github.io/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>FengJian&#39;s Blog</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://limboy.me/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>limboy</a>
             </li>
           
         </ul>

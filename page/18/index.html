@@ -153,14 +153,14 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Swift 的 flatMap 和 zip 函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-iOS 使用Moya网络请求" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/23/Swift 的 flatMap 和 zip 函数/">Swift 的 flatMap 和 zip 函数</a>
+      <a class="article-title" href="/2018/04/26/iOS 使用Moya网络请求/">iOS 使用Moya网络请求</a>
     </h1>
   
 
@@ -169,8 +169,8 @@
         	
 	
         
-        <a href="/2018/04/23/Swift 的 flatMap 和 zip 函数/" class="archive-article-date">
-  	<time datetime="2018-04-23T03:06:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-23</time>
+        <a href="/2018/04/26/iOS 使用Moya网络请求/" class="archive-article-date">
+  	<time datetime="2018-04-26T09:52:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-26</time>
 </a>
         
       </header>
@@ -182,33 +182,44 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Swift 的语法很适合写函数式程序。函数式“三板斧” map、filter、reduce 都应该很熟悉了。另外 flatMap 和 zip 也很常用。</p>
-<h2 id="flatMap"><a href="#flatMap" class="headerlink" title="flatMap"></a><strong>flatMap</strong></h2><p>flatMap 一个常见用法是在 map 的基础上，剔除掉空值。比如下面代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var images = [UIImage]()</span><br><span class="line">for i in 1 ..&lt; 10 &#123;</span><br><span class="line">    if let image = UIImage(named: &quot;icon-\(i).png&quot;) &#123;</span><br><span class="line">        images.append(image)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>就可以改写成</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let images = (1 ..&lt; 10).flatMap &#123; i in</span><br><span class="line">    UIImage(named: &quot;icon-\(i).png&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>flapMap 另一个常见的用法是插入额外元素。比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let a = [1, 2, 3, 4, 5, 6]</span><br><span class="line">let b = a.flatMap &#123; num in</span><br><span class="line">    return [num, num]</span><br><span class="line">&#125;</span><br><span class="line">// b = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]</span><br></pre></td></tr></table></figure>
-<h2 id="zip"><a href="#zip" class="headerlink" title="zip"></a><strong>zip</strong></h2><p>zip 是将两个序列的元素，一一对应合并成元组，生成一个新序列。比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let a = [1, 2, 3, 4]</span><br><span class="line">let b = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;]</span><br><span class="line">let c = zip(a, b).map &#123; $0 &#125;</span><br><span class="line">// c = [(1, &quot;a&quot;), (2, &quot;b&quot;), (3, &quot;c&quot;), (4, &quot;d&quot;)]</span><br></pre></td></tr></table></figure>
-<p>生成的序列，如同原始两个序列的相互咬合，因此函数的名字为 zip。zip 的英文有拉链的意思。生成的序列 count 为原始序列的最小值。</p>
-<p>zip 生成的序列通常会进行下一步处理。比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">func loadColors(colors: [UIColor]) &#123;</span><br><span class="line">    zip(self.colorButtons, colors).forEach &#123; (bt, color) in</span><br><span class="line">        bt.color = color</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面这段的语句，为颜色按钮分别赋予颜色值。相当于：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">func loadColors(colors: [UIColor]) &#123;</span><br><span class="line">    let minCount = min(colors.count, self.colorButtons.count)</span><br><span class="line">    for i in 0 ..&lt; minCount &#123;</span><br><span class="line">        self.colorButtons[i].color = colors[i]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>再举一段代码。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let colors = [UIColor.red, UIColor.blue, UIColor.white]</span><br><span class="line">let buttons = zip(0 ..&lt; colors.count, colors).map &#123; (i, color) in</span><br><span class="line">    let button = ColorButton(color: color)</span><br><span class="line">    button.tag = i</span><br><span class="line">    return button</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这段代码，创建了颜色按钮，并用索引设置了对应的 tag。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a><strong>最后</strong></h2><p>这些简单的函数，配合起来可以达到一些高级的功能。比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let a = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]</span><br><span class="line">let b = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;]</span><br><span class="line">let c = zip(a, b).flapMap &#123; [$0, $1] &#125;</span><br><span class="line">// c = [&quot;a&quot;, &quot;A&quot;, &quot;b&quot;, &quot;B&quot;, &quot;c&quot;, &quot;C&quot;, &quot;d&quot;, &quot;D&quot;]</span><br></pre></td></tr></table></figure>
-<p>这里将两个序列的元素，间隔地插入，合并成一个序列。</p>
-<p>第一次看这种代码，可能会看不懂。有些人可能会觉得太复杂了，为什么不直接写循环呢，这样每个人都可以看懂。其实这种风格的程序反而是简单的。按照我理解，简单并不一定是直观的，简单更多意味着统一。有些写法并不一定第一次就能看懂，可能需要经过一定努力才能学会，但一旦学会了，就可以无差别地统一处理一大批问题。既直观又统一当然最好，但两者不可兼得，我会优先取统一而非直观，这样反而更简单些，不用处理额外情况。</p>
-<p>比如 zip 函数，当两个序列的 count 不相等时，会取 count 的最小值。这种两个序列 count 不相等，就属于额外情况。当自己手写循环时，很可能就忘记处理了。</p>
-<p>另外时不时就遇到 Swift 一些诡异的 bugs。比如这段代码就编译不过：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let a = [UIView(), UIView(), UIView()]</span><br><span class="line">let b = a.map &#123; view in</span><br><span class="line">    let rt : CGRect = view.frame</span><br><span class="line">    return rt</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>而这样写就可以编译通过：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let a = [UIView(), UIView(), UIView()]</span><br><span class="line">let b = a.map &#123; view in</span><br><span class="line">    return view.frame</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>遇到这些 bugs, 就需要手动添加变量类型。</p>
+        <h4 id="Moya简介"><a href="#Moya简介" class="headerlink" title="Moya简介"></a>Moya简介</h4><p><strong>Moya</strong> 是你的 app 中缺失的网络层。不用再去想在哪儿（或者如何）安放网络请求，Moya 替你管理。</p>
+<p><strong>Moya</strong>有几个比较好的特性:</p>
+<ul>
+<li>编译时检查正确的API端点访问.</li>
+<li>使你定义不同端点枚举值对应相应的用途更加明晰.</li>
+<li>提高测试地位从而使单元测试更加容易.</li>
+</ul>
+<p>Swift我们用<strong>Alamofire</strong>来做网络库.而<a href="https://link.jianshu.com/?t=https://github.com/Moya/Moya" target="_blank" rel="noopener">Moya</a>在Alamofire的基础上又封装了一层,如下流程图说明<strong>Moya</strong>的简单工作流程图:</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/49368-4bf918cee5f14d1f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
+<p>简单流程图</p>
+<p><strong> Moya</strong>的官方下载地址<a href="https://link.jianshu.com/?t=https://github.com/Moya/Moya" target="_blank" rel="noopener">点我强大的Moya</a>,有具体的使用方法在demo里面有说明。</p>
+<p>本文主要介绍一下<strong>Moya</strong>的用法</p>
+<ul>
+<li>设置请求头部信息</li>
+<li>设置超时时间</li>
+<li>自定义插件</li>
+<li>自签名证书</li>
+</ul>
+<p>注意：以下所出现的<strong>NetAPIManager</strong>跟官网上demo的<strong> GitHub</strong>是一样类型的文件，都是这个enum实现一个协议TargetType，点进去可以看到TargetType定义了我们发送一个网络请求所需要的东西，什么baseURL，parameter，method等一些计算性属性，我们要做的就是去实现这些东西，当然有带默认值的我们可以不去实现，但是设置头部信息跟超时时间就要修改这些系统默认设置了。</p>
+<p>为了看得更加清楚，贴上<strong>NetAPIManager</strong>文件的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">//  NetAPIManager.swift</span><br><span class="line">//  NN110</span><br><span class="line">//</span><br><span class="line">//  Created by 陈亦海 on 2017/5/12.</span><br><span class="line">//  Copyright © 2017年 陈亦海. All rights reserved.</span><br><span class="line">//</span><br><span class="line"></span><br><span class="line">import Foundation</span><br><span class="line">import Moya</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">enum NetAPIManager &#123;</span><br><span class="line">    case Show</span><br><span class="line">    case upload(bodyData: Data)</span><br><span class="line">    case download</span><br><span class="line">    case request(isTouch: Bool, body: Dictionary&lt;String, Any&gt;? ,isShow: Bool)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">extension NetAPIManager: TargetType &#123;</span><br><span class="line">    var baseURL: URL &#123;//服务器地址</span><br><span class="line">        </span><br><span class="line">        switch self &#123;</span><br><span class="line">        case .request( _, _, _):</span><br><span class="line">            return URL(string: &quot;https://www.pmphmall.com&quot;)!</span><br><span class="line">        default:</span><br><span class="line">            return URL(string: &quot;https://httpbin.org&quot;)!</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var path: String &#123;//具体某个方法的路径</span><br><span class="line">        switch self &#123;</span><br><span class="line">        case .Show:</span><br><span class="line">            return &quot;&quot;</span><br><span class="line">        case .upload(_):</span><br><span class="line">            return &quot;&quot;</span><br><span class="line">        case .request(_, _, _):</span><br><span class="line">            return &quot;/app/json.do&quot;</span><br><span class="line">        case .download:</span><br><span class="line">            return &quot;&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var method: Moya.Method &#123;//请求的方法 get或者post之类的</span><br><span class="line">        switch self &#123;</span><br><span class="line">        case .Show:</span><br><span class="line">            return .get</span><br><span class="line">        case .request(_, _, _):</span><br><span class="line">            return .post</span><br><span class="line">        default:</span><br><span class="line">            return .post</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var parameters: [String: Any]? &#123;//请求的get post给服务器的参数</span><br><span class="line">        switch self &#123;</span><br><span class="line">        case .Show:</span><br><span class="line">            return nil</span><br><span class="line">        case .request(_, _, _):</span><br><span class="line">            return [&quot;msg&quot;:&quot;H4sIAAAAAAAAA11SSZJFIQi7EqPAEgTvf6TP62W7sMoSQhKSWDrs6ZUKVWogLwYV7RjHFBZJlNlzloN6LVqID4a+puxqRdUKVNLwE1TRcZIC/fjF2rPotuXmb84r1gMXbiASZIZbhQdKEewJlz41znDkujCHuQU3dU7G4/PmVRnwArMLXukBv0J23XVahNO3VX35wlgce6TLUzzgPQJFuHngAczl6VhaNXpmRLxJBlMml6gdLWiXxTdO7I+iEyC7XuTirCQXOk4dotgArgkH/InxVjfNTnE/uY46++hyAiLFuFL4cv1Z8WH5DgB2GnvFXMh5gm53Tr13vqqrEYtcdXfkNsMwKB+9sAQ77grNJmquFWOhfXA/DELlMB0KKFtHOc/ronj1ml+Z7qas82L3VWiCVQ+HEitjTVzoFw8RisFN/jJxBY4awvq427McXqnyrfCsl7oeEU6wYgW9yJtj1lOkx0ELL5Fw4z071NaVzRA9ebxWXkFyothgbB445cpRmTC+//F73r1kOyQ3lTpec12XNDR00nnq5/YmJItW3+w1z27lSOLqgVctrxG4xdL9WVPdkH1tkiZ/pUKBGhADAAA=&quot;]</span><br><span class="line">        default:</span><br><span class="line">            return nil</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var sampleData: Data &#123; //编码转义</span><br><span class="line">       return &quot;&#123;&#125;&quot;.data(using: String.Encoding.utf8)!</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var task: Task &#123; //一个请求任务事件</span><br><span class="line">        </span><br><span class="line">        switch self &#123;</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        case let .upload(data):</span><br><span class="line">        return .upload(.multipart([MultipartFormData(provider: .data(data), name: &quot;file&quot;, fileName: &quot;gif.gif&quot;, mimeType: &quot;image/gif&quot;)]))</span><br><span class="line">            </span><br><span class="line">        default:</span><br><span class="line">            return .request</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line">    </span><br><span class="line">    var parameterEncoding: ParameterEncoding &#123;//编码的格式</span><br><span class="line">        switch self &#123;</span><br><span class="line">        case .request(_, _, _):</span><br><span class="line">            return URLEncoding.default</span><br><span class="line">        default:</span><br><span class="line">            return URLEncoding.default</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    //以下两个参数是我自己写，用来控制网络加载的时候是否允许操作，跟是否要显示加载提示，这两个参数在自定义插件的时候会用到</span><br><span class="line">    var touch: Bool &#123; //是否可以操作</span><br><span class="line">        </span><br><span class="line">        switch self &#123;</span><br><span class="line">        case .request(let isTouch, _, _):</span><br><span class="line">            return isTouch</span><br><span class="line">        default:</span><br><span class="line">            return false</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var show: Bool &#123; //是否显示转圈提示</span><br><span class="line">        </span><br><span class="line">        switch self &#123;</span><br><span class="line">        case .request( _, _,let isShow):</span><br><span class="line">            return isShow</span><br><span class="line">        default:</span><br><span class="line">            return false</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="如何设置Moya请求头部信息"><a href="#如何设置Moya请求头部信息" class="headerlink" title="如何设置Moya请求头部信息"></a>如何设置<strong>Moya</strong>请求头部信息</h2><p>头部信息的设置在开发过程中很重要，如服务器生成的token，用户唯一标识等<br>我们直接上代码，不说那么多理论的东西，哈哈</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// MARK: - 设置请求头部信息</span><br><span class="line">let myEndpointClosure = &#123; (target: NetAPIManager) -&gt; Endpoint&lt;NetAPIManager&gt; in</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    let url = target.baseURL.appendingPathComponent(target.path).absoluteString</span><br><span class="line">    let endpoint = Endpoint&lt;NetAPIManager&gt;(</span><br><span class="line">        url: url,</span><br><span class="line">        sampleResponseClosure: &#123; .networkResponse(200, target.sampleData) &#125;,</span><br><span class="line">        method: target.method,</span><br><span class="line">        parameters: target.parameters,</span><br><span class="line">        parameterEncoding: target.parameterEncoding</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    //在这里设置你的HTTP头部信息</span><br><span class="line">    return endpoint.adding(newHTTPHeaderFields: [</span><br><span class="line">        &quot;Content-Type&quot; : &quot;application/x-www-form-urlencoded&quot;,</span><br><span class="line">        &quot;ECP-COOKIE&quot; : &quot;&quot;</span><br><span class="line">        ])</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="如何设置请求超时时间"><a href="#如何设置请求超时时间" class="headerlink" title="如何设置请求超时时间"></a>如何设置请求超时时间</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// MARK: - 设置请求超时时间</span><br><span class="line">let requestClosure = &#123; (endpoint: Endpoint&lt;NetAPIManager&gt;, done: @escaping MoyaProvider&lt;NetAPIManager&gt;.RequestResultClosure) in</span><br><span class="line">    </span><br><span class="line">    guard var request = endpoint.urlRequest else &#123; return &#125;</span><br><span class="line">    </span><br><span class="line">    request.timeoutInterval = 30    //设置请求超时时间</span><br><span class="line">    done(.success(request))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义插件"><a href="#自定义插件" class="headerlink" title="自定义插件"></a>自定义插件</h2><p>自定义插件必须<strong>PluginType</strong>协议的两个方法willSend与didReceive</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">//  MyNetworkActivityPlugin.swift</span><br><span class="line">//  NN110</span><br><span class="line">//</span><br><span class="line">//  Created by 陈亦海 on 2017/5/10.</span><br><span class="line">//  Copyright © 2017年 CocoaPods. All rights reserved.</span><br><span class="line">//</span><br><span class="line"></span><br><span class="line">import Foundation</span><br><span class="line">import Result</span><br><span class="line">import Moya</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/// Network activity change notification type.</span><br><span class="line">public enum MyNetworkActivityChangeType &#123;</span><br><span class="line">    case began, ended</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// Notify a request&apos;s network activity changes (request begins or ends).</span><br><span class="line">public final class MyNetworkActivityPlugin: PluginType &#123;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    public typealias MyNetworkActivityClosure = (_ change: MyNetworkActivityChangeType, _ target: TargetType) -&gt; Void</span><br><span class="line">    let myNetworkActivityClosure: MyNetworkActivityClosure</span><br><span class="line">    </span><br><span class="line">    public init(newNetworkActivityClosure: @escaping MyNetworkActivityClosure) &#123;</span><br><span class="line">        self.myNetworkActivityClosure = newNetworkActivityClosure</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // MARK: Plugin</span><br><span class="line">    </span><br><span class="line">    /// Called by the provider as soon as the request is about to start</span><br><span class="line">    public func willSend(_ request: RequestType, target: TargetType) &#123;</span><br><span class="line">        myNetworkActivityClosure(.began,target)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /// Called by the provider as soon as a response arrives, even if the request is cancelled.</span><br><span class="line">    public func didReceive(_ result: Result&lt;Moya.Response, MoyaError&gt;, target: TargetType) &#123;</span><br><span class="line">        myNetworkActivityClosure(.ended,target)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="使用自定义插件方法"><a href="#使用自定义插件方法" class="headerlink" title="使用自定义插件方法"></a>使用自定义插件方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// MARK: - 自定义的网络提示请求插件</span><br><span class="line">let myNetworkPlugin = MyNetworkActivityPlugin &#123; (state,target) in</span><br><span class="line">    if state == .began &#123;</span><br><span class="line">        //        SwiftSpinner.show(&quot;Connecting...&quot;)</span><br><span class="line">        </span><br><span class="line">        let api = target as! NetAPIManager</span><br><span class="line">        if api.show &#123;</span><br><span class="line">            print(&quot;我可以在这里写加载提示&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if !api.touch &#123;</span><br><span class="line">            print(&quot;我可以在这里写禁止用户操作，等待请求结束&quot;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        print(&quot;我开始请求\(api.touch)&quot;)</span><br><span class="line">        </span><br><span class="line">        UIApplication.shared.isNetworkActivityIndicatorVisible = true</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        //        SwiftSpinner.show(&quot;request finish...&quot;)</span><br><span class="line">        //        SwiftSpinner.hide()</span><br><span class="line">        print(&quot;我结束请求&quot;)</span><br><span class="line">        UIApplication.shared.isNetworkActivityIndicatorVisible = false</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="自签名证书"><a href="#自签名证书" class="headerlink" title="自签名证书"></a>自签名证书</h1><p>在16年的WWDC中，Apple已表示将从2017年1月1日起，<strong>所有新提交的App必须强制性应用HTTPS协议来进行网络请求。</strong>默认情况下非HTTPS的网络访问是禁止的并且不能再通过简单粗暴的向Info.plist中添加NSAllowsArbitraryLoads<br>设置绕过ATS(App Transport Security)的限制（否则须在应用审核时进行说明并很可能会被拒）。所以还未进行相应配置的公司需要尽快将升级为HTTPS的事项提上进程了。本文将简述HTTPS及配置数字证书的原理并以配置实例和出现的问题进行说明，希望能对你提供帮助。(比心~)</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1644286-54496771bcca464d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/240" alt="img"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1644286-757b5df7d56bc86f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/648" alt="img"></p>
+<ol>
+<li>一种是向权威认证机构购买的证书，服务端使用该种证书时，因为苹果系统内置了其受信任的签名根证书，所以客户端不需额外的配置。为了证书安全，在证书发布机构公布证书时，证书的指纹算法都会加密后再和证书放到一起公布以防止他人伪造数字证书。而证书机构使用自己的私钥对其指纹算法加密，可以用内置在操作系统里的机构签名根证书来解密，以此保证证书的安全。</li>
+<li>另一种是自己制作的证书，即自签名证书。好处是不需要花钱购2买，但使用这种证书是不会受信任的，所以<strong>需要我们在代码中将该证书配置为信任证书.</strong></li>
+</ol>
+<p>自签名证书具体实现:<br>我们在使用自签名证书来实现HTTPS请求时，因为不像机构颁发的证书一样其签名根证书在系统中已经内置了，所以我们需要在App中内置自己服务器的签名根证书来验证数字证书。首先将服务端生成的.cer格式的根证书添加到项目中，注意在添加证书要一定要记得勾选要添加的targets。<strong>这里有个地方要注意</strong>：苹果的ATS要求服务端必须支持TLS 1.2或以上版本；必须使用支持前向保密的密码；证书必须使用SHA-256或者更好的签名hash算法来签名，如果证书无效，则会导致连接失败。由于我在生成的根证书时签名hash算法低于其要求，在配置完请求时一直报<em>NSURLErrorServerCertificateUntrusted</em> = -1202错误，希望大家可以注意到这一点。</p>
+<p>那么如何在Moya中使用自签名的证书来实现HTTPS网络请求呢，请期待下回我专门分享……需要自定义一个Manager管理</p>
+<h1 id="综合使用的方法如下"><a href="#综合使用的方法如下" class="headerlink" title="综合使用的方法如下"></a>综合使用的方法如下</h1><h2 id="定义一个公用的Moya请求服务对象"><a href="#定义一个公用的Moya请求服务对象" class="headerlink" title="定义一个公用的Moya请求服务对象"></a>定义一个公用的<strong>Moya</strong>请求服务对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">let MyAPIProvider = MoyaProvider&lt;NetAPIManager&gt;(endpointClosure: myEndpointClosure,requestClosure: requestClosure, plugins: [NetworkLoggerPlugin(verbose: true, responseDataFormatter: JSONResponseDataFormatter),myNetworkPlugin])</span><br><span class="line"></span><br><span class="line">// MARK: -创建一个Moya请求</span><br><span class="line">func sendRequest(_ postDict: Dictionary&lt;String, Any&gt;? = nil,</span><br><span class="line">                 success:@escaping (Dictionary&lt;String, Any&gt;)-&gt;(),</span><br><span class="line">                 failure:@escaping (MoyaError)-&gt;()) -&gt; Cancellable? &#123;</span><br><span class="line">    </span><br><span class="line">   let request = MyAPIProvider.request(.Show) &#123; result in    </span><br><span class="line">        switch result &#123;</span><br><span class="line">        case let .success(moyaResponse):</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            do &#123;</span><br><span class="line">                let any = try moyaResponse.mapJSON()</span><br><span class="line">                let data =  moyaResponse.data</span><br><span class="line">                let statusCode =  moyaResponse.statusCode</span><br><span class="line">                MyLog(&quot;\(data) --- \(statusCode) ----- \(any)&quot;)</span><br><span class="line">                </span><br><span class="line">                success([&quot;&quot;:&quot;&quot;])</span><br><span class="line">                </span><br><span class="line"></span><br><span class="line">            &#125; catch &#123;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">           </span><br><span class="line">            </span><br><span class="line">        case let .failure(error):</span><br><span class="line">            </span><br><span class="line">            print(error)</span><br><span class="line">            failure(error)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return request</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="取消所有的Moya请求"><a href="#取消所有的Moya请求" class="headerlink" title="取消所有的Moya请求"></a>取消所有的Moya请求</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// MARK: -取消所有请求</span><br><span class="line">func cancelAllRequest() &#123;</span><br><span class="line">//    MyAPIProvider.manager.session.invalidateAndCancel()  //取消所有请求</span><br><span class="line">    MyAPIProvider.manager.session.getTasksWithCompletionHandler &#123; dataTasks, uploadTasks, downloadTasks in</span><br><span class="line">        dataTasks.forEach &#123; $0.cancel() &#125;</span><br><span class="line">        uploadTasks.forEach &#123; $0.cancel() &#125;</span><br><span class="line">        downloadTasks.forEach &#123; $0.cancel() &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    //let sessionManager = Alamofire.SessionManager.default</span><br><span class="line">    //sessionManager.session.getTasksWithCompletionHandler &#123; dataTasks, uploadTasks, downloadTasks in</span><br><span class="line">    //    dataTasks.forEach &#123; $0.cancel() &#125;</span><br><span class="line">    //    uploadTasks.forEach &#123; $0.cancel() &#125;</span><br><span class="line">    //    downloadTasks.forEach &#123; $0.cancel() &#125;</span><br><span class="line">    //&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -217,11 +228,30 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Moya</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">NetWork</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/23/Swift 的 flatMap 和 zip 函数/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/26/iOS 使用Moya网络请求/">展开全文 >></a>
         </p>
       
 
@@ -251,14 +281,14 @@
 
 
   
-    <article id="post-swift中map和flatMap的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-深入理解Moya设计" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/23/swift中map和flatMap的使用/">swift中map和flatMap的使用</a>
+      <a class="article-title" href="/2018/04/26/深入理解Moya设计/">深入理解Moya设计</a>
     </h1>
   
 
@@ -267,8 +297,8 @@
         	
 	
         
-        <a href="/2018/04/23/swift中map和flatMap的使用/" class="archive-article-date">
-  	<time datetime="2018-04-23T02:32:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-23</time>
+        <a href="/2018/04/26/深入理解Moya设计/" class="archive-article-date">
+  	<time datetime="2018-04-26T09:45:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-26</time>
 </a>
         
       </header>
@@ -280,24 +310,95 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h1><blockquote>
-<p>map和flatMap是swift中两个常用的函数，它们提现了swift中很多特性。</p>
-</blockquote>
-<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><p>1、map的使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let numbers = [1,2,3,4]</span><br><span class="line">let result = numbers.map &#123; $0 + 2 &#125;</span><br><span class="line">print(result)    //输出：3，4，5，6</span><br></pre></td></tr></table></figure>
-<p>大家可以看一下，map方法接受的是一个闭包参数，然后它会遍历整个numbers数组，并对数组中每一个元素执行闭包中定义的操作。相当于对数组中的所有元素做了一个映射。<br>这个例子就是对numbers数组的所有元素进行了加2。</p>
-<p>再看一个例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let array1 = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span><br><span class="line">let array2 = array1.map &#123; &quot;NO.\($0)&quot; &#125;</span><br><span class="line">print(array2)    //输出：NO.a，NO.b，NO.c，NO.d</span><br></pre></td></tr></table></figure>
-<p>2、flatMap的使用<br><code>map</code> 可以理解为对一个集合类型的所有元素做了一个映射操作，那么<code>flatMap</code>呢？</p>
-<p>让我们来看一下下面的一个例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = numbers.flatMap&#123; $0 + 2 &#125;      //输出：3,4,5,6</span><br></pre></td></tr></table></figure>
-<p>我们对同样的数组使用了<code>flatMap</code>进行处理，得到了相同的结果。那么这两个到底有什么区别呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let array1 = [[1,2,3],[4,5,6]]</span><br><span class="line">var arr = array1.map&#123; $0.map&#123; $0 + 1 &#125; &#125;</span><br><span class="line">//输出：[[2,3,4],[5,6,7]]</span><br><span class="line"></span><br><span class="line">var arr2 = array1.flatMap&#123; $0.map&#123; $0 + 1 &#125; &#125;</span><br><span class="line">//输出：[2,3,4,5,6,7]</span><br></pre></td></tr></table></figure>
-<p>看到这两个数组的输出就看出差别来了，对于二维数组，<code>map</code>和<code>flatMap</code>的结果就不同了。</p>
-<p><code>flatMap</code> 会遍历数组的元素，并对这些元素执行闭包中定义的操作。 但唯一和<code>map</code>不同的是，它对最终的结果进行了所谓的 “降维” 操作。 本来原始数组是一个二维的， 但经过 <code>flatMap</code> 之后，它变成一维的了。</p>
-<p>大家再来看看flatMap的第二个作用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let optionalArray: [String?] = [&quot;AA&quot;,&quot;BB&quot;,nil,&quot;CC&quot;]</span><br><span class="line">print(optionalArray)   </span><br><span class="line">//输出：[Optional(&quot;AA&quot;), Optional(&quot;BB&quot;), nil, Optional(&quot;CC&quot;)]</span><br><span class="line"></span><br><span class="line">var flatMapArray = optionalArray.flatMap&#123; $0 &#125;</span><br><span class="line">print(flatMapArray)</span><br><span class="line">//输出：[&quot;AA&quot;, &quot;BB&quot;, &quot;CC&quot;]</span><br></pre></td></tr></table></figure>
-<p>大家可以看到，在<code>flatMap</code> 的返回结果中， 成功的将原数组中的 nil 值过滤掉了。 再仔细观察，你会发现更多。 使用 flatMap 调用之后， 数组中的所有元素都被解包了。也就是说原始数组的类型是 <code>[String?]</code>, 而 <code>flatMap</code> 调用后变成了 <code>[String]</code>。 这也是<code>flatMap</code> 和 <code>map</code> 的一个重大区别。</p>
+        <h2 id="关于Moya"><a href="#关于Moya" class="headerlink" title="关于Moya"></a>关于Moya</h2><p>Moya是一个网络抽象层，它在底层将Alamofire进行封装，对外提供更简洁的接口供开发者调用。在以往的Objective-C中，大部分开发者会使用AFNetwork进行网络请求，当业务复杂一些时，会对AFNetwork进行二次封装，编写一个适用于自己项目的网络抽象层。在Objective-C中，有著名的<a href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fyuantiku%2FYTKNetwork" target="_blank" rel="noopener">YTKNetwork</a>，它将AFNetworking封装成抽象父类，然后根据每一种不同的网络请求，都编写不同的子类，子类继承父类，来实现请求业务。Moya在项目层次中的地位，有点类似于YTKNetwork。可以看下图对比</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/1/25/1612dcff3e63b1cd?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
+<h2 id="面向协议编程（POP）"><a href="#面向协议编程（POP）" class="headerlink" title="面向协议编程（POP）"></a>面向协议编程（POP）</h2><p>在阅读Moya源码之前，如果对POP有一定了解，那么理解其Moya会事半功倍的效果。在Objective-C也有协议，一般是让对象遵守协议，然后实现协议规定的方法，通过这种方式来对类实现扩展。POP其实就是把这种思路进一步强化。很多时候事物具备多样化的特质，而这些特质是无法单纯从一个类中继承而来的。为了解决这个痛点，C++有了多继承，即一个子类可以继承多种父类，这些被继承的父类之间不一定有关联。但是这依然会有其他问题，比如子类继承父类后，不一定需要用到所有的父类方法和属性，等于子类拥有了一些毫无用处的属性和方法。比如父类进行了修改，那么很难避免影响到子类。C++的多继承还会带来<code>菱形缺陷</code>，什么是<code>菱形缺陷</code>？本节的下方我会放两个链接，方便大家查阅。而Swift则引入了面向协议编程，通过协议来规定事物的实现。通过遵守不同的协议，来对一个类或者结构体或者枚举进行定制，它只需要实现协议所规定的属性或方法即可，有点类似于搭建积木，取每一块有需求的模块，进行组合拼接，相对于OOP，其耦合性更低，也为代码的维护和拓展提供更多的可能性。关于POP思想大致是这样，下面是王巍关于POP的两篇文章，值得读一番。 <a href="https://link.juejin.im/?target=https%3A%2F%2Fonevcat.com%2F2016%2F11%2Fpop-cocoa-1%2F" target="_blank" rel="noopener">面向协议编程与 Cocoa 的邂逅 (上)</a> <a href="https://link.juejin.im/?target=https%3A%2F%2Fonevcat.com%2F2016%2F12%2Fpop-cocoa-2%2F" target="_blank" rel="noopener">面向协议编程与 Cocoa 的邂逅 (下)</a></p>
+<h2 id="Moya的模块组成"><a href="#Moya的模块组成" class="headerlink" title="Moya的模块组成"></a>Moya的模块组成</h2><p>由于Moya是使用POP来设计的一个网络抽象层，因此他整体的逻辑结构并没有明显的继承关系。Moya的核心代码，可以分成以下几个模块</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/1/25/1612dbe2be371e0a?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
+<h3 id="Provider"><a href="#Provider" class="headerlink" title="Provider"></a>Provider</h3><p>provider是一个提供网络请求服务的提供者。通过一些初始化配置之后，在外部可以直接用provider来发起request。</p>
+<h3 id="Request"><a href="#Request" class="headerlink" title="Request"></a>Request</h3><p>在使用Moya进行网络请求时，第一步需要进行配置，来生成一个Request。首先按照官方文档，创建一个枚举，遵守TargetType协议，并实现协议所规定的属性。为什么要创建枚举来遵守协议，而不像Objective-C那样创建类来遵守协议呢？其实使用类或者结构体也是可以的，这里猜测使用枚举的原因是因为swift的枚举功能比Objective-C强大许多，枚举结合switch语句，使得API管理起来比较方便。 Request的生成过程如下图</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/1/25/1612dbedd7bdfe2a?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">baseURL</span><br><span class="line">path</span><br><span class="line">method</span><br><span class="line">sampleData</span><br><span class="line">task</span><br><span class="line">headers</span><br></pre></td></tr></table></figure>
+<p>提供了这些网络请求的“基本材料”之后，就可以进一步配置去生成所需要的请求。看上图的第一个箭头，通过了一个EndpointClosure生成了endPoint。endPoit是一个对象，把网络请求所需的一些属性和方法进行了包装，在EndPoint类中有如下属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public typealias SampleResponseClosure = () -&gt; EndpointSampleResponse</span><br><span class="line"></span><br><span class="line">open let url: String</span><br><span class="line">open let sampleResponseClosure: SampleResponseClosure</span><br><span class="line">open let method: Moya.Method</span><br><span class="line">open let task: Task</span><br><span class="line">open let httpHeaderFields: [String: String]?</span><br></pre></td></tr></table></figure>
+<p>可以很直观地看出来，EndPoint这几个属性可以和上面通过TargetTpye配置的变量对应起来。那么这个过程在代码中做了哪些事？ 在MoyaProvider类里，有如下声明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/// Closure that defines the endpoints for the provider.</span><br><span class="line">   public typealias EndpointClosure = (Target) -&gt; Endpoint&lt;Target&gt;</span><br><span class="line">   </span><br><span class="line">   open let endpointClosure: EndpointClosure</span><br></pre></td></tr></table></figure>
+<p>声明了一个闭包，参数为Target，它是一个泛型，然后返回一个EndPoint。endPoint是一个类，它对请求的参数和动作进行了包装，下面会对它进行详细说明，先继续看endpointClosure做了什么。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">endpointClosure: @escaping EndpointClosure = MoyaProvider.defaultEndpointMapping</span><br></pre></td></tr></table></figure>
+<p>在MoyaProvider的初始化方法里，调用其扩展的类方法<code>defaultEndpointMapping</code>输入Target作为参数，返回了一个endPoint对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public final class func defaultEndpointMapping(for target: Target) -&gt; Endpoint&lt;Target&gt; &#123;</span><br><span class="line">    return Endpoint(</span><br><span class="line">        url: URL(target: target).absoluteString,</span><br><span class="line">        sampleResponseClosure: &#123; .networkResponse(200, target.sampleData) &#125;,</span><br><span class="line">        method: target.method,</span><br><span class="line">        task: target.task,</span><br><span class="line">        httpHeaderFields: target.headers</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Target就是一开始进行配置的枚举，通过点语法取出Target的变量，完成endPoint的初始化。这里可能对于url和sampleResponseClosure会感到一些疑惑。url初始化，可以进入<code>URL+Moya.swift</code>查看，它对NSURL类进行构造器的扩展，让其具备根据Moya的TargetType来进行初始化的能力。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/// Initialize URL from Moya&apos;s `TargetType`.</span><br><span class="line"> init&lt;T: TargetType&gt;(target: T) &#123;</span><br><span class="line">     // When a TargetType&apos;s path is empty, URL.appendingPathComponent may introduce trailing /, which may not be wanted in some cases</span><br><span class="line">     if target.path.isEmpty &#123;</span><br><span class="line">         self = target.baseURL</span><br><span class="line">     &#125; else &#123;</span><br><span class="line">         self = target.baseURL.appendingPathComponent(target.path)</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>sampleResponseClosure是一个和网络请求返回假数据相关的闭包，这里可以先忽略，不影响对Moya生成Request过程的理解。 我们知道了MoyaProvider.defaultEndpointMapping可以返回endPoint对象后，重新看一遍这句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">endpointClosure: @escaping EndpointClosure = MoyaProvider.defaultEndpointMapping</span><br></pre></td></tr></table></figure>
+<p>使用@escaping把endpointClosure声明为逃逸闭包，我们可以把</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EndpointClosure = MoyaProvider.defaultEndpointMapping</span><br></pre></td></tr></table></figure>
+<p>转换为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(Target) -&gt; Endpoint&lt;Target&gt; = func defaultEndpointMapping(for target: Target) -&gt; Endpoint&lt;Target&gt;</span><br></pre></td></tr></table></figure>
+<p>再进一步转换，等号左边的可以写成一个常规的闭包表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;(Target)-&gt;Endpoint&lt;Target&gt; in</span><br><span class="line">	return Endpoint(</span><br><span class="line">            url: URL(target: target).absoluteString,</span><br><span class="line">            sampleResponseClosure: &#123; .networkResponse(200, target.sampleData) &#125;,</span><br><span class="line">            method: target.method,</span><br><span class="line">            task: target.task,</span><br><span class="line">            httpHeaderFields: target.headers</span><br><span class="line">        )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>即endpointClosure这个闭包，传入了Target作为参数，该闭包可以返回一个endPoint对象,如何获取到闭包返回的endPoint对象？MoyaProvider提供了这么一个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/// Returns an `Endpoint` based on the token, method, and parameters by invoking the `endpointClosure`.</span><br><span class="line">open func endpoint(_ token: Target) -&gt; Endpoint&lt;Target&gt; &#123;</span><br><span class="line">    return endpointClosure(token)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上就是关于TargetType通过endpointClosure转化为endPoint的过程。</p>
+<p>下一步就是把利用requestClosure，传入endPoint，然后生成request。request生成过程和endPoint很相似。</p>
+<p>在MoyaProvider中声明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/// Closure that decides if and what request should be performed</span><br><span class="line">  public typealias RequestResultClosure = (Result&lt;URLRequest, MoyaError&gt;) -&gt; Void</span><br><span class="line">  open let requestClosure: RequestClosure</span><br></pre></td></tr></table></figure>
+<p>然后在MoyaProvider的初始化方法里有很相似的一句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">requestClosure: @escaping RequestClosure = MoyaProvider.defaultRequestMapping,</span><br></pre></td></tr></table></figure>
+<p>进入查看defaultRequestMapping方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public final class func defaultRequestMapping(for endpoint: Endpoint&lt;Target&gt;, closure: RequestResultClosure) &#123;</span><br><span class="line">    do &#123;</span><br><span class="line">        let urlRequest = try endpoint.urlRequest()</span><br><span class="line">        closure(.success(urlRequest))</span><br><span class="line">    &#125; catch MoyaError.requestMapping(let url) &#123;</span><br><span class="line">        closure(.failure(MoyaError.requestMapping(url)))</span><br><span class="line">    &#125; catch MoyaError.parameterEncoding(let error) &#123;</span><br><span class="line">        closure(.failure(MoyaError.parameterEncoding(error)))</span><br><span class="line">    &#125; catch &#123;</span><br><span class="line">        closure(.failure(MoyaError.underlying(error, nil)))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>和endpointClosure类似，我们经过转换，可以得到requestClosure的表达式为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;(endpoint:Endpoint&lt;Target&gt;, closure:RequestResultClosure) in</span><br><span class="line">   do &#123;</span><br><span class="line">       let urlRequest = try endpoint.urlRequest()</span><br><span class="line">       closure(.success(urlRequest))</span><br><span class="line">   &#125; catch MoyaError.requestMapping(let url) &#123;</span><br><span class="line">       closure(.failure(MoyaError.requestMapping(url)))</span><br><span class="line">   &#125; catch MoyaError.parameterEncoding(let error) &#123;</span><br><span class="line">       closure(.failure(MoyaError.parameterEncoding(error)))</span><br><span class="line">   &#125; catch &#123;</span><br><span class="line">       closure(.failure(MoyaError.underlying(error, nil)))</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>整体上使用do-catch语句来初始化一个urlRequest，根据不同结果向闭包传入不同的参数。一开始使用try来调用endpoint.urlRequest()，如果抛出错误，会切换到catch语句中去。endpoint.urlRequest()这个方法比较长，这里就不放出来，感兴趣可自行到Moya核心代码里的Endpoint.swift里查看。它其实做的事情很简单，就是根据前面说到的endpoint的那些属性来初始化一个NSURLRequest的对象。</p>
+<p>以上就是上方图中所画的，根据TargetType最终生成Request的过程。很多人会感到疑惑，为什么搞得这么麻烦，直接一步到位，传一些必要参数生成Request不就完了？为什么还要再增加endPoint这么一个节点？根据Endpoint类所提供的一些方法来看，个人认为应该是为了更灵活地配置网络请求，以适应更多样化的业务需求。Endpoint类还有几个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/// Convenience method for creating a new `Endpoint` with the same properties as the receiver, but with added HTTP header fields.</span><br><span class="line">open func adding(newHTTPHeaderFields: [String: String]) -&gt; Endpoint&lt;Target&gt; </span><br><span class="line"></span><br><span class="line">    /// Convenience method for creating a new `Endpoint` with the same properties as the receiver, but with replaced `task` parameter.</span><br><span class="line">open func replacing(task: Task) -&gt; Endpoint&lt;Target&gt;</span><br></pre></td></tr></table></figure>
+<p>借用这些方法，在endpointClosure中可以给一些网络请求添加请求头，替换请求参数，让这些请求配置更加灵活。</p>
+<p>我们看完了整个Request生成过程，那么通过requestClosure生成的的Request是如何被外部拿到的呢？这就是我们下一步要探讨的，Provider发送请求实现过程。在下一节里将会看到如何使用这个Request。</p>
+<h3 id="Provider发送请求"><a href="#Provider发送请求" class="headerlink" title="Provider发送请求"></a>Provider发送请求</h3><p>我们再来看一下官方文档里说明的Moya的基本使用步骤</p>
+<ol>
+<li>创建枚举，遵守TargetType协议，实现规定的属性。</li>
+<li>初始化 <code>provider = MoyaProvider&lt;Myservice&gt;()</code></li>
+<li>调用provider.request，在闭包里处理请求结果。</li>
+</ol>
+<p>其中第一步我们在上方已经说明完了，MoyaProvider的初始化我们只说明了一小部分。在此不准备一口气初始化方法中剩余的部分讲完，这又会涉及很多东西，同时理解起来会比较麻烦。在后面的代码解读中，如果有涉及到相关属性，再回到初始化方法中一个一个突破。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">open func request(_ target: Target,</span><br><span class="line">                  callbackQueue: DispatchQueue? = .none,</span><br><span class="line">                  progress: ProgressBlock? = .none,</span><br><span class="line">                  completion: @escaping Completion) -&gt; Cancellable &#123;</span><br><span class="line"></span><br><span class="line">    let callbackQueue = callbackQueue ?? self.callbackQueue</span><br><span class="line">    return requestNormal(target, callbackQueue: callbackQueue, progress: progress, completion: completion)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>直接从这里可能看不出什么，再追溯到<code>requestNormal</code>中去 这个方法内容比较长，其中一些插件相关的代码，和测试桩的代码，暂且跳过不做说明，暂时不懂他们并不会成为理解provider.request的阻碍，它们属于可选内容，而不是必须的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let endpoint = self.endpoint(target)</span><br></pre></td></tr></table></figure>
+<p>生成了endPoint对象，这个很好理解，前面已经做过说明。 查看<code>performNetworking</code>闭包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if cancellableToken.isCancelled &#123;</span><br><span class="line">          self.cancelCompletion(pluginsWithCompletion, target: target)</span><br><span class="line">          return</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<p>如果取消请求，则调用取消完成的回调，并return,不在执行闭包内下面的语句。 在这个闭包里传入了参数<code>(requestResult: Result&lt;URLRequest, MoyaError&gt;)</code>，这里用到了<a href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fantitypical%2FResult" target="_blank" rel="noopener">Result</a>,想深入了解，可自行研究，这里简单说一下Result是干什么的。Result使用枚举方式，提供一些运行处理的结果,如下，很容易能看懂它所表达的意思。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">switch requestResult &#123;</span><br><span class="line">         case .success(let urlRequest):</span><br><span class="line">             request = urlRequest</span><br><span class="line">         case .failure(let error):</span><br><span class="line">             pluginsWithCompletion(.failure(error))</span><br><span class="line">             return</span><br><span class="line">         &#125;</span><br></pre></td></tr></table></figure>
+<p>如果请求成功，会拿到URLRequest，如果失败，会使用插件去处理失败回调。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// Allow plugins to modify request</span><br><span class="line">let preparedRequest = self.plugins.reduce(request) &#123; $1.prepare($0, target: target) &#125;</span><br></pre></td></tr></table></figure>
+<p>使用插件对请求进行完善</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cancellableToken.innerCancellable = self.performRequest(target, request: preparedRequest, callbackQueue: callbackQueue, progress: progress, completion: networkCompletion, endpoint: endpoint, stubBehavior: stubBehavior)</span><br></pre></td></tr></table></figure>
+<p>这里的<code>self.performRequest</code>就是进行实际的网络请求，内部代码比较多，但是思路很简单，使用Alamofire的SessionManager来发送请求。 配置完成后就可以调用<code>requestClosure(endpoint, performNetworking)</code>，执行这个闭包获取到上方所说的Request，来执行具体的网络请求了。</p>
+<h3 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h3><p>在使用Alamofire发送请求时，定义了闭包来处理请求的响应。Response这个类对于请求结果，提供了一些加工方法，比如data转json,图片转换等。</p>
+<h3 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h3><p>Moya提供了一个插件协议<code>PluginType</code>，协议里规定了几种方法，阐明了插件的应用区域。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/// Called to modify a request before sending</span><br><span class="line">   func prepare(_ request: URLRequest, target: TargetType) -&gt; URLRequest</span><br><span class="line"></span><br><span class="line">   /// Called immediately before a request is sent over the network (or stubbed).</span><br><span class="line">   func willSend(_ request: RequestType, target: TargetType)</span><br><span class="line"></span><br><span class="line">   /// Called after a response has been received, but before the MoyaProvider has invoked its completion handler.</span><br><span class="line">   func didReceive(_ result: Result&lt;Moya.Response, MoyaError&gt;, target: TargetType)</span><br><span class="line"></span><br><span class="line">   /// Called to modify a result before completion</span><br><span class="line">   func process(_ result: Result&lt;Moya.Response, MoyaError&gt;, target: TargetType) -&gt; Result&lt;Moya.Response, MoyaError&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>prepare</code>可以在请求之前对request进行修改。</p>
+</li>
+<li><p><code>willSend</code>在请求发送之前的一瞬间调用，这个可以用来添加请求时转圈圈的Toast</p>
+</li>
+<li><p><code>didReceive</code>在接收到请求响应时，且MoyaProvider的completion handler之前调用。</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">process</span><br></pre></td></tr></table></figure>
+<p>在completion handler之前调用，用来修改请求结果 可以通过以下图来直观地理解插件调用时机</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/1/25/1612dc3d457ac445?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
+<p>使用插件的方式，让代码仅保持着主干逻辑，使用者根据业务需求自行加入插件来配置自己的网络业务层，这样做更加灵活，低耦合。Moya提供了4种插件</p>
+</li>
+<li><p>AccessTokenPlugin OAuth的Token验证</p>
+</li>
+<li><p>CredentialsPlugin 证书</p>
+</li>
+<li><p>NetworkActivityPlugin 网络请求状态</p>
+</li>
+<li><p>NetworkLoggerPlugin 网络日志 可以根据需求编写自己的插件，选取NetworkActivityPlugin来查看插件内部构成。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public final class NetworkActivityPlugin: PluginType &#123;</span><br><span class="line"></span><br><span class="line">    public typealias NetworkActivityClosure = (_ change: NetworkActivityChangeType, _ target: TargetType) -&gt; Void</span><br><span class="line">    let networkActivityClosure: NetworkActivityClosure</span><br><span class="line"></span><br><span class="line">    public init(networkActivityClosure: @escaping NetworkActivityClosure) &#123;</span><br><span class="line">        self.networkActivityClosure = networkActivityClosure</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public func willSend(_ request: RequestType, target: TargetType) &#123;</span><br><span class="line">        networkActivityClosure(.began, target)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public func didReceive(_ result: Result&lt;Moya.Response, MoyaError&gt;, target: TargetType) &#123;</span><br><span class="line">        networkActivityClosure(.ended, target)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>插件内部结构很简单，除了自行定义的一些变量外，就是遵守<code>PluginType</code>协议后，去实现协议规定的方法，在特定方法内做自己需要做的事。因为<code>PluginType</code>它已经有一个协议扩展，把方法的默认实现都完成了，在具体插件内不一定需要实现所有的协议方法，仅根据需要实现特定方法即可。 写好插件之后，使用起来也比较简答，MoyaProvider的初始化方法中，有个形参<code>plugins: [PluginType] = []</code>，把网络请求中需要用到的插件加入数组中。</p>
 
       
 
@@ -306,11 +407,30 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Network</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Moya</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/23/swift中map和flatMap的使用/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/26/深入理解Moya设计/">展开全文 >></a>
         </p>
       
 
@@ -340,14 +460,14 @@
 
 
   
-    <article id="post-MarqueeLabel" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift网络请求（Moya篇）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/19/MarqueeLabel/">MarqueeLabel.swift</a>
+      <a class="article-title" href="/2018/04/26/Swift网络请求（Moya篇）/">Swift网络请求（Moya篇）</a>
     </h1>
   
 
@@ -356,8 +476,8 @@
         	
 	
         
-        <a href="/2018/04/19/MarqueeLabel/" class="archive-article-date">
-  	<time datetime="2018-04-19T06:44:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-19</time>
+        <a href="/2018/04/26/Swift网络请求（Moya篇）/" class="archive-article-date">
+  	<time datetime="2018-04-26T09:43:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-26</time>
 </a>
         
       </header>
@@ -369,18 +489,57 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>//</p>
-<p>//  Created by Charles Powell on 8/6/14.</p>
-<p>//  Copyright (c) 2015 Charles Powell. All rights reserved.</p>
-<p>//</p>
-<p>import UIKit</p>
-<p>import QuartzCore</p>
-<p>@IBDesignable</p>
-<p>open class MarqueeLabel: UILabel, CAAnimationDelegate {</p>
-<p>​<br>
-        
-          <a class="article-more-a" href="/2018/04/19/MarqueeLabel/#more">more >></a>
-        
+        <h2 id="Swift网络请求（Moya篇）"><a href="#Swift网络请求（Moya篇）" class="headerlink" title="Swift网络请求（Moya篇）"></a><a href="http://www.cnblogs.com/jadonblog/p/6945974.html" target="_blank" rel="noopener">Swift网络请求（Moya篇）</a></h2><p>　　在使用<a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="noopener">Alamofire</a>进行网络请求的时候，相信大部分的同学都会封装一个抽象的NetworkLayer，如”APIManager” 或者 “NetworkModel”等等。但是位置业务功能增加，会渐渐混合各种请求，不够清晰，而Moya能很好地解决这类问题。Moya在Alamofire基础上进行封装，是一个允许高度自定义的网络层，可以根据具体的需求进行接口的设置。具体的介绍可以参考Moya的<a href="https://github.com/Moya/Moya" target="_blank" rel="noopener">官方链接</a>，结构图如下：</p>
+<p><img src="https://images2015.cnblogs.com/blog/1177038/201706/1177038-20170605145011934-501739786.png" alt="img"></p>
+<p>　　接下来就介绍一下Moya的一些常见的用法：</p>
+<p>（一）根据业务需求创建具体请求：</p>
+<p>　　打比方现在我们需要书写账户的相关接口，如Login、userInfo。那么首先我们得创建AccountService:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">enum AccountService &#123;</span><br><span class="line">    case login(phoneNum: NSInteger,passWord: NSInteger)</span><br><span class="line">    case logout</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　然后让AccountService实现TargetType协议，定义请求需要的基本信息：</p>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">extension AccountService: TargetType &#123;</span><br><span class="line">    var baseURL: URL &#123;</span><br><span class="line">        return URL(string: ServiceBaseURL)!</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var path: String &#123;</span><br><span class="line">        switch self &#123;</span><br><span class="line">        case .login(_, _):</span><br><span class="line">            return &quot;accountService/login&quot;</span><br><span class="line">        case .logout:</span><br><span class="line">            return &quot;accountService/logout&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var method: Moya.Method &#123;</span><br><span class="line">        switch self &#123;</span><br><span class="line">        case .login(_, _):</span><br><span class="line">            return .post</span><br><span class="line">        case .logout:</span><br><span class="line">            return .get</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var parameters: [String: Any]? &#123;</span><br><span class="line">        switch self &#123;</span><br><span class="line">        case .login(let phoneNum, let passWord):</span><br><span class="line">            return [&quot;phoneNum&quot;: phoneNum, &quot;passWord&quot;: passWord]</span><br><span class="line">        case .logout:</span><br><span class="line">            return nil</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var parameterEncoding: ParameterEncoding &#123;</span><br><span class="line">        return JSONEncoding.default // Send parameters as JSON in request body</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var sampleData: Data &#123;</span><br><span class="line">        return &quot;&quot;.data(using: .utf8)!</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var task: Task &#123;</span><br><span class="line">        return .request</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<p>　　如上我们就已经完成了网络请求所需要的一个<code>endpoint</code>。接着通过Moya提供一个发送请求的<code>Provider就完成了基本的使用：</code></p>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let provider = MoyaProvider&lt;AccountService&gt;()</span><br><span class="line"></span><br><span class="line">provider.request(.login(phoneNum: 12345678901, passWord: 123456)) &#123; result in</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    switch result &#123;</span><br><span class="line">    case let .success(response):</span><br><span class="line">        //...............</span><br><span class="line">        break</span><br><span class="line">    case let .failure(error):</span><br><span class="line">        //...............</span><br><span class="line">        break</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<p>（二）通过HTTPHeader设置公共请求参数</p>
+<p>　　在实际开发中我们可能会需要在请求头内添加一些公共请求参数，如用于识别一些平台标志、辨别接口的版本号。你可以定义一个Endpoint的闭包，</p>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let publicParamEndpointClosure = &#123; (target: AccountService) -&gt; Endpoint&lt;AccountService&gt; in</span><br><span class="line">            let url = target.baseURL.appendingPathComponent(target.path).absoluteString</span><br><span class="line">            let endpoint = Endpoint&lt;AccountService&gt;(url: url, sampleResponseClosure: &#123; .networkResponse(200, target.sampleData) &#125;, method: target.method, parameters: target.parameters, parameterEncoding: target.parameterEncoding)</span><br><span class="line">            return endpoint.adding(newHTTPHeaderFields: [&quot;x-platform&quot; : &quot;iOS&quot;, &quot;x-interface-version&quot; : &quot;1.0&quot;])</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<p>　　然后在创建请求的<code>Provider把它添加上去，</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let provider = MoyaProvider(endpointClosure: publicParamEndpointClosure)</span><br></pre></td></tr></table></figure>
+<p>（三）通过插件的方式监听网络状态</p>
+<p>　　通常我们会在进行网络请求的时候进行一些状态展示，如loading，那么你可以通过插件的方式来实现。Moya默认有4个插件:</p>
+<ul>
+<li>AccessTokenPlugin 管理AccessToken的插件</li>
+<li>CredentialsPlugin 管理认证的插件</li>
+<li>NetworkActivityPlugin 管理网络状态的插件</li>
+<li>NetworkLoggerPlugin 管理网络log的插件</li>
+</ul>
+<p>　　在这里就演示一下NetworkActivityPlugin的使用：</p>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let networkPlugin = NetworkActivityPlugin &#123; (type) in</span><br><span class="line">            switch type &#123;</span><br><span class="line">            case .began:</span><br><span class="line">                NSLog(&quot;显示loading&quot;)</span><br><span class="line">            case .ended:</span><br><span class="line">                NSLog(&quot;隐藏loading&quot;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<p>　　同样在创建请求的<code>Provider把它添加上去即可</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let provider = MoyaProvider&lt;AccountService&gt;(plugins: [networkPlugin])</span><br></pre></td></tr></table></figure>
+<p>　　当然你也可以自定义一些功能的插件,只需要实现PluginType协议，具体功能实现可参考Moya默认的插件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">final class CustomPlugin: PluginType &#123;</span><br><span class="line">    </span><br><span class="line">    // MARK: Plugin</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（四）设置接口的超时时间</p>
+<p>　　一般网络的请求需要根据具体的业务接口设置合适的超时时间，你可以参照一下方法进行设置，</p>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let requestTimeoutClosure = &#123; (endpoint: Endpoint&lt;AccountService&gt;, done: @escaping MoyaProvider&lt;AccountService&gt;.RequestResultClosure) in</span><br><span class="line">            </span><br><span class="line">            guard var request = endpoint.urlRequest else &#123; return &#125;</span><br><span class="line">            </span><br><span class="line">            request.timeoutInterval = 30    //设置请求超时时间</span><br><span class="line">            done(.success(request))</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<p>　　同样<em>在创建请求的Provider把它添加上去即可</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let provider = MoyaProvider&lt;AccountService&gt;(requestClosure: requestTimeoutClosure)</span><br></pre></td></tr></table></figure>
+<p>　　</p>
+<p><em>资料参考：</em></p>
+<p><em><a href="http://www.jianshu.com/p/38fbc22a1e2b" target="_blank" rel="noopener">http://www.jianshu.com/p/38fbc22a1e2b</a></em></p>
+<p><em><a href="https://github.com/Moya/Moya" target="_blank" rel="noopener">https://github.com/Moya/Moya</a></em></p>
+
       
 
       
@@ -388,11 +547,30 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Moya</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">NetWork</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/19/MarqueeLabel/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/26/Swift网络请求（Moya篇）/">展开全文 >></a>
         </p>
       
 
@@ -422,14 +600,14 @@
 
 
   
-    <article id="post-对应用程序启动时所有方法的调用顺序分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift之沙盒与数据存储" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/19/对应用程序启动时所有方法的调用顺序分析/">应用程序启动时所有方法的调用顺序分析</a>
+      <a class="article-title" href="/2018/04/26/Swift之沙盒与数据存储/">Swift之沙盒与数据存储</a>
     </h1>
   
 
@@ -438,8 +616,8 @@
         	
 	
         
-        <a href="/2018/04/19/对应用程序启动时所有方法的调用顺序分析/" class="archive-article-date">
-  	<time datetime="2018-04-19T04:14:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-19</time>
+        <a href="/2018/04/26/Swift之沙盒与数据存储/" class="archive-article-date">
+  	<time datetime="2018-04-26T07:45:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-26</time>
 </a>
         
       </header>
@@ -451,18 +629,15 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="对应用程序启动时所有方法的调用顺序分析"><a href="#对应用程序启动时所有方法的调用顺序分析" class="headerlink" title="对应用程序启动时所有方法的调用顺序分析"></a><a href="http://www.cnblogs.com/dsxniubility/p/4322525.html" target="_blank" rel="noopener">对应用程序启动时所有方法的调用顺序分析</a></h1><p>一个应用程序的启动过程要包括代理的创建，控制器的加载和控制器view的加载，这其中有很多关于生命周期的方法，每个方法都是有先后顺序的，如果调用顺序拿不准，或者某段代码写的方法不恰当，就会遇到各种奇葩问题。本文不怕麻烦的在几乎所有启动时要调用的方法里都用了 <strong>FUNCTION</strong> 打印。结果还有有些地方出人意料的</p>
-<p>如果你不是在董铂然博客园看到本文，<a href="http://www.cnblogs.com/dsxniubility/p/4322525.html" target="_blank" rel="noopener">请点击查看原文</a></p>
-<h2 id="首先回顾一下应用程序的启动过程"><a href="#首先回顾一下应用程序的启动过程" class="headerlink" title="首先回顾一下应用程序的启动过程"></a>首先回顾一下应用程序的启动过程</h2><p>①.先加载Main函数</p>
-<p>②.在Main函数里的 UIApplicationMain方法中，创建Application对象 创建Application的Delegate对象</p>
-<p>③.创建主循环，代理对象开始监听事件</p>
-<p>④.启动完毕会调用 didFinishLaunching方法，并在这个方法中创建UIWindow</p>
-<p>⑤.设置UIWindow的根控制器是谁</p>
-<p>⑥.如果有storyboard，会根据info.plist中找到应用程序的入口storyboard并加载箭头所指的控制器</p>
-<p>⑦.显示窗口</p>
-        
-          <a class="article-more-a" href="/2018/04/19/对应用程序启动时所有方法的调用顺序分析/#more">more >></a>
-        
+        <h5 id="应用沙盒结构分析"><a href="#应用沙盒结构分析" class="headerlink" title="应用沙盒结构分析"></a>应用沙盒结构分析</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1、应用程序包：包含了所有的资源文件和可执行文件</span><br><span class="line"></span><br><span class="line">2、Documents：保存应用运行时生成的需要持久化的数据，iTunes同步设备时会备份该目录</span><br><span class="line"></span><br><span class="line">3、tmp：保存应用运行时所需要的临时数据，使用完毕后再将相应的文件从该目录删除。应用没有运行，系统也可能会清除该目录下的文件，iTunes不会同步备份该目录</span><br><span class="line"></span><br><span class="line">4、Library/Cache：保存应用运行时生成的需要持久化的数据，iTunes同步设备时不备份该目录。一般存放体积大、不需要备份的非重要数据</span><br><span class="line"></span><br><span class="line">5、Library/Preference：保存应用的所有偏好设置，IOS的Settings应用会在该目录中查找应用的设置信息。iTunes同步设备时会备份该目录</span><br></pre></td></tr></table></figure>
+<h5 id="IOS中的数据存储"><a href="#IOS中的数据存储" class="headerlink" title="IOS中的数据存储"></a>IOS中的数据存储</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">NSSearchPathDirectory.DocumentDirectory 查找Documents文件夹</span><br><span class="line">NSSearchPathDomainMask.UserDomainMask 在用户的应用程序下查找</span><br><span class="line">true 展开路径   false 当前应用的根路径 == “~”</span><br><span class="line">*/</span><br><span class="line">let docPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as NSString</span><br><span class="line"></span><br><span class="line">// 上面代码代替下面代码，防止Documen文件夹不存在*****************************************************************</span><br><span class="line"></span><br><span class="line">// 获得沙盒的根路径</span><br><span class="line">let home = NSHomeDirectory() as NSString;</span><br><span class="line">// 获得Documents路径，使用NSString对象的stringByAppendingPathComponent()方法拼接路径</span><br><span class="line">let docPath = home.stringByAppendingPathComponent(&quot;Documents&quot;) as NSString;</span><br></pre></td></tr></table></figure>
+<p>1、存储为plist属性列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">func saveWithFile() &#123;</span><br><span class="line">    // 1、获得沙盒的根路径</span><br><span class="line">    let home = NSHomeDirectory() as NSString;</span><br><span class="line">    // 2、获得Documents路径，使用NSString对象的stringByAppendingPathComponent()方法拼接路径</span><br><span class="line">    let docPath = home.stringByAppendingPathComponent(&quot;Documents&quot;) as NSString;</span><br><span class="line">    // 3、获取文本文件路径</span><br><span class="line">    let filePath = docPath.stringByAppendingPathComponent(&quot;data.plist&quot;);</span><br><span class="line">    let dataSource = NSMutableArray();</span><br><span class="line">    dataSource.addObject(&quot;衣带渐宽终不悔&quot;);</span><br><span class="line">    dataSource.addObject(&quot;为伊消得人憔悴&quot;);</span><br><span class="line">    dataSource.addObject(&quot;故国不堪回首明月中&quot;);</span><br><span class="line">    dataSource.addObject(&quot;人生若只如初见&quot;);</span><br><span class="line">    dataSource.addObject(&quot;暮然回首，那人却在灯火阑珊处&quot;);</span><br><span class="line">    // 4、将数据写入文件中</span><br><span class="line">    dataSource.writeToFile(filePath, atomically: true);</span><br><span class="line">&#125;</span><br><span class="line">func readWithFile() &#123;</span><br><span class="line">    /// 1、获得沙盒的根路径</span><br><span class="line">    let home = NSHomeDirectory() as NSString;</span><br><span class="line">    /// 2、获得Documents路径，使用NSString对象的stringByAppendingPathComponent()方法拼接路径</span><br><span class="line">    let docPath = home.stringByAppendingPathComponent(&quot;Documents&quot;) as NSString;</span><br><span class="line">    /// 3、获取文本文件路径</span><br><span class="line">    let filePath = docPath.stringByAppendingPathComponent(&quot;data.plist&quot;);</span><br><span class="line">    let dataSource = NSArray(contentsOfFile: filePath);</span><br><span class="line">    print(dataSource);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、使用NSUserDefaults存储数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">func saveWithNSUserDefaults() &#123;  </span><br><span class="line">    // 1、利用NSUserDefaults存储数据  </span><br><span class="line">    let defaults = NSUserDefaults.standardUserDefaults();  </span><br><span class="line">    // 2、存储数据  </span><br><span class="line">    defaults.setObject(&quot;衣带渐宽终不悔&quot;, forKey: &quot;name&quot;);  </span><br><span class="line">    // 3、同步数据  </span><br><span class="line">    defaults.synchronize();  </span><br><span class="line">&#125;</span><br><span class="line">func readWithNSUserDefaults()&#123;</span><br><span class="line">    let defaults = NSUserDefaults.standardUserDefaults();</span><br><span class="line">    let name = defaults.stringForKey(&quot;name&quot;)</span><br><span class="line">    let switch = defaults.boolForKey(&quot;bool&quot;)</span><br><span class="line">    print(name)</span><br><span class="line">    print(switch)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、归档存储：对象需要实现NSCoding协议，归档对应encode，反归档对应decode</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 归档数据</span><br><span class="line"> 需要实现NSCoding协议</span><br><span class="line"> */</span><br><span class="line">func saveWithNSKeyedArchiver() &#123;</span><br><span class="line">    let docPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as NSString</span><br><span class="line">    let filePath = docPath.stringByAppendingPathComponent(&quot;contact.data&quot;);</span><br><span class="line">    let contact = Contact(name: &quot;123333&quot;, phone: &quot;123456&quot;)</span><br><span class="line">    /**</span><br><span class="line">    *  数据归档处理</span><br><span class="line">    */</span><br><span class="line">    NSKeyedArchiver.archiveRootObject(contact, toFile: filePath);</span><br><span class="line">&#125;</span><br><span class="line">// 如果上面直接运行会报错，因为你需要在要归档的对象中遵循NSCoding协议，并实现归档方法和解析方法 如：</span><br><span class="line">class Contact: NSObject, NSCoding &#123;</span><br><span class="line"></span><br><span class="line">    var name: String?</span><br><span class="line">    var phone: String?</span><br><span class="line">    </span><br><span class="line">    required init(name: String, phone: String)&#123;</span><br><span class="line">        self.name = name</span><br><span class="line">        self.phone = phone</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 在对象归档的时候调用（哪些属性需要归档，怎么归档）</span><br><span class="line">    func encodeWithCoder(aCoder: NSCoder) &#123;</span><br><span class="line">        aCoder.encodeObject(name, forKey: &quot;name&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 解析NIB/XIB的时候会调用</span><br><span class="line">    required init?(coder aDecoder: NSCoder) &#123;</span><br><span class="line">        super.init()</span><br><span class="line">        name = aDecoder.decodeObjectForKey(&quot;name&quot;) as? String</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> 反归档数据</span><br><span class="line"> */</span><br><span class="line">func readWithNSKeyedUnarchiver() &#123;</span><br><span class="line">    let docPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as NSString</span><br><span class="line">    let filePath = docPath.stringByAppendingPathComponent(&quot;contact.data&quot;);</span><br><span class="line">    let contact = NSKeyedUnarchiver.unarchiveObjectWithFile(filePath) as! Contact;</span><br><span class="line">    print(contact.name!)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -470,11 +645,26 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据存储</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/19/对应用程序启动时所有方法的调用顺序分析/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/26/Swift之沙盒与数据存储/">展开全文 >></a>
         </p>
       
 
@@ -504,14 +694,14 @@
 
 
   
-    <article id="post-Swift中@IBDesignable:@IBInspectable的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-init(coder aDecoder: NSCoder)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/19/Swift中@IBDesignable:@IBInspectable的使用/">IB可视化属性调节视图-@IBDesignable/@IBInspectable的使用</a>
+      <a class="article-title" href="/2018/04/26/init(coder aDecoder: NSCoder)/">‘‘required’ initializer ‘init(coder:)’ must be provided by subclass of’</a>
     </h1>
   
 
@@ -520,8 +710,8 @@
         	
 	
         
-        <a href="/2018/04/19/Swift中@IBDesignable:@IBInspectable的使用/" class="archive-article-date">
-  	<time datetime="2018-04-19T03:32:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-19</time>
+        <a href="/2018/04/26/init(coder aDecoder: NSCoder)/" class="archive-article-date">
+  	<time datetime="2018-04-26T04:01:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-26</time>
 </a>
         
       </header>
@@ -533,13 +723,29 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##IB可视化属性调节视图-@IBDesignable/@IBInspectable的使用**</p>
-<p>@IBDesignable //要使用这个才可以直接在在IB中设置属性 相当于OC中的IB_DESIGNABLE(宏)</p>
-<p>示例代码如下：</p>
-<blockquote>
-<p>class TXView: UIView {<br>@IBInspectable var cornerRadius:CGFloat = 0.0{     //前面的为属性名字 初始值<br>didSet{              //【需要学习:属性监控器willset监控属性改变值之前做点什么，didSet监控改变后做些什么，通常直接跟在属性后 详情学习：           学习参考：<a href="http://www.hangge.com/blog/cache/detail_519.html】" target="_blank" rel="noopener">http://www.hangge.com/blog/cache/detail_519.html】</a><br>layer.cornerRadius=cornerRadius //设置属性 【？？layar干嘛的】<br>layer.masksToBounds = true//允许剪切<br>}<br>}<br>//边框颜色<br>@IBInspectable var borderColor:UIColor=UIColor(){<br>didSet{<br>layer.borderColor = borderColor.CGColor<br>}<br>}<br>//设置边框宽度<br>@IBInspectable var borderWidth:CGFloat=0.0{<br>didSet{<br>layer.borderWidth = borderWidth<br>}<br>}</p>
-<p>\1. 怎样将矩形按钮控件变成圆型<br>\2. 将属性设置为为可视化改变，并且可以实时查看。<br>\3. willSet与didSet的作用。<br>\4. 提示：很多OC中的代码（如某些宏的定义）在swift中用@前缀使用</p>
-</blockquote>
+        <p>转载。 <a href="https://blog.csdn.net/top_roboo/article/details/51313103" target="_blank" rel="noopener">https://blog.csdn.net/top_roboo/article/details/51313103</a></p>
+<p><em>Mast call a designated initializer of the superclass</em><br><em>‘required’ initializer ‘init(coder:)’ must be provided by subclass of</em></p>
+<p>如果你要用 <code>Swift</code>创建一个实现了 <code>NSCoding</code>协议的类（<code>UIView,UIViewController</code>）的子类的时候，你就会发现一种很尴尬的情况，<code>required init?(coder aDecoder: NSCoder)</code>, 还是必须实现的，然而你可能并不知道这是什么鬼，也不知道有什么卵用，你可能只是简单的知道他是 <code>NSCoding</code> 的协议方法而已.</p>
+<ul>
+<li><p>在<code>Swift</code>中，如果你要重写父类的构造器，并且父类实现了 <code>NSCoding</code>，那么在子类中你也必须实现这个构造器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">required init?(coder aDecoder: NSCoder) &#123;</span><br><span class="line">     super.init(coder: aDecoder)</span><br><span class="line">    &#125;123</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>所以你觉得万事大吉了，对不起，你错了。<code>Swift</code>在类初始化时，出于对安全性的考虑，对类的所有内部属性必须全部被初始化(通俗一点就是分配一个默认值)，否则编译器报错，next eg.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class ViewController: UIViewController &#123;</span><br><span class="line"> var name: String</span><br><span class="line"> var age : Int</span><br><span class="line"> init() &#123;</span><br><span class="line">   name = &quot;Paul&quot;</span><br><span class="line">   age = 24</span><br><span class="line">   super.init(nibName: nil, bundle:nil)</span><br><span class="line"> &#125;</span><br><span class="line"> required init(coder: NSCoder) &#123;</span><br><span class="line">   super.init(coder: coder)</span><br><span class="line"> &#125;</span><br><span class="line">&#125;123456789101112</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>有些人说话了，谁说了一定要初始化，比如 <code>var age : Int?</code> 就不需要在<code>super.init()</code>之前必须初始化，<code>?</code>是可选型符号，这种写法规定你的 <code>age</code>属性是个可选型，什么是可选型，可选型是指，在你没有赋值的情况下默认赋值为<code>nil</code>，所以即使 <code>age</code>定义的时候没有初始化，但是它已经被初始化了(nil 表示空值，和OC中的空对象区别，例如 Swift 中是不能通过 age=nil 来释放一个对象的),</p>
+</li>
+<li><p><strong>但是，如果你想要实现一个自定义的构造器，怎么做</strong>，我猜可能是这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class ViewController: UIViewController &#123;</span><br><span class="line">    let name: String</span><br><span class="line">    init() &#123;</span><br><span class="line">      name = &quot;Paul&quot;</span><br><span class="line">      super.init(nibName: nil, bundle:nil)</span><br><span class="line">     &#125;</span><br><span class="line">     init(name aName : String) &#123;</span><br><span class="line">        name = &quot;Paul&quot;</span><br><span class="line">        super.init(nibName: nil, bundle:nil)</span><br><span class="line">     &#125;</span><br><span class="line">    required init(coder: NSCoder) &#123;</span><br><span class="line">        name = &quot;Paul&quot;   \\ 索性都写上，</span><br><span class="line">        super.init(coder: coder)</span><br><span class="line">     &#125;</span><br><span class="line">    &#125;123456789101112131415</span><br></pre></td></tr></table></figure>
+<p>如果我有10个，100个属性呢？耗时间，那干脆想oc一样，写一个赋值的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class ViewController: UIViewController &#123;</span><br><span class="line">    let name: String</span><br><span class="line">    init() &#123;</span><br><span class="line">      setup()</span><br><span class="line">      super.init(nibName: nil, bundle:nil)</span><br><span class="line">     &#125;</span><br><span class="line">     init(name aName : String) &#123;</span><br><span class="line">        setup()</span><br><span class="line">        super.init(nibName: nil, bundle:nil)</span><br><span class="line">     &#125;</span><br><span class="line">    required init(coder: NSCoder) &#123;</span><br><span class="line">        setup()</span><br><span class="line">        super.init(coder: coder)</span><br><span class="line">     &#125;</span><br><span class="line">     func setup() &#123;</span><br><span class="line">        name = &quot;Paul&quot;</span><br><span class="line">        age = 25</span><br><span class="line">     &#125;</span><br><span class="line">    &#125;12345678910111213141516171819</span><br></pre></td></tr></table></figure>
+<p>这样一来有一百个也无妨，想法很不错，有见地，但是很可惜，编译未通过，(举个例子，对象好比蛋里面的鸡，属性是肌肉，方法是鸡翅、鸡爪等)，在<code>super.init</code>之前(蛋孵化之前)，方法也同样没有被初始化(鸡都没有孵出来，你就想烤鸡翅了？)</p>
+</li>
+<li><p>废话说了这么多，到底怎么解决呢，别着急，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class ViewController: UIViewController &#123;</span><br><span class="line">    let name: String</span><br><span class="line">    // 自定义的构造器</span><br><span class="line">    init(_ coder: NSCoder? = nil) &#123;</span><br><span class="line">        name = &quot;Paul&quot;</span><br><span class="line">        if let coder = coder &#123;</span><br><span class="line">            super.init(coder: coder)!</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            super.init(nibName: nil, bundle:nil)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    required convenience init(coder: NSCoder) &#123;</span><br><span class="line">        self.init(coder)</span><br><span class="line">    &#125;</span><br><span class="line">    // 下面这句可省去</span><br><span class="line">    override convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) &#123;</span><br><span class="line">        self.init(nil)</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;12345678910111213141516171819</span><br></pre></td></tr></table></figure>
+<p>像这样，我们在我们自定义的构造器 <code>init(_ coder: NSCoder? = nil)</code> 中添加了一个可选型的 <code>NSCoding</code> 的参数，默认是nil，所以我们像之前那样不用任何参数调用<code>init(nil)</code></p>
+</li>
+</ul>
 
       
 
@@ -548,11 +754,26 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">error</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/19/Swift中@IBDesignable:@IBInspectable的使用/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/26/init(coder aDecoder: NSCoder)/">展开全文 >></a>
         </p>
       
 
@@ -584,7 +805,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/17/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/19/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/17/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/19/">Next &raquo;</a>
     </nav>
   
 
@@ -696,11 +917,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
+                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">swift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UIButton</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IJKMediaFramework.framework</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -709,6 +942,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -724,6 +965,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Swift3</a>
               </li>
              
@@ -736,15 +981,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Moya</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">NetWork</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -764,15 +1009,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">UIImageView</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">iOS逆向</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">error</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ifaddrs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -820,10 +1069,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCD</a>
               </li>
              
@@ -832,7 +1077,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">响应链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -845,10 +1098,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">struct</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -869,6 +1118,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">protocol</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
             
             <div class="clearfix"></div>
@@ -1105,6 +1362,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           
             <li class="search-li">
               <a href="http://fengjian0106.github.io/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>FengJian&#39;s Blog</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://limboy.me/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>limboy</a>
             </li>
           
         </ul>
