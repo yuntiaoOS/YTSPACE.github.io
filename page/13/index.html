@@ -153,14 +153,14 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Swift设计模式之外观模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift设计模式之解释器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/11/Swift设计模式之外观模式/">Swift设计模式之外观模式</a>
+      <a class="article-title" href="/2018/05/11/Swift设计模式之解释器模式/">Swift设计模式之解释器模式</a>
     </h1>
   
 
@@ -169,8 +169,8 @@
         	
 	
         
-        <a href="/2018/05/11/Swift设计模式之外观模式/" class="archive-article-date">
-  	<time datetime="2018-05-11T04:17:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
+        <a href="/2018/05/11/Swift设计模式之解释器模式/" class="archive-article-date">
+  	<time datetime="2018-05-11T06:12:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
 </a>
         
       </header>
@@ -191,7 +191,7 @@
 <ul>
 <li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 外观模式</span><br><span class="line">// 百度百科：为子系统中的一组接口提供一个一致的界面，定义一个高层接口，这个接口使得这一子系统更加容易使用</span><br><span class="line">// 设计模式分类：结构型模式</span><br><span class="line"></span><br><span class="line">import Foundation</span><br><span class="line"></span><br><span class="line">enum Eternal &#123;</span><br><span class="line">    </span><br><span class="line">    static func setObj(value: AnyObject!, forKey defaultName: String!) &#123;</span><br><span class="line">        let defaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()</span><br><span class="line">        defaults.setObject(value, forKey:defaultName)</span><br><span class="line">        defaults.synchronize()</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    static func getObj(defaultName: String!) -&gt; AnyObject! &#123;</span><br><span class="line">        let defaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()</span><br><span class="line">        </span><br><span class="line">        return defaults.objectForKey(defaultName)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// *** 注意， 在playground中NSUserDefaults无法使用， 请在普通项目中测试</span><br><span class="line">Eternal.setObj(&quot;Disconnect me. I’d rather be nothing&quot;, forKey:&quot;Bishop&quot;)</span><br><span class="line">Eternal.getObj(&quot;Bishop&quot;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><span class="line">// 解释器模式</span><br><span class="line">// 百度百科：给定一个语言，定义它的文法的一种表示，并定义一个解释器，这个解释器使用该表示来解释语言中的句子</span><br><span class="line">// 设计模式分类：行为型模式</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  表达式接口</span><br><span class="line"> */</span><br><span class="line">protocol IntegerExp &#123;</span><br><span class="line">    /**</span><br><span class="line">     取值</span><br><span class="line">     </span><br><span class="line">     - parameter context: 上下文</span><br><span class="line">     </span><br><span class="line">     - returns: 值</span><br><span class="line">     */</span><br><span class="line">    func evaluate(context: IntegerContext) -&gt; Int</span><br><span class="line">    /**</span><br><span class="line">     替换</span><br><span class="line">     </span><br><span class="line">     - parameter character:  字符</span><br><span class="line">     - parameter integerExp: 表达式</span><br><span class="line">     </span><br><span class="line">     - returns: &lt;#return value description#&gt;</span><br><span class="line">     */</span><br><span class="line">    func replace(character: Character, integerExp: IntegerExp) -&gt; IntegerExp</span><br><span class="line">    /**</span><br><span class="line">     复制</span><br><span class="line">     </span><br><span class="line">     - returns: 表达式</span><br><span class="line">     */</span><br><span class="line">    func copy() -&gt; IntegerExp</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 上下文</span><br><span class="line">class IntegerContext &#123;</span><br><span class="line">    /// 数据字典</span><br><span class="line">    private var data: [Character:Int] = [:]</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     查找</span><br><span class="line">     </span><br><span class="line">     - parameter name: 字符</span><br><span class="line">     </span><br><span class="line">     - returns: 字符代表的值</span><br><span class="line">     */</span><br><span class="line">    func lookup(name: Character) -&gt; Int &#123;</span><br><span class="line">        return self.data[name]!</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     分配值</span><br><span class="line">     </span><br><span class="line">     - parameter integerVarExp: 变量表达式</span><br><span class="line">     - parameter value:         值</span><br><span class="line">     */</span><br><span class="line">    func assign(integerVarExp: IntegerVarExp, value: Int) &#123;</span><br><span class="line">        self.data[integerVarExp.name] = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 变量表达式</span><br><span class="line">class IntegerVarExp: IntegerExp &#123;</span><br><span class="line">    let name: Character</span><br><span class="line">    </span><br><span class="line">    init(name: Character) &#123;</span><br><span class="line">        self.name = name</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func evaluate(context: IntegerContext) -&gt; Int &#123;</span><br><span class="line">        return context.lookup(self.name)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func replace(name: Character, integerExp: IntegerExp) -&gt; IntegerExp &#123;</span><br><span class="line">        if name == self.name &#123;</span><br><span class="line">            return integerExp.copy()</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return IntegerVarExp(name: self.name)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func copy() -&gt; IntegerExp &#123;</span><br><span class="line">        return IntegerVarExp(name: self.name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 加表达式</span><br><span class="line">class AddExp: IntegerExp &#123;</span><br><span class="line">        /// 操作数1</span><br><span class="line">    private var operand1: IntegerExp</span><br><span class="line">        /// 操作数2</span><br><span class="line">    private var operand2: IntegerExp</span><br><span class="line">    </span><br><span class="line">    init(op1: IntegerExp, op2: IntegerExp) &#123;</span><br><span class="line">        self.operand1 = op1</span><br><span class="line">        self.operand2 = op2</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func evaluate(context: IntegerContext) -&gt; Int &#123;</span><br><span class="line">        return self.operand1.evaluate(context) + self.operand2.evaluate(context)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func replace(character: Character, integerExp: IntegerExp) -&gt; IntegerExp &#123;</span><br><span class="line">        return AddExp(op1: operand1.replace(character, integerExp: integerExp),</span><br><span class="line">                      op2: operand2.replace(character, integerExp: integerExp))</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func copy() -&gt; IntegerExp &#123;</span><br><span class="line">        return AddExp(op1: self.operand1, op2: self.operand2)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 减表达式</span><br><span class="line">class SubtractExp: IntegerExp &#123;</span><br><span class="line">    /// 操作数1</span><br><span class="line">    private var operand1: IntegerExp</span><br><span class="line">    /// 操作数2</span><br><span class="line">    private var operand2: IntegerExp</span><br><span class="line">    </span><br><span class="line">    init(op1: IntegerExp, op2: IntegerExp) &#123;</span><br><span class="line">        self.operand1 = op1</span><br><span class="line">        self.operand2 = op2</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func evaluate(context: IntegerContext) -&gt; Int &#123;</span><br><span class="line">        return self.operand1.evaluate(context) - self.operand2.evaluate(context)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func replace(character: Character, integerExp: IntegerExp) -&gt; IntegerExp &#123;</span><br><span class="line">        return AddExp(op1: operand1.replace(character, integerExp: integerExp),</span><br><span class="line">                      op2: operand2.replace(character, integerExp: integerExp))</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func copy() -&gt; IntegerExp &#123;</span><br><span class="line">        return AddExp(op1: self.operand1, op2: self.operand2)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var a = IntegerVarExp(name: &quot;A&quot;)</span><br><span class="line">var b = IntegerVarExp(name: &quot;B&quot;)</span><br><span class="line">var c = IntegerVarExp(name: &quot;C&quot;)</span><br><span class="line"></span><br><span class="line">// 创建一个表达式 a - (b + c)</span><br><span class="line">var expression: IntegerExp = SubtractExp(op1: a, op2: AddExp(op1: b, op2: c)) // a - (b + c)</span><br><span class="line"></span><br><span class="line">// 创建一个上下文</span><br><span class="line">var intContext = IntegerContext()</span><br><span class="line">intContext.assign(a, value: 2) // a = 2</span><br><span class="line">intContext.assign(b, value: 1) // b = 1</span><br><span class="line">intContext.assign(c, value: 3) // c = 3</span><br><span class="line"></span><br><span class="line">// 在上下文环境中执行表达式</span><br><span class="line">var result = expression.evaluate(intContext) // 2 - (1 + 3) = -2</span><br></pre></td></tr></table></figure>
 
       
 
@@ -219,7 +219,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/11/Swift设计模式之外观模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/11/Swift设计模式之解释器模式/">展开全文 >></a>
         </p>
       
 
@@ -249,14 +249,14 @@
 
 
   
-    <article id="post-Swift设计模式之保护代理模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift设计模式之迭代器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/11/Swift设计模式之保护代理模式/">Swift设计模式之保护代理模式</a>
+      <a class="article-title" href="/2018/05/11/Swift设计模式之迭代器模式/">Swift设计模式之迭代器模式</a>
     </h1>
   
 
@@ -265,8 +265,8 @@
         	
 	
         
-        <a href="/2018/05/11/Swift设计模式之保护代理模式/" class="archive-article-date">
-  	<time datetime="2018-05-11T04:17:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
+        <a href="/2018/05/11/Swift设计模式之迭代器模式/" class="archive-article-date">
+  	<time datetime="2018-05-11T06:12:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
 </a>
         
       </header>
@@ -287,7 +287,7 @@
 <ul>
 <li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">// 保护代理模式</span><br><span class="line">// 百度百科：为其他对象提供一种代理以控制对这个对象的访问。在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用</span><br><span class="line">// 设计模式分类：结构型模式</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  电脑接口</span><br><span class="line"> */</span><br><span class="line">protocol PC &#123;</span><br><span class="line">    func connect(ip: String) -&gt; Bool</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 电脑实现</span><br><span class="line">class MyPC: PC &#123;</span><br><span class="line">    func connect(ip: String) -&gt; Bool &#123;</span><br><span class="line">        print(&quot;connect to \(ip)&quot;)</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 代理实现</span><br><span class="line">class MyProxy: PC &#123;</span><br><span class="line">    </span><br><span class="line">    var pc: MyPC!</span><br><span class="line">    </span><br><span class="line">    init(pc: MyPC) &#123;</span><br><span class="line">        self.pc = pc</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func connect(ip: String) -&gt; Bool &#123;</span><br><span class="line">        if ip == &quot;10.10.10.10&quot; &#123;</span><br><span class="line">            print(&quot;\(ip) has been limited&quot;)</span><br><span class="line">            return false</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            pc.connect(ip)</span><br><span class="line">            return true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let pc = MyPC()</span><br><span class="line">let proxy = MyProxy(pc: pc)</span><br><span class="line"></span><br><span class="line">proxy.connect(&quot;1.2.3.4&quot;)</span><br><span class="line">proxy.connect(&quot;10.10.10.10&quot;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// 迭代器模式</span><br><span class="line">// 百度百科：提供一种方法顺序访问一个聚合对象中的各种元素，而又不暴露该对象的内部表示</span><br><span class="line">// 设计模式分类：行为型模式</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  小说集类</span><br><span class="line"> */</span><br><span class="line">struct NovellasCollection&lt;T&gt; &#123;</span><br><span class="line">    let novellas: [T]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 实现SequenceType接口</span><br><span class="line">extension NovellasCollection: SequenceType &#123;</span><br><span class="line">    typealias Generator = AnyGenerator&lt;T&gt;</span><br><span class="line">    </span><br><span class="line">    func generate() -&gt; AnyGenerator&lt;T&gt; &#123;</span><br><span class="line">        var i = 0</span><br><span class="line">        return AnyGenerator&#123;</span><br><span class="line">            if i &gt;= self.novellas.count &#123;</span><br><span class="line">                return nil</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                let r = self.novellas[i]</span><br><span class="line">                i += 1</span><br><span class="line">                return r</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let greatNovellas = NovellasCollection(novellas:[&quot;三国演义&quot;, &quot;水浒&quot;, &quot;红楼梦&quot;, &quot;西游记&quot;])</span><br><span class="line"></span><br><span class="line">// 可以迭代</span><br><span class="line">for novella in greatNovellas &#123;</span><br><span class="line">    print(&quot;I&apos;ve read: \(novella)&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -315,7 +315,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/11/Swift设计模式之保护代理模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/11/Swift设计模式之迭代器模式/">展开全文 >></a>
         </p>
       
 
@@ -345,14 +345,14 @@
 
 
   
-    <article id="post-Swift中自定义Log" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift设计模式之中介者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/11/Swift中自定义Log/">Swift中自定义Log</a>
+      <a class="article-title" href="/2018/05/11/Swift设计模式之中介者模式/">Swift设计模式之中介者模式</a>
     </h1>
   
 
@@ -361,104 +361,8 @@
         	
 	
         
-        <a href="/2018/05/11/Swift中自定义Log/" class="archive-article-date">
-  	<time datetime="2018-05-11T03:02:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
-</a>
-        
-      </header>
-    
-
-    <!-- 目录内容 -->
-
-<!-- 目录内容结束 -->
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#</p>
-<p>Swift中自定义Log：依次是<strong>类名.方法名.行号.内容</strong>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">func LTLog&lt;T&gt;(funcName: String = #function,_ message: T,file: String = #file, line: Int = #line) &#123;</span><br><span class="line"></span><br><span class="line">    #if DEBUG</span><br><span class="line">    let files = (file as NSString).lastPathComponent.replacingOccurrences(of: &quot;.swift&quot;, with: &quot;&quot;)</span><br><span class="line">        print(&quot;\(files) --&gt; \(funcName) --&gt;  \(line) --&gt; \(message) &quot;)</span><br><span class="line">    #endif</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>还要配置以下宏</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1067182-c319525049a240a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p>假如我在一个函数中打印这个”我是靓仔”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&gt; Bool &#123;</span><br><span class="line">      </span><br><span class="line">      </span><br><span class="line">      </span><br><span class="line">       LTLog(&quot;撒大大的&quot;)</span><br><span class="line">       return true</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p>最终会输出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AppDelegate.application(_:didFinishLaunchingWithOptions:)[23]:撒大大的</span><br></pre></td></tr></table></figure>
-<p>注:依次是<strong>类名.方法名.行号.内容</strong>.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/11/Swift中自定义Log/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Swift设计模式之观察者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/10/Swift设计模式之观察者模式/">Swift设计模式之观察者模式</a>
-    </h1>
-  
-
-
-        <!-- 显示阅读和评论数 -->
-        	
-	
-        
-        <a href="/2018/05/10/Swift设计模式之观察者模式/" class="archive-article-date">
-  	<time datetime="2018-05-10T08:03:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-10</time>
+        <a href="/2018/05/11/Swift设计模式之中介者模式/" class="archive-article-date">
+  	<time datetime="2018-05-11T06:11:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
 </a>
         
       </header>
@@ -479,7 +383,7 @@
 <ul>
 <li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">// 观察者模式</span><br><span class="line">// 一个目标物件管理所有相依于它的观察者物件，并且在它本身的状态改变时主动发出通知。这通常透过呼叫各观察者所提供的方法来实现。此种模式通常被用来实现事件处理系统</span><br><span class="line">// 设计模式分类：行为型模式</span><br><span class="line"></span><br><span class="line">/// 观察者接口</span><br><span class="line">protocol PropertyObserver : class &#123;</span><br><span class="line">    /**</span><br><span class="line">     属性即将改变监听方法</span><br><span class="line">     </span><br><span class="line">     - parameter propertyName:     属性名</span><br><span class="line">     - parameter newPropertyValue: 新的值</span><br><span class="line">     */</span><br><span class="line">    func willChangePropertyName(propertyName:String, newPropertyValue:Int)</span><br><span class="line">    /**</span><br><span class="line">     属性已经改变监听方法</span><br><span class="line">     </span><br><span class="line">     - parameter propertyName:     属性名</span><br><span class="line">     - parameter oldPropertyValue: 原来的值</span><br><span class="line">     */</span><br><span class="line">    func didChangePropertyName(propertyName:String, oldPropertyValue:Int)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 观察对象</span><br><span class="line">class TestChambers &#123;</span><br><span class="line">    </span><br><span class="line">    weak var observer:PropertyObserver?</span><br><span class="line">    </span><br><span class="line">    var testChamberNumber: Int = 0 &#123;</span><br><span class="line">        willSet(newValue) &#123;</span><br><span class="line">            observer?.willChangePropertyName(&quot;testChamberNumber&quot;, newPropertyValue:newValue)</span><br><span class="line">        &#125;</span><br><span class="line">        didSet &#123;</span><br><span class="line">            observer?.didChangePropertyName(&quot;testChamberNumber&quot;, oldPropertyValue:oldValue)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 具体观察者</span><br><span class="line">class Observer : PropertyObserver &#123;</span><br><span class="line">    func willChangePropertyName(propertyName: String, newPropertyValue: Int) &#123;</span><br><span class="line">        print(&quot;\(propertyName)的值将要改变为\(newPropertyValue)&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func didChangePropertyName(propertyName: String, oldPropertyValue: Int) &#123;</span><br><span class="line">        print(&quot;\(propertyName)的值已经改变,原来的值为\(oldPropertyValue)&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var observerInstance = Observer()</span><br><span class="line">var testChambers = TestChambers()</span><br><span class="line">testChambers.observer = observerInstance</span><br><span class="line">testChambers.testChamberNumber += 1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">// 中介者模式</span><br><span class="line">// 来自网络：类之间的交互行为被统一放在Mediator的对象中，对象通过Mediator对象同其他对象交互，Mediator对象起着控制器的作用</span><br><span class="line">// 设计模式分类：行为型模式</span><br><span class="line"></span><br><span class="line">/// 对象抽象</span><br><span class="line">class Colleague &#123;</span><br><span class="line">    let name: String</span><br><span class="line">    let mediator: Mediator</span><br><span class="line">    </span><br><span class="line">    init(name: String, mediator: Mediator) &#123;</span><br><span class="line">        self.name = name</span><br><span class="line">        self.mediator = mediator</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     发送消息</span><br><span class="line">     </span><br><span class="line">     - parameter message: 消息</span><br><span class="line">     */</span><br><span class="line">    func send(message: String) &#123;</span><br><span class="line">        print(&quot;Colleague \(name) send: \(message)&quot;)</span><br><span class="line">        mediator.send(message, colleague: self)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     接收消息</span><br><span class="line">     </span><br><span class="line">     - parameter message: 消息</span><br><span class="line">     */</span><br><span class="line">    func receive(message: String) &#123;</span><br><span class="line">        assert(false, &quot;Method should be overriden&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  中介者接口</span><br><span class="line"> */</span><br><span class="line">protocol Mediator &#123;</span><br><span class="line">    /**</span><br><span class="line">     发送消息</span><br><span class="line">     </span><br><span class="line">     - parameter message:   消息</span><br><span class="line">     - parameter colleague: 发送者</span><br><span class="line">     */</span><br><span class="line">    func send(message: String, colleague: Colleague)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 具体中介者</span><br><span class="line">class MessageMediator: Mediator &#123;</span><br><span class="line">    private var colleagues: [Colleague] = []</span><br><span class="line">    </span><br><span class="line">    func addColleague(colleague: Colleague) &#123;</span><br><span class="line">        colleagues.append(colleague)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func send(message: String, colleague: Colleague) &#123;</span><br><span class="line">        for c in colleagues &#123;</span><br><span class="line">            if c !== colleague &#123; //for simplicity we compare object references</span><br><span class="line">                c.receive(message)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 具体对象</span><br><span class="line">class ConcreteColleague: Colleague &#123;</span><br><span class="line">    override func receive(message: String) &#123;</span><br><span class="line">        print(&quot;Colleague \(name) received: \(message)&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let messagesMediator = MessageMediator()</span><br><span class="line">let user0 = ConcreteColleague(name: &quot;张三&quot;, mediator: messagesMediator)</span><br><span class="line">let user1 = ConcreteColleague(name: &quot;李四&quot;, mediator: messagesMediator)</span><br><span class="line">let user2 = ConcreteColleague(name: &quot;王五&quot;, mediator: messagesMediator)</span><br><span class="line">messagesMediator.addColleague(user0)</span><br><span class="line">messagesMediator.addColleague(user1)</span><br><span class="line">messagesMediator.addColleague(user2)</span><br><span class="line"></span><br><span class="line">user0.send(&quot;Hello&quot;) // user1 receives message</span><br></pre></td></tr></table></figure>
 
       
 
@@ -507,7 +411,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/10/Swift设计模式之观察者模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/11/Swift设计模式之中介者模式/">展开全文 >></a>
         </p>
       
 
@@ -537,14 +441,14 @@
 
 
   
-    <article id="post-Swift 4 域名解析 DNS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift设计模式之备忘录模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/08/Swift 4 域名解析 DNS/">Swift 4 域名解析 DNS</a>
+      <a class="article-title" href="/2018/05/11/Swift设计模式之备忘录模式/">Swift设计模式之备忘录模式</a>
     </h1>
   
 
@@ -553,8 +457,8 @@
         	
 	
         
-        <a href="/2018/05/08/Swift 4 域名解析 DNS/" class="archive-article-date">
-  	<time datetime="2018-05-08T09:25:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-08</time>
+        <a href="/2018/05/11/Swift设计模式之备忘录模式/" class="archive-article-date">
+  	<time datetime="2018-05-11T06:11:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
 </a>
         
       </header>
@@ -566,10 +470,16 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>引用于GitHub：<a href="https://github.com/xiaoxiaocainiao/HostToIP/blob/master/HostToIP/ViewController.swift" target="_blank" rel="noopener">https://github.com/xiaoxiaocainiao/HostToIP/blob/master/HostToIP/ViewController.swift</a><br>这里又根据自己需要做了少许改动，在此感谢下作者的无私提供。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import UIKit</span><br><span class="line"></span><br><span class="line">class ViewController: UIViewController &#123;</span><br><span class="line"></span><br><span class="line">    override func viewDidLoad() &#123;</span><br><span class="line">        super.viewDidLoad()</span><br><span class="line"></span><br><span class="line">        getIPAddress(&quot;www.baidu.com&quot;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override func didReceiveMemoryWarning() &#123;</span><br><span class="line">        super.didReceiveMemoryWarning()</span><br><span class="line">        // Dispose of any resources that can be recreated.</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 域名解析</span><br><span class="line">    func getIPAddress(domainName: String) -&gt; String &#123;</span><br><span class="line">    var result = &quot;&quot;</span><br><span class="line">        let host = CFHostCreateWithName(nil,domainName as CFString).takeRetainedValue()</span><br><span class="line">        CFHostStartInfoResolution(host, .addresses, nil)</span><br><span class="line">        var success: DarwinBoolean = false</span><br><span class="line">        if let addresses = CFHostGetAddressing(host, &amp;success)?.takeUnretainedValue() as NSArray?,</span><br><span class="line">            let theAddress = addresses.firstObject as? NSData &#123;</span><br><span class="line">            var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))</span><br><span class="line">            if getnameinfo(theAddress.bytes.assumingMemoryBound(to: sockaddr.self), socklen_t(theAddress.length),</span><br><span class="line">                           &amp;hostname, socklen_t(hostname.count), nil, 0, NI_NUMERICHOST) == 0 &#123;</span><br><span class="line">                let numAddress = String(cString: hostname)</span><br><span class="line">                result = numAddress</span><br><span class="line">                print(numAddress)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>#</p>
+<p><strong>转自</strong></p>
+<ul>
+<li><a href="http://qefee.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">Swift设计模式</a></li>
+</ul>
+<p><strong>原文</strong></p>
+<ul>
+<li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line">// 备忘录模式</span><br><span class="line">// 百度百科：在不破坏封闭的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到原先保存的状态</span><br><span class="line">// 设计模式分类：行为型模式</span><br><span class="line"></span><br><span class="line">import Foundation</span><br><span class="line">typealias Memento = Dictionary&lt;NSObject, AnyObject&gt;</span><br><span class="line"></span><br><span class="line">let DPMementoKeyChapter = &quot;com.valve.halflife.chapter&quot;</span><br><span class="line">let DPMementoKeyWeapon = &quot;com.valve.halflife.weapon&quot;</span><br><span class="line">let DPMementoGameState = &quot;com.valve.halflife.state&quot;</span><br><span class="line"></span><br><span class="line">/// 游戏状态</span><br><span class="line">class GameState &#123;</span><br><span class="line">    var chapter: String = &quot;&quot;</span><br><span class="line">    var weapon: String = &quot;&quot;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     生成游戏存档</span><br><span class="line">     </span><br><span class="line">     - returns: 存档</span><br><span class="line">     */</span><br><span class="line">    func toMemento() -&gt; Memento &#123;</span><br><span class="line">        return [ DPMementoKeyChapter:chapter, DPMementoKeyWeapon:weapon ]</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     恢复游戏存档</span><br><span class="line">     </span><br><span class="line">     - parameter memento: 存档</span><br><span class="line">     */</span><br><span class="line">    func restoreFromMemento(memento: Memento) &#123;</span><br><span class="line">        chapter = memento[DPMementoKeyChapter] as? String ?? &quot;n/a&quot;</span><br><span class="line">        weapon = memento[DPMementoKeyWeapon] as? String ?? &quot;n/a&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 存档点</span><br><span class="line"> */</span><br><span class="line">enum CheckPoint &#123;</span><br><span class="line">    /**</span><br><span class="line">     保存存档</span><br><span class="line">     </span><br><span class="line">     - parameter memento: 存档</span><br><span class="line">     - parameter keyName: 存档名</span><br><span class="line">     */</span><br><span class="line">    static func saveState(memento: Memento, keyName: String = DPMementoGameState) &#123;</span><br><span class="line">//        let defaults = NSUserDefaults.standardUserDefaults()</span><br><span class="line">//        defaults.setObject(memento, forKey: keyName)</span><br><span class="line">//        defaults.synchronize()</span><br><span class="line">        </span><br><span class="line">        DB.set(keyName, obj: memento)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     读取存档</span><br><span class="line">     </span><br><span class="line">     - parameter keyName: 存档名</span><br><span class="line">     </span><br><span class="line">     - returns: 存档</span><br><span class="line">     */</span><br><span class="line">    static func restorePreviousState(keyName keyName: String = DPMementoGameState) -&gt; Memento &#123;</span><br><span class="line">//        let defaults = NSUserDefaults.standardUserDefaults()</span><br><span class="line">//        </span><br><span class="line">//        return defaults.objectForKey(keyName) as? Memento ?? Memento()</span><br><span class="line">        </span><br><span class="line">        let m = DB.get(keyName)</span><br><span class="line">        return m as? Memento ?? Memento()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class DB &#123;</span><br><span class="line">    static var dict:Dictionary&lt;String, AnyObject&gt; = [:]</span><br><span class="line">    </span><br><span class="line">    class func set(key: String, obj: AnyObject) &#123;</span><br><span class="line">        dict[key] = obj</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    class func get(key: String) -&gt; AnyObject? &#123;</span><br><span class="line">        return dict[key]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func printGameStateInfo(state: GameState) -&gt; Void &#123;</span><br><span class="line">    print(&quot;当前游戏状态：[chapter = \(state.chapter), weapon = \(state.weapon)]&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var gameState = GameState()</span><br><span class="line">gameState.restoreFromMemento(CheckPoint.restorePreviousState()) // 新游戏</span><br><span class="line"></span><br><span class="line">printGameStateInfo(gameState)</span><br><span class="line"></span><br><span class="line">gameState.chapter = &quot;第一章 新手上路&quot;</span><br><span class="line">gameState.weapon = &quot;木剑&quot;</span><br><span class="line">CheckPoint.saveState(gameState.toMemento()) // 第一个存档</span><br><span class="line"></span><br><span class="line">printGameStateInfo(gameState)</span><br><span class="line"></span><br><span class="line">gameState.chapter = &quot;第二章 冒险开始&quot;</span><br><span class="line">gameState.weapon = &quot;铜剑&quot;</span><br><span class="line">gameState.restoreFromMemento(CheckPoint.restorePreviousState()) // 恢复存档</span><br><span class="line"></span><br><span class="line">printGameStateInfo(gameState)</span><br><span class="line"></span><br><span class="line">gameState.chapter = &quot;第三章 挑战魔龙&quot;</span><br><span class="line">gameState.weapon = &quot;铁剑&quot;</span><br><span class="line">CheckPoint.saveState(gameState.toMemento(), keyName: &quot;gameState2&quot;) // 第二个存档</span><br><span class="line"></span><br><span class="line">printGameStateInfo(gameState)</span><br><span class="line"></span><br><span class="line">gameState.chapter = &quot;最后章 最终之战&quot;</span><br><span class="line">gameState.weapon = &quot;圣剑&quot;</span><br><span class="line">CheckPoint.saveState(gameState.toMemento()) // 覆盖第一个存档</span><br><span class="line"></span><br><span class="line">printGameStateInfo(gameState)</span><br><span class="line"></span><br><span class="line">gameState.restoreFromMemento(CheckPoint.restorePreviousState(keyName: &quot;gameState2&quot;)) // 加载第二个存档</span><br><span class="line"></span><br><span class="line">printGameStateInfo(gameState)</span><br></pre></td></tr></table></figure>
 
       
 
@@ -587,7 +497,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Swift设计模式</a>
         		</li>
       		
 		</ul>
@@ -597,7 +507,103 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/08/Swift 4 域名解析 DNS/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/11/Swift设计模式之备忘录模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Swift设计模式之状态模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/11/Swift设计模式之状态模式/">Swift设计模式之状态模式</a>
+    </h1>
+  
+
+
+        <!-- 显示阅读和评论数 -->
+        	
+	
+        
+        <a href="/2018/05/11/Swift设计模式之状态模式/" class="archive-article-date">
+  	<time datetime="2018-05-11T06:10:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
+</a>
+        
+      </header>
+    
+
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#</p>
+<p><strong>转自</strong></p>
+<ul>
+<li><a href="http://qefee.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">Swift设计模式</a></li>
+</ul>
+<p><strong>原文</strong></p>
+<ul>
+<li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">// 状态模式</span><br><span class="line">// 百度百科：允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它的类</span><br><span class="line">// 设计模式分类：行为型模式</span><br><span class="line"></span><br><span class="line">/// 持有状态的对象</span><br><span class="line">class Context &#123;</span><br><span class="line">    private var state: State = UnauthorizedState()</span><br><span class="line">    </span><br><span class="line">    var isAuthorized: Bool &#123;</span><br><span class="line">        get &#123; return state.isAuthorized(self) &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var userId: String? &#123;</span><br><span class="line">        get &#123; return state.userId(self) &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func changeStateToAuthorized(userId userId: String) &#123;</span><br><span class="line">        state = AuthorizedState(userId: userId)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func changeStateToUnauthorized() &#123;</span><br><span class="line">        state = UnauthorizedState()</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  状态接口</span><br><span class="line"> */</span><br><span class="line">protocol State &#123;</span><br><span class="line">    func isAuthorized(context: Context) -&gt; Bool</span><br><span class="line">    func userId(context: Context) -&gt; String?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 未认证状态</span><br><span class="line">class UnauthorizedState: State &#123;</span><br><span class="line">    func isAuthorized(context: Context) -&gt; Bool &#123; return false &#125;</span><br><span class="line">    </span><br><span class="line">    func userId(context: Context) -&gt; String? &#123; return nil &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 认证状态</span><br><span class="line">class AuthorizedState: State &#123;</span><br><span class="line">    let userId: String</span><br><span class="line">    </span><br><span class="line">    init(userId: String) &#123; self.userId = userId &#125;</span><br><span class="line">    </span><br><span class="line">    func isAuthorized(context: Context) -&gt; Bool &#123; return true &#125;</span><br><span class="line">    </span><br><span class="line">    func userId(context: Context) -&gt; String? &#123; return userId &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let context = Context()</span><br><span class="line">(context.isAuthorized, context.userId)</span><br><span class="line">context.changeStateToAuthorized(userId: &quot;admin&quot;)</span><br><span class="line">(context.isAuthorized, context.userId) // now logged in as &quot;admin&quot;</span><br><span class="line">context.changeStateToUnauthorized()</span><br><span class="line">(context.isAuthorized, context.userId)</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Swift设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/11/Swift设计模式之状态模式/">展开全文 >></a>
         </p>
       
 
@@ -629,7 +635,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/12/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/14/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/12/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/14/">Next &raquo;</a>
     </nav>
   
 
@@ -741,7 +747,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
+                <a href="javascript:void(0)" class="js-tag color3">LIVE555</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -757,6 +763,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
               </li>
              
@@ -769,11 +779,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">Data</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -785,11 +791,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">fallthrough</a>
+                <a href="javascript:void(0)" class="js-tag color4">KVC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
+                <a href="javascript:void(0)" class="js-tag color4">KVO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">fallthrough</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -801,11 +811,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
+                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -817,6 +827,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">UICollectionViewLayout</a>
               </li>
              
@@ -825,11 +839,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">上架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GCDAsyncUdpSocket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">侧滑手势</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">smart_monkey</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">UIAlertController</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -849,7 +883,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Data</a>
+                <a href="javascript:void(0)" class="js-tag color5">view</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">searchController</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -869,11 +907,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CoreData</a>
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">UIAlertController</a>
+                <a href="javascript:void(0)" class="js-tag color4">CoreData</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -893,6 +931,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCD</a>
               </li>
              
@@ -901,7 +947,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">rtsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CPU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">响应链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">h264</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bug</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -909,7 +971,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
+                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -925,11 +987,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">集合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -942,14 +1012,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">protocol</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
             
             <div class="clearfix"></div>

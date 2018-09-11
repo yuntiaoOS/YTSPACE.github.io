@@ -153,14 +153,14 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-GPUImage详细解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/02/hello-world/">Alamofire serversTool</a>
+      <a class="article-title" href="/2018/04/12/GPUImage详细解析/">GPUImage详细解析</a>
     </h1>
   
 
@@ -169,8 +169,8 @@
         	
 	
         
-        <a href="/2018/02/02/hello-world/" class="archive-article-date">
-  	<time datetime="2018-02-02T03:54:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-02</time>
+        <a href="/2018/04/12/GPUImage详细解析/" class="archive-article-date">
+  	<time datetime="2018-04-12T02:05:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-12</time>
 </a>
         
       </header>
@@ -182,13 +182,15 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>更新”moya”~&gt;11.0.1；swift4.0。后   </p>
-<p>ApiService.swift</p>
-<p>//</p>
-<p>//  ApiService.swift</p>
-<p>//</p>
+        <p>假设我们自定义一个OpenGL ES程序来处理图片，那么会有以下几个步骤：</p>
+<p>1、初始化OpenGL ES环境，编译、链接顶点着色器和片元着色器；</p>
+<p>2、缓存顶点、纹理坐标数据，传送图像数据到GPU；</p>
+<p>3、绘制图元到特定的帧缓存；</p>
+<p>4、在帧缓存取出绘制的图像。</p>
+<p><code>GPUImageFilter</code>负责的是第一、二、三步。</p>
+<p><code>GPUImageFramebuffer</code>负责是第四步。<br>
         
-          <a class="article-more-a" href="/2018/02/02/hello-world/#more">more >></a>
+          <a class="article-more-a" href="/2018/04/12/GPUImage详细解析/#more">more >></a>
         
       
 
@@ -201,7 +203,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/02/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/12/GPUImage详细解析/">展开全文 >></a>
         </p>
       
 
@@ -231,14 +233,14 @@
 
 
   
-    <article id="post-swift4.0 适配" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift - 使用ijkplayer框架播放直播视频1——RTMP:HTTP视频流播放" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/02/swift4.0 适配/">swift4.0 适配</a>
+      <a class="article-title" href="/2018/04/11/Swift - 使用ijkplayer框架播放直播视频1——RTMP:HTTP视频流播放/">Swift - 使用ijkplayer框架播放直播视频1——（RTMP/HTTP视频流播放）</a>
     </h1>
   
 
@@ -246,6 +248,10 @@
         <!-- 显示阅读和评论数 -->
         	
 	
+        
+        <a href="/2018/04/11/Swift - 使用ijkplayer框架播放直播视频1——RTMP:HTTP视频流播放/" class="archive-article-date">
+  	<time datetime="2018-04-11T02:30:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
+</a>
         
       </header>
     
@@ -256,11 +262,22 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>转载<a href="http://blog.csdn.net/andanlan/article/details/78491599?locationNum=1&amp;fps=1" target="_blank" rel="noopener">http://blog.csdn.net/andanlan/article/details/78491599?locationNum=1&amp;fps=1</a><br>一、前言<br>在我们的工程中处于swift和OC混编的状态，使用swift已经有一年半的时间了，随着Xcode9的更新，swift3.2和swift4.0也随之到来，swift3.2相较于Xcode8的swift3.1变动极小，适配没遇到问题，主要关注swift4.0的适配。</p>
-<p>二、查看当前工程的 swift 版本<br>image.png</p>
-<p>三、使用 Xcode 将工程转换到 swift4.0<br>1、环境<br>Xcode9.1<br>当前 swift 版本 3.2<br>2、转换步骤：<br>选中要转换的 target<br>Edit -&gt; Convert -&gt; To Current Swift Syntax<br>image.png<br>勾选需要转换的 target （pod 引用不用勾选），Next<br>image.png<br>选择转换选项，Next<br>这两个选项是关于 swift 的 @objc 推断特性的，如果使用了 swift4.0 显式的 @objc 属性，能减少整体代码的大小。此时我们选 Minimize Inference（recommend），<br>image.png<br>关于两个选项：<br>
+        <p>转载 2017年03月10日 11:53:03</p>
+<ul>
+<li>**868</li>
+</ul>
+<p>最近在研究IOS下播放RTSP RTMP等视频流，目前已测试成功。</p>
+<p>转载地址：<a href="http://www.hangge.com/blog/cache/detail_1326.html" target="_blank" rel="noopener">http://www.hangge.com/blog/cache/detail_1326.html</a></p>
+<p><strong>BiliBili</strong>（简称B站），想必大家都不陌生。<strong>Ijkplayer </strong>框架是B站提供了一个开源的流媒体解决方案，集成了 <strong>ffmpeg</strong>，还支持硬解码(需 <strong>iOS8 </strong>以上版本)。使用 <strong>Ijkplayer </strong>框架我们可以很方便地实现视频直播功能（<strong>Http</strong>/<strong>RTMP</strong>/<strong>RTSP </strong>这几种直播源都支持）。</p>
+<p>本文主要介绍如何使用 <strong>Ijkplayer </strong>框架播放在线直播视频（当然其本地播放能力也很强大）。对于几种直播流不太清楚地，可以参考我前面写的这篇文章：<a href="http://www.hangge.com/blog/cache/detail_1325.html" target="_blank" rel="noopener">RTMP、RTSP、HTTP视频协议详解（附：直播流地址、播放软件）</a></p>
+<p>一，环境部署</p>
+<p>在使用 <strong>Ijkplayer </strong>前，我们需要先搭建运行环境。</p>
+<p>1，在“终端”中运行如下命令，安装homebrew, git, yasm等环境。</p>
+<p><strong>2，将Ijkplayer项目下载到本地</strong></p>
+<p><strong>GitHub</strong></p>
+<p>地址：<br>
         
-          <a class="article-more-a" href="/2018/02/02/swift4.0 适配/#more">more >></a>
+          <a class="article-more-a" href="/2018/04/11/Swift - 使用ijkplayer框架播放直播视频1——RTMP:HTTP视频流播放/#more">more >></a>
         
       
 
@@ -273,7 +290,257 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/02/swift4.0 适配/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/11/Swift - 使用ijkplayer框架播放直播视频1——RTMP:HTTP视频流播放/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-AppIcon和LaunchImage尺寸" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/10/AppIcon和LaunchImage尺寸/">AppIcon和LaunchImage尺寸</a>
+    </h1>
+  
+
+
+        <!-- 显示阅读和评论数 -->
+        	
+	
+        
+        <a href="/2018/04/10/AppIcon和LaunchImage尺寸/" class="archive-article-date">
+  	<time datetime="2018-04-10T08:06:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-10</time>
+</a>
+        
+      </header>
+    
+
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、AppIcon 尺寸</p>
+<p>iPhone Notification iOS 7-10 20pt                             2x( 40x40 )  3x( 60x60 )</p>
+<p>iPhone、Spotlight iOS 5,6 、Settings iOS 5-10  29pt   2x( 58x58 )  3x( 87x87 )</p>
+<p>iPhone Spotlight iOS 7-10 40pt                                 2x( 80x80 )   3x( 120x120 )</p>
+<p>iPhone APP iOS 7-10 60pt                                        2x( 120x120 )  3x( 180x180 )</p>
+<p>iPad Notifications 7-10 20pt                                      1x( 20x20 )  2x( 40x40 )</p>
+<p>iPad Settings 5-10 29pt                                            1x( 29x29 )  2x( 58x58 )</p>
+<p>iPad Spotlight iOS 7-10 40pt                                     1x( 40x40 )  2x( 80x80 )</p>
+<p>iPad App iOS 7-10 76pt                                            1x( 76x76 )  2x( 152x152 )</p>
+<p>iPad Pro App iOS 9-10 83.5                                      2x( 167x167 )</p>
+<p>2、LaunchImage尺寸</p>
+<p>iPhone X  1125 * 2436  必要</p>
+<p>iPhone Portrait  iOS 5,6        1x( 320x480 )  2x( 640x960 ) Retina4( 640x1136 )</p>
+<p>iPhone Portrait iOS 8,9         Retina HD 5.5( 1242x2208 )  Retina HD 4.7( 750x1334 )  必要</p>
+<p>iPhone Portrait iOS 7-9        2x( 640x960 )  Retina4( 640x1136 )  必要(没有的话 在5上边有问题)</p>
+<p>iPhone Landscape iOS 8,9    Retina HD 5.5( 2208x1242 )</p>
+<p>iPad Portrait iOS 5,6            1x( 768x1024 )  2x( 1536x2048 )</p>
+<p>iPad Portait iOS 7-9            1x( 768x1024 )  2x( 1536x2048 )</p>
+<p>iPad Landscape iOS 5,6       1x( 1024x768 )  2x( 2048x1536 )</p>
+<p>iPad Landscape 7-9            1x( 1024x768 )  2x( 2048x1536 )</p>
+<p>iPad Portrait Without Status Bar iOS 5,6           1x( 768x1004 )  2x( 1536x2008 )</p>
+<p>iPad Landscape Without Status Bar iOS 5,6      1x( 1024x748 )  2x( 2048x1496 )<br>
+        
+          <a class="article-more-a" href="/2018/04/10/AppIcon和LaunchImage尺寸/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/10/AppIcon和LaunchImage尺寸/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-iPhone通过usb与windows实现通信" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/10/iPhone通过usb与windows实现通信/">iPhone通过usb与windows实现通信</a>
+    </h1>
+  
+
+
+        <!-- 显示阅读和评论数 -->
+        	
+	
+        
+        <a href="/2018/04/10/iPhone通过usb与windows实现通信/" class="archive-article-date">
+  	<time datetime="2018-04-10T02:15:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-10</time>
+</a>
+        
+      </header>
+    
+
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前没怎么接触过这方面知识，最近有个需求需要实现这方面功能。于是上网查找资料，写了个小程序，实现了iPhone端和windows端的互联通信，原理基本上是这样的：windows端运行一个叫做usbmuxd的多路复用守护进程，该进程的作用是建立本地端口和远程端口的转发，实现usb到tcp的转换服务。window端通过本地127.0.0.1:27015连接到usb，然后指定和iPhone进行通信的端口（例如2345）。同样，iPhone端也指定对应连接地址127.0.0.1:2345。根据相关usb协议，客户端将请求包发送到usbmuxd进程，通过usbmuxd转发到对方设备，实现tcp连接。实现过程如下：</p>
+<p><strong>1、安装服务</strong></p>
+<p>windows端首先要安装苹果公司提供的相关服务，才能实现通信功能。服务名称为：AppleApplicationSupport和AppleMobileDeviceSupport</p>
+<p><strong>2、协议内容</strong><br>
+        
+          <a class="article-more-a" href="/2018/04/10/iPhone通过usb与windows实现通信/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/10/iPhone通过usb与windows实现通信/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-GPUImage强大的图像处理框架]" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/09/GPUImage强大的图像处理框架]/">iOS：GPUImage强大的图像处理框架</a>
+    </h1>
+  
+
+
+        <!-- 显示阅读和评论数 -->
+        	
+	
+        
+        <a href="/2018/04/09/GPUImage强大的图像处理框架]/" class="archive-article-date">
+  	<time datetime="2018-04-09T03:13:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-09</time>
+</a>
+        
+      </header>
+    
+
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>附一张GPUImage的结构图：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2348494-7f030c0295b0fc7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
+<p>GPUImage.png</p>
+<h5 id="GPUImage中的几个概念"><a href="#GPUImage中的几个概念" class="headerlink" title="GPUImage中的几个概念"></a>GPUImage中的几个概念</h5><p><code>output</code>为输出源<br><code>input</code>为输入源<br><code>filter</code>为滤镜</p>
+<h5 id="GPUImage的四大输入基础类"><a href="#GPUImage的四大输入基础类" class="headerlink" title="GPUImage的四大输入基础类"></a>GPUImage的四大输入基础类</h5><p><code>GPUImageVideoCamera</code> 摄像头-视频流<br><code>GPUImageStillCamera</code> 摄像头-照相<br><code>GPUImagePicture</code> 图片<br><code>GPUImageMovie</code> 视频<br>
+        
+          <a class="article-more-a" href="/2018/04/09/GPUImage强大的图像处理框架]/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/09/GPUImage强大的图像处理框架]/">展开全文 >></a>
         </p>
       
 
@@ -305,7 +572,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/26/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span>
+      <a class="extend prev" rel="prev" href="/page/26/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><a class="page-number" href="/page/29/">29</a><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/28/">Next &raquo;</a>
     </nav>
   
 
@@ -417,7 +684,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
+                <a href="javascript:void(0)" class="js-tag color3">LIVE555</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -433,6 +700,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
               </li>
              
@@ -445,11 +716,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">Data</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -461,11 +728,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">fallthrough</a>
+                <a href="javascript:void(0)" class="js-tag color4">KVC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
+                <a href="javascript:void(0)" class="js-tag color4">KVO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">fallthrough</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -477,11 +748,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
+                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -493,6 +764,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">UICollectionViewLayout</a>
               </li>
              
@@ -501,11 +776,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">上架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GCDAsyncUdpSocket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">侧滑手势</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">smart_monkey</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">UIAlertController</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -525,7 +820,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Data</a>
+                <a href="javascript:void(0)" class="js-tag color5">view</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">searchController</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -545,11 +844,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CoreData</a>
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">UIAlertController</a>
+                <a href="javascript:void(0)" class="js-tag color4">CoreData</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -569,6 +868,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCD</a>
               </li>
              
@@ -577,7 +884,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">rtsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CPU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">响应链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">h264</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bug</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -585,7 +908,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
+                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -601,11 +924,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">集合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,14 +949,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">protocol</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
             
             <div class="clearfix"></div>

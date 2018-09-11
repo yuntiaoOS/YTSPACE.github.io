@@ -153,14 +153,14 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-苹果企业账号发布APP详解——通过自己网站分发应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift 4 域名解析 DNS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/27/苹果企业账号发布APP详解——通过自己网站分发应用/">苹果企业账号发布APP详解——通过自己网站分发应用</a>
+      <a class="article-title" href="/2018/05/08/Swift 4 域名解析 DNS/">Swift 4 域名解析 DNS</a>
     </h1>
   
 
@@ -169,8 +169,8 @@
         	
 	
         
-        <a href="/2018/04/27/苹果企业账号发布APP详解——通过自己网站分发应用/" class="archive-article-date">
-  	<time datetime="2018-04-27T10:16:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-27</time>
+        <a href="/2018/05/08/Swift 4 域名解析 DNS/" class="archive-article-date">
+  	<time datetime="2018-05-08T09:25:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-08</time>
 </a>
         
       </header>
@@ -182,74 +182,10 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>转：<a href="https://www.jianshu.com/p/0418f5051185" target="_blank" rel="noopener">https://www.jianshu.com/p/0418f5051185</a></p>
-<h2 id="一、通过企业账号申请证书"><a href="#一、通过企业账号申请证书" class="headerlink" title="一、通过企业账号申请证书"></a>一、通过企业账号申请证书</h2><ul>
-<li><strong>1 Certificate Signing Request (CSR)文件</strong></li>
-</ul>
-<p>在Mac系统中进入“钥匙串访问”，选择“钥匙串访问”-“证书助理”-“从证书颁发机构请求证书…”，如图1所示：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-4f833ce5acd0cd16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p>钥匙串请求证书</p>
-<p>—&gt;填写前两项，并选择“存储到磁盘”，如图2所示：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-bda6eb8ba786059a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<ul>
-<li><strong>2 请求Certificate证书</strong><br>登录<a href="https://link.jianshu.com/?t=https://developer.apple.com" target="_blank" rel="noopener">https://developer.apple.com</a> —&gt;<code>MemberCenter</code>—&gt;<code>Certificates, Indentifiers &amp; Profiles</code>—&gt;<code>Certificates</code>，如图3所示：</li>
-</ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-5f6b1a8cbf07b321.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p>—&gt;在图4页面，点击右上角加号，添加一个证书：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-d7ec28b1103666d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p>—&gt;选择In-House and Ad Hoc，点继续，如图5所示：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-72096ca91b9726e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p>—&gt;如图6：Choose File选择第1步的CSR文件上传，点击generate生成cer证书，下载后双击安转（需要输入Mac的密码）</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-8ad19b13232f4db7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<ul>
-<li><strong>3 App ID</strong></li>
-</ul>
-<p>点击右上角的加号按钮，如图7所示：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-1747ad7a163a4436.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p>—&gt;有两项需要填（如图8所示），name为描述可以随便填写.bundleID必须与APP的bundleID完全一致（如图9所示）。至于App Services根据自己需要选择。最后点击继续-&gt;submit-&gt;done</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-4b59673c3f3b862e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-c3d17ea45cda0caa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<ul>
-<li><strong>4 生成最终的Provisioning Profile(企业版不需要device即iPhone的UDID，因此跳过)</strong></li>
-</ul>
-<p>选择Provisioning Profile-&gt;ALL，点击右上角加号：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-9803422f46a87fe5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-80e187cc47f376f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p>—&gt;选择刚创建的AppID，点击继续，如图12所示：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-2764f943ee12bf1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p>—&gt;选择cer证书点击继续.图13 给最终生成的Profile文件命名方便自己识别。然后点击生成，并下载双击打开。至此证书环节完毕</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-b1ec7bd0f4486268.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<h2 id="二、打包ipa，手动生成plist"><a href="#二、打包ipa，手动生成plist" class="headerlink" title="二、打包ipa，手动生成plist"></a>二、打包ipa，手动生成plist</h2><p>这一步开始前，需要将手机插入电脑，并调试选项选择真机。（防止无法Archive），如果没有真机，可以选择iOS Device（这个没有测试）。</p>
-<h4 id="1-打包ipa"><a href="#1-打包ipa" class="headerlink" title="1 打包ipa"></a>1 打包ipa</h4><ul>
-<li>1.1 Edit scheme</li>
-</ul>
-<p>用Xcode打开对应APP。Product-&gt;Scheme-&gt;Edit scheme，填写Archive name，即为打包后的ipa名字,如图14所示</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-b9a2a5b0c95d6704.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<ul>
-<li>1.2 选择对应证书，即刚才生成的证书，如图15所示：</li>
-</ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-d4d0596dbc143cea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<ul>
-<li>1.3 归档，Product-&gt;Archive，并按图16，图17操作(选择Save for Enterprise Deployment)：</li>
-</ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-2e5b7a7a10095dae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-ea0f98a4a2fd02a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p>完成之后会生成一个ipa包。</p>
-<h2 id="三、发布APP"><a href="#三、发布APP" class="headerlink" title="三、发布APP"></a>三、发布APP</h2><p>要发布还必须有一个plist文件，在Xcode6之前会自动生成一个plist文件，但是Xcode6之后需要我们自己创建plist，文章最后提供一个plist模板，复制并重命名为plist后打开根据提示操作即可.图18为plist的截图，可以看到有三个URL，分别存放ipa，大小图标。下图的1(ipa)、2(大图)、3(小图)填写我们自己生成的URL，即将ipa和大小图标放在我们自己的服务器，当用Safari打开plist时会根据填的plist里面的1、2、3对应的URL来下载安装ipa、大小图标。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1785352-a0a126bb6bd89416.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
-<p>那么plist放在哪里呢（即Safari打开plist的URL是多少呢）？苹果对plist存放地址有要求，必须是https的，如果没有https网站，我们可以把plist放在<a href="https://link.jianshu.com/?t=https://git.oschina.net" target="_blank" rel="noopener">https://git.oschina.net</a>。</p>
-<p>具体做法就是在上面创建一个项目（不能是私人的），然后将编辑好的plist传到项目，最后将plist的URL赋值下来，比如<a href="https://link.jianshu.com/?t=https://git.oschina.net/waitwait/companytest/blob/master/MDDTest.plist" target="_blank" rel="noopener">https://git.oschina.net/waitwait/companytest/blob/master/MDDTest.plist</a>。然后我们在Safari中输入：<code>itms-services:///?action=download-manifest&amp;url=https://git.oschina.net/waitwait/companytest/blob/master/MDDTest.plist</code>就可以安装了(Safari会解析<code>itms-services:///?action=download-manifest&amp;url=</code>)。</p>
-<blockquote>
-<p>注意，有简友反应oschina的https不能使用，其实公用的https链接经常会被封掉，可以试试github，百度云，七牛云存储等等。另外，最好还是用自己的</p>
+        <blockquote>
+<p>引用于GitHub：<a href="https://github.com/xiaoxiaocainiao/HostToIP/blob/master/HostToIP/ViewController.swift" target="_blank" rel="noopener">https://github.com/xiaoxiaocainiao/HostToIP/blob/master/HostToIP/ViewController.swift</a><br>这里又根据自己需要做了少许改动，在此感谢下作者的无私提供。</p>
 </blockquote>
-<p>Safari操作的具体流程是：</p>
-<ul>
-<li>1 Safari解析我们输入的那一串字符串，找到plist文件</li>
-<li>2 根据plist文件里面提供的信息下载并安装ipa包，还会访问大小图标，大小图标在ipa包正在下载时显示，当下载完毕后显示程序自带的图标</li>
-<li>下载安装后，如果想打开程序还需要在手机 设置-&gt;通用-&gt;描述文件与设备管理(不同系统可能名字不一样) 里面选择相应的证书信任后，方可打开程序</li>
-</ul>
-<p>下面是plist模板的文本形式，将其复制到文本然后重命名.plist，用Xcode打开按照提示编辑即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span><br><span class="line">&lt;plist version=&quot;1.0&quot;&gt;</span><br><span class="line">&lt;dict&gt;</span><br><span class="line">    &lt;key&gt;items&lt;/key&gt;</span><br><span class="line">    &lt;array&gt;</span><br><span class="line">        &lt;dict&gt;</span><br><span class="line">            &lt;key&gt;assets&lt;/key&gt;</span><br><span class="line">            &lt;array&gt;</span><br><span class="line">                &lt;dict&gt;</span><br><span class="line">                    &lt;key&gt;kind&lt;/key&gt;</span><br><span class="line">                    &lt;string&gt;software-package&lt;/string&gt;</span><br><span class="line">                    &lt;key&gt;url&lt;/key&gt;</span><br><span class="line">                    &lt;string&gt;ipa包URL（必填）&lt;/string&gt;</span><br><span class="line">                &lt;/dict&gt;</span><br><span class="line">                &lt;dict&gt;</span><br><span class="line">                    &lt;key&gt;kind&lt;/key&gt;</span><br><span class="line">                    &lt;string&gt;full-size-image&lt;/string&gt;</span><br><span class="line">                    &lt;key&gt;needs-shine&lt;/key&gt;</span><br><span class="line">                    &lt;false/&gt;</span><br><span class="line">                    &lt;key&gt;url&lt;/key&gt;</span><br><span class="line">                    &lt;string&gt;下载时大图（非必填）&lt;/string&gt;</span><br><span class="line">                &lt;/dict&gt;</span><br><span class="line">                &lt;dict&gt;</span><br><span class="line">                    &lt;key&gt;kind&lt;/key&gt;</span><br><span class="line">                    &lt;string&gt;display-image&lt;/string&gt;</span><br><span class="line">                    &lt;key&gt;needs-shine&lt;/key&gt;</span><br><span class="line">                    &lt;false/&gt;</span><br><span class="line">                    &lt;key&gt;url&lt;/key&gt;</span><br><span class="line">                    &lt;string&gt;下载时小图（非必填）&lt;/string&gt;</span><br><span class="line">                &lt;/dict&gt;</span><br><span class="line">            &lt;/array&gt;</span><br><span class="line">            &lt;key&gt;metadata&lt;/key&gt;</span><br><span class="line">            &lt;dict&gt;</span><br><span class="line">                &lt;key&gt;bundle-identifier&lt;/key&gt;</span><br><span class="line">                &lt;string&gt;BundleID（必填）&lt;/string&gt;</span><br><span class="line">                &lt;key&gt;bundle-version&lt;/key&gt;</span><br><span class="line">                &lt;string&gt;1.0&lt;/string&gt;</span><br><span class="line">                &lt;key&gt;kind&lt;/key&gt;</span><br><span class="line">                &lt;string&gt;software&lt;/string&gt;</span><br><span class="line">                &lt;key&gt;subtitle&lt;/key&gt;</span><br><span class="line">                &lt;string&gt;副标题（非必填）&lt;/string&gt;</span><br><span class="line">                &lt;key&gt;title&lt;/key&gt;</span><br><span class="line">                &lt;string&gt;应用名（必填）&lt;/string&gt;</span><br><span class="line">            &lt;/dict&gt;</span><br><span class="line">        &lt;/dict&gt;</span><br><span class="line">    &lt;/array&gt;</span><br><span class="line">&lt;/dict&gt;</span><br><span class="line">&lt;/plist&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import UIKit</span><br><span class="line"></span><br><span class="line">class ViewController: UIViewController &#123;</span><br><span class="line"></span><br><span class="line">    override func viewDidLoad() &#123;</span><br><span class="line">        super.viewDidLoad()</span><br><span class="line"></span><br><span class="line">        getIPAddress(&quot;www.baidu.com&quot;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override func didReceiveMemoryWarning() &#123;</span><br><span class="line">        super.didReceiveMemoryWarning()</span><br><span class="line">        // Dispose of any resources that can be recreated.</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 域名解析</span><br><span class="line">    func getIPAddress(domainName: String) -&gt; String &#123;</span><br><span class="line">    var result = &quot;&quot;</span><br><span class="line">        let host = CFHostCreateWithName(nil,domainName as CFString).takeRetainedValue()</span><br><span class="line">        CFHostStartInfoResolution(host, .addresses, nil)</span><br><span class="line">        var success: DarwinBoolean = false</span><br><span class="line">        if let addresses = CFHostGetAddressing(host, &amp;success)?.takeUnretainedValue() as NSArray?,</span><br><span class="line">            let theAddress = addresses.firstObject as? NSData &#123;</span><br><span class="line">            var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))</span><br><span class="line">            if getnameinfo(theAddress.bytes.assumingMemoryBound(to: sockaddr.self), socklen_t(theAddress.length),</span><br><span class="line">                           &amp;hostname, socklen_t(hostname.count), nil, 0, NI_NUMERICHOST) == 0 &#123;</span><br><span class="line">                let numAddress = String(cString: hostname)</span><br><span class="line">                result = numAddress</span><br><span class="line">                print(numAddress)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -265,6 +201,10 @@
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
         		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
+        		</li>
       		
 		</ul>
 	</div>
@@ -273,7 +213,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/27/苹果企业账号发布APP详解——通过自己网站分发应用/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/08/Swift 4 域名解析 DNS/">展开全文 >></a>
         </p>
       
 
@@ -303,14 +243,14 @@
 
 
   
-    <article id="post-URLSessionConfiguration" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-自定义UIAlertController" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/27/URLSessionConfiguration/">URLSessionConfiguration</a>
+      <a class="article-title" href="/2018/05/07/自定义UIAlertController/">UIAlertController</a>
     </h1>
   
 
@@ -319,8 +259,8 @@
         	
 	
         
-        <a href="/2018/04/27/URLSessionConfiguration/" class="archive-article-date">
-  	<time datetime="2018-04-27T07:37:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-27</time>
+        <a href="/2018/05/07/自定义UIAlertController/" class="archive-article-date">
+  	<time datetime="2018-05-07T10:58:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-07</time>
 </a>
         
       </header>
@@ -332,110 +272,17 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="https://developer.apple.com/documentation/foundation/urlsessionconfiguration#2888288" target="_blank" rel="noopener">https://developer.apple.com/documentation/foundation/urlsessionconfiguration#2888288</a></p>
-<p>配置对象，用于定义URL会话的行为和策略。</p>
-<p>软件开发工具包</p>
-<ul>
-<li>iOS 7.0+</li>
-<li>macOS 10.9+</li>
-<li>tvOS 9.0+</li>
-<li>watchOS 2.0+</li>
-</ul>
-<p>骨架</p>
-<ul>
-<li>基础</li>
-</ul>
-<p>在本页<a href="https://developer.apple.com/documentation/foundation/urlsessionconfiguration#overview" target="_blank" rel="noopener">概观</a><a href="https://developer.apple.com/documentation/foundation/urlsessionconfiguration#topics" target="_blank" rel="noopener">主题</a><a href="https://developer.apple.com/documentation/foundation/urlsessionconfiguration#relationships" target="_blank" rel="noopener">关系</a><a href="https://developer.apple.com/documentation/foundation/urlsessionconfiguration#see-also" target="_blank" rel="noopener">也可以看看</a></p>
-<h2 id="概观"><a href="#概观" class="headerlink" title="概观"></a>概观</h2><p>一个对象定义了使用对象上传和下载数据时要使用的行为和策略。上传或下载数据时，创建配置对象始终是您必须采取的第一步。您可以使用此对象来配置打算用于对象的超时值，缓存策略，连接要求和其他类型的信息。<code>URLSessionConfiguration</code><a href="https://developer.apple.com/documentation/foundation/urlsession" target="_blank" rel="noopener"><code>URLSession</code></a><code>URLSession</code></p>
-<p>在使用它来初始化会话对象之前，正确配置对象非常重要。会话对象会复制您提供的配置设置，并使用这些设置来配置会话。配置完成后，会话对象将忽略您对该对象所做的任何更改。如果您需要修改传输策略，则必须更新会话配置对象并使用它创建新对象。<code>URLSessionConfiguration``URLSessionConfiguration``URLSession</code></p>
-<p>注意在某些情况下，此配置中定义的策略可能会被<a href="https://developer.apple.com/documentation/foundation/nsurlrequest" target="_blank" rel="noopener"><code>NSURLRequest</code></a>为任务提供的对象指定的策略覆盖。在请求对象上指定的任何策略都会受到尊重，除非会话的策略更具限制性。例如，如果会话配置指定不应允许蜂窝网络，则该<a href="https://developer.apple.com/documentation/foundation/nsurlrequest" target="_blank" rel="noopener"><code>NSURLRequest</code></a>对象不能请求蜂窝网络。</p>
-<p>有关使用配置对象创建会话的更多信息，请参阅<a href="https://developer.apple.com/documentation/foundation/urlsession" target="_blank" rel="noopener"><code>URLSession</code></a>。</p>
-<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><h3 id="创建会话配置对象"><a href="#创建会话配置对象" class="headerlink" title="创建会话配置对象"></a>创建会话配置对象</h3><p><code>class var</code>default<code>: URLSessionConfiguration</code></p>
-<p>返回新创建的默认会话配置对象。</p>
-<p><code>class var ephemeral: URLSessionConfiguration</code></p>
-<p>返回不使用缓存，Cookie或凭证的持久性存储的会话配置。</p>
-<p><code>class func background(withIdentifier: String)</code></p>
-<p>返回一个会话配置对象，允许在后台执行HTTP和HTTPS上传或下载。</p>
-<h3 id="设置常规属性"><a href="#设置常规属性" class="headerlink" title="设置常规属性"></a>设置常规属性</h3><p><code>var identifier: String?</code></p>
-<p>配置对象的后台会话标识符。</p>
-<p><code>var httpAdditionalHeaders: [AnyHashable : Any]?</code></p>
-<p>与请求一起发送的附加头文件的字典。</p>
-<p><code>var networkServiceType: NSURLRequest.NetworkServiceType</code></p>
-<p>网络服务的类型。</p>
-<p><code>var allowsCellularAccess: Bool</code></p>
-<p>一个布尔值，用于确定是否应通过蜂窝网络进行连接。</p>
-<p><code>var timeoutIntervalForRequest: TimeInterval</code></p>
-<p>等待其他数据时使用的超时间隔。</p>
-<p><code>var timeoutIntervalForResource: TimeInterval</code></p>
-<p>资源请求应该允许的最大时间量。</p>
-<p><code>var sharedContainerIdentifier: String?</code></p>
-<p>应该下载后台URL会话中的文件的共享容器的标识符。</p>
-<p><code>var waitsForConnectivity: Bool</code></p>
-<p>一个布尔值，指示会话是否应等待连接变为可用或者立即失败。</p>
-<h3 id="设置Cookie政策"><a href="#设置Cookie政策" class="headerlink" title="设置Cookie政策"></a>设置Cookie政策</h3><p><code>var httpCookieAcceptPolicy: HTTPCookie.AcceptPolicy</code></p>
-<p>决定何时应该接受Cookie的策略常量。</p>
-<p><code>var httpShouldSetCookies: Bool</code></p>
-<p>一个布尔值，用于确定请求是否应包含来自Cookie存储的Cookie。</p>
-<p><code>var httpCookieStorage: HTTPCookieStorage?</code></p>
-<p>用于在此会话中存储Cookie的Cookie存储。</p>
-<p><code>class HTTPCookieStorage</code></p>
-<p>管理cookie存储的单一对象（共享实例）。</p>
-<p><code>class HTTPCookie</code></p>
-<p>表示HTTP cookie的对象。它是一个不可变的对象，从包含cookie属性的字典中初始化。</p>
-<h3 id="设置安全策略"><a href="#设置安全策略" class="headerlink" title="设置安全策略"></a>设置安全策略</h3><p><code>var tlsMaximumSupportedProtocol: SSLProtocol</code></p>
-<p>在此会话中进行连接时客户端应请求的最大TLS协议版本。</p>
-<p><code>var tlsMinimumSupportedProtocol: SSLProtocol</code></p>
-<p>协议协商期间应该接受的最小TLS协议。</p>
-<p><code>var urlCredentialStorage: URLCredentialStorage?</code></p>
-<p>提供身份验证凭据的凭证存储。</p>
-<h3 id="设置缓存策略"><a href="#设置缓存策略" class="headerlink" title="设置缓存策略"></a>设置缓存策略</h3><p><code>var urlCache: URLCache?</code></p>
-<p>用于向会话中的请求提供缓存响应的URL缓存。</p>
-<p><code>var requestCachePolicy: NSURLRequest.CachePolicy</code></p>
-<p>一个预定义常量，用于确定何时从缓存中返回响应。</p>
-<h3 id="支持后台转移"><a href="#支持后台转移" class="headerlink" title="支持后台转移"></a>支持后台转移</h3><p><code>var sessionSendsLaunchEvents: Bool</code></p>
-<p>一个布尔值，指示在传输完成时是否应该在后台继续或启动应用程序。</p>
-<p><code>var isDiscretionary: Bool</code></p>
-<p>一个布尔值，用于确定是否可以根据系统的判断来调度后台任务以获得最佳性能。</p>
-<p><a href="https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1409517-shoulduseextendedbackgroundidlem" target="_blank" rel="noopener"><code>var shouldUseExtendedBackgroundIdleMode: Bool</code></a></p>
-<h3 id="支持自定义协议"><a href="#支持自定义协议" class="headerlink" title="支持自定义协议"></a>支持自定义协议</h3><p><code>var protocolClasses: [AnyClass]?</code></p>
-<p>在会话中处理请求的额外协议子类的数组。</p>
-<p><code>class URLProtocol</code></p>
-<p>一个<code>NSURLProtocol</code>对象处理加载协议特定的URL数据。在<code>NSURLProtocol</code>类本身是一个抽象类，可以为与特定URL方案的URL处理基础设施。您可以为您的应用支持的任何自定义协议或URL方案创建子类。</p>
-<h3 id="支持多路径TCP"><a href="#支持多路径TCP" class="headerlink" title="支持多路径TCP"></a>支持多路径TCP</h3><p>使用多路径TCP提高网络可靠性</p>
-<p>使用iOS设备中的可用收音机来提高应用程序的网络可靠性和性能。</p>
-<p><code>var multipathServiceType: URLSessionConfiguration.MultipathServiceType</code></p>
-<p>指定用于通过Wi-Fi和蜂窝接口传输数据的多路径TCP连接策略的服务类型。</p>
-<p><code>enum URLSessionConfiguration.MultipathServiceType</code></p>
-<p>指定多路径TCP使用的服务类型的常量。</p>
-<h3 id="设置HTTP策略和代理属性"><a href="#设置HTTP策略和代理属性" class="headerlink" title="设置HTTP策略和代理属性"></a>设置HTTP策略和代理属性</h3><p><code>var httpMaximumConnectionsPerHost: Int</code></p>
-<p>同时连接到给定主机的最大数量。</p>
-<p><code>var httpShouldUsePipelining: Bool</code></p>
-<p>一个布尔值，用于确定会话是否应使用HTTP流水线。</p>
-<p><code>var connectionProxyDictionary: [AnyHashable : Any]?</code></p>
-<p>包含有关在此会话中使用的代理信息的字典。</p>
-<h3 id="支持连接变化"><a href="#支持连接变化" class="headerlink" title="支持连接变化"></a>支持连接变化</h3><p><code>var waitsForConnectivity: Bool</code></p>
-<p>一个布尔值，指示会话是否应等待连接变为可用或者立即失败。</p>
-<h3 id="已弃用的方法"><a href="#已弃用的方法" class="headerlink" title="已弃用的方法"></a>已弃用的方法</h3><p><code>class func backgroundSessionConfiguration(String)</code></p>
-<p>返回一个会话配置对象，允许在后台执行HTTP和HTTPS上传或下载。</p>
-<p>弃用</p>
-<h2 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h2><h3 id="继承自"><a href="#继承自" class="headerlink" title="继承自"></a>继承自</h3><p><a href="https://developer.apple.com/documentation/objectivec/nsobject" target="_blank" rel="noopener"><code>NSObject</code></a></p>
-<h3 id="符合"><a href="#符合" class="headerlink" title="符合"></a>符合</h3><ul>
-<li><a href="https://developer.apple.com/documentation/swift/cvararg" target="_blank" rel="noopener"><code>CVarArg</code></a></li>
-<li><a href="https://developer.apple.com/documentation/swift/equatable" target="_blank" rel="noopener"><code>Equatable</code></a></li>
-<li><a href="https://developer.apple.com/documentation/swift/hashable" target="_blank" rel="noopener"><code>Hashable</code></a></li>
-<li><a href="https://developer.apple.com/documentation/foundation/nscopying" target="_blank" rel="noopener"><code>NSCopying</code></a></li>
-</ul>
-<h2 id="也可以看看"><a href="#也可以看看" class="headerlink" title="也可以看看"></a>也可以看看</h2><h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>将网站数据存入内存</p>
-<p>通过从URL会话创建数据任务，将数据直接接收到内存中。</p>
-<p>上传数据到网站</p>
-<p>将数据从应用程序发布到服务器。</p>
-<p>在后台下载文件</p>
-<p>创建在您的应用处于非活动状态时下载文件的任务</p>
-<p><code>class URLSession</code></p>
-<p>协调一组相关网络数据传输任务的对象。</p>
-<p><code>class URLSessionTask</code></p>
-<p>一个任务，比如下载一个特定的资源，由一个URL会话进行。</p>
-
+        <p>自定义UIAlertController</p>
+<p>1:显示alert，点击过到指定时间，dissMiss Alert</p>
+<p>2:显示alert，点击过到指定时间，dissMiss Alert 后，继续执行block内容</p>
+<p>class Utils :NSObject{</p>
+<p>​    static var alert: UIAlertController!</p>
+<p>​      // 消息提示框</p>
+<p>​    public static func notifyUser(title: String, message: String, timeToDissapear: Int) -&gt; Void</p>
+<p>​    {<br>
+        
+          <a class="article-more-a" href="/2018/05/07/自定义UIAlertController/#more">more >></a>
+        
       
 
       
@@ -452,11 +299,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Network</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">UIAlertController</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">URLSession</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">UI</a>
         		</li>
       		
 		</ul>
@@ -466,7 +313,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/27/URLSessionConfiguration/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/07/自定义UIAlertController/">展开全文 >></a>
         </p>
       
 
@@ -496,14 +343,14 @@
 
 
   
-    <article id="post-Multipath TCP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-类和结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/27/Multipath TCP/">使用 Multipath TCP 为 iOS 创建备份连接</a>
+      <a class="article-title" href="/2018/05/07/类和结构/">类和结构struct</a>
     </h1>
   
 
@@ -512,8 +359,8 @@
         	
 	
         
-        <a href="/2018/04/27/Multipath TCP/" class="archive-article-date">
-  	<time datetime="2018-04-27T07:27:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-27</time>
+        <a href="/2018/05/07/类和结构/" class="archive-article-date">
+  	<time datetime="2018-05-07T06:33:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-07</time>
 </a>
         
       </header>
@@ -525,29 +372,12 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>如果您是网络管理员，您可以将 Multipath TCP 与 iOS 搭配使用，以加强与您的目标主机的连接。</p>
-<p><a href="https://github.com/below/MultipathTCP" target="_blank" rel="noopener">https://github.com/below/MultipathTCP</a></p>
-<p>iOS 支持 <a href="http://datatracker.ietf.org/doc/rfc6824/?include_text=1" target="_blank" rel="noopener">Multipath TCP (MPTCP)</a>，并且允许 iPhone 或 iPad 通过蜂窝移动数据连接建立与目标主机的备份 TCP 连接。</p>
-<p>网络管理员可能需要使用 MPTCP。使用标准家庭网络的客户无需启用 MPTCP。</p>
-<h2 id="关于-Multipath-TCP"><a href="#关于-Multipath-TCP" class="headerlink" title="关于 Multipath TCP"></a>关于 Multipath TCP</h2><p>MPTCP 是对传输控制协议 (TCP) 规范的一组扩展。凭借 MPTCP，客户端可以通过不同网络适配器连接到有多个连接的同一目标主机。这可在各主机间建立强大而高效的数据连接，并且与现有的网络基础设施兼容。 </p>
-<h2 id="iPhone-或-iPad-上的-Mulitpath-TCP"><a href="#iPhone-或-iPad-上的-Mulitpath-TCP" class="headerlink" title="iPhone 或 iPad 上的 Mulitpath TCP"></a>iPhone 或 iPad 上的 Mulitpath TCP</h2><p>iPhone 和 iPad 在具有活跃的蜂窝移动数据连接的情况下使用 MPTCP 来建立两个连接：</p>
-<ul>
-<li>通过 Wi-Fi 的主要 TCP 连接</li>
-<li>通过蜂窝移动数据的备用连接</li>
-</ul>
-<p>如果 Wi-Fi 不可用或无响应，iOS 会使用蜂窝移动数据连接。</p>
-<p>MPTCP 使用 TCP 选项域 30，这是互联网编号分配机构 (IANA) 专为此用途而保留的。如果 iOS 设备与服务器之间的任何中间盒（如路由器或交换机）都不支持 MPTCP，则 iOS 会建立标准的 TCP 连接。</p>
-<p>例如，当您向 Siri 提问时，Siri 会尝试通过 Wi-Fi 建立 MPTCP 连接。如果连接成功，Siri 会通过蜂窝移动数据建立备用连接。如果 Wi-Fi 不可用或不可靠，则 MPTCP 会立即在后台切换到蜂窝移动数据。</p>
-<h2 id="为网络开启-MPTCP"><a href="#为网络开启-MPTCP" class="headerlink" title="为网络开启 MPTCP"></a>为网络开启 MPTCP</h2><p>MPTCP 与现有网络兼容。如果某个网络不支持 MPTCP，则客户端会使用标准的 TCP 连接。不过，网络管理员必须查看其防火墙政策，以确保所有介入设备都允许 TCP 选项 30，才能以未修改的方式传递信号。</p>
-<p>很多商用路由器会将未知的 TCP 选项替换为 NOOP 数据。询问您的供应商如何开启 TCP 选项。</p>
-<p>有关非 Apple 制造的产品或非 Apple 控制或测试的独立网站的信息仅供参考，不代表 Apple 的任何建议或保证。Apple 对于第三方网站或产品的选择、性能或使用不承担任何责任。Apple 对于第三方网站的准确性和可靠性不作任何担保。互联网的使用具有一定风险。请<a href="https://support.apple.com/zh-cn/HT201777" target="_blank" rel="noopener">联系供应商</a>以了解其他信息。其他公司和产品名称可能是其各自所有公司的商标。</p>
-<p>ios7.0之后，通过wifi建立tcp连接时，还会通过3g/4g建立一个备用的连接。</p>
-<p>然后搜索这玩意儿如何用法:</p>
-<p>不要填dns就ok了。</p>
-<p>为了验证这种说法，</p>
-<p>验证一: 连接了盯盯拍的wifi（老板买了一个盯盯拍给大家琢磨），点进细节一看，dhcp的信息里果然没有dns信息。</p>
-<p>验证二:连接了一个支持ap模式的wifi，记录下dhcp模式下的ip、掩码、网关，然后设置为static模式，填写 刚才记录的信息。注意不要填写dns信息。果然可以同时连接ap模式的ipc，也可以3g/4g翻看网页。只是这种做法下，手机顶部没有扇形的连接信号。</p>
-
+        <h2 id="类和结构"><a href="#类和结构" class="headerlink" title="类和结构"></a>类和结构</h2><p><em>类</em>和<em>结构</em>是通用的，灵活的构造，它们成为程序代码的构建块。您可以使用与常量，变量和函数完全相同的语法来定义属性和方法，从而为您的类和结构添加功能。</p>
+<p>与其他编程语言不同，Swift不要求您为自定义类和结构创建单独的接口和实现文件。在Swift中，您可以在单个文件中定义一个类或结构，并且该类或结构的外部接口会自动提供给其他代码使用。</p>
+<p>注意传统上将<em>类</em>的实例称为<em>对象</em>。然而，斯威夫特类和结构在功能上比其他语言更接近，而很多本章介绍了可以应用到的实例功能，<em>无论是</em>类或结构类型。因此，使用更一般的术语<em>实例</em>。<br>
+        
+          <a class="article-more-a" href="/2018/05/07/类和结构/#more">more >></a>
+        
       
 
       
@@ -564,15 +394,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Multipath</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">apple</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Network</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TCP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">struct</a>
         		</li>
       		
 		</ul>
@@ -582,7 +408,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/27/Multipath TCP/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/07/类和结构/">展开全文 >></a>
         </p>
       
 
@@ -612,14 +438,14 @@
 
 
   
-    <article id="post-Moya的设计之道" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-枚举enum" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/27/Moya的设计之道/">Moya的设计之道</a>
+      <a class="article-title" href="/2018/05/07/枚举enum/">枚举enum</a>
     </h1>
   
 
@@ -628,8 +454,8 @@
         	
 	
         
-        <a href="/2018/04/27/Moya的设计之道/" class="archive-article-date">
-  	<time datetime="2018-04-27T06:11:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-27</time>
+        <a href="/2018/05/07/枚举enum/" class="archive-article-date">
+  	<time datetime="2018-05-07T06:33:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-07</time>
 </a>
         
       </header>
@@ -641,252 +467,14 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="转载-https-blog-csdn-net-Hello-Hwc-article-details-77096648"><a href="#转载-https-blog-csdn-net-Hello-Hwc-article-details-77096648" class="headerlink" title="转载    https://blog.csdn.net/Hello_Hwc/article/details/77096648"></a>转载    <a href="https://blog.csdn.net/Hello_Hwc/article/details/77096648" target="_blank" rel="noopener">https://blog.csdn.net/Hello_Hwc/article/details/77096648</a></h2><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>Moya是一个基于Alamofire开发的，轻量级的Swift网络层。Moya的可扩展性非常强，可以方便的RXSwift，PromiseKit和ObjectMapper结合。</p>
-</blockquote>
-<p>如果你的项目刚刚搭建，并且是纯Swift的，非常推荐以Moya为核心去搭建你的网络层。另外,如果你对Alamofire的源码感兴趣，推荐我之前的一篇博客：</p>
-<ul>
-<li><a href="http://blog.csdn.net/hello_hwc/article/details/72853786" target="_blank" rel="noopener">Alamofire的设计之道</a></li>
-</ul>
-<blockquote>
-<p>Moya除了依赖Alamofire，还依赖<a href="https://github.com/antitypical/Result" target="_blank" rel="noopener">Result</a>。Result用一种枚举的方式提供函数处理结果：</p>
-<ul>
-<li><code>.success(let data)</code> // 成功，关联值是数据</li>
-<li><code>.falure(let error)</code> // 失败, 关联值是错误原因</li>
-</ul>
-</blockquote>
-<p><strong>本文的讲解顺序：Moya的实现原理 -&gt; Moya的设计理念 -&gt; Moya与RxSwift，ObjectMapper一起工作</strong></p>
-<p>–</p>
-<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><blockquote>
-<p>分析任何代码都是从它的接口开始的。</p>
-</blockquote>
-<p>我们先来看看通过Moya如何去写一个网络API请求。Moya中，通过协议<a href="https://github.com/Moya/Moya/blob/master/Sources/Moya/TargetType.swift" target="_blank" rel="noopener">TargetType</a>来表示这是一个API请求。</p>
-<p>协议要求提供以下属性，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public protocol TargetType &#123;</span><br><span class="line">    var baseURL: URL &#123; get &#125;</span><br><span class="line">    var path: String &#123; get &#125;</span><br><span class="line">    var method: Moya.Method &#123; get &#125;</span><br><span class="line">    var parameters: [String: Any]? &#123; get &#125; //参数</span><br><span class="line">    var parameterEncoding: ParameterEncoding &#123; get &#125; //编码方式</span><br><span class="line">    var sampleData: Data &#123; get &#125;//stub数据</span><br><span class="line">    var task: Task &#123; get &#125;//请求类型，Data/Downlaod/Upload</span><br><span class="line">    var validate: Bool &#123; get &#125; //是否需要对返回值验证，默认值false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过枚举来管理一组API，比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public enum GitHub &#123;</span><br><span class="line">    case zen</span><br><span class="line">    case userProfile(String)</span><br><span class="line">&#125;</span><br><span class="line">extension GitHub: TargetType &#123;</span><br><span class="line">    public var baseURL: URL &#123; return URL(string: &quot;https://api.github.com&quot;)! &#125;</span><br><span class="line">    public var path: String &#123;</span><br><span class="line">        switch self &#123;</span><br><span class="line">        case .zen:</span><br><span class="line">            return &quot;/zen&quot;</span><br><span class="line">        case .userProfile(let name):</span><br><span class="line">            return &quot;/users/\(name.urlEscaped)&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>当然也可以让你的Class/Stuct来实现TargetType协议，使用枚举可以方便的管理一组API，优点是方便复用baseURL,method等，缺点是不得不写大量的Switch语句</p>
-</blockquote>
-<p>然后，在进行API请求的时候，要创建<code>MoyaProvider</code>，接着调用Request方法进行实际的请求</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let provider = MoyaProvider&lt;GitHub&gt;()</span><br><span class="line">provider.request(.zen) &#123; result in</span><br><span class="line">    if case let .success(response) = result &#123;</span><br><span class="line"></span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>可以看到，Moya通过协议来定义一个网络请求，并且属性都是只读的。协议意味着是依赖于抽象，而不是具体的实现，这样更易控制藕合，并且容易扩展；只读的意味着不可变状态，不可变状态会让你的代码行为可预测。</p>
-</blockquote>
-<hr>
-<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p>通过功能划分，Moya大致分为几个模块</p>
-<ul>
-<li><p><strong>Request</strong>，包括TargetType，Endpoint，Cancellable集中类型</p>
-</li>
-<li><p><strong>Provider</strong>，网络请求的枢纽，Provider会把<code>TargetType</code>转换成<code>Endpoint</code>再转换成<code>URLRequest</code>交给Alamofire去实际执行</p>
-</li>
-<li><p><strong>Response</strong>，回调给上层的数据结构，支持<code>filter</code>，<code>mapJSON</code>等方法</p>
-</li>
-<li><p><strong>Alamofire封装</strong>，通过桥接的方式对上层隐藏alamofire的细节</p>
-</li>
-<li><p><strong>Plguins</strong>，插件。moya提供了插件来给给外部。包括四个方法，这里知道方法就好，后文会具体的讲解插件的方法在何时工作。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public protocol PluginType &#123;</span><br><span class="line">    func prepare(_ request: URLRequest, target: TargetType) -&gt; URLRequest</span><br><span class="line">    func willSend(_ request: RequestType, target: TargetType)</span><br><span class="line">    func didReceive(_ result: Result&lt;Moya.Response, MoyaError&gt;, target: TargetType)</span><br><span class="line">    func process(_ result: Result&lt;Moya.Response, MoyaError&gt;, target: TargetType) -&gt; Result&lt;Moya.Response, MoyaError&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>为了更好的讲解Moya的处理流程，我画了一张图（用Sketch画的）：</p>
-<p><img src="https://img-blog.csdn.net/20170809135909929?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSGVsbG9fSHdj/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="img"></p>
-<p>第一眼看到这张图的时候，你肯定是困惑的，我们来一点点讲解图中的过程。通过上文的讲解我们知道，<a href="https://github.com/Moya/Moya/blob/master/Sources/Moya/MoyaProvider.swift" target="_blank" rel="noopener">Provider</a>这个类是网络请求的枢纽，它接受一个TargetType(请求)，并且通过闭包的方式给上层回调。</p>
-<p>那么，我们来看看<a href="https://github.com/Moya/Moya/blob/master/Sources/Moya/MoyaProvider.swift" target="_blank" rel="noopener">Provider</a>的初始化方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public init(endpointClosure: @escaping EndpointClosure = MoyaProvider.defaultEndpointMapping,</span><br><span class="line">            requestClosure: @escaping RequestClosure = MoyaProvider.defaultRequestMapping,</span><br><span class="line">            stubClosure: @escaping StubClosure = MoyaProvider.neverStub,</span><br><span class="line">            manager: Manager = MoyaProvider&lt;Target&gt;.defaultAlamofireManager(),</span><br><span class="line">            plugins: [PluginType] = [],</span><br><span class="line">            trackInflights: Bool = false) &#123;</span><br><span class="line">  //...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>初始化的时候的几个参数：</p>
-<ul>
-<li><code>endpointClosure</code> 作用是把TargetType转换成EndPoint，EndPoint是Moya网络请求的一个中间态。</li>
-<li><code>requestClosure</code> 作用是把Endpoint转换成URLRequest</li>
-<li><code>stubClosure</code> 是用来桩测试的，也就是模拟服务端假数据，这里先不管。</li>
-<li><code>manager</code>，实际请求的Alamofire的SessionManager</li>
-<li><code>plugins</code>, 插件</li>
-<li><code>trackInflights</code>，是否要跟踪重复网络请求</li>
-</ul>
-<hr>
-<h3 id="Request"><a href="#Request" class="headerlink" title="Request"></a>Request</h3><p><img src="https://camo.githubusercontent.com/11d7f03370059f782a5c2170360165656cf6ec45/68747470733a2f2f7261772e6769746875622e636f6d2f4d6f79612f4d6f79612f6d61737465722f7765622f706970656c696e652e706e67" alt="img"></p>
-<p>在Moya中，请求是按照如图的方式进行转换的。其中,TargetType到Endpoint的转换是通过闭包<code>endpointClosure</code>来完成的。闭包的输入是TargetType，输出是<code>EndPoint</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public typealias EndpointClosure = (Target) -&gt; Endpoint&lt;Target&gt;</span><br></pre></td></tr></table></figure>
-<p>在初始化Provider的时候，<code>endpointClosure</code>有默认参数，可以看到默认实现只是由Target创建了一个Endpoint</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public final class func defaultEndpointMapping(for target: Target) -&gt; Endpoint&lt;Target&gt; &#123;</span><br><span class="line">    return Endpoint(</span><br><span class="line">        url: url(for: target).absoluteString,</span><br><span class="line">        sampleResponseClosure: &#123; .networkResponse(200, target.sampleData) &#125;,</span><br><span class="line">        method: target.method,</span><br><span class="line">        parameters: target.parameters,</span><br><span class="line">        parameterEncoding: target.parameterEncoding</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>接着，通过<code>requestClosure</code>将Endpoing映射到URLRequest。这是你最后修改Request的机会，同样它也有默认参数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public final class func defaultRequestMapping(for endpoint: Endpoint&lt;Target&gt;, closure: RequestResultClosure) &#123;</span><br><span class="line">    if let urlRequest = endpoint.urlRequest &#123;//urlReuqest有效，就以success执行闭包</span><br><span class="line">        closure(.success(urlRequest))</span><br><span class="line">    &#125; else &#123;//无效，以faliure执行闭包</span><br><span class="line">        closure(.failure(MoyaError.requestMapping(endpoint.url)))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>为什么要用闭包进行TargetType-&gt;Endpoint-&gt;URLRequest映射呢？</strong></p>
-<blockquote>
-<p><strong>为了在灵活性和易用性之间进行平衡</strong>。</p>
-</blockquote>
-<p>对于大部分API请求来说，使用Moya提供的默认闭包映射足以，这样大多数时候根本不需要关心着两个闭包的内容。但是有时候，有一些额外需求，比如对所有API请求增加额外的<code>HTTP Header</code>，moya通过闭包的方式开发者可以去修改这些内容。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let endpointClosure = &#123; (target: MyTarget) -&gt; Endpoint&lt;MyTarget&gt; in</span><br><span class="line">    let defaultEndpoint = MoyaProvider.defaultEndpointMapping(for: target)</span><br><span class="line">    return defaultEndpoint.adding(newHTTPHeaderFields: [&quot;APP_NAME&quot;: &quot;MY_AWESOME_APP&quot;])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>为什么要引入requestClosure，把底层的URLRequest暴露给外部？</strong></p>
-<blockquote>
-<p>我想有几点原因</p>
-<ul>
-<li>有些信息只有<code>URLRequest</code>创建之后才能知晓，比如cookie。</li>
-<li><code>URLRequest</code>属性很多，大多不常用，比如<code>allowsCellularAccess</code>，没必在Moya这一层封装。</li>
-<li>Endpoint到URLRequest的映射是通过闭包回调的方式进行的，意味着你可以异步回调。</li>
-</ul>
-</blockquote>
-<p><strong>为什么要引入Endpoint，不直接映射成URLRequest?也就是说，两步闭包映射变成一步</strong></p>
-<blockquote>
-<p>为了保证TargetType维持不可变状态（属性全都是只读），同时给外部友好的API。通过Endpoint你可以方便的：添加新的参数,添加HttpHeader….</p>
-</blockquote>
-<hr>
-<h3 id="Stub"><a href="#Stub" class="headerlink" title="Stub"></a>Stub</h3><p>这里我们先不管流程图中的Plugins（插件），先顺着流程走，接下来我们到了一个叫做stub的模块。stub是一个测试相关的概念，通过stub你可以返回一些假数据。</p>
-<blockquote>
-<p>Moya的stub原理很简单，如果Provider决定Stub，那么就返回Endpoint中的假数据；否则就进行实际的网络请求。</p>
-</blockquote>
-<p>Moya通过<code>StubClosure</code>闭包开决定stub的模式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public typealias StubClosure = (Target) -&gt; Moya.StubBehavior</span><br></pre></td></tr></table></figure>
-<p>模式分为三种</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public enum StubBehavior &#123;</span><br><span class="line">    case never //不Stub</span><br><span class="line">    case immediate //立刻返回数据</span><br><span class="line">    case delayed(seconds: TimeInterval)//延时返回数据</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>返回数据的时候，就是简单的根据EndPoint中的假数据闭包：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">switch endpoint.sampleResponseClosure() &#123;</span><br><span class="line">    case .networkResponse(let statusCode, let data):</span><br><span class="line">        let response = Moya.Response(statusCode: statusCode, data: data, request: request, response: nil)</span><br><span class="line">        completion(.success(response))</span><br><span class="line">        //...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>默认的Endpoint的<code>sampleResponseClosure</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sampleResponseClosure: &#123; .networkResponse(200, target.sampleData) &#125;,</span><br></pre></td></tr></table></figure>
-<p>Moya采用了这种简单粗暴，但是效果却很好的stub方式。</p>
-<p><strong>这里很多人肯定会问，假如我不用Moya，我还想返回假数据，我该咋么做呢？</strong></p>
-<blockquote>
-<p>答案是<a href="https://developer.apple.com/documentation/foundation/urlprotocol" target="_blank" rel="noopener">URLProtocol</a>。通过<a href="https://developer.apple.com/documentation/foundation/urlprotocol" target="_blank" rel="noopener">URLProtocol</a>可以拦截网络请求，你可以把网络请求重定向到假数据。</p>
-<p>对于NSURLConnection发起的请求可以直接拦截。在拦截NSURLSession的时候有一点tricky，因为URLSession支持的拦截是通过<a href="https://developer.apple.com/documentation/foundation/urlsessionconfiguration" target="_blank" rel="noopener">URLSessionConfiguration</a>的属性<a href="https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411050-protocolclasses" target="_blank" rel="noopener">protocolClasses</a>来决定的，一般的做法是hook URLSession的初始化方法<code>init(configuration: URLSessionConfiguration, delegate: URLSessionDelegate?, delegateQueue: OperationQueue?)</code>，然后把想要的拦截Protocol注册到URLSessionConfiguration中。</p>
-</blockquote>
-<hr>
-<h3 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h3><blockquote>
-<p>Plugin提供了一种插件的机制让你可以在网络请求的关键节点插入代码，比如显示小菊花扽等。</p>
-</blockquote>
-<p><img src="https://img-blog.csdn.net/20170809135909929?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSGVsbG9fSHdj/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="img"></p>
-<p>这里我们再看一下这张图，可以清楚的看到四个plugin方法作用的时机。</p>
-<blockquote>
-<p>Note：Plugin没有用范型编程，所以不要尝试在plugin中进行JSON解析然后传递给上层。</p>
-</blockquote>
-<p>Moya提供了四种Plugin：</p>
-<ul>
-<li><a href="https://github.com/Moya/Moya/blob/master/Sources/Moya/Plugins/AccessTokenPlugin.swift" target="_blank" rel="noopener">AccessTokenPlugin</a> OAuth的Token验证</li>
-<li><a href="https://github.com/Moya/Moya/blob/master/Sources/Moya/Plugins/CredentialsPlugin.swift" target="_blank" rel="noopener">CredentialsPlugin</a> 证书</li>
-<li><a href="https://github.com/Moya/Moya/blob/master/Sources/Moya/Plugins/NetworkActivityPlugin.swift" target="_blank" rel="noopener">NetworkActivityPlugin</a> 网络请求状态</li>
-<li><a href="https://github.com/Moya/Moya/blob/master/Sources/Moya/Plugins/NetworkLoggerPlugin.swift" target="_blank" rel="noopener">NetworkLoggerPlugin</a> 网络日志</li>
-</ul>
-<hr>
-<h3 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h3><blockquote>
-<p>Moya并没有对Response进行特殊处理，仅仅是把Alamofire层面返回的数据封装成<code>Moya.Response</code>，然后再调用<code>convertResponseToResult</code>进一步封装成<code>Result&lt;Moya.Response, MoyaError&gt;</code>类型交给上层</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public func convertResponseToResult(_ response: HTTPURLResponse?, request: URLRequest?, data: Data?, error: Swift.Error?) -&gt;</span><br><span class="line">    Result&lt;Moya.Response, MoyaError&gt; &#123;</span><br><span class="line">        switch (response, data, error) &#123;</span><br><span class="line">        case let (.some(response), data, .none):</span><br><span class="line">            let response = Moya.Response(statusCode: response.statusCode, data: data ?? Data(), request: request, response: response)</span><br><span class="line">            return .success(response)</span><br><span class="line">        case let (_, _, .some(error)):</span><br><span class="line">            //....</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果你要对Response进一步转换成JSON，可以用Response的方法，比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func mapJSON(failsOnEmptyData: Bool = true) throws -&gt; Any &#123;/* */&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>到这里，Moya做的事情已经很清晰了：提供一种面向协议的接口来进行网络请求的编写；提供灵活的闭包接口来自定义请求；提供插件来让客户端在各个节点去介入网络请求；返回原始的请求数据给层。</p>
-</blockquote>
-<p>Moya最大的优点:</p>
-<ul>
-<li><strong>纯粹的轻量级网络层。</strong></li>
-</ul>
-<hr>
-<h3 id="Cancel"><a href="#Cancel" class="headerlink" title="Cancel"></a>Cancel</h3><p>网络API请求应该是可以被取消的。也就是说，在发起一个API请求后，客户端应该能够有一个数据结构能够取消这个请求。Moya返回协议<code>Cancellable</code>给客户端</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public protocol Cancellable &#123;</span><br><span class="line">    var isCancelled: Bool &#123; get &#125;</span><br><span class="line">    func cancel()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>这符合《最少知识原则》。客户端不知道请求是什么，它唯一能做的就是<code>cancel</code>。</p>
-</blockquote>
-<p>在内部实现中，引入了一个<code>CancellableWrapper</code>来进行实际的Cancel动作包装，返回的实际实现协议的类型就是它</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">internal class CancellableWrapper: Cancellable &#123;</span><br><span class="line">    internal var innerCancellable: Cancellable = SimpleCancellable()</span><br><span class="line"></span><br><span class="line">    var isCancelled: Bool &#123; return innerCancellable.isCancelled &#125;</span><br><span class="line"></span><br><span class="line">    internal func cancel() &#123;</span><br><span class="line">        innerCancellable.cancel()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">internal class SimpleCancellable: Cancellable &#123;</span><br><span class="line">    var isCancelled = false</span><br><span class="line">    func cancel() &#123;</span><br><span class="line">        isCancelled = true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>为什么要用一个CancellableWrapper进行包装呢？</strong></p>
-<p>原因是：</p>
-<ul>
-<li>对于没有实际发出的请求（参数错误），cancel动作直接用<code>SimpleCancellable</code>即可。</li>
-<li>对于实际发出的请求请求，cancel则需要取消实际的网络请求。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let cancellableToken = CancellableWrapper()</span><br><span class="line">if error&#123; //参数出错</span><br><span class="line">    return cancellableToken</span><br><span class="line">&#125;</span><br><span class="line">cancellableToken.innerCancellable = CancellableToken(request:request)</span><br></pre></td></tr></table></figure>
-<p>而<code>CancellableToken</code>中，取消网络请求：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public final class CancellableToken: Cancellable&#123;</span><br><span class="line">    //...</span><br><span class="line">    fileprivate var lock: DispatchSemaphore = DispatchSemaphore(value: 1)</span><br><span class="line">    public func cancel() &#123;</span><br><span class="line">        _ = lock.wait(timeout: DispatchTime.distantFuture)</span><br><span class="line">        defer &#123; lock.signal() &#125;</span><br><span class="line">        guard !isCancelled else &#123; return &#125;</span><br><span class="line">        isCancelled = true</span><br><span class="line">        cancelAction()</span><br><span class="line">    &#125;</span><br><span class="line">    init(request: Request) &#123;</span><br><span class="line">        self.request = request</span><br><span class="line">        self.cancelAction = &#123;</span><br><span class="line">            request.cancel()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>这里用到了信号量，为了防止两个线程同时执行cancel操作。</p>
-</blockquote>
-<hr>
-<h3 id="Alamofire封装"><a href="#Alamofire封装" class="headerlink" title="Alamofire封装"></a>Alamofire封装</h3><p>Moya采用桥接的方式，把Alamofire的API细节进行封装，详细的封装细节可见<a href="https://github.com/Moya/Moya/blob/master/Sources/Moya/Moya%2BAlamofire.swift" target="_blank" rel="noopener">Moya+Alamofire.swift</a>。总的来说，采用了两种方式：</p>
-<p>简单的类型桥接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//用typealias进行桥接</span><br><span class="line">public typealias Method = Alamofire.HTTPMethod</span><br><span class="line">public typealias ParameterEncoding = Alamofire.ParameterEncoding</span><br></pre></td></tr></table></figure>
-<p>协议桥接</p>
-<p>Alamofire对外的接口是<a href="https://github.com/Alamofire/Alamofire/blob/master/Source/Request.swift" target="_blank" rel="noopener">Request</a>类型。而Moya需要在Plugin中对Reuqest进行暴露，用协议怼Request进行了桥接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public protocol RequestType &#123;</span><br><span class="line">    var request: URLRequest? &#123; get &#125;</span><br><span class="line">    func authenticate(user: String, password: String, persistence: URLCredential.Persistence) -&gt; Self</span><br><span class="line">    func authenticate(usingCredential credential: URLCredential) -&gt; Self</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">internal typealias Request = Alamofire.Request</span><br><span class="line">extension Request: RequestType &#123; &#125;</span><br></pre></td></tr></table></figure>
-<p>然后，暴露给外部的接口变成了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func willSend(_ request: RequestType, target: TargetType)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>采用桥接的方式对外隐藏了细节，这样即使有一天Moya的底层依赖不再是Alamofire，对上层也没有任何影响。</p>
-</blockquote>
-<h2 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h2><p>moya的很多设计原则是值得借鉴的，这些原则在软件开发领域是通用的。</p>
-<h3 id="面向协议"><a href="#面向协议" class="headerlink" title="面向协议"></a>面向协议</h3><blockquote>
-<p>Swift是一个面向协议的语言。(这句话我好像在博客里写过好多遍了)</p>
-</blockquote>
-<p>比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">protocol TargetType &#123;&#125; //表示这是一个API请求</span><br><span class="line">public protocol Cancellable&#123;&#125;//唯一确定请求，只有一个接口用来取消</span><br><span class="line">public protocol RequestType&#123;&#125;//对外提供的请求类型，隐藏Alamofire的细节</span><br><span class="line">public protocol PluginType&#123;&#125; //插件类型</span><br></pre></td></tr></table></figure>
-<p>面向协议的最大优点是：</p>
-<ul>
-<li>协议是建立的是一个抽象的依赖关系。</li>
-</ul>
-<p>同时，Swift协议支持扩展，你可以通过协议扩展为协议中的方法提供默认实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public extension TargetType &#123;</span><br><span class="line">    var validate: Bool &#123;</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="不可变状态"><a href="#不可变状态" class="headerlink" title="不可变状态"></a>不可变状态</h3><blockquote>
-<p>不可变状态会让你的代码可预测，可测试。</p>
-</blockquote>
-<p>不可变状态是函数式编程里的一个核心概念。在Moya中，很多状态都是不可变的。典型的是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public protocol TargetType &#123;</span><br><span class="line">    var baseURL: URL &#123; get &#125; //只读</span><br><span class="line">    var path: String &#123; get &#125; //只读</span><br><span class="line">    //...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>同样，还体现在Endpoint中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">open class Endpoint&lt;Target&gt; &#123;</span><br><span class="line">    open let url: String //常量</span><br><span class="line">    open let method: Moya.Method</span><br><span class="line">    //...</span><br><span class="line">    //不修改自身，而是返回一个新的实例</span><br><span class="line">     open func adding(newHTTPHeaderFields: [String: String]) -&gt; Endpoint&lt;Target&gt; &#123;</span><br><span class="line">        return adding(httpHeaderFields: newHTTPHeaderFields)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h3><blockquote>
-<p>Swift中，函数是一等公民，意味着你可以把它作为函数的参数和返回值。当一个函数作为函数参数或者返回值的时候，称之为高阶函数。</p>
-</blockquote>
-<p><strong>高阶函数让你的代码可以输入/输出逻辑，这样就增加了灵活性。</strong></p>
-<p>比如在Provider初始化的时候传入的三个闭包：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">endpointClosure: = MoyaProvider.defaultEndpointMapping,</span><br><span class="line">requestClosure: = MoyaProvider.defaultRequestMapping,</span><br><span class="line">stubClosure: = MoyaProvider.neverStub,</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>高阶函数配合函数默认值，是Swift开发中进行接口暴露的常用技巧。</p>
-</blockquote>
-<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>插件是我认为Moya这个框架最吸引我的地方。</p>
-<p><img src="https://img-blog.csdn.net/20170809135909929?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSGVsbG9fSHdj/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="img"></p>
-<blockquote>
-<p>通过在各个节点暴露出插件的接口，让Moya的日志，授权，小菊花等功能无需耦合到核心代码里，同时也给外部足够的灵活性，能够插入任何想要的代码。</p>
-</blockquote>
-<h3 id="类型安全"><a href="#类型安全" class="headerlink" title="类型安全"></a>类型安全</h3><blockquote>
-<p>使用枚举来保证类型安全是Swift中常用技巧。</p>
-</blockquote>
-<p>比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//返回假数据</span><br><span class="line">public enum EndpointSampleResponse &#123;</span><br><span class="line">    case networkResponse(Int, Data)</span><br><span class="line">    case response(HTTPURLResponse, Data)</span><br><span class="line">    case networkError(NSError)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><p>Moya的错误处理主要采用了两种方式：</p>
-<p>抛异常：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public func filterSuccessfulStatusAndRedirectCodes() throws -&gt; Response &#123;</span><br><span class="line">    return try filter(statusCodes: 200...399)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Result类型：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">func convertResponseToResult(****) -&gt; Result&lt;Moya.Response, MoyaError&gt; &#123;</span><br><span class="line">    return .success(response) </span><br><span class="line">    return .failure(error)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>在Swift中，通过Result类型来处理异步错误是一个很常见也很有效的做法。</p>
-</blockquote>
-<p>使用Result类型最大的好处是可以不用每一步都处理错误。</p>
-<p>比如，类似这个链式调用，每一步都有可能出错，通过Result类型，我们可以在最后统一处理错误。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">provider.request(...).filter().mapJSON.filter().&#123; result in</span><br><span class="line">    switch result &#123;</span><br><span class="line">        case let .success(moyaResponse):</span><br><span class="line"></span><br><span class="line">        case let .failure(error):</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>延伸阅读： <a href="http://blog.csdn.net/hello_hwc/article/details/63685843" target="_blank" rel="noopener">详解Swift中的错误处理</a></li>
-</ul>
-<hr>
-<h2 id="RxSwift"><a href="#RxSwift" class="headerlink" title="RxSwift"></a>RxSwift</h2><blockquote>
-<p><a href="https://github.com/ReactiveX/RxSwift" target="_blank" rel="noopener">RxSwift</a>是一个响应式编程框架，它是语言层面的扩展，改变的是你写代码的方式，与具体业务细节无关。</p>
-</blockquote>
-<p>如果你对RxSwift并不熟悉，推荐我之前的一篇博客：<a href="http://blog.csdn.net/hello_hwc/article/details/51859330" target="_blank" rel="noopener">RxSwift使用教程</a>。另外，我还维护了一个<a href="https://github.com/LeoMobileDeveloper/awesome-rxswift" target="_blank" rel="noopener">awesome-rxswift</a>列表。</p>
-<p>Moya核心代码并没有支持RxSwift，那样就与另外一个框架耦合在一起了。Moya采用了扩展的方式，让Moya支持RxSwift，具体代码参见<a href="https://github.com/Moya/Moya/tree/master/Sources/RxMoya" target="_blank" rel="noopener">RxMoya</a>。</p>
-<p>在扩展中，提供了<code>RxMoyaProvider</code>类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class RxMoyaProvider&lt;Target&gt;: MoyaProvider&lt;Target&gt;</span><br></pre></td></tr></table></figure>
-<p>在请求的时候，不再通过闭包进行回调，而是返回<code>Observable&lt;Response&gt;</code>（一个可监听的信号源）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">open func request(_ token: Target) -&gt; Observable&lt;Response&gt; &#123;</span><br><span class="line">    return Observable.create &#123; observer in </span><br><span class="line">        //...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后，通过extension扩展ObservableType为Response提供各种响应式处理方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">extension ObservableType where E == Response &#123;</span><br><span class="line">     public func mapJSON(failsOnEmptyData: Bool = true) -&gt; Observable&lt;Any&gt;</span><br><span class="line">     public func filter(statusCode: Int) -&gt; Observable&lt;E&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="ObjectMapper"><a href="#ObjectMapper" class="headerlink" title="ObjectMapper"></a>ObjectMapper</h2><blockquote>
-<p><a href="https://github.com/Hearst-DD/ObjectMapper" target="_blank" rel="noopener">ObjectMapper</a> 是一个用来做把JSON转换成Struct/Class的Swift框架。</p>
-</blockquote>
-<p>实际开发中，先把JSON转换成对象再进行下一步UI操作是很常见的事情。结合RxSwift，我们可以很容易的把ObjectMapper插入响应式处理的一个节点中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">extension ObservableType where E == Response &#123;</span><br><span class="line">    public func mapObject&lt;T: Mappable&gt;(_ type: T.Type) -&gt; Observable&lt;T&gt; &#123;</span><br><span class="line">        return flatMap &#123; response -&gt; Observable&lt;T&gt; in</span><br><span class="line">            return Observable.just&#123;/* 这里引入ObjectMapper进行JSON解析*/&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过这个方法，可以进行信号中包含的信息转换：</p>
-<p><img src="https://img-blog.csdn.net/20170811103606241?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSGVsbG9fSHdj/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="img"></p>
-<p>于是，通过RxSwift和ObjectMapper，就可以这么处理：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">rxRrovider.request(.targetType)</span><br><span class="line">  .mapObject(YouClass.type)</span><br><span class="line">  .subscribe &#123; event -&gt; Void in</span><br><span class="line">    switch event &#123;</span><br><span class="line">    case .next(let object):</span><br><span class="line">      self.object = object</span><br><span class="line">    case .error(let error):</span><br><span class="line">      print(error)</span><br><span class="line">    default:</span><br><span class="line">      break</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;.addDisposableTo(disposeBag)</span><br></pre></td></tr></table></figure>
-<hr>
-
+        <p>##</p>
+<p>一个<em>枚举</em>定义了一个通用型的一组相关的值，使你在你的代码中的一个类型安全的方式这些值来工作。</p>
+<p>如果您熟悉C，您将知道C枚举将相关名称分配给一组整数值。Swift中的枚举更加灵活，并且不必为枚举的每种情况提供值。如果一个值（被称为“原始”的值）<em>被</em>提供给每个枚举的情况下，该值可以是一个字符串，一个字符，或任何整数的值或者浮点型。</p>
+<p>或者，枚举案例可以指定与每个不同案例值一起存储的<em>任何</em>类型的关联值，这与联合会或变体在其他语言中的做法非常相似。您可以将一组相关案例定义为一个枚举的一部分，其中每个案例都有一组与其相关的适当类型的值。</p>
+<p>Swift中的枚举本身就是一流的类型。它们采用了传统上仅由类支持的许多功能，例如计算属性以提供有关枚举的当前值的附加信息，以及提供与枚举所代表的值相关的功能的实例方法。枚举还可以定义初始化器以提供初始案例值; 可以扩展到超出其原始实现范围的功能; 并且可以符合协议以提供标准功能。<br>
+        
+          <a class="article-more-a" href="/2018/05/07/枚举enum/#more">more >></a>
+        
       
 
       
@@ -903,11 +491,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Network</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">apple</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Moya</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">enum</a>
         		</li>
       		
 		</ul>
@@ -917,7 +505,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/27/Moya的设计之道/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/07/枚举enum/">展开全文 >></a>
         </p>
       
 
@@ -947,14 +535,14 @@
 
 
   
-    <article id="post-Moya源码解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Closures闭包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/27/Moya源码解析/">Moya源码解析</a>
+      <a class="article-title" href="/2018/05/07/Closures闭包/">Closures闭包</a>
     </h1>
   
 
@@ -963,8 +551,8 @@
         	
 	
         
-        <a href="/2018/04/27/Moya源码解析/" class="archive-article-date">
-  	<time datetime="2018-04-27T04:34:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-27</time>
+        <a href="/2018/05/07/Closures闭包/" class="archive-article-date">
+  	<time datetime="2018-05-07T06:31:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-07</time>
 </a>
         
       </header>
@@ -976,105 +564,14 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>转<a href="https://blog.csdn.net/lh844386434/article/details/51818017" target="_blank" rel="noopener">https://blog.csdn.net/lh844386434/article/details/51818017</a></p>
-<p><a href="https://github.com/Moya/Moya" target="_blank" rel="noopener"><strong>Moya</strong></a>是一个高度抽象的网络库，他的理念是让你不用关心网络请求的底层的实现细节，只用定义你关心的业务。且Moya采用桥接和组合来进行封装(默认桥接了<a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="noopener"><strong>Alamofire</strong></a>)，使得Moya非常好扩展，让你不用修改Moya源码就可以轻易定制。官方给出几个Moya主要优点：</p>
-<ul>
-<li>编译时检查API endpoint权限</li>
-<li>让你使用枚举定义各种不同Target, endpoints</li>
-<li>把stubs当做一等公民对待，因此测试超级简单。</li>
-</ul>
-<h2 id="Target"><a href="#Target" class="headerlink" title="Target"></a>Target</h2><p>开始Moya之旅的第一步便是，建立一个Enum的Target，这个Target便是你网络请求相关行为的定义。Target必须实现TargetType协议。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public protocol TargetType &#123;</span><br><span class="line">    var baseURL: NSURL &#123; get &#125;</span><br><span class="line">    var path: String &#123; get &#125;</span><br><span class="line">    var method: Moya.Method &#123; get &#125;</span><br><span class="line">    var parameters: [String: AnyObject]? &#123; get &#125;</span><br><span class="line">    var sampleData: NSData &#123; get &#125;</span><br><span class="line">&#125; 1234567</span><br></pre></td></tr></table></figure>
-<p>例如有一个AccountAPI模块，模块实现注册登录的功能。所以第一件事情，我们需要定义一个Target</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">enum AccountAPI &#123;</span><br><span class="line">    case Login(userName: String, passwd: String)</span><br><span class="line">    case Register(userName: String, passwd: String)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">extension AccountAPI: TargetType &#123;</span><br><span class="line">    var baseURL: NSURL &#123;</span><br><span class="line">        return NSURL(string: &quot;https://www.myapp.com&quot;)!</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var path: String &#123;</span><br><span class="line">        switch self &#123;</span><br><span class="line">        case .Login:</span><br><span class="line">            return &quot;/login&quot;</span><br><span class="line">        case .Register:</span><br><span class="line">            return &quot;/register&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var method: Moya.Method &#123;</span><br><span class="line">        return .GET</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var parameters: [String: AnyObject]? &#123;</span><br><span class="line">        switch self &#123;</span><br><span class="line">        case .Login:</span><br><span class="line">            return nil</span><br><span class="line">        case .Register(let userName, let passwd):</span><br><span class="line">            return [&quot;username&quot;: userName, &quot;password&quot;: passwd]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var sampleData: NSData &#123;</span><br><span class="line">        switch self &#123;</span><br><span class="line">        case .Login:</span><br><span class="line">            return &quot;&#123;&apos;code&apos;: 1,6&apos;Token&apos;:&apos;123455&apos;&#125;&quot;.dataUsingEncoding(NSUTF8StringEncoding)!</span><br><span class="line">        case .Register(let userName, let passwd):</span><br><span class="line">            return &quot;找不到数据&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;1234567891011121314151617181920212223242526272829303132333435363738394041</span><br></pre></td></tr></table></figure>
-<p>主要是实现了TargetType协议，里面的网址和内容，是随便写的，可能不make sence（不合理）, 但 仅仅是做一个例子而已。</p>
-<h2 id="Providers"><a href="#Providers" class="headerlink" title="Providers"></a>Providers</h2><p>Providers是Moya中的核心，Moya中所有的API请求都是通过Provider来发起的。因此大多数时候，你的代码请求像这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let provider = MoyaProvider&lt;AccountAPI&gt;()</span><br><span class="line">provider.request(.Login) &#123; result in</span><br><span class="line">    // `result` is either .Success(response) or .Failure(error)</span><br><span class="line">&#125;</span><br><span class="line">12345</span><br></pre></td></tr></table></figure>
-<p>我们初始化了一个AccountAPI的Provider，并且调用了Login请求。怎么样？干净简单吧！</p>
-<h3 id="从Provider的构造函数说起"><a href="#从Provider的构造函数说起" class="headerlink" title="从Provider的构造函数说起"></a><strong>从Provider的构造函数说起</strong></h3><p>Provider真正做的事情可以用一个流来表示：<strong>Target -&gt; Endpoint -&gt; Request</strong>。在这个例子中，它将AccountAPI转换成Endpoint, 再将其转换成为NSRURLRequest。最后将这个NSRURLRequest交给<strong>Alamofire</strong>去进行网络请求。</p>
-<p>我们从Provider的构造函数开始切入，一步一步地扒开它。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//Moya.swift</span><br><span class="line"></span><br><span class="line">public init(endpointClosure: EndpointClosure = MoyaProvider.DefaultEndpointMapping,</span><br><span class="line">        requestClosure: RequestClosure = MoyaProvider.DefaultRequestMapping,   </span><br><span class="line">        stubClosure: StubClosure = MoyaProvider.NeverStub,</span><br><span class="line">        manager: Manager = MoyaProvider&lt;Target&gt;.DefaultAlamofireManager(),</span><br><span class="line">        plugins: [PluginType] = []) 1234567</span><br></pre></td></tr></table></figure>
-<ol>
-<li>首先我们发现的是3个Closure：endpointClosure、requestClosure、stubClosure。这3个Closure是让我们定制请求和进行测试时用的。非常有用，后面细说。</li>
-<li>然后是一个Manager，Manager是真正用来网络请求的类，Moya自己并不提供Manager类，Moya只是对其他网络请求类进行了简单的桥接。这么做是为了让调用方可以轻易地定制、更换网络请求的库。比如你不想用Alamofire，可以十分简单的换成其他库</li>
-<li>最后是一个类型为PluginType的数组。Moya提供了一个插件机制，使我们可以建立自己的插件类来做一些额外的事情。比如写Log，显示“菊花”等。抽离出Plugin层的目的，就是让Provider职责单一，满足开闭原则。把和自己网络无关的行为抽离。避免各种业务揉在一起不利于扩展。</li>
-</ol>
-<p>先来看看第一个<strong>EndpointClosure</strong></p>
-<h3 id="EndpointClosure"><a href="#EndpointClosure" class="headerlink" title="EndpointClosure"></a><strong>EndpointClosure</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//Moya.swift</span><br><span class="line"></span><br><span class="line">public typealias EndpointClosure = Target -&gt; Endpoint&lt;Target&gt;123</span><br></pre></td></tr></table></figure>
-<p><strong>EndpointClosure</strong>这个闭包，输入是一个Target，返回<strong>Endpoint</strong>。这就是我们前面说的Target -&gt; Endpoint的转换，那么<strong>Endpoint</strong>是个什么鬼？<br><strong>Endpoint</strong> 是Moya最终进行网络请求前的一种数据结构，它保存了这些数据：</p>
-<ul>
-<li>URL</li>
-<li>HTTP请求方式 (GET, POST, etc).</li>
-<li>本次请求的参数</li>
-<li>参数的编码方式 (URL, JSON, custom, etc).</li>
-<li>stub数据的 response(测试用的)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//Endpoint.swift</span><br><span class="line"></span><br><span class="line">public class Endpoint&lt;Target&gt; &#123;</span><br><span class="line">    public typealias SampleResponseClosure = () -&gt; EndpointSampleResponse</span><br><span class="line"></span><br><span class="line">    public let URL: String</span><br><span class="line">    public let method: Moya.Method</span><br><span class="line">    public let sampleResponseClosure: SampleResponseClosure</span><br><span class="line">    public let parameters: [String: AnyObject]?</span><br><span class="line">    public let parameterEncoding: Moya.ParameterEncoding</span><br><span class="line"></span><br><span class="line">      ...</span><br><span class="line">  &#125;12345678910111213</span><br></pre></td></tr></table></figure>
-<p>Moya提供一个默认<strong>EndpointClosure</strong>的函数，来实现这个Target到Endpoint的转换：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//Moya.swift</span><br><span class="line"></span><br><span class="line">public final class func DefaultEndpointMapping(target: Target) -&gt; Endpoint&lt;Target&gt; &#123;</span><br><span class="line">     let url = target.baseURL.URLByAppendingPathComponent(target.path).absoluteString</span><br><span class="line">     return Endpoint(URL: url, sampleResponseClosure: &#123;.NetworkResponse(200, target.sampleData)&#125;, method: target.method, parameters: target.parameters)</span><br><span class="line"> &#125;123456</span><br></pre></td></tr></table></figure>
-<p>上面的代码只是单纯地创建并返回一个Endpoint实例。然而在很多时候，我们需要自定义这个闭包来做更多额外的事情。后面在stub小节，你会看到，我们用stub模拟API请求失败的场景，给客户端返回一个非200的状态码。为了实现这个功能，在这个闭包里处理相关的逻辑，再合适不过了！或者说这个闭包就是让我们根据业务需求定制网络请求的。</p>
-<h3 id="RequestClosure"><a href="#RequestClosure" class="headerlink" title="RequestClosure"></a><strong>RequestClosure</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//Moya.swift</span><br><span class="line"></span><br><span class="line">public typealias RequestClosure = (Endpoint&lt;Target&gt;, NSURLRequest -&gt; Void) -&gt; Void123</span><br></pre></td></tr></table></figure>
-<p><strong>RequestClosure</strong>这个闭包就是实现将Endpoint -&gt; NSURLRequest，Moya也提供了一个默认实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//Moya.swift</span><br><span class="line"></span><br><span class="line">public final class func DefaultRequestMapping(endpoint: Endpoint&lt;Target&gt;, closure: NSURLRequest -&gt; Void) &#123;</span><br><span class="line">      return closure(endpoint.urlRequest)</span><br><span class="line">&#125;12345</span><br></pre></td></tr></table></figure>
-<p>默认实现也只是简单地调用endpoint.urlRequest取得一个NSURLRequest实例。然后调用了closure。然而，你可以在这里修改这个请求Request, 事实上这也是Moya给你的最后的机会。举个例子, 你想禁用所有的cookie，并且设置超时时间等。那么你可以实现这样的闭包：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let requestClosure = &#123; (endpoint: Endpoint&lt;GitHub&gt;, done: NSURLRequest -&gt; Void) in</span><br><span class="line">    //可以在这里修改request</span><br><span class="line">    let request: NSMutableURLRequest = endpoint.urlRequest.mutableCopy() as NSMutableURLRequest</span><br><span class="line">    request.HTTPShouldHandleCookies = false</span><br><span class="line">    request.timeoutInterval = 20 </span><br><span class="line"></span><br><span class="line">    done(request)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">provider = MoyaProvider(requestClosure: requestClosure)</span><br><span class="line">1234567891011</span><br></pre></td></tr></table></figure>
-<p>从上面可以清晰地看出，<strong>EndpointClosure</strong> 和 <strong>RequestClosure</strong> 实现了 <strong>Target -&gt; Endpoint -&gt; NSRequest</strong>的转换流</p>
-<h3 id="StubClosure"><a href="#StubClosure" class="headerlink" title="StubClosure"></a><strong>StubClosure</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//Moya.swift</span><br><span class="line"></span><br><span class="line">public typealias StubClosure = Target -&gt; Moya.StubBehavior123</span><br></pre></td></tr></table></figure>
-<p><strong>StubClosure</strong>这个闭包比较简单，返回一个<strong>StubBehavior</strong>的枚举值。它就是让你告诉Moya你是否使用Stub返回数据或者怎样使用Stub返回数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//Moya.swift</span><br><span class="line"></span><br><span class="line">public enum StubBehavior &#123;</span><br><span class="line">    case Never          //不使用Stub返回数据</span><br><span class="line">    case Immediate      //立即使用Stub返回数据</span><br><span class="line">    case Delayed(seconds: NSTimeInterval) //一段时间间隔后使用Stub返回的数据</span><br><span class="line">&#125;1234567</span><br></pre></td></tr></table></figure>
-<p>Never表明不使用Stub来返回模拟的网络数据， Immediate表示马上返回Stub的数据， Delayed是在几秒后返回。Moya默认是不使用Stub来测试。</p>
-<p>在Target那一节我们定义了一个AccountAPI, API中我们实现了接口sampleData, 这个属性是返回Stub数据的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">extension AccountAPI: TargetType &#123;</span><br><span class="line">    ...</span><br><span class="line">    var sampleData: NSData &#123;</span><br><span class="line">        switch self &#123;</span><br><span class="line">        case .Login:</span><br><span class="line">            return &quot;&#123;&apos;code&apos;: 1,6&apos;Token&apos;:&apos;123455&apos;&#125;&quot;.dataUsingEncoding(NSUTF8StringEncoding)!</span><br><span class="line">        case .Register(let userName, let passwd):</span><br><span class="line">            return &quot;找不到数据&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let endPointAction = &#123; (target: TargetType) -&gt; Endpoint&lt;AccountAPI&gt; in</span><br><span class="line">    let url = target.baseURL.URLByAppendingPathComponent(target.path).absoluteString</span><br><span class="line"></span><br><span class="line">    switch target &#123;</span><br><span class="line">    case .Login:</span><br><span class="line">        return Endpoint(URL: url, sampleResponseClosure: &#123;.NetworkResponse(200, target.sampleData)&#125;, method: target.method, parameters: target.parameters)</span><br><span class="line">    case .Register:</span><br><span class="line">        return Endpoint(URL: url, sampleResponseClosure: &#123;.NetworkResponse(404, target.sampleData)&#125;, method: target.method, parameters: target.parameters)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let stubAction: (type: AccountAPI) -&gt; Moya.StubBehavior  = &#123; type in</span><br><span class="line">    switch type &#123;</span><br><span class="line">    case .Login:</span><br><span class="line">        return Moya.StubBehavior.Immediate</span><br><span class="line">    case .Register:</span><br><span class="line">        return Moya.StubBehavior.Delayed(seconds: 3)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">let loginAPIProvider = MoyaProvider&lt;AccountAPI&gt;(</span><br><span class="line">    endpointClosure: endPointAction,</span><br><span class="line">    stubClosure: stubAction</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">self.netProvider = loginAPIProvider</span><br><span class="line">loginAPIProvider.request(AccountAPI.Login(userName: &quot;user&quot;, passwd: &quot;123456&quot;)) &#123; (result) in</span><br><span class="line">    switch result &#123;</span><br><span class="line">    case .Success(let respones) :</span><br><span class="line">        print(respones)</span><br><span class="line"></span><br><span class="line">    case .Failure(_) :</span><br><span class="line">        print(&quot;We got an error&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    print(result)</span><br><span class="line">&#125;</span><br><span class="line">123456789101112131415161718192021222324252627282930313233343536373839404142434445464748</span><br></pre></td></tr></table></figure>
-<p>就这样我们就实现了一个Stub! Login和Register都使用了Stub返回的数据。</p>
-<blockquote>
-<p>注意：Moya中Provider对象在销毁的时候会去Cancel网络请求。为了得到正确的结果，你必须保证在网络请求的时候你的Provider不会被释放。否者你会得到下面的错误 “But don’t forget to keep a reference for it in property. If it gets deallocated you’ll see -999 “cancelled” error on response” 。通常为了避免这种情况，你可以将Provider实例设置为类成员变量，或者shared实例</p>
-</blockquote>
-<h3 id="Moya中Stub的实现"><a href="#Moya中Stub的实现" class="headerlink" title="Moya中Stub的实现"></a><strong>Moya中Stub的实现</strong></h3><p>大多iOS的Http的Stub框架本质都是实现一个HTTP网络请求的代理类，去Hook系统Http请求。 如<a href="https://github.com/AliSoftware/OHHTTPStubs" target="_blank" rel="noopener"><strong>OHHTTPStub</strong></a>就是这么做的。在iOS中，HTTP代理类需要继承<strong>NSURLProtocol</strong>类，重载一些父类的方法，然后将这个代理类注册到系统中去。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class MyHttpProxy : NSURLProtocol &#123;</span><br><span class="line">    //重载一些父类的方法</span><br><span class="line">     override class func canInitWithRequest(request: NSURLRequest) -&gt; Bool &#123;</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override class func canonicalRequestForRequest(request: NSURLRequest) -&gt; NSURLRequest &#123;</span><br><span class="line">        return super.canonicalRequestForRequest(request)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//注册</span><br><span class="line">NSURLProtocol.registerClass(MyHttpProxy.self) </span><br><span class="line">12345678910111213141516</span><br></pre></td></tr></table></figure>
-<p>之后我们APP中所有的网络请求，都会去经过我们MyHttpProxy的代理类。<br>然而Moya的Stub不是这样的，Moya的Stub的实现原理也超级无敌简单！它不是系统级别的，非入侵式的。它只是简单的加了一个判断而已！还是在Moya的Request方法里面</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//Moya.swift</span><br><span class="line"></span><br><span class="line">public func request(target: Target, queue:dispatch_queue_t?, completion: Moya.Completion) -&gt; Cancellable &#123;</span><br><span class="line">        let endpoint = self.endpoint(target)</span><br><span class="line">        let stubBehavior = self.stubClosure(target)</span><br><span class="line">        var cancellableToken = CancellableWrapper()</span><br><span class="line"></span><br><span class="line">        let performNetworking = &#123; (request: NSURLRequest) in</span><br><span class="line">            if cancellableToken.isCancelled &#123; return &#125;</span><br><span class="line"></span><br><span class="line">            switch stubBehavior &#123;</span><br><span class="line">            case .Never:</span><br><span class="line">                cancellableToken.innerCancellable = self.sendRequest(target, request: request, queue: queue, completion: completion)</span><br><span class="line">            default:</span><br><span class="line">                cancellableToken.innerCancellable = self.stubRequest(target, request: request, completion: completion, endpoint: endpoint, stubBehavior: stubBehavior)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        requestClosure(endpoint, performNetworking)</span><br><span class="line"></span><br><span class="line">        return cancellableToken</span><br><span class="line">    &#125;12345678910111213141516171819202122</span><br></pre></td></tr></table></figure>
-<p>Moya先调用我们在构造函数中传入的stubClosure闭包，如果stubBehavior是Never就真正的发起网络请求，否<br>者就调用self.stubRequest</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//Moya.swift</span><br><span class="line"></span><br><span class="line">internal func stubRequest(target: Target, request: NSURLRequest, completion: Moya.Completion, endpoint: Endpoint&lt;Target&gt;, stubBehavior: Moya.StubBehavior) -&gt; CancellableToken &#123;</span><br><span class="line">        ...</span><br><span class="line">        let stub: () -&gt; () = createStubFunction(cancellableToken, forTarget: target, withCompletion: completion, endpoint: endpoint, plugins: plugins)</span><br><span class="line">        switch stubBehavior &#123;</span><br><span class="line">        case .Immediate:</span><br><span class="line">            stub()</span><br><span class="line">        case .Delayed(let delay):</span><br><span class="line">            let killTimeOffset = Int64(CDouble(delay) * CDouble(NSEC_PER_SEC))</span><br><span class="line">            let killTime = dispatch_time(DISPATCH_TIME_NOW, killTimeOffset)</span><br><span class="line">            dispatch_after(killTime, dispatch_get_main_queue()) &#123;</span><br><span class="line">                stub()</span><br><span class="line">            &#125;</span><br><span class="line">        case .Never:</span><br><span class="line">            fatalError(&quot;Method called to stub request when stubbing is disabled.&quot;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line">&#125;1234567891011121314151617181920</span><br></pre></td></tr></table></figure>
-<p>如果Immediate，就马上调用stub返回，是Delayed的话就Dispatch after延迟调用。</p>
-<h3 id="Manager"><a href="#Manager" class="headerlink" title="Manager"></a><strong>Manager</strong></h3><p>我们知道，Moya并不是一个网络请求的三方库，它只是一个抽象的网络层。它对其他网络库的进行了桥接，真正进行网络请求是别人的网络库（比如默认的Alamofire.Manager）<br>为了达到这个目的Moya做了几件事情：</p>
-<p>首先抽象了一个<strong>RequestType</strong>协议，利用这个协议将Alamofire隐藏了起来，让Provider类依赖于这个协议，而不是具体细节。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//Plugin.swift</span><br><span class="line"></span><br><span class="line">public protocol RequestType &#123;</span><br><span class="line">    var request: NSURLRequest? &#123; get &#125;</span><br><span class="line"></span><br><span class="line">    func authenticate(user user: String, password: String, persistence: NSURLCredentialPersistence) -&gt; Self</span><br><span class="line"></span><br><span class="line">    func authenticate(usingCredential credential: NSURLCredential) -&gt; Self</span><br><span class="line">&#125;123456789</span><br></pre></td></tr></table></figure>
-<p>然后让Moya.Manager == Alamofire.Manager，并且让Alamofire.Manager也实现RequestType协议</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Moya+Alamofire.swift</span><br><span class="line"></span><br><span class="line">public typealias Manager = Alamofire.Manager</span><br><span class="line"></span><br><span class="line">/// Choice of parameter encoding.</span><br><span class="line">public typealias ParameterEncoding = Alamofire.ParameterEncoding</span><br><span class="line"></span><br><span class="line">//让Alamofire.Manager也实现 RequestType协议</span><br><span class="line">extension Request: RequestType &#123; &#125;123456789</span><br></pre></td></tr></table></figure>
-<p>上面几步，就完成了Alamofire的封装、桥接。正因为桥接封装了Alamofire, 因此Moya的request,最终一定会调用Alamofire的request。简单的跟踪下Moya的Request方法就可以发现sendRequest调用了Alamofire。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//Moya.swift</span><br><span class="line"></span><br><span class="line">func sendRequest(target: Target, request: NSURLRequest, queue: dispatch_queue_t?, completion: Moya.Completion) -&gt; CancellableToken &#123;</span><br><span class="line">    //调用Alamofire发起网络请求</span><br><span class="line">    let alamoRequest = manager.request(request)</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br><span class="line">12345678</span><br></pre></td></tr></table></figure>
-<p>如果你想自定义你自己的Manager, 你可以传入你自己的Manager到Privoder。之后所有的请求都会经过你的这个Manager</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let policies: [String: ServerTrustPolicy] = [</span><br><span class="line">    &quot;example.com&quot;: .PinPublicKeys(</span><br><span class="line">        publicKeys: ServerTrustPolicy.publicKeysInBundle(),</span><br><span class="line">        validateCertificateChain: true,</span><br><span class="line">        validateHost: true</span><br><span class="line">    )</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">let manager = Manager(</span><br><span class="line">    configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),</span><br><span class="line">    serverTrustPolicyManager: ServerTrustPolicyManager(policies: policies)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">let provider = MoyaProvider&lt;MyTarget&gt;(manager: manager)1234567891011121314</span><br></pre></td></tr></table></figure>
-<h3 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a><strong>Plugin</strong></h3><p>Moya提供还提供插件机制，你可以自定义各种插件，所有插件必须满足<strong>PluginType</strong>协议</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//Plugin.swift</span><br><span class="line"></span><br><span class="line">public protocol PluginType &#123;</span><br><span class="line">    /// Called immediately before a request is sent over the network (or stubbed).</span><br><span class="line">    func willSendRequest(request: RequestType, target: TargetType)</span><br><span class="line"></span><br><span class="line">    // Called after a response has been received, but before the MoyaProvider has invoked its completion handler.</span><br><span class="line">    func didReceiveResponse(result: Result&lt;Moya.Response, Moya.Error&gt;, target: TargetType)</span><br><span class="line">&#125;123456789</span><br></pre></td></tr></table></figure>
-<p>协议里只有两个方法，willSendRequest和didReceiveResponse。在进行网络请求之前和收到请求后，Moya会遍历所有的插件。分别去调用插件各自的willSendRequest和didReceiveResponse方法。</p>
-<p>个人觉得这个插件更像是一个网络回调的Delegate，只是取了一个高大上的名字而已。不过将网络回调抽取出来确实能更好地将无关业务隔离，让Privoder更加专心的做自己的事情。而且以后也非常好扩展。</p>
-<p>Moya默认提供了三个插件：</p>
-<ul>
-<li>Authentication插件 (CredentialsPlugin.swift)。 HTTP认证的插件。</li>
-<li>Logging插件(NetworkLoggerPlugin.swift)。在调试是，输入网络请求的调试信息到控制台</li>
-<li>Network Activity Indicator插件（NetworkActivityPlugin.swift）。可以用这个插件来显示网络菊花</li>
-</ul>
-<p>Network Activity Indicator插件用法示例，在网络进行请求开始请求时添加一个Spinner, 请求结束隐藏Spinner。这里用的是<a href="https://github.com/icanzilb/SwiftSpinner" target="_blank" rel="noopener"><strong>SwiftSpinner</strong></a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let spinerPlugin = NetworkActivityPlugin &#123; state in</span><br><span class="line">    if state == .Began &#123;</span><br><span class="line">        SwiftSpinner.show(&quot;Connecting...&quot;)</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        SwiftSpinner.show(&quot;request finish...&quot;)</span><br><span class="line">        SwiftSpinner.hide()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">let loginAPIProvider = MoyaProvider&lt;AccountAPI&gt;(</span><br><span class="line">    plugins: [spinerPlugin]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">loginAPIProvider.request(.Login) &#123; _ in &#125;</span><br><span class="line">1234567891011121314</span><br></pre></td></tr></table></figure>
-<p><strong>插件实现代码</strong></p>
-<p>插件的源码实现也超级简单。在进行网络请求之前和收到请求后，遍历所有的插件，调用其相关的接口。只是要分别处理下Stub和真正进行网络请求的两种情况</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">//Moya.swift</span><br><span class="line"></span><br><span class="line">func sendRequest(target: Target, request: NSURLRequest, queue: dispatch_queue_t?, completion: Moya.Completion) -&gt; CancellableToken &#123;</span><br><span class="line">        let alamoRequest = manager.request(request)</span><br><span class="line">        let plugins = self.plugins</span><br><span class="line"></span><br><span class="line">        // 遍历插件，通知开始请求</span><br><span class="line">        plugins.forEach &#123; $0.willSendRequest(alamoRequest, target: target) &#125;</span><br><span class="line"></span><br><span class="line">        // Perform the actual request</span><br><span class="line">        alamoRequest.response(queue: queue) &#123; (_, response: NSHTTPURLResponse?, data: NSData?, error: NSError?) -&gt; () in</span><br><span class="line">            let result = convertResponseToResult(response, data: data, error: error)</span><br><span class="line">            // 遍历插件，通知收到请求</span><br><span class="line">            plugins.forEach &#123; $0.didReceiveResponse(result, target: target) &#125;</span><br><span class="line">            completion(result: result)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        alamoRequest.resume()</span><br><span class="line"></span><br><span class="line">        return CancellableToken(request: alamoRequest)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//在测试时，Stub分支的也要，遍历调用一次插件</span><br><span class="line"></span><br><span class="line">internal final func createStubFunction(token: CancellableToken, forTarget target: Target, withCompletion completion: Moya.Completion, endpoint: Endpoint&lt;Target&gt;, plugins: [PluginType]) -&gt; (() -&gt; ()) &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            if (token.canceled) &#123;</span><br><span class="line">                let error = Moya.Error.Underlying(NSError(domain: NSURLErrorDomain, code: NSURLErrorCancelled, userInfo: nil))</span><br><span class="line">                //调用插件</span><br><span class="line">                plugins.forEach &#123; $0.didReceiveResponse(.Failure(error), target: target) &#125;</span><br><span class="line">                completion(result: .Failure(error))</span><br><span class="line">                return</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            switch endpoint.sampleResponseClosure() &#123;</span><br><span class="line">            case .NetworkResponse(let statusCode, let data):</span><br><span class="line">                let response = Moya.Response(statusCode: statusCode, data: data, response: nil)</span><br><span class="line">                //成功情况，调用插件</span><br><span class="line">                plugins.forEach &#123; $0.didReceiveResponse(.Success(response), target: target) &#125;</span><br><span class="line">                completion(result: .Success(response))</span><br><span class="line">            case .NetworkError(let error):</span><br><span class="line">                let error = Moya.Error.Underlying(error)</span><br><span class="line">                //失败情况，调用插件</span><br><span class="line">                plugins.forEach &#123; $0.didReceiveResponse(.Failure(error), target: target) &#125;</span><br><span class="line">                completion(result: .Failure(error))</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849</span><br></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><hr>
-<p>总的来说Moya的实现比较简单，但是基于作者这种桥接、封装的思路，使得Moya扩展十分灵活，所以Moya有各种Provider, 能和RxSwift, RAC等等轻松的结合。 而Moya用起来也非常的干净。你不用关心Request具体实现。只用专注于你自己的Target设计就行。再加上Moya的Stub特性，的确使得它十分易于测试。</p>
-<h2 id="自己的思考"><a href="#自己的思考" class="headerlink" title="自己的思考"></a>自己的思考</h2><hr>
-<p>成也萧何败也萧何。然而我自己的感受，Moya让我们把所有的业务都放到Target中去，也会导致另外一些问题：<br>（以下仅是个人观点，仅供参考）</p>
-<ol>
-<li><p><strong>枚举无法重载，代码未必简洁</strong><br>比如，现在要添加一个新接口，还是要求实现Login功能，除了支持已有的用户名/密码登录，还要支持指纹登录。那么我们想定义可能想这样：Login(fingerPrint: String)。这两种登录情况实际上只是参数不一样。但在因为枚举中不能重载，所以为了添加这个case，我们不得不重新取一个名字，而不能利用函数重载。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">enum AccountAPI &#123;</span><br><span class="line">case Login(userName: String, passwd: String)</span><br><span class="line">case Register(userName: String, passwd: String)</span><br><span class="line">//case Login(fingerPrint: String) //error: 不能这样添加错的，不支持重载</span><br><span class="line">case LoginWithPrint(fingerPrint: String) //正确. 只能改名</span><br><span class="line">&#125;</span><br><span class="line">1234567</span><br></pre></td></tr></table></figure>
-<p>我个人觉得这样做，似乎并没有重载简洁。相比修改名字，我更喜欢重载。</p>
-</li>
-<li><p><strong>Target碎片化，后期维护困难</strong><br>随着业务的增加，Target会变得很复杂。TargetType协议它是利用多个属性：method属性、parameters属性等。将一次API请求的实现的分割到多个了函数（属性）中去实现。这就导致实现碎片化了。添加一个API请求，你需要修改几个函数（属性）， 改几个switch语句。如果文件很长，修改起来真的很烦，根本不好归类整理。</p>
-</li>
-<li><p><strong>不利于多人协作开发</strong><br>因为大家每次添加新功能，修改的都是这几个相同的函数（属性），所以非常容易导致文件冲突。</p>
-</li>
-</ol>
-
+        <p>##</p>
+<p><em>闭包</em>是自包含的功能块，可以在代码中传递和使用。Swift中的闭包与C和Objective-C中的块以及其他编程语言中的lambda类似。</p>
+<p>闭包可以从定义的上下文中捕获和存储对任何常量和变量的引用。这被称为<em>关闭</em>那些常量和变量。Swift处理所有为你捕获的内存管理。</p>
+<p>注意如果您不熟悉捕捉概念，请不要担心。它在下面的<a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Closures.html#//apple_ref/doc/uid/TP40014097-CH11-ID103" target="_blank" rel="noopener">捕获值</a>中有详细的解释。</p>
+<p>在<a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html#//apple_ref/doc/uid/TP40014097-CH10-ID158" target="_blank" rel="noopener">函数中</a>引入的全局函数和嵌套函数实际上是闭包的特例。闭包采取以下三种形式之一：<br>
+        
+          <a class="article-more-a" href="/2018/05/07/Closures闭包/#more">more >></a>
+        
       
 
       
@@ -1091,11 +588,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Network</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Moya</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Closures</a>
         		</li>
       		
 		</ul>
@@ -1105,7 +598,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/27/Moya源码解析/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/07/Closures闭包/">展开全文 >></a>
         </p>
       
 
@@ -1137,7 +630,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/16/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/18/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/16/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/18/">Next &raquo;</a>
     </nav>
   
 
@@ -1249,7 +742,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
+                <a href="javascript:void(0)" class="js-tag color3">LIVE555</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1265,6 +758,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
               </li>
              
@@ -1277,11 +774,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">Data</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1293,11 +786,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">fallthrough</a>
+                <a href="javascript:void(0)" class="js-tag color4">KVC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
+                <a href="javascript:void(0)" class="js-tag color4">KVO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">fallthrough</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1309,11 +806,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
+                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1325,6 +822,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">UICollectionViewLayout</a>
               </li>
              
@@ -1333,11 +834,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">上架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GCDAsyncUdpSocket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">侧滑手势</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">smart_monkey</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">UIAlertController</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1357,7 +878,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Data</a>
+                <a href="javascript:void(0)" class="js-tag color5">view</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">searchController</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1377,11 +902,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CoreData</a>
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">UIAlertController</a>
+                <a href="javascript:void(0)" class="js-tag color4">CoreData</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1401,6 +926,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCD</a>
               </li>
              
@@ -1409,7 +942,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">rtsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CPU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">响应链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">h264</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bug</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1417,7 +966,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
+                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1433,11 +982,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">集合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1450,14 +1007,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">protocol</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
             
             <div class="clearfix"></div>

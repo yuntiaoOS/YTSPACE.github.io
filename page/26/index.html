@@ -153,14 +153,14 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-关于Dictionary根据键值Key字母升降序排列的解决方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-NEHotspotConfigurationManager使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/16/关于Dictionary根据键值Key字母升降序排列的解决方法/">关于Dictionary根据键值Key字母升降序排列的解决方法</a>
+      <a class="article-title" href="/2018/04/13/NEHotspotConfigurationManager使用/">NEHotspotConfigurationManager使用</a>
     </h1>
   
 
@@ -169,8 +169,8 @@
         	
 	
         
-        <a href="/2018/03/16/关于Dictionary根据键值Key字母升降序排列的解决方法/" class="archive-article-date">
-  	<time datetime="2018-03-16T08:16:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-16</time>
+        <a href="/2018/04/13/NEHotspotConfigurationManager使用/" class="archive-article-date">
+  	<time datetime="2018-04-13T07:24:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-13</time>
 </a>
         
       </header>
@@ -182,19 +182,26 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="目标Dictionary："><a href="#目标Dictionary：" class="headerlink" title="目标Dictionary："></a>目标Dictionary：</h2><p>addressBookDict: [string:[ZZWPersonGetAllMembersModel]]</p>
-<h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><p>// 将addressBookDict字典中的所有Key值进行排序: A~Z，，得到key值排序数组</p>
-<p>​            nameKeys = Array(addressBookDict.keys).sorted()</p>
-<p>// 将addressBookDict字典中的所有Value值根据key键值进行排序: A~Z，，得到[(key:string,Value:[ZZWPersonGetAllMembersModel])]值排序的新数组</p>
-<p>var addressBkeys  = addressBookDict.sorted(by: { (t1, t2) -&gt; Bool in</p>
-<p>​                return t1.0 &lt; t2.0 ? true:false</p>
-<p>​            })</p>
-<p>//获取键值数组 [[ZZWPersonGetAllMembersModel]]</p>
-<p>var personArray =<a href="">[ZZWPersonGetAllMembersModel]</a></p>
-<p>​                for (_,value) in addressBkeys {</p>
-<p>​                    personArray.append(value)</p>
-<p>​                }</p>
-<p>​    继续获得Dictionary 只要用key和value做一个初始化赋值即可</p>
+        <p>NEHotspotConfigurationManager 是IOS 11刚刚推出的用户获取WiFi信息的框架。</p>
+<p>初次使用时，如果没有做响应的设置，会提示NEHotspotConfigurationHelper failed to communicate to helper server.一个原因是工程配置有问题。</p>
+<p>NEHotspotConfigurationManager 加入已经密码的wifi网络多用于物联网。设备配置加入互联网。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1972390-59becfc0fb36674b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
+<p>35295D1A-69EF-4AC5-886F-E0842F2E46D6.png</p>
+<p>2.创建工程在Capabilities 中勾选Hotspot configuration</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1972390-d2c8b5f93b883a67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/680" alt="img"></p>
+<p>7CBBF69E-5C62-47E7-957E-158A716FDF3C.png</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1972390-bd67498d7ab0a5ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/677" alt="img"></p>
+<p>4B49C6A7-5D14-4FB5-8660-CE750E43025C.png</p>
+<p>下面开始使用<br>1.在使用的地方加入头文件 #import <networkextension nehotspotconfigurationmanager.h=""></networkextension></p>
+<ol>
+<li>NEHotspotConfiguration* configuration = [[NEHotspotConfiguration alloc]initWithSSID:@”wifi名” passphrase:@”wifi密码” isWEP:NO]; //加入有密码的wifi</li>
+</ol>
+<p>//    NEHotspotConfiguration* configuration = [[NEHotspotConfiguration alloc]initWithSSID:@”wifi名”]; //加入没有密码的wifi</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[[NEHotspotConfigurationManager sharedManager] applyConfiguration:configuration completionHandler:^(NSError * _Nullable error) &#123;</span><br><span class="line">    if([[self currentIphoneConnectedWifiName]isEqualToString:@&quot;NET&quot;]) &#123;</span><br><span class="line"></span><br><span class="line">            NSLog(@&quot;加入网络成功&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    NSLog(@&quot;%@&quot;,error);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<p>这个方法存在一个问题，如果你加入一个不存在的WiFi，会弹出无法加入WiFi的弹框，但是本方法的回调error没有值。在这里，我是通过判断当前wifi是否是我要加入的wifi来解决这个问题的。</p>
+<p>后面是辅助的方法 查看手机当前连接的wifi 先要导入头文件</p>
+<h1 id="import"><a href="#import" class="headerlink" title="import "></a>import <systemconfiguration captivenetwork.h=""></systemconfiguration></h1><p>/<em>* 获取当前手机连接到到Wi-Fi 的名字 </em>/</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">-(NSString *)currentIphoneConnectedWifiName&#123;</span><br><span class="line"></span><br><span class="line">NSString *wifiName = nil;</span><br><span class="line"></span><br><span class="line">CFArrayRef wifiInterfaces = CNCopySupportedInterfaces();</span><br><span class="line"></span><br><span class="line">if (!wifiInterfaces)return nil;</span><br><span class="line"></span><br><span class="line">NSArray *interfaces = (__bridge NSArray *)wifiInterfaces;</span><br><span class="line"></span><br><span class="line">for (NSString *interfaceName in interfaces)&#123;</span><br><span class="line"></span><br><span class="line">    CFDictionaryRef dictRef = CNCopyCurrentNetworkInfo((__bridge CFStringRef)(interfaceName));</span><br><span class="line"></span><br><span class="line">    if (dictRef)&#123;</span><br><span class="line"></span><br><span class="line">        NSDictionary *networkInfoDic = (__bridge NSDictionary *)dictRef;</span><br><span class="line"></span><br><span class="line">        wifiName = [networkInfoDic objectForKey:(__bridge NSString *)kCNNetworkInfoKeySSID];</span><br><span class="line">        CFRelease(dictRef);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">CFRelease(wifiInterfaces);</span><br><span class="line"></span><br><span class="line">return wifiName;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -207,7 +214,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/16/关于Dictionary根据键值Key字母升降序排列的解决方法/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/13/NEHotspotConfigurationManager使用/">展开全文 >></a>
         </p>
       
 
@@ -237,14 +244,14 @@
 
 
   
-    <article id="post-使用UISearchController跳转新控制器时搜索框依然出现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-IJKPlayer获取实时数据（上）- 添加外部接口" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/09/使用UISearchController跳转新控制器时搜索框依然出现/">使用UISearchController跳转新控制器时搜索框依然出现</a>
+      <a class="article-title" href="/2018/04/13/IJKPlayer获取实时数据（上）- 添加外部接口/">IJKPlayer获取实时数据（上）- 添加外部接口</a>
     </h1>
   
 
@@ -253,8 +260,8 @@
         	
 	
         
-        <a href="/2018/03/09/使用UISearchController跳转新控制器时搜索框依然出现/" class="archive-article-date">
-  	<time datetime="2018-03-09T08:54:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
+        <a href="/2018/04/13/IJKPlayer获取实时数据（上）- 添加外部接口/" class="archive-article-date">
+  	<time datetime="2018-04-13T05:41:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-13</time>
 </a>
         
       </header>
@@ -266,9 +273,27 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近偶遇一个问题，当使用UISearchController来push一个新的界面时，push成功后搜索框依然存在，不知道是不是苹果的一个bug，但是可以通过增加一句代码来解决：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.definesPresentationContext = YES;</span><br></pre></td></tr></table></figure>
-<p>definesPresentationContext这是一个布尔变量，表示该视图被覆盖时，视图或者它的子类提供了一个视图控制器。默认为NO，我们在做跳转时，需要一个跳转的环境，如果呈现的视图控制器不提供的话，需要呈现这个控制器的父视图控制器。此处因为UISearchController为呈现的视图控制器，它不提供这个跳转的环境，所以需要它的父视图控制器提供，所以设置父视图控制器的这个布尔变量为YES。 </p>
+        <p>一、添加接口</p>
+<h5 id="1、在IJKMediaPlayBack-h添加三个方法"><a href="#1、在IJKMediaPlayBack-h添加三个方法" class="headerlink" title="1、在IJKMediaPlayBack.h添加三个方法"></a>1、在IJKMediaPlayBack.h添加三个方法</h5><p><img src="https://upload-images.jianshu.io/upload_images/3440053-23aa8037c6cbc1d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/410" alt="img"></p>
+<p>image.png</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (CVPixelBufferRef)framePixelbuffer;</span><br><span class="line">- (void)framePixelbufferLock;</span><br><span class="line">- (void)framePixelbufferUnlock;</span><br></pre></td></tr></table></figure>
+<h5 id="2、在ff-ffplay-def-h-的-FFPlayer-数据结构中添加如下"><a href="#2、在ff-ffplay-def-h-的-FFPlayer-数据结构中添加如下" class="headerlink" title="2、在ff_ffplay_def.h 的 FFPlayer 数据结构中添加如下:"></a>2、在ff_ffplay_def.h 的 FFPlayer 数据结构中添加如下:</h5><p><img src="https://upload-images.jianshu.io/upload_images/3440053-b1fe34f7c7f69a4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/383" alt="img"></p>
+<p>image.png</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 引入头文件</span><br><span class="line">#include &lt;CoreVideo/CoreVideo.h&gt;</span><br><span class="line">  </span><br><span class="line">CVPixelBufferRef szt_pixelbuffer;</span><br><span class="line">pthread_mutex_t szt_pixelbuffer_mutex;</span><br></pre></td></tr></table></figure>
+<h5 id="3、在ijkplayer-h中添加："><a href="#3、在ijkplayer-h中添加：" class="headerlink" title="3、在ijkplayer.h中添加："></a>3、在ijkplayer.h中添加：</h5><p><img src="https://upload-images.jianshu.io/upload_images/3440053-aa70d2457f67f558.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/645" alt="img"></p>
+<p>image.png</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 引入头文件</span><br><span class="line">#include &lt;CoreVideo/CoreVideo.h&gt;</span><br><span class="line"></span><br><span class="line">CVPixelBufferRef ijkmp_get_pixelbuffer(IjkMediaPlayer *mp);</span><br><span class="line">int ijkmp_pixelbuffer_mutex_init(IjkMediaPlayer *mp);</span><br><span class="line">int ijkmp_pixelbuffer_mutex_lock(IjkMediaPlayer *mp);</span><br><span class="line">int ijkmp_pixelbuffer_mutex_unlock(IjkMediaPlayer *mp);</span><br></pre></td></tr></table></figure>
+<h5 id="4、在ijkplayer-c添加"><a href="#4、在ijkplayer-c添加" class="headerlink" title="4、在ijkplayer.c添加:"></a>4、在ijkplayer.c添加:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">CVPixelBufferRef ijkmp_get_pixelbuffer(IjkMediaPlayer *mp)</span><br><span class="line">&#123;</span><br><span class="line">    return mp-&gt;ffplayer-&gt;szt_pixelbuffer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int ijkmp_pixelbuffer_mutex_init(IjkMediaPlayer *mp)</span><br><span class="line">&#123;</span><br><span class="line">    int ret = ffp_pixelbuffer_mutex_init(mp-&gt;ffplayer);</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int ijkmp_pixelbuffer_mutex_lock(IjkMediaPlayer *mp)</span><br><span class="line">&#123;</span><br><span class="line">    int ret = ffp_pixelbuffer_lock(mp-&gt;ffplayer);</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int ijkmp_pixelbuffer_mutex_unlock(IjkMediaPlayer *mp)</span><br><span class="line">&#123;</span><br><span class="line">    int ret = ffp_pixelbuffer_unlock(mp-&gt;ffplayer);</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="5、在ff-ffplay-h添加"><a href="#5、在ff-ffplay-h添加" class="headerlink" title="5、在ff_ffplay.h添加:"></a>5、在ff_ffplay.h添加:</h5><p><img src="https://upload-images.jianshu.io/upload_images/3440053-da63d6a3514450dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/489" alt="img"></p>
+<p>image.png</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int       ffp_pixelbuffer_mutex_init(FFPlayer *ffp);</span><br><span class="line">int       ffp_pixelbuffer_lock(FFPlayer *ffp);</span><br><span class="line">int       ffp_pixelbuffer_unlock(FFPlayer *ffp);</span><br></pre></td></tr></table></figure>
+<h5 id="6、在ff-ffplay-c添加"><a href="#6、在ff-ffplay-c添加" class="headerlink" title="6、在ff_ffplay.c添加:"></a>6、在ff_ffplay.c添加:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">int ffp_pixelbuffer_mutex_init(FFPlayer *ffp)</span><br><span class="line">&#123;</span><br><span class="line">    int ret = pthread_mutex_init(&amp;ffp-&gt;szt_pixelbuffer_mutex, NULL);</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line">            </span><br><span class="line">int ffp_pixelbuffer_lock(FFPlayer *ffp)</span><br><span class="line">&#123;</span><br><span class="line">    int ret = pthread_mutex_lock(&amp;ffp-&gt;szt_pixelbuffer_mutex);</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line">            </span><br><span class="line">int ffp_pixelbuffer_unlock(FFPlayer *ffp)</span><br><span class="line">&#123;</span><br><span class="line">    int ret = pthread_mutex_unlock(&amp;ffp-&gt;szt_pixelbuffer_mutex);</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="7、在IJKFFMoviePlayerController-h添加"><a href="#7、在IJKFFMoviePlayerController-h添加" class="headerlink" title="7、在IJKFFMoviePlayerController.h添加:"></a>7、在IJKFFMoviePlayerController.h添加:</h5><p><img src="https://upload-images.jianshu.io/upload_images/3440053-a909e9517bd3fd71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/421" alt="img"></p>
+<p>image.png</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (CVPixelBufferRef)framePixelbuffer;</span><br><span class="line">- (void)framePixelbufferLock;</span><br><span class="line">- (void)framePixelbufferUnlock;</span><br></pre></td></tr></table></figure>
+<h5 id="8、在IJKFFMoviePlayerController-m添加"><a href="#8、在IJKFFMoviePlayerController-m添加" class="headerlink" title="8、在IJKFFMoviePlayerController.m添加:"></a>8、在IJKFFMoviePlayerController.m添加:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">- (CVPixelBufferRef)framePixelbuffer</span><br><span class="line">&#123;</span><br><span class="line">    if (_mediaPlayer)</span><br><span class="line">    &#123;</span><br><span class="line">        return ijkmp_get_pixelbuffer(_mediaPlayer);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return NULL;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)framePixelbufferLock</span><br><span class="line">&#123;</span><br><span class="line">    if (_mediaPlayer)</span><br><span class="line">    &#123;</span><br><span class="line">        ijkmp_pixelbuffer_mutex_lock(_mediaPlayer);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)framePixelbufferUnlock</span><br><span class="line">&#123;</span><br><span class="line">    if (_mediaPlayer)</span><br><span class="line">    &#123;</span><br><span class="line">        ijkmp_pixelbuffer_mutex_unlock(_mediaPlayer);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二、如何使用："><a href="#二、如何使用：" class="headerlink" title="二、如何使用："></a>二、如何使用：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[self.ijkplayer framePixelbufferLock];</span><br><span class="line">CVPixelBufferRef pixelBuffer = [self.ijkplayer framePixelbuffer];</span><br><span class="line">[self.ijkplayer framePixelbufferUnlock];</span><br></pre></td></tr></table></figure>
+<p>小礼物走一走，来简书关注我</p>
 
       
 
@@ -281,7 +306,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/09/使用UISearchController跳转新控制器时搜索框依然出现/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/13/IJKPlayer获取实时数据（上）- 添加外部接口/">展开全文 >></a>
         </p>
       
 
@@ -311,14 +336,14 @@
 
 
   
-    <article id="post-NSAttributedStringKey" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-iOS 图片去除特像素色" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/08/NSAttributedStringKey/">NSAttributedStringKey</a>
+      <a class="article-title" href="/2018/04/12/iOS 图片去除特像素色/">iOS 图片去除特像素色</a>
     </h1>
   
 
@@ -327,8 +352,8 @@
         	
 	
         
-        <a href="/2018/03/08/NSAttributedStringKey/" class="archive-article-date">
-  	<time datetime="2018-03-08T08:53:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
+        <a href="/2018/04/12/iOS 图片去除特像素色/" class="archive-article-date">
+  	<time datetime="2018-04-12T06:33:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-12</time>
 </a>
         
       </header>
@@ -340,21 +365,20 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>系统关键字段</p>
-<p>import Foundation</p>
-<p>import UIKit</p>
-<p>import _SwiftUIKitOverlayShims</p>
-<p>extension NSAttributedStringKey {</p>
-<p>​    </p>
-<p>​    /<strong><strong><strong><strong><strong><em>**</em></strong></strong></strong></strong></strong> Attributes <strong><strong><strong><strong><strong><em>**</em></strong></strong></strong></strong></strong>/</p>
-<p>​    @available(iOS 6.0, *)</p>
-<p>​    public static let font: NSAttributedStringKey</p>
-<p>​    @available(iOS 6.0, *)</p>
-<p>​    public static let paragraphStyle: NSAttributedStringKey // NSParagraphStyle, default defaultParagraphStyle</p>
-<p>​    @available(iOS 6.0, *)</p>
-<p>​    public static let foregroundColor: NSAttributedStringKey // UIColor, default blackColor</p>
+        <p>//颜色替换</p>
+<p>- (UIImage<em>) imageToTransparent:(UIImage</em>) image</p>
+<p>{</p>
+<p>​    // 分配内存</p>
+<p>​    const int imageWidth = image.size.width;</p>
+<p>​    const int imageHeight = image.size.height;</p>
+<p>​    size_t      bytesPerRow = imageWidth * 4;</p>
+<p>​    uint32_t<em> rgbImageBuf = (uint32_t</em>)malloc(bytesPerRow * imageHeight);</p>
+<p>​    // 创建context</p>
+<p>​    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();</p>
+<p>​    CGContextRef context = CGBitmapContextCreate(rgbImageBuf, imageWidth, imageHeight, 8, bytesPerRow, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipLast);</p>
+<p>​    CGContextDrawImage(context, CGRectMake(0, 0, imageWidth, imageHeight), image.CGImage);</p>
         
-          <a class="article-more-a" href="/2018/03/08/NSAttributedStringKey/#more">more >></a>
+          <a class="article-more-a" href="/2018/04/12/iOS 图片去除特像素色/#more">more >></a>
         
       
 
@@ -367,7 +391,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/08/NSAttributedStringKey/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/12/iOS 图片去除特像素色/">展开全文 >></a>
         </p>
       
 
@@ -397,14 +421,14 @@
 
 
   
-    <article id="post-AvoidCrash - oc-no-crash 福音" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-NSURLSession " class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/02/AvoidCrash - oc-no-crash 福音/">AvoidCrash - oc-no-crash 福音</a>
+      <a class="article-title" href="/2018/04/12/NSURLSession /">NSURLSession</a>
     </h1>
   
 
@@ -413,8 +437,8 @@
         	
 	
         
-        <a href="/2018/02/02/AvoidCrash - oc-no-crash 福音/" class="archive-article-date">
-  	<time datetime="2018-02-02T09:38:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-02</time>
+        <a href="/2018/04/12/NSURLSession /" class="archive-article-date">
+  	<time datetime="2018-04-12T06:20:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-12</time>
 </a>
         
       </header>
@@ -426,17 +450,24 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="https://github.com/chenfanfang/AvoidCrash" target="_blank" rel="noopener">https://github.com/chenfanfang/AvoidCrash</a></p>
-<p>感觉像是在发广告，虽然我已经转到swift，但是这几天的测试还是忍不住要向oc同仁们安利一番</p>
-<p>以下内容ctrl+c and ctrl+v完成</p>
-<h3 id="Foundation框架存在许多潜在崩溃的危险"><a href="#Foundation框架存在许多潜在崩溃的危险" class="headerlink" title="Foundation框架存在许多潜在崩溃的危险"></a>Foundation框架存在许多潜在崩溃的危险</h3><p>===</p>
-<p>- 将 nil 插入可变数组中会导致崩溃。</p>
-<p>- 数组越界会导致崩溃。</p>
-<p>- 根据key给字典某个元素重新赋值时，若key为 nil 会导致崩溃。</p>
-<p>- ……</p>
-<h3 id="AvoidCrash简介"><a href="#AvoidCrash简介" class="headerlink" title="AvoidCrash简介"></a>AvoidCrash简介</h3><h1 id=""><a href="#" class="headerlink" title=""></a>
+        <p>转<a href="https://www.jianshu.com/p/b0ddadd34037" target="_blank" rel="noopener">https://www.jianshu.com/p/b0ddadd34037</a></p>
+<p>由于傲娇的苹果在 iOS9 之后已经放弃了 <a href="https://www.jianshu.com/p/70bff73f0500" target="_blank" rel="noopener">NSURLConnection</a>，所以在现在的实际开发中，除了大家常见的 AFN 框架，一般使用的是 iOS7 之后推出的 NSURLSession，作为一名 iOS 开发人员，如果你只知道 AFN 框架来进行网络请求，那就只能说是 too young too simple,sometimes naive。</p>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ol>
+<li>NSURLSession 的优势</li>
+<li>NSURLSessionTask 的子类</li>
+<li>NSURLSessionDataTask 发送 GET 请求</li>
+<li>NSURLSessionDataTask 发送 POST 请求</li>
+<li>NSURLSessionDataTask 设置代理发送请求</li>
+<li>设置代理之后的强引用问题</li>
+<li>NSURLSessionDataTask 简单下载</li>
+<li>NSURLSessionDownloadTask 简单下载</li>
+<li>dataTask 和 downloadTask 下载对比</li>
+<li>写在最后</li>
+<li><a href="https://www.jianshu.com/p/b63217ff7287" target="_blank" rel="noopener">【补充】NSURLSession 详解离线断点下载的实现</a></li>
+</ol>
+<h4 id="1"> NSURLSession 的优势 </h4><br>
         
-          <a class="article-more-a" href="/2018/02/02/AvoidCrash - oc-no-crash 福音/#more">more >></a>
+          <a class="article-more-a" href="/2018/04/12/NSURLSession /#more">more >></a>
         
       
 
@@ -449,7 +480,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/02/AvoidCrash - oc-no-crash 福音/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/12/NSURLSession /">展开全文 >></a>
         </p>
       
 
@@ -479,14 +510,14 @@
 
 
   
-    <article id="post-iOS Swift Crash的捕获" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-NSURLSession的下载和断点继传以及后台下载功能" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/02/iOS Swift Crash的捕获/">iOS Swift Crash的捕获</a>
+      <a class="article-title" href="/2018/04/12/NSURLSession的下载和断点继传以及后台下载功能/">NSURLSession的下载和断点继传以及后台下载功能</a>
     </h1>
   
 
@@ -495,8 +526,8 @@
         	
 	
         
-        <a href="/2018/02/02/iOS Swift Crash的捕获/" class="archive-article-date">
-  	<time datetime="2018-02-02T03:54:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-02</time>
+        <a href="/2018/04/12/NSURLSession的下载和断点继传以及后台下载功能/" class="archive-article-date">
+  	<time datetime="2018-04-12T06:14:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-12</time>
 </a>
         
       </header>
@@ -508,27 +539,12 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="crash捕获介绍"><a href="#crash捕获介绍" class="headerlink" title="crash捕获介绍"></a>crash捕获介绍</h2><p>文章转载至 <a href="https://www.jianshu.com/p/d2b7a2eb36ba" target="_blank" rel="noopener">https://www.jianshu.com/p/d2b7a2eb36ba</a></p>
-<p>## </p>
-<ul>
-<li><p>如果对crash捕获不太了解，可以先参考这篇<a href="https://link.jianshu.com?t=https://nianxi.net/ios/ios-crash-reporter.html" target="_blank" rel="noopener">文章</a>,本文进行<code>Mach异常+Unix信号方式</code>捕获crash。</p>
-</li>
-<li><p>NSException一般只在OC当中被捕获，一般情况下在捕获NSException异常后同时也会捕获到一个对应的signal异常。但如果你使用的是纯swift开发，如下代码并不会捕获相关的crash</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSSetUncaughtExceptionHandler(UncaughtExceptionHandler)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="swift崩溃捕获"><a href="#swift崩溃捕获" class="headerlink" title="swift崩溃捕获"></a>swift崩溃捕获</h2><ul>
-<li><p>swift通常都是通过对应的signal来捕获crash。对于swift的崩溃捕获，Apple的<a href="https://link.jianshu.com?t=https://developer.apple.com/library/content/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-ANALYZING_CRASH_REPORTS-EXCEPTION_CODES" target="_blank" rel="noopener">文档</a>中有描述说需要通过<code>SIGTRAP</code>信号捕获强转失败，及非可选的nil值导致的崩溃.具体描述如下：</p>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Trace Trap[EXC_BREAKPOINT // SIGTRAP]</span><br><span class="line">类似于异常退出，此异常旨在使附加的调试器有机会在其执行中的特定点中断进程。您可以使用该__builtin_trap()函数从您自己的代码触发此异常。如果没有附加调试器，则该过程将终止并生成崩溃报告。</span><br><span class="line">较低级的库（例如，libdispatch）会在遇到致命错误时捕获进程。有关错误的其他信息可以在崩溃报告的“ 附加诊断信息”部分或设备的控制台中找到。</span><br><span class="line"></span><br><span class="line">如果在运行时遇到意外情况，Swift代码将以此异常类型终止，例如：</span><br><span class="line">    1.具有nil值的非可选类型</span><br><span class="line">    2.一个失败的强制类型转换</span><br></pre></td></tr></table></figure>
-<p>对于swift还有一种崩溃需要捕获(Intel处理器,我认为应该是指在模拟器上的崩溃)，为保险起见，也需要将信号<code>SIGILL</code>进行注册，Apple同样对其中做了描述</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Illegal Instruction[EXC_BAD_INSTRUCTION // SIGILL]</span><br><span class="line">  该过程尝试执行非法或未定义的指令。该过程可能尝试通过错误配置的函数指针跳转到无效地址。</span><br><span class="line">  在Intel处理器上，ud2操作码引起EXC_BAD_INSTRUCTION异常，但通常用于进程调试目的。如果在运行时遇到意外情况，Intel处理器上的Swift代码将以此异常类型终止。有关详细信息，请参阅Trace Trap。</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="crash捕获实现代码参考"><a href="#crash捕获实现代码参考" class="headerlink" title="crash捕获实现代码参考"></a>crash捕获实现代码参考</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//对于OC的exception采取如下方式捕获</span><br><span class="line">NSSetUncaughtExceptionHandler(UncaughtExceptionHandler)</span><br><span class="line">//对于Swift则捕获相关signa，一般来说如下几种已经能够捕获大部分crash。(其中SIGTRAP一定要捕获,swift大量的crash都会通过它）</span><br><span class="line"> signal(SIGABRT, SignalExceptionHandler)</span><br><span class="line">signal(SIGSEGV, SignalExceptionHandler)</span><br><span class="line">signal(SIGBUS, SignalExceptionHandler)</span><br><span class="line">signal(SIGTRAP, SignalExceptionHandler)</span><br><span class="line">signal(SIGILL, SignalExceptionHandler)</span><br></pre></td></tr></table></figure>
-<h2 id="获取Slide-Address"><a href="#获取Slide-Address" class="headerlink" title="获取Slide Address"></a>获取Slide Address</h2>
+        <h1 id="转载https-blog-csdn-net-u014523377-article-details-51849808"><a href="#转载https-blog-csdn-net-u014523377-article-details-51849808" class="headerlink" title="转载https://blog.csdn.net/u014523377/article/details/51849808/"></a>转载<a href="https://blog.csdn.net/u014523377/article/details/51849808/" target="_blank" rel="noopener">https://blog.csdn.net/u014523377/article/details/51849808/</a></h1><h2 id="一-大体步骤"><a href="#一-大体步骤" class="headerlink" title="一.大体步骤"></a>一.大体步骤</h2><p>NSURLSession始于ios7.它具有访问接口,上传/下载数据,断点继传和后台下载等功能: 其使用步骤:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 1. 创建session指定其configuration</span><br><span class="line"> 2. 由session执行任务得到task</span><br><span class="line"> 3. task调用resume,启动网络请求</span><br><span class="line">1234</span><br></pre></td></tr></table></figure>
+<h2 id="二-task分类"><a href="#二-task分类" class="headerlink" title="二.task分类"></a>二.task分类</h2><p>session的任务有四种:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> 1. 数据任务 Data task</span><br><span class="line"> 2. 下载任务 Download task</span><br><span class="line"> 3. 上传任务 Upload task</span><br><span class="line"> 4. 流任务 Stream task ios9之后出现的,用于TCP/IP流</span><br><span class="line">12345</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2018/02/02/iOS Swift Crash的捕获/#more">more >></a>
+          <a class="article-more-a" href="/2018/04/12/NSURLSession的下载和断点继传以及后台下载功能/#more">more >></a>
         
       
 
@@ -541,7 +557,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/02/iOS Swift Crash的捕获/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/12/NSURLSession的下载和断点继传以及后台下载功能/">展开全文 >></a>
         </p>
       
 
@@ -573,7 +589,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/25/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/27/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/25/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/27/">Next &raquo;</a>
     </nav>
   
 
@@ -685,7 +701,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
+                <a href="javascript:void(0)" class="js-tag color3">LIVE555</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,6 +717,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
               </li>
              
@@ -713,11 +733,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">Data</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -729,11 +745,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">fallthrough</a>
+                <a href="javascript:void(0)" class="js-tag color4">KVC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
+                <a href="javascript:void(0)" class="js-tag color4">KVO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">fallthrough</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -745,11 +765,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
+                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -761,6 +781,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">UICollectionViewLayout</a>
               </li>
              
@@ -769,11 +793,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">上架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GCDAsyncUdpSocket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">侧滑手势</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">smart_monkey</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">UIAlertController</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -793,7 +837,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Data</a>
+                <a href="javascript:void(0)" class="js-tag color5">view</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">searchController</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -813,11 +861,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CoreData</a>
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">UIAlertController</a>
+                <a href="javascript:void(0)" class="js-tag color4">CoreData</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -837,6 +885,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCD</a>
               </li>
              
@@ -845,7 +901,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">rtsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CPU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">响应链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">h264</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bug</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -853,7 +925,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
+                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -869,11 +941,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">集合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -886,14 +966,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">protocol</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
             
             <div class="clearfix"></div>

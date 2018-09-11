@@ -153,14 +153,14 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-UICollectionViewLayout布局详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift设计模式之装饰模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/02/UICollectionViewLayout布局详解/">UICollectionViewLayout布局详解</a>
+      <a class="article-title" href="/2018/05/11/Swift设计模式之装饰模式/">Swift设计模式之装饰模式</a>
     </h1>
   
 
@@ -169,8 +169,8 @@
         	
 	
         
-        <a href="/2018/05/02/UICollectionViewLayout布局详解/" class="archive-article-date">
-  	<time datetime="2018-05-02T09:26:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-02</time>
+        <a href="/2018/05/11/Swift设计模式之装饰模式/" class="archive-article-date">
+  	<time datetime="2018-05-11T04:18:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
 </a>
         
       </header>
@@ -183,25 +183,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>#</p>
-<p>转载：<a href="https://www.jianshu.com/p/45ff718090a8" target="_blank" rel="noopener">https://www.jianshu.com/p/45ff718090a8</a></p>
-<h3 id="首先我们先看一下-我们今天要最终实现的效果图"><a href="#首先我们先看一下-我们今天要最终实现的效果图" class="headerlink" title="首先我们先看一下 我们今天要最终实现的效果图"></a>首先我们先看一下 我们今天要最终实现的效果图</h3><hr>
-<h3 id="UICollectionView的简单介绍"><a href="#UICollectionView的简单介绍" class="headerlink" title="UICollectionView的简单介绍"></a>UICollectionView的简单介绍</h3><ul>
-<li>UICollectionView的结构</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cells</span><br><span class="line">Supplementary Views 追加视图 （类似Header或者Footer）</span><br><span class="line">Decoration Views 装饰视图 （用作背景展示）</span><br></pre></td></tr></table></figure>
+<p><strong>转自</strong></p>
 <ul>
-<li>由两个方面对UICollectionView进行支持。<ul>
-<li>和tableView一样，即提供数据的UICollectionViewDataSource以及处理用户交互的UICollectionViewDelegate。</li>
+<li><a href="http://qefee.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">Swift设计模式</a></li>
 </ul>
-</li>
-<li>另一方面，对于cell的样式和组织方式，由于collectionView比tableView要复杂得多，因此没有按照类似于tableView的style的方式来定义，而是专门使用了一个类来对collectionView的布局和行为进行描述，这就是<code>UICollectionViewLayout</code>。</li>
-<li>而我们主要讲UICollectionViewLayout，因为这不仅是collectionView和tableView的最重要求的区别，也是整个UICollectionView的精髓所在。</li>
-<li>如果对UICollectionView的基本构成要素和使用方法还不清楚的话，可以查看：<a href="https://link.jianshu.com/?t=http://www.onevcat.com/2012/06/introducing-collection-views/" target="_blank" rel="noopener">UICollectionView详解</a>中进行一些了解。</li>
+<p><strong>原文</strong></p>
+<ul>
+<li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
 </ul>
-<hr>
-        
-          <a class="article-more-a" href="/2018/05/02/UICollectionViewLayout布局详解/#more">more >></a>
-        
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">// 装饰模式</span><br><span class="line">// 百度百科：在不必改变原类文件和使用继承的情况下，动态地扩展一个对象的功能。它是通过创建一个包装对象，也就是装饰来包裹真实的对象</span><br><span class="line">// 设计模式分类：结构型模式</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  咖啡接口</span><br><span class="line"> */</span><br><span class="line">protocol Coffee &#123;</span><br><span class="line">    /**</span><br><span class="line">     价格</span><br><span class="line">     </span><br><span class="line">     - returns: 价格</span><br><span class="line">     */</span><br><span class="line">    func getCost() -&gt; Double</span><br><span class="line">    /**</span><br><span class="line">     原料</span><br><span class="line">     </span><br><span class="line">     - returns: 原料</span><br><span class="line">     */</span><br><span class="line">    func getIngredients() -&gt; String</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 简单咖啡实现</span><br><span class="line">class SimpleCoffee: Coffee &#123;</span><br><span class="line">    func getCost() -&gt; Double &#123;</span><br><span class="line">        return 1.0</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func getIngredients() -&gt; String &#123;</span><br><span class="line">        return &quot;Coffee&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 咖啡装饰接口</span><br><span class="line">class CoffeeDecorator: Coffee &#123;</span><br><span class="line">    private let decoratedCoffee: Coffee</span><br><span class="line">    private let ingredientSeparator: String = &quot;, &quot;</span><br><span class="line">    </span><br><span class="line">    required init(decoratedCoffee: Coffee) &#123;</span><br><span class="line">        self.decoratedCoffee = decoratedCoffee</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func getCost() -&gt; Double &#123;</span><br><span class="line">        return decoratedCoffee.getCost()</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func getIngredients() -&gt; String &#123;</span><br><span class="line">        return decoratedCoffee.getIngredients()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 牛奶装饰实现</span><br><span class="line">class Milk: CoffeeDecorator &#123;</span><br><span class="line">    required init(decoratedCoffee: Coffee) &#123;</span><br><span class="line">        super.init(decoratedCoffee: decoratedCoffee)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    override func getCost() -&gt; Double &#123;</span><br><span class="line">        return super.getCost() + 0.5</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    override func getIngredients() -&gt; String &#123;</span><br><span class="line">        return super.getIngredients() + ingredientSeparator + &quot;Milk&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// whip装饰实现</span><br><span class="line">class WhipCoffee: CoffeeDecorator &#123;</span><br><span class="line">    required init(decoratedCoffee: Coffee) &#123;</span><br><span class="line">        super.init(decoratedCoffee: decoratedCoffee)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    override func getCost() -&gt; Double &#123;</span><br><span class="line">        return super.getCost() + 0.7</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    override func getIngredients() -&gt; String &#123;</span><br><span class="line">        return super.getIngredients() + ingredientSeparator + &quot;Whip&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var someCoffee: Coffee = SimpleCoffee() // 简单咖啡</span><br><span class="line">print(&quot;Cost : \(someCoffee.getCost()); Ingredients: \(someCoffee.getIngredients())&quot;)</span><br><span class="line"></span><br><span class="line">var milkCoffee = Milk(decoratedCoffee: someCoffee) // 装饰了牛奶的咖啡</span><br><span class="line">print(&quot;Cost : \(milkCoffee.getCost()); Ingredients: \(milkCoffee.getIngredients())&quot;)</span><br><span class="line"></span><br><span class="line">var whipCoffee = WhipCoffee(decoratedCoffee: milkCoffee) // 装饰了whip和牛奶的咖啡</span><br><span class="line">print(&quot;Cost : \(whipCoffee.getCost()); Ingredients: \(whipCoffee.getIngredients())&quot;)</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -218,7 +209,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">UICollectionViewLayout</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Swift设计模式</a>
         		</li>
       		
 		</ul>
@@ -228,7 +219,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/02/UICollectionViewLayout布局详解/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/11/Swift设计模式之装饰模式/">展开全文 >></a>
         </p>
       
 
@@ -258,14 +249,14 @@
 
 
   
-    <article id="post-What&#39;s New in iOS 11.0" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift设计模式之外观模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/02/What's New in iOS 11.0/">iOS 11.0 news</a>
+      <a class="article-title" href="/2018/05/11/Swift设计模式之外观模式/">Swift设计模式之外观模式</a>
     </h1>
   
 
@@ -274,289 +265,8 @@
         	
 	
         
-        <a href="/2018/05/02/What's New in iOS 11.0/" class="archive-article-date">
-  	<time datetime="2018-05-02T06:48:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-02</time>
-</a>
-        
-      </header>
-    
-
-    <!-- 目录内容 -->
-
-<!-- 目录内容结束 -->
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://developer.apple.com/library/content/releasenotes/General/WhatsNewIniOS/Articles/" target="_blank" rel="noopener">https://developer.apple.com/library/content/releasenotes/General/WhatsNewIniOS/Articles/</a></p>
-<p>iOS 11.0</p>
-<p>This article summarizes the key developer-related features introduced in iOS 11, which runs on currently shipping iOS devices. The article also lists the documents that describe new features in more detail.</p>
-<p>For late-breaking news and information about known issues, see <em>iOS 11 Release Notes</em>.</p>
-<p>For a complete list of new, modified, and deprecated APIs, see <a href="https://developer.apple.com/documentation?changes=latest_major" target="_blank" rel="noopener">Apple Developer Documentation</a>.</p>
-<p>To learn about new features for SafariServices and WebKit, see <em>What’s New in Safari</em>.<br>
-        
-          <a class="article-more-a" href="/2018/05/02/What's New in iOS 11.0/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">apple</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/02/What's New in iOS 11.0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-关于IOS中设置中找不到开发者选项的解决办法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/28/关于IOS中设置中找不到开发者选项的解决办法/">IOS中设置中找不到开发者选项的解决办法</a>
-    </h1>
-  
-
-
-        <!-- 显示阅读和评论数 -->
-        	
-	
-        
-        <a href="/2018/04/28/关于IOS中设置中找不到开发者选项的解决办法/" class="archive-article-date">
-  	<time datetime="2018-04-28T08:58:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-28</time>
-</a>
-        
-      </header>
-    
-
-    <!-- 目录内容 -->
-
-<!-- 目录内容结束 -->
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>关于IOS中设置中找不到开发者选项的解决办法</p>
-<p>今天做开发的时候突然要用到限速测试，</p>
-<p>记得以前都是在开发者选项里去打开network link conditioner开关，然后选择一个profile ,</p>
-<p>今天去设置里从头到尾仔细找了遍，没发现有开发者选项，后来终于在网上找到答案了，</p>
-<p>觉得很受用，这里为了方便广大iOS童鞋，记录如下：</p>
-<p>1、XCode 6 , 数据线连接手机到Mac上，Xcode -》 Windows-》Organizer -》选中当前手机设备 ，选中Use for Development.</p>
-<p>2、XCode 7,  数据线连接手机到Mac上，Xcode -》 Windows-》Devices -》选中当前手机设备，右键弹出菜单-》选择Show Provisioning Profiles…-》</p>
-<p>会弹出一个证书列表窗口，如果手机已经安装了必要的开发者证书，直接点击done按钮即可，否则需要点击左下角的+号，把从网上下载下来的证书导入进去，</p>
-<p>点击done按钮关闭窗口，此时再看手机设置里是不是多了一个开发者选项。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">other</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/28/关于IOS中设置中找不到开发者选项的解决办法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-iOS 判断当前网络状态的三种方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/28/iOS 判断当前网络状态的三种方法/">iOS判断当前网络状态的三种方法</a>
-    </h1>
-  
-
-
-        <!-- 显示阅读和评论数 -->
-        	
-	
-        
-        <a href="/2018/04/28/iOS 判断当前网络状态的三种方法/" class="archive-article-date">
-  	<time datetime="2018-04-28T07:49:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-28</time>
-</a>
-        
-      </header>
-    
-
-    <!-- 目录内容 -->
-
-<!-- 目录内容结束 -->
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><p>转：<a href="http://www.cocoachina.com/cms/tags.php?/iOS/" target="_blank" rel="noopener"> iOS</a><a href="http://www.cocoachina.com/cms/tags.php?/%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81/" target="_blank" rel="noopener">网络状态</a> </p>
-<p>在项目中，为了好的用户体验，有些场景必须线判断网络状态，然后才能决定改干嘛。比如视频播放，需要线判断是Wifi还是4G，Wifi直接播放，4G先提示用户。获取网络状态的方法大概有三种：</p>
-<p><strong>1. Reachability</strong></p>
-<p>这是苹果的官方演示demo中使用到的方法，我们可以到苹果官方文档里<a href="https://developer.apple.com/library/content/samplecode/Reachability/Listings/Reachability_Reachability_h.html#//apple_ref/doc/uid/DTS40007324-Reachability_Reachability_h-DontLinkElementID_8" target="_blank" rel="noopener">下载Demo</a>(点击左上角Download Sample Code 即可下载)，然后把Demo里的Reachability.h和.m考到自己项目中，并在Build Phases 的 Link Binary 添加SystemConfiguration.framework框架，然后在需要使用的地方导入Reachability头文件<br>
-        
-          <a class="article-more-a" href="/2018/04/28/iOS 判断当前网络状态的三种方法/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Network</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/28/iOS 判断当前网络状态的三种方法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-子类化Provider，session的自动刷新）--Moya文档" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/28/子类化Provider，session的自动刷新）--Moya文档/">Subclassing Provider and refreshing session automatically（子类化Provider，session的自动刷新）--Moya文档</a>
-    </h1>
-  
-
-
-        <!-- 显示阅读和评论数 -->
-        	
-	
-        
-        <a href="/2018/04/28/子类化Provider，session的自动刷新）--Moya文档/" class="archive-article-date">
-  	<time datetime="2018-04-28T06:20:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-28</time>
+        <a href="/2018/05/11/Swift设计模式之外观模式/" class="archive-article-date">
+  	<time datetime="2018-05-11T04:17:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
 </a>
         
       </header>
@@ -569,11 +279,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>#</p>
-<p>参考简书文集：<a href="https://www.jianshu.com/nb/13910345" target="_blank" rel="noopener">https://www.jianshu.com/nb/13910345</a></p>
-<p>基于<a href="https://www.jianshu.com/p/a82fd2768c27" target="_blank" rel="noopener"> Artsy’s implementation.</a> 使用RxSwift</p>
-        
-          <a class="article-more-a" href="/2018/04/28/子类化Provider，session的自动刷新）--Moya文档/#more">more >></a>
-        
+<p><strong>转自</strong></p>
+<ul>
+<li><a href="http://qefee.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">Swift设计模式</a></li>
+</ul>
+<p><strong>原文</strong></p>
+<ul>
+<li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 外观模式</span><br><span class="line">// 百度百科：为子系统中的一组接口提供一个一致的界面，定义一个高层接口，这个接口使得这一子系统更加容易使用</span><br><span class="line">// 设计模式分类：结构型模式</span><br><span class="line"></span><br><span class="line">import Foundation</span><br><span class="line"></span><br><span class="line">enum Eternal &#123;</span><br><span class="line">    </span><br><span class="line">    static func setObj(value: AnyObject!, forKey defaultName: String!) &#123;</span><br><span class="line">        let defaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()</span><br><span class="line">        defaults.setObject(value, forKey:defaultName)</span><br><span class="line">        defaults.synchronize()</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    static func getObj(defaultName: String!) -&gt; AnyObject! &#123;</span><br><span class="line">        let defaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()</span><br><span class="line">        </span><br><span class="line">        return defaults.objectForKey(defaultName)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// *** 注意， 在playground中NSUserDefaults无法使用， 请在普通项目中测试</span><br><span class="line">Eternal.setObj(&quot;Disconnect me. I’d rather be nothing&quot;, forKey:&quot;Bishop&quot;)</span><br><span class="line">Eternal.getObj(&quot;Bishop&quot;)</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -590,11 +305,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Network</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Moya</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Swift设计模式</a>
         		</li>
       		
 		</ul>
@@ -604,7 +315,295 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/28/子类化Provider，session的自动刷新）--Moya文档/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/11/Swift设计模式之外观模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Swift设计模式之保护代理模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/11/Swift设计模式之保护代理模式/">Swift设计模式之保护代理模式</a>
+    </h1>
+  
+
+
+        <!-- 显示阅读和评论数 -->
+        	
+	
+        
+        <a href="/2018/05/11/Swift设计模式之保护代理模式/" class="archive-article-date">
+  	<time datetime="2018-05-11T04:17:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
+</a>
+        
+      </header>
+    
+
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#</p>
+<p><strong>转自</strong></p>
+<ul>
+<li><a href="http://qefee.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">Swift设计模式</a></li>
+</ul>
+<p><strong>原文</strong></p>
+<ul>
+<li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">// 保护代理模式</span><br><span class="line">// 百度百科：为其他对象提供一种代理以控制对这个对象的访问。在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用</span><br><span class="line">// 设计模式分类：结构型模式</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  电脑接口</span><br><span class="line"> */</span><br><span class="line">protocol PC &#123;</span><br><span class="line">    func connect(ip: String) -&gt; Bool</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 电脑实现</span><br><span class="line">class MyPC: PC &#123;</span><br><span class="line">    func connect(ip: String) -&gt; Bool &#123;</span><br><span class="line">        print(&quot;connect to \(ip)&quot;)</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 代理实现</span><br><span class="line">class MyProxy: PC &#123;</span><br><span class="line">    </span><br><span class="line">    var pc: MyPC!</span><br><span class="line">    </span><br><span class="line">    init(pc: MyPC) &#123;</span><br><span class="line">        self.pc = pc</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func connect(ip: String) -&gt; Bool &#123;</span><br><span class="line">        if ip == &quot;10.10.10.10&quot; &#123;</span><br><span class="line">            print(&quot;\(ip) has been limited&quot;)</span><br><span class="line">            return false</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            pc.connect(ip)</span><br><span class="line">            return true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let pc = MyPC()</span><br><span class="line">let proxy = MyProxy(pc: pc)</span><br><span class="line"></span><br><span class="line">proxy.connect(&quot;1.2.3.4&quot;)</span><br><span class="line">proxy.connect(&quot;10.10.10.10&quot;)</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Swift设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/11/Swift设计模式之保护代理模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Swift中自定义Log" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/11/Swift中自定义Log/">Swift中自定义Log</a>
+    </h1>
+  
+
+
+        <!-- 显示阅读和评论数 -->
+        	
+	
+        
+        <a href="/2018/05/11/Swift中自定义Log/" class="archive-article-date">
+  	<time datetime="2018-05-11T03:02:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
+</a>
+        
+      </header>
+    
+
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#</p>
+<p>Swift中自定义Log：依次是<strong>类名.方法名.行号.内容</strong>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">func LTLog&lt;T&gt;(funcName: String = #function,_ message: T,file: String = #file, line: Int = #line) &#123;</span><br><span class="line"></span><br><span class="line">    #if DEBUG</span><br><span class="line">    let files = (file as NSString).lastPathComponent.replacingOccurrences(of: &quot;.swift&quot;, with: &quot;&quot;)</span><br><span class="line">        print(&quot;\(files) --&gt; \(funcName) --&gt;  \(line) --&gt; \(message) &quot;)</span><br><span class="line">    #endif</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还要配置以下宏</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1067182-c319525049a240a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="img"></p>
+<p>假如我在一个函数中打印这个”我是靓仔”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&gt; Bool &#123;</span><br><span class="line">      </span><br><span class="line">      </span><br><span class="line">      </span><br><span class="line">       LTLog(&quot;撒大大的&quot;)</span><br><span class="line">       return true</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>最终会输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AppDelegate.application(_:didFinishLaunchingWithOptions:)[23]:撒大大的</span><br></pre></td></tr></table></figure>
+<p>注:依次是<strong>类名.方法名.行号.内容</strong>.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/11/Swift中自定义Log/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Swift设计模式之观察者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/10/Swift设计模式之观察者模式/">Swift设计模式之观察者模式</a>
+    </h1>
+  
+
+
+        <!-- 显示阅读和评论数 -->
+        	
+	
+        
+        <a href="/2018/05/10/Swift设计模式之观察者模式/" class="archive-article-date">
+  	<time datetime="2018-05-10T08:03:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-10</time>
+</a>
+        
+      </header>
+    
+
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#</p>
+<p><strong>转自</strong></p>
+<ul>
+<li><a href="http://qefee.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">Swift设计模式</a></li>
+</ul>
+<p><strong>原文</strong></p>
+<ul>
+<li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">// 观察者模式</span><br><span class="line">// 一个目标物件管理所有相依于它的观察者物件，并且在它本身的状态改变时主动发出通知。这通常透过呼叫各观察者所提供的方法来实现。此种模式通常被用来实现事件处理系统</span><br><span class="line">// 设计模式分类：行为型模式</span><br><span class="line"></span><br><span class="line">/// 观察者接口</span><br><span class="line">protocol PropertyObserver : class &#123;</span><br><span class="line">    /**</span><br><span class="line">     属性即将改变监听方法</span><br><span class="line">     </span><br><span class="line">     - parameter propertyName:     属性名</span><br><span class="line">     - parameter newPropertyValue: 新的值</span><br><span class="line">     */</span><br><span class="line">    func willChangePropertyName(propertyName:String, newPropertyValue:Int)</span><br><span class="line">    /**</span><br><span class="line">     属性已经改变监听方法</span><br><span class="line">     </span><br><span class="line">     - parameter propertyName:     属性名</span><br><span class="line">     - parameter oldPropertyValue: 原来的值</span><br><span class="line">     */</span><br><span class="line">    func didChangePropertyName(propertyName:String, oldPropertyValue:Int)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 观察对象</span><br><span class="line">class TestChambers &#123;</span><br><span class="line">    </span><br><span class="line">    weak var observer:PropertyObserver?</span><br><span class="line">    </span><br><span class="line">    var testChamberNumber: Int = 0 &#123;</span><br><span class="line">        willSet(newValue) &#123;</span><br><span class="line">            observer?.willChangePropertyName(&quot;testChamberNumber&quot;, newPropertyValue:newValue)</span><br><span class="line">        &#125;</span><br><span class="line">        didSet &#123;</span><br><span class="line">            observer?.didChangePropertyName(&quot;testChamberNumber&quot;, oldPropertyValue:oldValue)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 具体观察者</span><br><span class="line">class Observer : PropertyObserver &#123;</span><br><span class="line">    func willChangePropertyName(propertyName: String, newPropertyValue: Int) &#123;</span><br><span class="line">        print(&quot;\(propertyName)的值将要改变为\(newPropertyValue)&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func didChangePropertyName(propertyName: String, oldPropertyValue: Int) &#123;</span><br><span class="line">        print(&quot;\(propertyName)的值已经改变,原来的值为\(oldPropertyValue)&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var observerInstance = Observer()</span><br><span class="line">var testChambers = TestChambers()</span><br><span class="line">testChambers.observer = observerInstance</span><br><span class="line">testChambers.testChamberNumber += 1</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Swift设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/10/Swift设计模式之观察者模式/">展开全文 >></a>
         </p>
       
 
@@ -636,7 +635,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/15/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/17/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/15/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/17/">Next &raquo;</a>
     </nav>
   
 
@@ -748,7 +747,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
+                <a href="javascript:void(0)" class="js-tag color3">LIVE555</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -764,6 +763,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
               </li>
              
@@ -776,11 +779,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">Data</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -792,11 +791,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">fallthrough</a>
+                <a href="javascript:void(0)" class="js-tag color4">KVC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
+                <a href="javascript:void(0)" class="js-tag color4">KVO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">fallthrough</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -808,11 +811,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
+                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -824,6 +827,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">UICollectionViewLayout</a>
               </li>
              
@@ -832,11 +839,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">上架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GCDAsyncUdpSocket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">侧滑手势</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">smart_monkey</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">UIAlertController</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -856,7 +883,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Data</a>
+                <a href="javascript:void(0)" class="js-tag color5">view</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">searchController</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -876,11 +907,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CoreData</a>
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">UIAlertController</a>
+                <a href="javascript:void(0)" class="js-tag color4">CoreData</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -900,6 +931,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCD</a>
               </li>
              
@@ -908,7 +947,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">rtsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CPU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">响应链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">h264</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bug</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -916,7 +971,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
+                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -932,11 +987,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">集合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -949,14 +1012,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">protocol</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
             
             <div class="clearfix"></div>

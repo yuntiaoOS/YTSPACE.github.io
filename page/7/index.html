@@ -153,14 +153,14 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Swift高手进阶之协议" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-窥探Swift之数组安全索引与数组切片" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/16/Swift高手进阶之协议/">Swift高手进阶之协议</a>
+      <a class="article-title" href="/2018/05/28/窥探Swift之数组安全索引与数组切片/">窥探Swift之数组安全索引与数组切片</a>
     </h1>
   
 
@@ -169,8 +169,8 @@
         	
 	
         
-        <a href="/2018/05/16/Swift高手进阶之协议/" class="archive-article-date">
-  	<time datetime="2018-05-16T09:10:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-16</time>
+        <a href="/2018/05/28/窥探Swift之数组安全索引与数组切片/" class="archive-article-date">
+  	<time datetime="2018-05-28T06:19:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
@@ -182,202 +182,70 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#</p>
-<p> 转自：<a href="http://codecloud.net/swift-22-1228.html" target="_blank" rel="noopener">http://codecloud.net/swift-22-1228.html</a><br>Protocol(协议)用于统一方法和属性的名称，而不实现任何功能。协议能够被类，枚举，结构体实现，满足协议要求的类，枚举，结构体被称为协议的遵循者。<br>遵循者需要提供协议指定的成员，如属性，方法，操作符，下标等。<br>协议的语法<br>协议的定义与类，结构体，枚举的定义非常相似，如下所示：<br>protocol SomeProtocol {<br>​    // 协议内容<br>}<br>在类，结构体，枚举的名称后加上协议名称，中间以冒号:分隔即可实现协议；实现多个协议时，各协议之间用逗号,分隔，如下所示：<br>struct SomeStructure: FirstProtocol, AnotherProtocol {<br>​    // 结构体内容<br>}</p>
-        
-          <a class="article-more-a" href="/2018/05/16/Swift高手进阶之协议/#more">more >></a>
-        
-      
+        <h1 id="窥探Swift之数组安全索引与数组切片"><a href="#窥探Swift之数组安全索引与数组切片" class="headerlink" title="窥探Swift之数组安全索引与数组切片"></a><a href="https://www.cnblogs.com/ludashi/p/5179275.html" target="_blank" rel="noopener">窥探Swift之数组安全索引与数组切片</a></h1><p>　　今天是元宵节，祝大家元宵节快乐！在Swift中的数组和字典中下标是非常常见的，数组可以通过索引下标进行元素的查询，字典可以通过键下标来获取相应的值。在使用数组时，一个常见的致命错误就是数组越界。如果在你的应用程序中数组越界了，那么对不起，如果由着程序的性子的话是会崩溃的。为了防止崩溃呢，我们会对集合做一些安全的处理。比如对数组进行扩展，从而对数组的索引进行安全检查，保证数组的index在正常范围内。在Objective-C中也是经常对数组，字典等做一些处理操作。</p>
+<p>　　今天的博客的主要内容是先对Objective-C中常用集合的安全扩展进行介绍，由此在窥探一下Swift语言中的处理。并且还会介绍Swift中自定义下标，说白了自定义下标其实就是通过下标的形式与特定的下标值来访问一个对象。自定义下标在有些场合中是非常实用的。然后下方还会给出数组切片的概念与实用方式。废话少说进入今天的主题。</p>
+<p>一、安全的索引集合元素</p>
+<p>　　对一个集合索引进行安全检查是很有必要的，也是经常实用的，最常见的就是对数组和字典索引的安全检查，该部分内容就是类比这Objective-C中的数组索引的安全检查来扩充Swift的数组，从而让你的Swift数组也同样具备对数组安全检查的功能。</p>
+<p>　　1. Objective-C中NSArray对索引的安全扩展</p>
+<p>　　下方这段代码是非常简单的，它是对Objective-C中的NSArray做的扩展，该方法位于NSArray相关的延展中。在你的项目中，如果添加了此段延展代码，那么你就可以通过objectAtIndexSafe:方法对数组进行安全的索引。有代码不难看出在定义该函数参数时，我们将index声明为NSUInteger，也就是正整数，这就排除了你对下标传入一个负数。紧接着又对index的合法性进行验证，如果index不在数组有效范围内，那么就返回nil。当你查找的元素不存在时，你返回nil是不会造成程序崩溃的，因为nil的地址是0x0, 这和归零若引用有些类似。</p>
+<p>　　当然下方只是NSArray安全扩展其中一个方法，还有许多扩展的安全方法，比如数组的增删改查都可以进行相应的安全扩展，扩展的方式和思路与下方这段简单代码类似，再次就不花过多的篇幅对其进行介绍了。</p>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1 - (id)objectAtIndexSafe:(NSUInteger)index &#123;</span><br><span class="line">2     if (index &gt; self.count-1) &#123;</span><br><span class="line">3         return nil;</span><br><span class="line">4     &#125;</span><br><span class="line">5     return [self objectAtIndex:index];</span><br><span class="line">6 &#125;</span><br></pre></td></tr></table></figure>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<p>　　</p>
+<p>　　2.Swift中对Array的安全扩展</p>
+<p>　　上面简单的对Objective-C中的安全方法进行了简单的介绍，就算是对Swift相关内容的引子吧，下方将会给出Swift语言中类似的方法。对Swift相关方法介绍时，我会尽量的详细一些，因为毕竟本篇博客主要是关于Swift内容的。接下来将对上面Objective-C中NSArray数组索引安全验证的方法使用Swift语言进行重新。当然重写的内容也是非常容易理解的。</p>
+<p>　　　　（1）主要是对subscript方法进行重载，在重载的subscript方法中，对index的范围通过三目运算符进行了安全检查。如果index在0..&lt;count这个半开区间内，那么就返回当前索引的值，如果不在该范围内就返回nil, 下方就是对Array索引的安全检查。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1 extension Array &#123;</span><br><span class="line">2     subscript (safe index: Int) -&gt; Element? &#123;</span><br><span class="line">3         return (0..&lt;count).contains(index) ? self[index] : nil</span><br><span class="line">4     &#125;</span><br><span class="line">5 &#125;</span><br></pre></td></tr></table></figure>
+<p>　　　　</p>
+<p>　　　　（2）上面是对Swift中的Array进行了安全索引扩展，接下来就是简单的使用了，下方的代码段是对上面安全扩展函数的测试。首先创建了一个数组testArray, 然后创建了一个索引数组indexs, 然后遍历indexs中的元素值，将其作为testArray的下标，对testArray进行检索。当然检索时，使用的是我们上面定义的safe方法，并且在indexs下标数组中存在非法的下标。在这种情况下，我们来验证一下我们的安全方法。</p>
+<p>　　　　当然在数组遍历中，我们使用了for-in循环取出indexs中的每个index, 然后使用guard语句取出testArray中的值。使用guard语句能很好的过滤掉因为非法的index而返回的nil值。具体代码段如下所示：</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201602/545446-20160205134129741-410346246.png" alt="img"></p>
+<p>　　　　上面的代码段理解起来并不难，上述测试代码的运行结果如下所示，从运行结果可以很好的说明问题，并且在index非法时不会崩溃，并合理的给出相应的错误提示，请看下方具体运行结果。</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201602/545446-20160205134817882-1459948311.png" alt="img"></p>
+<p>　　　　上面的延展也可以通过对整个集合类型，也就是CollectionType进行扩展，不过在扩展CollectionType时要对Index使用where子句进行限制，使Index必须符合Comparable协议，具体实现如下所示，不过下面的方法比较少用，因为一般是数组存在越界的情况，因为在字典中，如果你对一个不存在的键进行值的索引，会返回nil值，而不会崩溃。但是在数组中，你对不存在的index进行索引，就会抛出错误。下方是另一种处理方式，不过该方式用的比较少。</p>
+<p>　　　　实现下方延展后，同样可以在数组中使用safe方法。</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201602/545446-20160219131435081-784419369.png" alt="img"></p>
+<p>　　</p>
+<p>二、使用多个索引下标的数组</p>
+<p>　　延展的功能是非常强大的，该部分将会给出另一个数组的延展。该延展的功能是可以通过多个索引给数组设置值，以及通过多个索引一次性获取多个数组的值。该功能是非常强大的，接下来将一步步实现该功能。</p>
+<p>　　1. 了解zip()函数以及Zip2Sequence</p>
+<p>　　　　在实现数组多个索引扩展时，需要使用到zip()函数，zip()函数接收两个序列，并且返回一个Zip2Sequence类型的数据。zip()函数究竟是干嘛的呢？接下来将会通过一个小的实例来搞一下zip()函数。首先看一下Apple的帮助文档上对zip()函数的介绍。具体如下所示：</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201602/545446-20160219141933925-2078157118.png" alt="img"></p>
+<p> 　　　　上面那句英文的意思大概就是“基于两个基本序列构建了一个序列对，在序列对中，第i对，代表着每个基本序列中的第i个元素。”在zip函数定义的过程中，我们可以看到，zip()是一个泛型函数，其接收两个SequenceType类型的参数，然后返回一个Zip2Sequence类型的数据。新创建的序列对就存在于Zip2Sequence中。说这么多还是来个小Demo实惠一些，通过一个小实例，看zip()函数的用法一目了然。</p>
+<p>　　　　(1) 创建两个数组zip1和zip2, 将这两个数组作为zip()函数的参数，将两个数组进行合并。具体实现如下：</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201602/545446-20160219154659253-1427565472.png" alt="img"></p>
+<p>　　　　(2) 通过上面的程序可以看出，zipSum是一个Zip2Sequence&lt;Array<int>, Array<int>&gt;类型的常量，我们可以使用dump()对zipSum常量进行打印，观察其中的数据存储结构，具体结构如下所示：</int></int></p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201602/545446-20160219155008425-2071073573.png" alt="img"></p>
+<p>　　　　输出结果如下，由结果容易看出，在序列中有两个元素，第一个元素对应着数组zip1, 第二个元素对应着数组zip2。 </p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201602/545446-20160219155046581-657495057.png" alt="img"></p>
+<p>　　　　(3)接下来就是对zipSum这个序列通过for-in循环进行遍历，下方就是对zipSum进行遍历的代码。</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201602/545446-20160219160311613-207228770.png" alt="img"></p>
+<p>　　　　　　上面对zipSum遍历的结果如下所示，由下方输出结果可知，输出是成对遍历的，如果某个数组中的元素是多余的，那么就会被忽略掉。</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201602/545446-20160219161821847-263203693.png" alt="img"></p>
+<p>　　2. 数组多个索引的延展实现</p>
+<p>　　　　在这个将要实现的延展中，我们对Array进行了扩展，在延展中对subscript方法进行重载，使其可以接受多个下标，并且对多个下标对应的值进行索引，并把索引结果组成数组。在subscript方法中通过get方法获取索引相应的值，通过set方法为相应的索引值进行设置。下方代码段就是该延展的实现：　　　　</p>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> 1 extension Array &#123;</span><br><span class="line"> 2     subscript(i1: Int, i2: Int, rest: Int...) -&gt; [Element] &#123;</span><br><span class="line"> 3         //通过实现get方法，获取数组中相应的值</span><br><span class="line"> 4         get &#123;</span><br><span class="line"> 5             var result: [Element] = [self[i1], self[i2]]</span><br><span class="line"> 6             for index in rest &#123;</span><br><span class="line"> 7                 result.append(self[index])</span><br><span class="line"> 8             &#125;</span><br><span class="line"> 9             return result</span><br><span class="line">10         &#125;</span><br><span class="line">11         </span><br><span class="line">12         //通过set方法，对数组相应的索引进行设置</span><br><span class="line">13         set (values) &#123;</span><br><span class="line">14             for (index, value) in zip([i1, i2] + rest, values) &#123;</span><br><span class="line">15                 self[index] = value</span><br><span class="line">16             &#125;</span><br><span class="line">17         &#125;</span><br><span class="line">18     &#125;</span><br><span class="line">19 &#125;</span><br></pre></td></tr></table></figure>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<p>　　　　在上述延展的实现中，并没有多少困难的地方。在subs两个cript函数中，使用的是可变参数，subscript函数参数的个数是两个以上（包括两个）。然后就是通过zip()函数以及对zip()函数返回的结果集进行遍历，从而对多个下标索引进行值的设置。经过上述延展，我们就可以通过多个索引对数组进行操作了。上述延展的使用方式如下：　</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201602/545446-20160219164815316-1907649161.png" alt="img"></p>
+<p>三、数组切片</p>
+<p>　　数组切片在OC中也是不存在的，是Swift新引入的概念，该部分将会对数组切片进行讨论，研究一下数组切片的使用方式及其特点。下方先通过一个小Demo来看一下如何生成数组切片。下方代码段先将一个字符串通过map函数转换成一个数组arrayTest, 然后我们创建一个该数组的切片。下方代码段创建了arrayTest数组中的下标3到下标6这个范围区间中的切片，arraySlices就是数组切片变量，它是ArraySlice<string>类型的，具体代码段如下所示。</string></p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201602/545446-20160219173136238-1056758933.png" alt="img"></p>
+<p>　　在数组切片中有一点需要注意，数组切片的下标与原始数组中的下标保持一致。如果要取出切片arraySlices中的第一个值，我们要使用arraySlices[3], 而不是arraySlices[0], 如果使用arraySlices[0]就会报错，如下所示：</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201602/545446-20160219173726019-1405556997.png" alt="img"></p>
+<p>　　</p>
+<p>　　因为数组是值类型，尽管切片与原数组有着对应的数组下标，但是切片是原始数组的部分拷贝，所以修改切片或者修改原数组，两者互不影响，下方示例给出了该测试，如下所示：</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201602/545446-20160219174939550-1098254819.png" alt="img"></p>
+<p>　　　</p>
+<p>　　如果把切片转换成枚举，那么切片中与原始数组对应的下标关系将不存在，下方是将切片转换成枚举序列，然后对其进行遍历，代码如下：</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201602/545446-20160219175757628-1014755793.png" alt="img"></p>
+<p>　　上述代码段输出结果如下：</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201602/545446-20160219175827644-1276857687.png" alt="img"></p>
+<p>　　　　今天博客就先写到这儿，关于数组的延展还有许多，以后有机会再讨论。其实我们还可以通过一些方式来为我们自己的对象添加下标。也就是可以通过下标来访问对象属性，这个以后在讨论吧。　　 </p>
+<p>作者：<a href="http://home.cnblogs.com/u/ludashi/" target="_blank" rel="noopener">青玉伏案</a><br>出处：<a href="http://www.cnblogs.com/ludashi/" target="_blank" rel="noopener">http://www.cnblogs.com/ludashi/</a><br>本文版权归作者和共博客园共有，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。<br>如果文中有什么错误，欢迎指出。以免更多的人被误导。</p>
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">协议</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/16/Swift高手进阶之协议/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-WKWebView学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/16/WKWebView学习笔记/">WKWebView学习笔记</a>
-    </h1>
-  
-
-
-        <!-- 显示阅读和评论数 -->
-        	
-	
-        
-        <a href="/2018/05/16/WKWebView学习笔记/" class="archive-article-date">
-  	<time datetime="2018-05-16T05:43:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-16</time>
-</a>
-        
-      </header>
-    
-
-    <!-- 目录内容 -->
-
-<!-- 目录内容结束 -->
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#</p>
-<p>一、简介</p>
-<p>webView是我们日常开发中不可缺少的一个组件，通常我们都是使用UIWebView来实现的，不过大多数情况下，UIWebView的表现却不尽如人意（最直观的就是内存消耗严重，特别是有视频的时候，有木有！）<br>iOS8之后苹果推荐使用WKWebView替代UIWebView，其主要的有点有：</p>
-<ol>
-<li>在性能、稳定性</li>
-<li>WKWebView更多的支持HTML5的特性</li>
-<li>WKWebView更快，占用内存可能只有UIWebView的1/3 ~ 1/4</li>
-<li>WKWebView高达60fps的滚动刷新率和丰富的内置手势</li>
-<li>WKWebView具有Safari相同的JavaScript引擎</li>
-<li>WKWebView增加了加载进度属性</li>
-<li>将UIWebViewDelegate和UIWebView重构成了14个类与3个协议<a href="https://link.jianshu.com/?t=https://developer.apple.com/library/ios/documentation/Cocoa/Reference/WebKit/ObjC_classic/index.html" target="_blank" rel="noopener">官方链接</a>
-        
-          <a class="article-more-a" href="/2018/05/16/WKWebView学习笔记/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">WKWebView</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/16/WKWebView学习笔记/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-[Swift]为Extension添加存储属性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/16/[Swift]为Extension添加存储属性/">为Extension添加存储属性</a>
-    </h1>
-  
-
-
-        <!-- 显示阅读和评论数 -->
-        	
-	
-        
-        <a href="/2018/05/16/[Swift]为Extension添加存储属性/" class="archive-article-date">
-  	<time datetime="2018-05-16T02:39:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-16</time>
-</a>
-        
-      </header>
-    
-
-    <!-- 目录内容 -->
-
-<!-- 目录内容结束 -->
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#</p>
-<p>众所周知, 在Swift的扩展(Extension)中只能添加计算属性, 但是有时候, 我们需要添加存储属性的话, 就用到了Runtime的方法.<br>在为Extension添加存储属性的时候, 主要用到了下面两个方法:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public func objc_setAssociatedObject(_ object: Any, _ key: UnsafeRawPointer, _ value: Any?, _ policy: objc_AssociationPolicy)</span><br><span class="line"></span><br><span class="line">public func objc_getAssociatedObject(_ object: Any, _ key: UnsafeRawPointer) -&gt; Any?</span><br></pre></td></tr></table></figure>
-<h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4>
-        
-          <a class="article-more-a" href="/2018/05/16/[Swift]为Extension添加存储属性/#more">more >></a>
-        
       
 
       
@@ -404,7 +272,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/16/[Swift]为Extension添加存储属性/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/窥探Swift之数组安全索引与数组切片/">展开全文 >></a>
         </p>
       
 
@@ -434,14 +302,14 @@
 
 
   
-    <article id="post-WKWebView的使用--API篇" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-为啥数组越界抛异常而字典确不会？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/16/WKWebView的使用--API篇/">WKWebView的使用API篇</a>
+      <a class="article-title" href="/2018/05/28/为啥数组越界抛异常而字典确不会？/">为啥数组越界抛异常而字典确不会？</a>
     </h1>
   
 
@@ -450,8 +318,8 @@
         	
 	
         
-        <a href="/2018/05/16/WKWebView的使用--API篇/" class="archive-article-date">
-  	<time datetime="2018-05-16T02:37:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-16</time>
+        <a href="/2018/05/28/为啥数组越界抛异常而字典确不会？/" class="archive-article-date">
+  	<time datetime="2018-05-28T06:15:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
@@ -464,28 +332,34 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>#</p>
-<p>WKWebView是苹果在iOS 8之后推出的框架WebKit中的浏览器控件, 其加载速度比UIWebView快了许多, 但内存占用率却下降很多, 也解决了加载网页时的内存泄露问题. 现在的项目大多数只需适配到iOS 8, 所以用WKWebView来替换项目中的UIWebView是很有必要的.</p>
-<p>WKWebView的使用主要涉及下面几个类:</p>
-<blockquote>
+<p>转： <a href="https://www.jianshu.com/u/ac893eccce9e" target="_blank" rel="noopener">八条8tiao</a></p>
+<h4 id="数组遭受了不平等对待吗？"><a href="#数组遭受了不平等对待吗？" class="headerlink" title="数组遭受了不平等对待吗？"></a>数组遭受了不平等对待吗？</h4><p>在我们访问数组的时候，如果发生了越界，那么我们一定会收到错误。以swift语言为例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let array = [1,2,3]</span><br><span class="line">array[10] // error ！！！！！！！！！</span><br></pre></td></tr></table></figure>
+<p>数组中只包含三个元素，但我们用下标10去访问，发生越界错误。</p>
+<p>但是当我们访问一个不在字典中的元素的时候，确不会发生类似的情况！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let dic = [&quot;a&quot;: 1, &quot;b&quot;: 2]</span><br><span class="line">dic[&quot;z&quot;]  // 虽然不存在，但不会出现异常</span><br></pre></td></tr></table></figure>
+<p>同样的问题，不同的待遇，这是为啥呢？</p>
+<h4 id="究其原因"><a href="#究其原因" class="headerlink" title="究其原因"></a>究其原因</h4><p>我们来查看一下swift中数组和字典下标访问的实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct Array&lt;Element&gt; &#123;</span><br><span class="line">    subscript(index: Int) -&gt; Element</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Dictionary&lt;Key: Hashable, Value&gt; &#123;</span><br><span class="line">    subscript(key: Key) -&gt; Value?</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>比较两者的实现，我们可以得到问题的原因：</p>
 <ul>
-<li>WKWebView</li>
-<li>WKWebViewConfiguration</li>
-<li>WKUserScript</li>
-<li>WKUserContentController</li>
-<li>WKWebsiteDataStore</li>
+<li>数组下标访问返回的不是一个optional类型</li>
+<li>subscript方法无法throw错误</li>
 </ul>
-</blockquote>
-<p>以及两个代理:</p>
+<p>所以对于数组而言，swift除了弄个fatalError以外，没有其它的替代方案了。而字典返回的是optional类型值，如果发生什么意外状况，即使subscript不能throw errors，字典也可以悠然的返回一个nil。</p>
+<h4 id="让我们定义另个版本"><a href="#让我们定义另个版本" class="headerlink" title="让我们定义另个版本"></a>让我们定义另个版本</h4><p>其实我们可以给数组做一个扩展，实现一个即使数组访问越界也不会抛异常的版本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">extension Array &#123;</span><br><span class="line">    subscript(safe index: Int) -&gt; Element? &#123;</span><br><span class="line">        return index &gt;= 0 &amp;&amp; index &lt; count ? self[index] : nil</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们使用 extension 关键字来给Array做一个扩展，要注意的是：我们无法覆盖原有的subscript方法，</p>
 <blockquote>
-<ul>
-<li>WKNavigationDelegate</li>
-<li>WKUIDelegate</li>
-</ul>
+<p><strong>注意：subscript方法是可以被重载的，也就是说允许同时有多个subscript方法存在</strong></p>
 </blockquote>
-<h2 id="1-WKWebView"><a href="#1-WKWebView" class="headerlink" title="1. WKWebView"></a>1. WKWebView</h2>
-        
-          <a class="article-more-a" href="/2018/05/16/WKWebView的使用--API篇/#more">more >></a>
-        
+<p>我们只增加一个新的subscript方法，并明确指定一个外部参数就可以了，我们现在可以这样访问数组了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var array = [1,2,3]</span><br><span class="line">array[safe: 10] // 返回nil，而不是异常</span><br></pre></td></tr></table></figure>
+<p>我们需要在下标访问的时候增加一个label，这个时候虽然我们越界了，但我们却像字典那样，收获了一个nil。</p>
+<blockquote>
+<p><strong>本文的目的是讨论一下字典与数组下标实现的区别以及subscript的一些特点：不可throw，可以重载等但绝对不是在说数组越界后应该不应该抛出异常。抛不抛出异常要从数组的数据结构应用场景等多方面考虑。</strong></p>
+</blockquote>
+
       
 
       
@@ -502,7 +376,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">WKWebView</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
         		</li>
       		
 		</ul>
@@ -512,7 +386,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/16/WKWebView的使用--API篇/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/为啥数组越界抛异常而字典确不会？/">展开全文 >></a>
         </p>
       
 
@@ -542,14 +416,14 @@
 
 
   
-    <article id="post-UIApplication" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift3 GCD" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/15/UIApplication/">iOS UIApplication.h</a>
+      <a class="article-title" href="/2018/05/25/Swift3 GCD/">Swift3 GCD</a>
     </h1>
   
 
@@ -558,8 +432,8 @@
         	
 	
         
-        <a href="/2018/05/15/UIApplication/" class="archive-article-date">
-  	<time datetime="2018-05-15T05:48:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-15</time>
+        <a href="/2018/05/25/Swift3 GCD/" class="archive-article-date">
+  	<time datetime="2018-05-25T03:36:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
 </a>
         
       </header>
@@ -571,17 +445,12 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>import Foundation</p>
-<p>import UIKit</p>
-<p>import _SwiftUIKitOverlayShims</p>
-<p>//</p>
-<p>//  UIApplication.h</p>
-<p>//  UIKit</p>
-<p>//</p>
-<p>//  Copyright (c) 2005-2017 Apple Inc. All rights reserved.</p>
-<p>//<br>
+        <p>#</p>
+<p>Swift3 的gcd变化很大，这里列举一下，大家可以有个对照：</p>
+<h3 id="1、Create-a-serial-queue-创建一个serial-queue"><a href="#1、Create-a-serial-queue-创建一个serial-queue" class="headerlink" title="1、Create a serial queue 创建一个serial queue"></a>1、Create a serial queue 创建一个serial queue</h3><p>OC</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;com.leacode.gcd.serialqueue&quot;, DISPATCH_QUEUE_SERIAL); dispatch_async(queue, ^&#123;</span><br><span class="line">    // 在queue线程执行</span><br><span class="line">    dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        // 回到主线程</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2018/05/15/UIApplication/#more">more >></a>
+          <a class="article-more-a" href="/2018/05/25/Swift3 GCD/#more">more >></a>
         
       
 
@@ -599,7 +468,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Apple</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Swift3</a>
         		</li>
       		
 		</ul>
@@ -609,7 +478,187 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/15/UIApplication/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/25/Swift3 GCD/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-swift-Tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/25/swift-Tips/">where Self</a>
+    </h1>
+  
+
+
+        <!-- 显示阅读和评论数 -->
+        	
+	
+        
+        <a href="/2018/05/25/swift-Tips/" class="archive-article-date">
+  	<time datetime="2018-05-25T02:56:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
+</a>
+        
+      </header>
+    
+
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>extension BorderDesignable where Self: UIView 中的where Self是什么意思?</p>
+<p>你的<code>BorderDesignable</code>这个协议只能被 UIView 继承</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/25/swift-Tips/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Swift-predecessor(), successor(), advancedBy()" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/24/Swift-predecessor(), successor(), advancedBy()/">Swift-predecessor(), successor(), advancedBy()</a>
+    </h1>
+  
+
+
+        <!-- 显示阅读和评论数 -->
+        	
+	
+        
+        <a href="/2018/05/24/Swift-predecessor(), successor(), advancedBy()/" class="archive-article-date">
+  	<time datetime="2018-05-24T10:21:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-24</time>
+</a>
+        
+      </header>
+    
+
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h6 id="Swift-predecessor-successor-advancedBy"><a href="#Swift-predecessor-successor-advancedBy" class="headerlink" title="Swift-predecessor(), successor(), advancedBy()"></a>Swift-predecessor(), successor(), advancedBy()</h6><p>—————— 以下为Swift 3.0 的方法 ——————————</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">let str = &quot;hello world!&quot;  </span><br><span class="line">str[str.startIndex]  </span><br><span class="line">打印结果：  </span><br><span class="line">//h</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">//访问其结束前一个字符</span><br><span class="line">//str[str.endIndex.predecessor()]  </span><br><span class="line">//在Swift3.0 predecessor使用以下代替：</span><br><span class="line">str[str.index(before: str.endIndex)]</span><br><span class="line">打印结果：</span><br><span class="line">//!</span><br><span class="line"></span><br><span class="line">//访问其开始后一个字符</span><br><span class="line">str[str.startIndex.successor()]  </span><br><span class="line">//在Swift3.0 successor使用以下代替：</span><br><span class="line">str[str.index(after: str.startIndex)]</span><br><span class="line">打印结果：</span><br><span class="line">//e</span><br><span class="line"></span><br><span class="line">//访问其开始后一个字符</span><br><span class="line">let index = str.startIndex.advancedBy(7) </span><br><span class="line">//在Swift3.0 advancedBy使用以下代替： </span><br><span class="line">let index = str.index(str.startIndex, offsetBy: 7)</span><br><span class="line">打印结果：</span><br><span class="line">//7</span><br><span class="line">str[index]  </span><br><span class="line">打印结果：</span><br><span class="line">//输出 o</span><br><span class="line">1234567891011121314151617181920212223242526272829</span><br></pre></td></tr></table></figure>
+<p>—————— 以下为Swift 2.0 的方法 ——————————</p>
+<p>在截取字符串时遇到几个没用过的函数特此记.<br>startIndex:访问String第一个位置的字符<br>endIndex: 访问String最后一个位置的字符</p>
+<p>predecessor(), successor(), advancedBy()<br>一个String.Index值可以通过调用predecessor()方法来访问其前一个index,<br>调用successor()来访问其后一个index<br>调用advancedBy()来指定访问相对位置的index</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">let str = &quot;hello world!&quot;  </span><br><span class="line">str[str.startIndex]  </span><br><span class="line">打印结果：  </span><br><span class="line">//h</span><br><span class="line"></span><br><span class="line">//访问其结束前一个字符</span><br><span class="line">str[str.endIndex.predecessor()]  </span><br><span class="line">打印结果：</span><br><span class="line">//!</span><br><span class="line"></span><br><span class="line">//访问其开始后一个字符</span><br><span class="line">str[str.startIndex.successor()]  </span><br><span class="line">打印结果：</span><br><span class="line">//e</span><br><span class="line"></span><br><span class="line">//访问其开始后一个字符</span><br><span class="line">let index = str.startIndex.advancedBy(7)  </span><br><span class="line">打印结果：</span><br><span class="line">//7</span><br><span class="line">str[index]  </span><br><span class="line">打印结果：</span><br><span class="line">//输出 o</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/24/Swift-predecessor(), successor(), advancedBy()/">展开全文 >></a>
         </p>
       
 
@@ -641,7 +690,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
     </nav>
   
 
@@ -753,7 +802,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
+                <a href="javascript:void(0)" class="js-tag color3">LIVE555</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -769,6 +818,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
               </li>
              
@@ -781,11 +834,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">Data</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -797,11 +846,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">fallthrough</a>
+                <a href="javascript:void(0)" class="js-tag color4">KVC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
+                <a href="javascript:void(0)" class="js-tag color4">KVO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">fallthrough</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -813,11 +866,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
+                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -829,6 +882,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">UICollectionViewLayout</a>
               </li>
              
@@ -837,11 +894,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">上架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GCDAsyncUdpSocket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">侧滑手势</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">smart_monkey</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">UIAlertController</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -861,7 +938,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Data</a>
+                <a href="javascript:void(0)" class="js-tag color5">view</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">searchController</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -881,11 +962,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CoreData</a>
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">UIAlertController</a>
+                <a href="javascript:void(0)" class="js-tag color4">CoreData</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -905,6 +986,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCD</a>
               </li>
              
@@ -913,7 +1002,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">rtsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CPU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">响应链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">h264</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bug</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -921,7 +1026,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
+                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -937,11 +1042,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">集合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -954,14 +1067,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">protocol</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
             
             <div class="clearfix"></div>

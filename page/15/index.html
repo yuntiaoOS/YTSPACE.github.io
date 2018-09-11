@@ -153,14 +153,14 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-嵌套类型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift设计模式之原型模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/07/嵌套类型/">iOS嵌套类型</a>
+      <a class="article-title" href="/2018/05/11/Swift设计模式之原型模式/">Swift设计模式之原型模式</a>
     </h1>
   
 
@@ -169,8 +169,8 @@
         	
 	
         
-        <a href="/2018/05/07/嵌套类型/" class="archive-article-date">
-  	<time datetime="2018-05-07T06:27:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-07</time>
+        <a href="/2018/05/11/Swift设计模式之原型模式/" class="archive-article-date">
+  	<time datetime="2018-05-11T06:07:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
 </a>
         
       </header>
@@ -182,13 +182,17 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="嵌套类型"><a href="#嵌套类型" class="headerlink" title="嵌套类型"></a>嵌套类型</h2><p>枚举通常被创建来支持特定的类或结构的功能。类似地，定义纯粹用于更复杂类型的上下文中的实用程序类和结构可能很方便。为了达到这个目的，Swift使您能够定义<em>嵌套类型</em>，从而将支持枚举，类和结构嵌套在它们支持的类型的定义中。</p>
-<p>要将一个类型嵌套在另一个类型中，请将其定义写入其支持的类型的外括号中。类型可以嵌套到所需的级别。</p>
-<h3 id="嵌套类型在行动"><a href="#嵌套类型在行动" class="headerlink" title="嵌套类型在行动"></a>嵌套类型在行动</h3><p>下面的例子定义了一个叫做“结构”的结构<code>BlackjackCard</code>，它模拟了21点游戏中使用的扑克牌。该<code>BlackjackCard</code>结构包含两个名为<code>Suit</code>and的嵌套枚举类型<code>Rank</code>。</p>
-<p>在大酒杯中，Ace卡的价值为1或11。此功能由一个名为的结构表示，该结构<code>Values</code>嵌套在<code>Rank</code>枚举中：<br>
-        
-          <a class="article-more-a" href="/2018/05/07/嵌套类型/#more">more >></a>
-        
+        <p>#</p>
+<p><strong>转自</strong></p>
+<ul>
+<li><a href="http://qefee.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">Swift设计模式</a></li>
+</ul>
+<p><strong>原文</strong></p>
+<ul>
+<li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 原型模式</span><br><span class="line">// 百度百科：用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象</span><br><span class="line">// 设计模式分类：创建型模式</span><br><span class="line"></span><br><span class="line">class ChungasRevengeDisplay &#123;</span><br><span class="line">    var name: String?</span><br><span class="line">    let font: String</span><br><span class="line">    </span><br><span class="line">    init(font: String) &#123;</span><br><span class="line">        self.font = font</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func clone() -&gt; ChungasRevengeDisplay &#123;</span><br><span class="line">        return ChungasRevengeDisplay(font:self.font)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let Prototype = ChungasRevengeDisplay(font:&quot;GotanProject&quot;)</span><br><span class="line"></span><br><span class="line">let Philippe = Prototype.clone()</span><br><span class="line">Philippe.name = &quot;Philippe&quot;</span><br><span class="line"></span><br><span class="line">let Christoph = Prototype.clone()</span><br><span class="line">Christoph.name = &quot;Christoph&quot;</span><br><span class="line"></span><br><span class="line">let Eduardo = Prototype.clone()</span><br><span class="line">Eduardo.name = &quot;Eduardo&quot;</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -205,11 +209,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">嵌套</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">apple</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Swift设计模式</a>
         		</li>
       		
 		</ul>
@@ -219,7 +219,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/07/嵌套类型/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/11/Swift设计模式之原型模式/">展开全文 >></a>
         </p>
       
 
@@ -249,14 +249,14 @@
 
 
   
-    <article id="post-协议" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift设计模式之单例模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/07/协议/">协议protocol</a>
+      <a class="article-title" href="/2018/05/11/Swift设计模式之单例模式/">Swift设计模式之单例模式</a>
     </h1>
   
 
@@ -265,8 +265,8 @@
         	
 	
         
-        <a href="/2018/05/07/协议/" class="archive-article-date">
-  	<time datetime="2018-05-07T06:26:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-07</time>
+        <a href="/2018/05/11/Swift设计模式之单例模式/" class="archive-article-date">
+  	<time datetime="2018-05-11T06:07:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
 </a>
         
       </header>
@@ -278,16 +278,17 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h2><p>甲<em>协议</em>定义的该适合特定任务或片的功能的方法，属性和其他要求的蓝图。该协议然后可以<em>采用</em>由一个类，结构，或枚举，以提供实际实施方案的这些要求。据说满足协议要求的任何类型都<em>符合</em>该协议。</p>
-<p>除了指定符合类型必须实现的要求外，还可以扩展协议以实现其中一些要求或实现符合类型可以利用的其他功能。</p>
-<h3 id="协议语法"><a href="#协议语法" class="headerlink" title="协议语法"></a>协议语法</h3><p>您以与类，结构和枚举类似的方式定义协议：</p>
-<ol>
-<li><code>protocol SomeProtocol {</code></li>
-<li><code>// protocol definition goes here</code></li>
-<li><p><code>}</code></p>
-        
-          <a class="article-more-a" href="/2018/05/07/协议/#more">more >></a>
-        
+        <p>#</p>
+<p><strong>转自</strong></p>
+<ul>
+<li><a href="http://qefee.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">Swift设计模式</a></li>
+</ul>
+<p><strong>原文</strong></p>
+<ul>
+<li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 单例模式</span><br><span class="line">// 百度百科：单例模式是一种常用的软件设计模式。在它的核心结构中只包含一个被称为单例的特殊类。通过单例模式可以保证系统中一个类只有一个实例</span><br><span class="line">// 设计模式分类：创建型模式</span><br><span class="line"></span><br><span class="line">class DeathStarSuperlaser &#123;</span><br><span class="line">    static let sharedInstance = DeathStarSuperlaser()</span><br><span class="line">    </span><br><span class="line">    private init() &#123;</span><br><span class="line">        // 私有化构造函数来保证只有一个实例</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let laser = DeathStarSuperlaser.sharedInstance</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -304,11 +305,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">apple</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">protocol</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Swift设计模式</a>
         		</li>
       		
 		</ul>
@@ -318,7 +315,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/07/协议/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/11/Swift设计模式之单例模式/">展开全文 >></a>
         </p>
       
 
@@ -348,14 +345,14 @@
 
 
   
-    <article id="post-泛型T" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift设计模式之适配器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/07/泛型T/">iOS泛型</a>
+      <a class="article-title" href="/2018/05/11/Swift设计模式之适配器模式/">Swift设计模式之适配器模式</a>
     </h1>
   
 
@@ -364,8 +361,8 @@
         	
 	
         
-        <a href="/2018/05/07/泛型T/" class="archive-article-date">
-  	<time datetime="2018-05-07T06:24:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-07</time>
+        <a href="/2018/05/11/Swift设计模式之适配器模式/" class="archive-article-date">
+  	<time datetime="2018-05-11T04:19:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
 </a>
         
       </header>
@@ -377,18 +374,17 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p><em>通用代码</em>使您能够编写灵活的，可重用的函数和类型，它们可以与任何类型一起使用，并符合您定义的要求。您可以编写避免重复的代码，并以清晰抽象的方式表达其意图。</p>
-<p>泛型是Swift最强大的特性之一，Swift标准库的大部分都是用泛型代码构建的。实际上，即使您没有意识到，您在整个“ <em>语言指南”中</em>都一直在使用泛型。例如，Swift <code>Array</code>和<code>Dictionary</code>类型都是泛型集合。你可以创建一个包含<code>Int</code>值的数组，或者一个包含值的数组<code>String</code>，或者确实可以在Swift中创建任何其他类型的数组。同样，您可以创建一个字典来存储任何指定类型的值，并且对该类型可以是什么没有限制。</p>
-<h3 id="泛型求解的问题"><a href="#泛型求解的问题" class="headerlink" title="泛型求解的问题"></a>泛型求解的问题</h3><p>这是一个标准的非泛型函数<code>swapTwoInts(_:_:)</code>，它可以交换两个<code>Int</code>值：</p>
-<ol>
-<li><code>func swapTwoInts(_ a: inout Int, _ b: inout Int) {</code></li>
-<li><code>let temporaryA = a</code></li>
-<li><code>a = b</code></li>
-<li><code>b = temporaryA</code></li>
-<li><code>}</code>
-        
-          <a class="article-more-a" href="/2018/05/07/泛型T/#more">more >></a>
-        
+        <p>#</p>
+<p><strong>转自</strong></p>
+<ul>
+<li><a href="http://qefee.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">Swift设计模式</a></li>
+</ul>
+<p><strong>原文</strong></p>
+<ul>
+<li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">// 适配器模式</span><br><span class="line">// 百度百科：适配器模式（有时候也称包装样式或者包装）将一个类的接口适配成用户所期待的。一个适配允许通常因为接口不兼容而不能在一起工作的类工作在一起，做法是将类自己的接口包裹在一个已存在的类中</span><br><span class="line">// 设计模式分类：结构型模式</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  两针插座接口</span><br><span class="line"> */</span><br><span class="line">protocol TwoPinPlugProtocol &#123;</span><br><span class="line">    var pin1: String &#123; get &#125;</span><br><span class="line">    var pin2: String &#123; get &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 现在有一个三针插座</span><br><span class="line">class ThreePinPlug &#123;</span><br><span class="line">    var pin1: String &#123;</span><br><span class="line">        get &#123;</span><br><span class="line">            return &quot;pin1 of ThreePinPlug&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    var pin2: String &#123;</span><br><span class="line">        get &#123;</span><br><span class="line">            return &quot;pin2 of ThreePinPlug&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    var pin3: String &#123;</span><br><span class="line">        get &#123;</span><br><span class="line">            return &quot;pin3 of ThreePinPlug&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 这是一个适配器， 将三针插座转化为两针插座</span><br><span class="line">class TwoPinPlugAdapter: TwoPinPlugProtocol &#123;</span><br><span class="line">    let threePinPlug: ThreePinPlug!</span><br><span class="line">    </span><br><span class="line">    init(plug: ThreePinPlug) &#123;</span><br><span class="line">        self.threePinPlug = plug</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    var pin1: String &#123;</span><br><span class="line">        get &#123;</span><br><span class="line">            return threePinPlug.pin1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    var pin2: String &#123;</span><br><span class="line">        get &#123;</span><br><span class="line">            return threePinPlug.pin2</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 打印两针插座信息（不可以接收三针插座）</span><br><span class="line"> </span><br><span class="line"> - parameter plug: 两针插座</span><br><span class="line"> */</span><br><span class="line">func printTwoPinPlugInfo(plug: TwoPinPlugProtocol) -&gt; Void &#123;</span><br><span class="line">    print(&quot;two pin plug info: [pin1 = \(plug.pin1), pin2 = \(plug.pin2)]&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let threePinPlug = ThreePinPlug() // 目前有一个三针插座</span><br><span class="line">let twoPinPlugAdapter = TwoPinPlugAdapter(plug: threePinPlug) // 用适配器来包装</span><br><span class="line"></span><br><span class="line">printTwoPinPlugInfo(twoPinPlugAdapter) // 包装后可以将三针插座放入只接收两针插座的接口中</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -405,11 +401,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">apple</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">泛型</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Swift设计模式</a>
         		</li>
       		
 		</ul>
@@ -419,7 +411,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/07/泛型T/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/11/Swift设计模式之适配器模式/">展开全文 >></a>
         </p>
       
 
@@ -449,14 +441,14 @@
 
 
   
-    <article id="post-struct ifaddrs " class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift设计模式之桥梁模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/04/struct ifaddrs /">iOS struct ifaddrs</a>
+      <a class="article-title" href="/2018/05/11/Swift设计模式之桥梁模式/">Swift设计模式之桥梁模式</a>
     </h1>
   
 
@@ -465,8 +457,8 @@
         	
 	
         
-        <a href="/2018/05/04/struct ifaddrs /" class="archive-article-date">
-  	<time datetime="2018-05-04T09:14:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-04</time>
+        <a href="/2018/05/11/Swift设计模式之桥梁模式/" class="archive-article-date">
+  	<time datetime="2018-05-11T04:19:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
 </a>
         
       </header>
@@ -478,20 +470,17 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p><code>import Darwin</code></p>
-<p><code>public struct ifaddrs {</code></p>
-<p>​    public var ifa_next: UnsafeMutablePointer<ifaddrs>!</ifaddrs></p>
-<p>​    public var ifa_name: UnsafeMutablePointer<int8>!</int8></p>
-<p>​    public var ifa_flags: UInt32</p>
-<p>​    public var ifa_addr: UnsafeMutablePointer<sockaddr>!</sockaddr></p>
-<p>​    public var ifa_netmask: UnsafeMutablePointer<sockaddr>!</sockaddr></p>
-<p>​    public var ifa_dstaddr: UnsafeMutablePointer<sockaddr>!</sockaddr></p>
-<p>​    public var ifa_data: UnsafeMutableRawPointer!</p>
-<p>​    public init()</p>
-<p>​    public init(ifa_next: UnsafeMutablePointer<ifaddrs>!, ifa_name: UnsafeMutablePointer<int8>!, ifa_flags: UInt32, ifa_addr: UnsafeMutablePointer<sockaddr>!, ifa_netmask: UnsafeMutablePointer<sockaddr>!, ifa_dstaddr: UnsafeMutablePointer<sockaddr>!, ifa_data: UnsafeMutableRawPointer!)<br>
-        
-          <a class="article-more-a" href="/2018/05/04/struct ifaddrs /#more">more >></a>
-        
+        <p>#</p>
+<p><strong>转自</strong></p>
+<ul>
+<li><a href="http://qefee.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">Swift设计模式</a></li>
+</ul>
+<p><strong>原文</strong></p>
+<ul>
+<li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">// 桥梁模式</span><br><span class="line">// 百度百科：继承或实现的类通过不同的实现方式来完成抽象类或接口的变化 , 也就是实现过程的变化 , 但可能会有这样的情况 , 抽象过程同样需要进行变化 , 也就是抽象类或者接口需要变化 , 这样就会造成原有的继承或实现关系复杂 , 关系混乱 .桥梁模式利用将抽象层和实现层进行解耦 , 使两者不再像继承或实现这样的较强的关系 , 从而使抽象和实现层更加独立的完成变化的过程 . 使系统更加清晰</span><br><span class="line">// 设计模式分类：结构型模式</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  开关接口</span><br><span class="line"> */</span><br><span class="line">protocol Switch &#123;</span><br><span class="line">    var appliance: Appliance &#123;get set&#125;</span><br><span class="line">    func turnOn()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  电器接口</span><br><span class="line"> */</span><br><span class="line">protocol Appliance &#123;</span><br><span class="line">    func run()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 开关实现</span><br><span class="line">class RemoteControl: Switch &#123;</span><br><span class="line">    var appliance: Appliance</span><br><span class="line">    </span><br><span class="line">    func turnOn() &#123;</span><br><span class="line">        self.appliance.run()</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    init(appliance: Appliance) &#123;</span><br><span class="line">        self.appliance = appliance</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 电器实现，电视</span><br><span class="line">class TV: Appliance &#123;</span><br><span class="line">    func run() &#123;</span><br><span class="line">        print(&quot;tv turned on&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 电器实现，吸尘器</span><br><span class="line">class VacuumCleaner: Appliance &#123;</span><br><span class="line">    func run() &#123;</span><br><span class="line">        print(&quot;vacuum cleaner turned on&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var tvRemoteControl = RemoteControl(appliance: TV())</span><br><span class="line">tvRemoteControl.turnOn()</span><br><span class="line"></span><br><span class="line">var fancyVacuumCleanerRemoteControl = RemoteControl(appliance: VacuumCleaner())</span><br><span class="line">fancyVacuumCleanerRemoteControl.turnOn()</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -508,7 +497,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ifaddrs</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Swift设计模式</a>
         		</li>
       		
 		</ul>
@@ -518,7 +507,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/04/struct ifaddrs /">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/11/Swift设计模式之桥梁模式/">展开全文 >></a>
         </p>
       
 
@@ -548,14 +537,14 @@
 
 
   
-    <article id="post-获取手机SSID和BSSID以及IP地址" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Swift设计模式之组合模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/04/获取手机SSID和BSSID以及IP地址/">获取手机SSID和BSSID以及IP地址</a>
+      <a class="article-title" href="/2018/05/11/Swift设计模式之组合模式/">Swift设计模式之组合模式</a>
     </h1>
   
 
@@ -564,8 +553,8 @@
         	
 	
         
-        <a href="/2018/05/04/获取手机SSID和BSSID以及IP地址/" class="archive-article-date">
-  	<time datetime="2018-05-04T08:40:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-04</time>
+        <a href="/2018/05/11/Swift设计模式之组合模式/" class="archive-article-date">
+  	<time datetime="2018-05-11T04:18:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
 </a>
         
       </header>
@@ -577,17 +566,17 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>获取手机SSID和BSSID以及IP地址</p>
-<p>import SystemConfiguration</p>
-<p>import SystemConfiguration.CaptiveNetwork</p>
-<p>extension NSObject{</p>
-<p>​    </p>
-<p>​    func GetIPAddresses() -&gt; String? {</p>
-<p>​        var addresses = <a href="">String</a></p>
-<p>​
-        
-          <a class="article-more-a" href="/2018/05/04/获取手机SSID和BSSID以及IP地址/#more">more >></a>
-        
+        <p>#</p>
+<p><strong>转自</strong></p>
+<ul>
+<li><a href="http://qefee.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank" rel="noopener">Swift设计模式</a></li>
+</ul>
+<p><strong>原文</strong></p>
+<ul>
+<li><a href="https://github.com/ochococo/Design-Patterns-In-Swift#behavioral" target="_blank" rel="noopener">Design-Patterns-In-Swift</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">// 桥梁模式</span><br><span class="line">// 百度百科：继承或实现的类通过不同的实现方式来完成抽象类或接口的变化 , 也就是实现过程的变化 , 但可能会有这样的情况 , 抽象过程同样需要进行变化 , 也就是抽象类或者接口需要变化 , 这样就会造成原有的继承或实现关系复杂 , 关系混乱 .桥梁模式利用将抽象层和实现层进行解耦 , 使两者不再像继承或实现这样的较强的关系 , 从而使抽象和实现层更加独立的完成变化的过程 . 使系统更加清晰</span><br><span class="line">// 设计模式分类：创建型模式</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  开关接口</span><br><span class="line"> */</span><br><span class="line">protocol Switch &#123;</span><br><span class="line">    var appliance: Appliance &#123;get set&#125;</span><br><span class="line">    func turnOn()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  电器接口</span><br><span class="line"> */</span><br><span class="line">protocol Appliance &#123;</span><br><span class="line">    func run()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 开关实现</span><br><span class="line">class RemoteControl: Switch &#123;</span><br><span class="line">    var appliance: Appliance</span><br><span class="line">    </span><br><span class="line">    func turnOn() &#123;</span><br><span class="line">        self.appliance.run()</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    init(appliance: Appliance) &#123;</span><br><span class="line">        self.appliance = appliance</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 电器实现，电视</span><br><span class="line">class TV: Appliance &#123;</span><br><span class="line">    func run() &#123;</span><br><span class="line">        print(&quot;tv turned on&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// 电器实现，吸尘器</span><br><span class="line">class VacuumCleaner: Appliance &#123;</span><br><span class="line">    func run() &#123;</span><br><span class="line">        print(&quot;vacuum cleaner turned on&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var tvRemoteControl = RemoteControl(appliance: TV())</span><br><span class="line">tvRemoteControl.turnOn()</span><br><span class="line"></span><br><span class="line">var fancyVacuumCleanerRemoteControl = RemoteControl(appliance: VacuumCleaner())</span><br><span class="line">fancyVacuumCleanerRemoteControl.turnOn()</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -604,11 +593,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">SSID</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">IP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Swift设计模式</a>
         		</li>
       		
 		</ul>
@@ -618,7 +603,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/04/获取手机SSID和BSSID以及IP地址/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/11/Swift设计模式之组合模式/">展开全文 >></a>
         </p>
       
 
@@ -650,7 +635,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/14/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/16/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/14/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/16/">Next &raquo;</a>
     </nav>
   
 
@@ -762,7 +747,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
+                <a href="javascript:void(0)" class="js-tag color3">LIVE555</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -778,6 +763,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
               </li>
              
@@ -790,11 +779,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">Data</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -806,11 +791,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">fallthrough</a>
+                <a href="javascript:void(0)" class="js-tag color4">KVC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
+                <a href="javascript:void(0)" class="js-tag color4">KVO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">fallthrough</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -822,11 +811,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
+                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -838,6 +827,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">UICollectionViewLayout</a>
               </li>
              
@@ -846,11 +839,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">上架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GCDAsyncUdpSocket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">侧滑手势</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">smart_monkey</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">UIAlertController</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -870,7 +883,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Data</a>
+                <a href="javascript:void(0)" class="js-tag color5">view</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">searchController</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -890,11 +907,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CoreData</a>
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">UIAlertController</a>
+                <a href="javascript:void(0)" class="js-tag color4">CoreData</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -914,6 +931,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCD</a>
               </li>
              
@@ -922,7 +947,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">rtsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CPU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">响应链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">h264</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bug</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -930,7 +971,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
+                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -946,11 +987,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">集合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -963,14 +1012,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">protocol</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
             
             <div class="clearfix"></div>

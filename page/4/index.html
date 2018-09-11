@@ -153,14 +153,14 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-为啥数组越界抛异常而字典确不会？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-ios 硬解码h264视频的坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/28/为啥数组越界抛异常而字典确不会？/">为啥数组越界抛异常而字典确不会？</a>
+      <a class="article-title" href="/2018/06/29/ios 硬解码h264视频的坑/">ios 硬解码h264视频的坑</a>
     </h1>
   
 
@@ -169,8 +169,8 @@
         	
 	
         
-        <a href="/2018/05/28/为啥数组越界抛异常而字典确不会？/" class="archive-article-date">
-  	<time datetime="2018-05-28T06:15:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
+        <a href="/2018/06/29/ios 硬解码h264视频的坑/" class="archive-article-date">
+  	<time datetime="2018-06-29T07:22:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-29</time>
 </a>
         
       </header>
@@ -182,35 +182,14 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#</p>
-<p>转： <a href="https://www.jianshu.com/u/ac893eccce9e" target="_blank" rel="noopener">八条8tiao</a></p>
-<h4 id="数组遭受了不平等对待吗？"><a href="#数组遭受了不平等对待吗？" class="headerlink" title="数组遭受了不平等对待吗？"></a>数组遭受了不平等对待吗？</h4><p>在我们访问数组的时候，如果发生了越界，那么我们一定会收到错误。以swift语言为例。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let array = [1,2,3]</span><br><span class="line">array[10] // error ！！！！！！！！！</span><br></pre></td></tr></table></figure>
-<p>数组中只包含三个元素，但我们用下标10去访问，发生越界错误。</p>
-<p>但是当我们访问一个不在字典中的元素的时候，确不会发生类似的情况！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let dic = [&quot;a&quot;: 1, &quot;b&quot;: 2]</span><br><span class="line">dic[&quot;z&quot;]  // 虽然不存在，但不会出现异常</span><br></pre></td></tr></table></figure>
-<p>同样的问题，不同的待遇，这是为啥呢？</p>
-<h4 id="究其原因"><a href="#究其原因" class="headerlink" title="究其原因"></a>究其原因</h4><p>我们来查看一下swift中数组和字典下标访问的实现。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct Array&lt;Element&gt; &#123;</span><br><span class="line">    subscript(index: Int) -&gt; Element</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct Dictionary&lt;Key: Hashable, Value&gt; &#123;</span><br><span class="line">    subscript(key: Key) -&gt; Value?</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>比较两者的实现，我们可以得到问题的原因：</p>
-<ul>
-<li>数组下标访问返回的不是一个optional类型</li>
-<li>subscript方法无法throw错误</li>
-</ul>
-<p>所以对于数组而言，swift除了弄个fatalError以外，没有其它的替代方案了。而字典返回的是optional类型值，如果发生什么意外状况，即使subscript不能throw errors，字典也可以悠然的返回一个nil。</p>
-<h4 id="让我们定义另个版本"><a href="#让我们定义另个版本" class="headerlink" title="让我们定义另个版本"></a>让我们定义另个版本</h4><p>其实我们可以给数组做一个扩展，实现一个即使数组访问越界也不会抛异常的版本。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">extension Array &#123;</span><br><span class="line">    subscript(safe index: Int) -&gt; Element? &#123;</span><br><span class="line">        return index &gt;= 0 &amp;&amp; index &lt; count ? self[index] : nil</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们使用 extension 关键字来给Array做一个扩展，要注意的是：我们无法覆盖原有的subscript方法，</p>
-<blockquote>
-<p><strong>注意：subscript方法是可以被重载的，也就是说允许同时有多个subscript方法存在</strong></p>
-</blockquote>
-<p>我们只增加一个新的subscript方法，并明确指定一个外部参数就可以了，我们现在可以这样访问数组了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var array = [1,2,3]</span><br><span class="line">array[safe: 10] // 返回nil，而不是异常</span><br></pre></td></tr></table></figure>
-<p>我们需要在下标访问的时候增加一个label，这个时候虽然我们越界了，但我们却像字典那样，收获了一个nil。</p>
-<blockquote>
-<p><strong>本文的目的是讨论一下字典与数组下标实现的区别以及subscript的一些特点：不可throw，可以重载等但绝对不是在说数组越界后应该不应该抛出异常。抛不抛出异常要从数组的数据结构应用场景等多方面考虑。</strong></p>
-</blockquote>
-
+        <p>//<br>//  WBH264Play.m<br>//  wenba_rtc<br>//<br>//  Created by zhouweiwei on 16/11/20.<br>//  Copyright © 2016年 zhouweiwei. All rights reserved.<br>//</p>
+<p>#import <foundation foundation.h=""></foundation></p>
+<p>#import “WBH264Play.h”</p>
+<p>#define kH264outputWidth  160</p>
+<p>#define kH264outputHeight 120<br>
+        
+          <a class="article-more-a" href="/2018/06/29/ios 硬解码h264视频的坑/#more">more >></a>
+        
       
 
       
@@ -227,7 +206,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">h264</a>
         		</li>
       		
 		</ul>
@@ -237,7 +216,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/28/为啥数组越界抛异常而字典确不会？/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/06/29/ios 硬解码h264视频的坑/">展开全文 >></a>
         </p>
       
 
@@ -267,14 +246,14 @@
 
 
   
-    <article id="post-Swift3 GCD" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-ffmpeg学习（二） 通过rtsp获取H264裸流并保存到mp4文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/25/Swift3 GCD/">Swift3 GCD</a>
+      <a class="article-title" href="/2018/06/29/ffmpeg学习（二） 通过rtsp获取H264裸流并保存到mp4文件/">通过rtsp获取H264裸流并保存到mp4文件</a>
     </h1>
   
 
@@ -283,8 +262,8 @@
         	
 	
         
-        <a href="/2018/05/25/Swift3 GCD/" class="archive-article-date">
-  	<time datetime="2018-05-25T03:36:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
+        <a href="/2018/06/29/ffmpeg学习（二） 通过rtsp获取H264裸流并保存到mp4文件/" class="archive-article-date">
+  	<time datetime="2018-06-29T03:06:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-29</time>
 </a>
         
       </header>
@@ -296,12 +275,19 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#</p>
-<p>Swift3 的gcd变化很大，这里列举一下，大家可以有个对照：</p>
-<h3 id="1、Create-a-serial-queue-创建一个serial-queue"><a href="#1、Create-a-serial-queue-创建一个serial-queue" class="headerlink" title="1、Create a serial queue 创建一个serial queue"></a>1、Create a serial queue 创建一个serial queue</h3><p>OC</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;com.leacode.gcd.serialqueue&quot;, DISPATCH_QUEUE_SERIAL); dispatch_async(queue, ^&#123;</span><br><span class="line">    // 在queue线程执行</span><br><span class="line">    dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        // 回到主线程</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+        <p>转载： <a href="https://www.cnblogs.com/wenjingu/p/3990071.html" target="_blank" rel="noopener">ffmpeg学习（二） 通过rtsp获取H264裸流并保存到mp4文件</a></p>
+<p>本篇将使用上节<a href="http://www.cnblogs.com/wenjingu/p/3977015.html" target="_blank" rel="noopener">http://www.cnblogs.com/wenjingu/p/3977015.html</a>中编译好的库文件通过rtsp获取网络上的h264裸流并保存到mp4文件中。</p>
+<p>1、VS2010建立VC++  win32控制台项目</p>
+<p>2、在工程目录下建立lib目录和include目录，将已编译好的lib拷打lib下，include拷到include下，dll拷到Debug目录下</p>
+<p>3、工程属性–配置属性–VC++目录–包含目录，添加ffmpeg头文件目录及其他第三方头文件目录</p>
+<p>​                                             链接器–常规–附加库目录，添加lib目录</p>
+<p>​                                             链接器–输入–附加依赖项，添加各个lib名</p>
+<p>4、设计和实现：</p>
+<p>4.1 设计思路：</p>
+<p>​       组件和网络初始化——&gt;打开网络流——&gt;获取网络流信息——&gt;根据网络流信息初始化输出流信息——&gt;创建并打开mp4文件——&gt;写mp4文件头</p>
+<p>​                    ——&gt;循环读取输入流并写入mp4文件——&gt;写文件尾——&gt;关闭流，关闭文件<br>​<br>​
         
-          <a class="article-more-a" href="/2018/05/25/Swift3 GCD/#more">more >></a>
+          <a class="article-more-a" href="/2018/06/29/ffmpeg学习（二） 通过rtsp获取H264裸流并保存到mp4文件/#more">more >></a>
         
       
 
@@ -319,7 +305,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Swift3</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">rtsp</a>
         		</li>
       		
 		</ul>
@@ -329,7 +315,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/25/Swift3 GCD/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/06/29/ffmpeg学习（二） 通过rtsp获取H264裸流并保存到mp4文件/">展开全文 >></a>
         </p>
       
 
@@ -359,14 +345,14 @@
 
 
   
-    <article id="post-swift-Tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-LIVE555再学习 -- VLC搭建RTSP服务器（转）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/25/swift-Tips/">where Self</a>
+      <a class="article-title" href="/2018/06/29/LIVE555再学习 -- VLC搭建RTSP服务器（转）/">LIVE555再学习 -- VLC搭建RTSP服务器（转）</a>
     </h1>
   
 
@@ -375,8 +361,8 @@
         	
 	
         
-        <a href="/2018/05/25/swift-Tips/" class="archive-article-date">
-  	<time datetime="2018-05-25T02:56:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
+        <a href="/2018/06/29/LIVE555再学习 -- VLC搭建RTSP服务器（转）/" class="archive-article-date">
+  	<time datetime="2018-06-29T02:42:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-29</time>
 </a>
         
       </header>
@@ -388,9 +374,14 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>extension BorderDesignable where Self: UIView 中的where Self是什么意思?</p>
-<p>你的<code>BorderDesignable</code>这个协议只能被 UIView 继承</p>
-
+        <p>实时流协议 RTSP 是在实时传输协议的基础上工作的，主要实现对多媒体播放的控制。用户对多媒体信息的播放、暂停、前进和后退等功能就是通过对实时数据流的控制来实现的。 而这些播放控制功能的实现不仅需要多媒体播放器， 同时还需要实时流协议。实时流协议是通过请求报文和响应报文的交互实现的，请求报文和发送报文。</p>
+<p>下面我们来再详细的介绍一下它的搭建。</p>
+<p><strong>参看：VLC搭建RTSP服务器的过程</strong></p>
+<h1 id="一、VLC搭建RTSP服务器的过程"><a href="#一、VLC搭建RTSP服务器的过程" class="headerlink" title="一、VLC搭建RTSP服务器的过程"></a>一、VLC搭建RTSP服务器的过程</h1><h2 id="服务器搭建："><a href="#服务器搭建：" class="headerlink" title="服务器搭建："></a><strong>服务器搭建：</strong></h2><h3 id="第一步，打开VLC"><a href="#第一步，打开VLC" class="headerlink" title="第一步，打开VLC"></a>第一步，打开VLC</h3><h3 id="第二步：在媒体下拉菜单下！有一个子菜单“串流”如图所示："><a href="#第二步：在媒体下拉菜单下！有一个子菜单“串流”如图所示：" class="headerlink" title="第二步：在媒体下拉菜单下！有一个子菜单“串流”如图所示："></a>第二步：在媒体下拉菜单下！有一个子菜单“串流”如图所示：</h3><p><img src="https://img-blog.csdn.net/20130703121814656" alt="img"></p>
+<p>点击“串流”子菜单<br>
+        
+          <a class="article-more-a" href="/2018/06/29/LIVE555再学习 -- VLC搭建RTSP服务器（转）/#more">more >></a>
+        
       
 
       
@@ -403,11 +394,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">LIVE555</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">swift</a>
         		</li>
       		
 		</ul>
@@ -417,7 +408,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/25/swift-Tips/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/06/29/LIVE555再学习 -- VLC搭建RTSP服务器（转）/">展开全文 >></a>
         </p>
       
 
@@ -447,14 +438,14 @@
 
 
   
-    <article id="post-Swift-predecessor(), successor(), advancedBy()" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-IJKMediaFramework.framework的播放接口播放直播流的时候，会出现只有声音没有画面，但是我只要把app切换到后台再切换到回来的时候画面就出来了" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/24/Swift-predecessor(), successor(), advancedBy()/">Swift-predecessor(), successor(), advancedBy()</a>
+      <a class="article-title" href="/2018/06/28/IJKMediaFramework.framework的播放接口播放直播流的时候，会出现只有声音没有画面，但是我只要把app切换到后台再切换到回来的时候画面就出来了/">IJKMediaFramework.framework的播放接口播放直播流的时候，会出现只有声音没有画面，但是我只要把app切换到后台再切换到回来的时候画面就出来了</a>
     </h1>
   
 
@@ -463,8 +454,8 @@
         	
 	
         
-        <a href="/2018/05/24/Swift-predecessor(), successor(), advancedBy()/" class="archive-article-date">
-  	<time datetime="2018-05-24T10:21:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-24</time>
+        <a href="/2018/06/28/IJKMediaFramework.framework的播放接口播放直播流的时候，会出现只有声音没有画面，但是我只要把app切换到后台再切换到回来的时候画面就出来了/" class="archive-article-date">
+  	<time datetime="2018-06-28T02:41:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-28</time>
 </a>
         
       </header>
@@ -476,13 +467,11 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h6 id="Swift-predecessor-successor-advancedBy"><a href="#Swift-predecessor-successor-advancedBy" class="headerlink" title="Swift-predecessor(), successor(), advancedBy()"></a>Swift-predecessor(), successor(), advancedBy()</h6><p>—————— 以下为Swift 3.0 的方法 ——————————</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">let str = &quot;hello world!&quot;  </span><br><span class="line">str[str.startIndex]  </span><br><span class="line">打印结果：  </span><br><span class="line">//h</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">//访问其结束前一个字符</span><br><span class="line">//str[str.endIndex.predecessor()]  </span><br><span class="line">//在Swift3.0 predecessor使用以下代替：</span><br><span class="line">str[str.index(before: str.endIndex)]</span><br><span class="line">打印结果：</span><br><span class="line">//!</span><br><span class="line"></span><br><span class="line">//访问其开始后一个字符</span><br><span class="line">str[str.startIndex.successor()]  </span><br><span class="line">//在Swift3.0 successor使用以下代替：</span><br><span class="line">str[str.index(after: str.startIndex)]</span><br><span class="line">打印结果：</span><br><span class="line">//e</span><br><span class="line"></span><br><span class="line">//访问其开始后一个字符</span><br><span class="line">let index = str.startIndex.advancedBy(7) </span><br><span class="line">//在Swift3.0 advancedBy使用以下代替： </span><br><span class="line">let index = str.index(str.startIndex, offsetBy: 7)</span><br><span class="line">打印结果：</span><br><span class="line">//7</span><br><span class="line">str[index]  </span><br><span class="line">打印结果：</span><br><span class="line">//输出 o</span><br><span class="line">1234567891011121314151617181920212223242526272829</span><br></pre></td></tr></table></figure>
-<p>—————— 以下为Swift 2.0 的方法 ——————————</p>
-<p>在截取字符串时遇到几个没用过的函数特此记.<br>startIndex:访问String第一个位置的字符<br>endIndex: 访问String最后一个位置的字符</p>
-<p>predecessor(), successor(), advancedBy()<br>一个String.Index值可以通过调用predecessor()方法来访问其前一个index,<br>调用successor()来访问其后一个index<br>调用advancedBy()来指定访问相对位置的index</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">let str = &quot;hello world!&quot;  </span><br><span class="line">str[str.startIndex]  </span><br><span class="line">打印结果：  </span><br><span class="line">//h</span><br><span class="line"></span><br><span class="line">//访问其结束前一个字符</span><br><span class="line">str[str.endIndex.predecessor()]  </span><br><span class="line">打印结果：</span><br><span class="line">//!</span><br><span class="line"></span><br><span class="line">//访问其开始后一个字符</span><br><span class="line">str[str.startIndex.successor()]  </span><br><span class="line">打印结果：</span><br><span class="line">//e</span><br><span class="line"></span><br><span class="line">//访问其开始后一个字符</span><br><span class="line">let index = str.startIndex.advancedBy(7)  </span><br><span class="line">打印结果：</span><br><span class="line">//7</span><br><span class="line">str[index]  </span><br><span class="line">打印结果：</span><br><span class="line">//输出 o</span><br></pre></td></tr></table></figure>
-
+        <h1 id="IJKMediaFramework-framework的播放接口播放直播流的时候，会出现只有声音没有画面，但是我只要把app切换到后台再切换到回来的时候画面就出来了"><a href="#IJKMediaFramework-framework的播放接口播放直播流的时候，会出现只有声音没有画面，但是我只要把app切换到后台再切换到回来的时候画面就出来了" class="headerlink" title="IJKMediaFramework.framework的播放接口播放直播流的时候，会出现只有声音没有画面，但是我只要把app切换到后台再切换到回来的时候画面就出来了"></a>IJKMediaFramework.framework的播放接口播放直播流的时候，会出现只有声音没有画面，但是我只要把app切换到后台再切换到回来的时候画面就出来了</h1><p>使用打包出来的IJKMediaFramework.framework框架的时候，系统的依赖库也添加完毕，如果直接在根控制器上直接使用IJKMediaFramework.framework的播放接口播放直播流的时候，会出现只有声音没有画面，但是只要把app切换到后台再切换到回来的时候画面就出来了，一直都不知道什么原因。<br>解决方案</p>
+<p>就是不要把IJKMediaFramework.framework的直播源播放的接口在根控制器使用</p>
+        
+          <a class="article-more-a" href="/2018/06/28/IJKMediaFramework.framework的播放接口播放直播流的时候，会出现只有声音没有画面，但是我只要把app切换到后台再切换到回来的时候画面就出来了/#more">more >></a>
+        
       
 
       
@@ -499,7 +488,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tips</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">IJKMediaFramework.framework</a>
         		</li>
       		
 		</ul>
@@ -509,7 +498,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/24/Swift-predecessor(), successor(), advancedBy()/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/06/28/IJKMediaFramework.framework的播放接口播放直播流的时候，会出现只有声音没有画面，但是我只要把app切换到后台再切换到回来的时候画面就出来了/">展开全文 >></a>
         </p>
       
 
@@ -539,14 +528,14 @@
 
 
   
-    <article id="post-swift 简单的Time单例，延迟，循环，任你选" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-iOS——Tips" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/24/swift 简单的Time单例，延迟，循环，任你选/">swift 简单的Time单例，延迟，循环，任你选</a>
+      <a class="article-title" href="/2018/06/25/iOS——Tips/">iOS——Tips</a>
     </h1>
   
 
@@ -555,8 +544,8 @@
         	
 	
         
-        <a href="/2018/05/24/swift 简单的Time单例，延迟，循环，任你选/" class="archive-article-date">
-  	<time datetime="2018-05-24T10:04:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-24</time>
+        <a href="/2018/06/25/iOS——Tips/" class="archive-article-date">
+  	<time datetime="2018-06-25T06:21:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
 </a>
         
       </header>
@@ -568,15 +557,10 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>swift 简单的Time单例，延迟，循环，任你选</p>
-<p>import Foundation</p>
-<p>typealias ZZWTimeBlock = () -&gt; Void</p>
-<p>class ZZWTimeManager: NSObject{</p>
-<p>​    static let sharedInstance = ZZWTimeManager()</p>
-<p>​    var cycyleTimer : Timer?</p>
-<p>​
+        <p>iOS——Tips</p>
+<p>退出app：exit(0)</p>
         
-          <a class="article-more-a" href="/2018/05/24/swift 简单的Time单例，延迟，循环，任你选/#more">more >></a>
+          <a class="article-more-a" href="/2018/06/25/iOS——Tips/#more">more >></a>
         
       
 
@@ -604,7 +588,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/24/swift 简单的Time单例，延迟，循环，任你选/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/06/25/iOS——Tips/">展开全文 >></a>
         </p>
       
 
@@ -636,7 +620,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav>
   
 
@@ -748,7 +732,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
+                <a href="javascript:void(0)" class="js-tag color3">LIVE555</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -764,6 +748,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IBDesignable</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Multipath</a>
               </li>
              
@@ -776,11 +764,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">Data</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -792,11 +776,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">fallthrough</a>
+                <a href="javascript:void(0)" class="js-tag color4">KVC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
+                <a href="javascript:void(0)" class="js-tag color4">KVO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">fallthrough</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -808,11 +796,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
+                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -824,6 +812,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Swift设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">UICollectionViewLayout</a>
               </li>
              
@@ -832,11 +824,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">上架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GCDAsyncUdpSocket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">侧滑手势</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">smart_monkey</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">UIAlertController</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -856,7 +868,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Data</a>
+                <a href="javascript:void(0)" class="js-tag color5">view</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">searchController</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -876,11 +892,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CoreData</a>
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">UIAlertController</a>
+                <a href="javascript:void(0)" class="js-tag color4">CoreData</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -900,6 +916,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Core Data</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GCD</a>
               </li>
              
@@ -908,7 +932,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">rtsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CPU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">响应链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">h264</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bug</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -916,7 +956,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
+                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -932,11 +972,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Closures</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">集合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -949,14 +997,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">protocol</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Siri</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">files</a>
               </li>
             
             <div class="clearfix"></div>
